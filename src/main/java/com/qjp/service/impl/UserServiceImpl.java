@@ -2,12 +2,14 @@ package com.qjp.service.impl;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.qjp.entity.UserEntity;
-import com.qjp.mapper.UserMapper;
 import com.qjp.service.UserService;
+import com.qjp.util.api.MyBaseApiUtils;
+import com.qjp.util.api.model.ApiCode;
 import com.qjp.util.query.UserQuery;
 
 /** 
@@ -20,58 +22,71 @@ import com.qjp.util.query.UserQuery;
  */
 @Service
 public class UserServiceImpl implements UserService{
-	@Autowired
-	private UserMapper userMapper;
-
+	
 	@Override
 	public void insertUser(UserEntity user) {
-		userMapper.insertUser(user);
+		
 	}
 
 	@Override
 	public UserQuery getUserList(UserQuery userQuery) {
-		List<UserEntity> list = userMapper.getUserPage(userQuery);
-		userQuery.setItems(list);
+		
 		
 		return userQuery;
 	}
 
 	@Override
 	public void updateUser(UserEntity user) {
-		userMapper.updateUser(user);
+		
 	}
 
 	@Override
 	public UserEntity getUserById(Integer id) {
 		// TODO Auto-generated method stub
-		return userMapper.getUserById(id);
+		return null;
 	}
 
 	@Override
 	public UserEntity login(String account, String password) {
-		return userMapper.login(account, password);
+		String loginResult = MyBaseApiUtils.login(account, password);
+		UserEntity user = null;
+		if(StringUtils.isNotBlank(loginResult)){
+			JSONObject jsonObject = JSONObject.parseObject(loginResult);
+			if(jsonObject != null){
+				Object codeObj = jsonObject.get("code");
+				if(codeObj != null){
+					String code = codeObj.toString();
+					if (ApiCode.OK.toString().equals(code)) {
+						Object dataObj = jsonObject.get("data");
+						if(dataObj != null){
+							String data = dataObj.toString();
+							List<UserEntity> list = JSONObject.parseArray(data, UserEntity.class);
+							user = list.get(0);
+						}
+					}
+				}
+			}
+		}
+		
+		return user;
 	}
 
 	@Override
 	public boolean isExistTelphone(String departmentId, String telphone) {
-		UserEntity user = userMapper.getUserByDepartmentIdAndTelphone(departmentId, telphone);
-		if(user != null){
-			return true;
-		}
+		
 		
 		return false;
 	}
 
 	@Override
 	public void deleteUserById(String id) {
-		userMapper.deleteUserById(id);
+		
 	}
 
 	@Override
 	public List<UserEntity> getUserPage(UserQuery userQuery) {
-		List<UserEntity> list = userMapper.getUserPage(userQuery);
 		
-		return list;
+		return null;
 	}
 	
 }

@@ -8,7 +8,7 @@ import com.qjp.base.Constant;
 import com.qjp.entity.UserEntity;
 import com.qjp.model.BRPUserInfo;
 import com.qjp.model.LoginUser;
-import com.qjp.util.api.PMSApiUtils;
+import com.qjp.util.api.MyBaseApiUtils;
 import com.qjp.util.cookie.LoggedCookie;
 import com.google.gson.Gson;
 

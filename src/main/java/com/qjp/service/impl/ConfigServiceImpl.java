@@ -2,11 +2,9 @@ package com.qjp.service.impl;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.qjp.entity.ConfigEntity;
-import com.qjp.mapper.ConfigMapper;
 import com.qjp.service.ConfigService;
 import com.qjp.util.query.ConfigQuery;
 
@@ -20,45 +18,36 @@ import com.qjp.util.query.ConfigQuery;
  */
 @Service
 public class ConfigServiceImpl implements ConfigService{
-	@Autowired
-	private ConfigMapper configMapper;
+	
 	@Override
 	public void insertConfig(ConfigEntity config) {
-		configMapper.insertConfig(config);
 	}
 	
 	@Override
 	public ConfigQuery getConfigList(ConfigQuery configQuery) {
-		List<ConfigEntity> list = configMapper.getConfigPage(configQuery);
-		if(list != null && list.size() > 0){
-			configQuery.setItems(list);
-		}
+		
 		
 		return configQuery;
 	}
 
 	@Override
 	public void updateConfig(ConfigEntity config) {
-		configMapper.updateConfig(config);
 	}
 
 	@Override
 	public ConfigEntity getConfigById(Integer id) {
-		ConfigEntity Config = configMapper.getConfigById(id);
 		
-		return Config;
+		return null;
 	}
 
 	@Override
 	public List<ConfigEntity> getConfigListByCode(String code) {
-		List<ConfigEntity> list = configMapper.getConfigListByCode(code);
 		
-		return list;
+		return null;
 	}
 
 	@Override
 	public void deleteConfigById(String id) {
-		configMapper.deleteConfigById(id);
 	}
 }
 

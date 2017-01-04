@@ -10,7 +10,7 @@ import com.qjp.model.BRPUserInfo;
 import com.qjp.model.LoginUser;
 import com.qjp.service.UserService;
 import com.qjp.util.CommonUtils;
-import com.qjp.util.api.PMSApiUtils;
+import com.qjp.util.api.MyBaseApiUtils;
 import com.qjp.util.cookie.LoggedCookie;
 import com.google.gson.Gson;
 

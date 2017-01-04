@@ -2,15 +2,11 @@ package com.qjp.service.impl;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.qjp.entity.MenuEntity;
-import com.qjp.mapper.MenuMapper;
 import com.qjp.service.MenuService;
 import com.qjp.util.query.MenuQuery;
-import com.qjp.util.vo.MenuTreeVO;
-import com.google.gson.Gson;
 
 /** 
  * <p>Project: MyBase</p> 
@@ -22,55 +18,48 @@ import com.google.gson.Gson;
  */
 @Service
 public class MenuServiceImpl implements MenuService{
-	@Autowired
-	private MenuMapper menuMapper;
+
 	@Override
 	public void insertMenu(MenuEntity menu) {
-		menuMapper.insertMenu(menu);
+		
 	}
 	
 	@Override
 	public MenuQuery getMenuPage(MenuQuery menuQuery) {
-		List<MenuEntity> list = menuMapper.getMenuPage(menuQuery);
-		if(list != null && list.size() > 0){
-			menuQuery.setItems(list);
-		}
 		
 		return menuQuery;
 	}
 
 	@Override
 	public void updateMenu(MenuEntity menu) {
-		menuMapper.updateMenu(menu);
+		
 	}
 
 	@Override
 	public MenuEntity getMenuById(Integer id) {
-		MenuEntity Menu = menuMapper.getMenuById(id);
 		
-		return Menu;
+		return null;
 	}
 
 	@Override
 	public List<MenuEntity> getMenuListByCode(String code) {
-		List<MenuEntity> list = menuMapper.getMenuListByCode(code);
 		
-		return list;
+		
+		return null;
 	}
 
 	@Override
 	public void deleteMenuById(String id) {
-		menuMapper.deleteMenuById(id);
 	}
 
 	@Override
 	public MenuEntity getMenuByNameAndType(String menuName, String menuType) {
-		return menuMapper.getMenuByNameAndType(menuName, menuType);
+		return null;
 	}
 
 	@Override
 	public MenuEntity getMenuByNameAndSystemId(String menuName, String systemId) {
-		return menuMapper.getMenuByNameAndSystemId(menuName, systemId);
+		return null;
 	}
 }
 

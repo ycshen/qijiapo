@@ -9,7 +9,7 @@ import com.qjp.model.BRPUserInfo;
 import com.qjp.model.LoginUser;
 import com.qjp.util.CommonUtils;
 import com.qjp.util.UserUtils;
-import com.qjp.util.api.PMSApiUtils;
+import com.qjp.util.api.MyBaseApiUtils;
 import com.qjp.util.cookie.LoggedCookie;
 
 /** 
