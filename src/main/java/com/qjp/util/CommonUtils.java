@@ -10,7 +10,7 @@ import java.util.Properties;
 import com.qjp.base.Constant;
 
 /** 
- * <p>Project: BRP</p> 
+ * <p>Project: qijiapo</p> 
  * <p>Title: CommonUtils.java</p> 
  * <p>Description: TODO</p> 
  * <p>Copyright (c) 2016 xjw Consultancy Services</p>
@@ -83,5 +83,18 @@ public class CommonUtils {
 		}
 		
 		return isProd;
+	}
+	
+	public static String getPropertyByKey(String key) {
+		Properties prop = null;
+		try {
+			prop = PropertiesUtils.readConfig();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		String value = (String) prop.get(key);
+		
+		return value;
 	}
 }

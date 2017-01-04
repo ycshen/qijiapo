@@ -60,8 +60,7 @@ public class UserServiceImpl implements UserService{
 						Object dataObj = jsonObject.get("data");
 						if(dataObj != null){
 							String data = dataObj.toString();
-							List<UserEntity> list = JSONObject.parseArray(data, UserEntity.class);
-							user = list.get(0);
+							user = JSONObject.parseObject(data, UserEntity.class);
 						}
 					}
 				}

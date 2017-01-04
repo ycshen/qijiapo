@@ -38,5 +38,18 @@ public class Constant {
 	public static final String test = "test";
 	public static final String prod = "prod";
 	
+	@Value("${mybase}")
+	private String mybase_url;
+	public static String mybase;
+	@Value("${mybase.login}")
+	private String mybase_login_url;
+	public static String mybase_login;
+	
+	@PostConstruct
+	public void init() {
+		mybase_login = this.mybase_login_url;
+		mybase = this.mybase_url;
+	}
+	
 }
 
