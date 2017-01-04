@@ -3,7 +3,7 @@
 <configuration>
 
    <plugins>
-        <plugin interceptor="com.brp.model.pageutil.PageInterceptor">
+        <plugin interceptor="com.qjp.model.pageutil.PageInterceptor">
             <property name="databaseType" value="mysql"/>
             <property name="pageSqlId" value=".*Page$"/>
         </plugin>

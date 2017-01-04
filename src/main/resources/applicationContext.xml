@@ -13,7 +13,7 @@
 		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 
 	<import resource="classpath:properties-config.xml" />
-	<context:component-scan base-package="com.brp" />
+	<context:component-scan base-package="com.qjp" />
 	<context:annotation-config />
 
 	<bean name="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
@@ -59,7 +59,7 @@
 
 	<!-- myBatis Mapper文件 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.brp.mapper" />
+		<property name="basePackage" value="com.qjp.mapper" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 
@@ -70,6 +70,6 @@
 	</bean>
 	<!-- 使用annotation定义事务 -->
 	<tx:annotation-driven transaction-manager="txManager" />
-	<bean id="dalMethodInterceptor" class="com.brp.util.dal.DalMethodInterceptor" />
+	<bean id="dalMethodInterceptor" class="com.qjp.util.dal.DalMethodInterceptor" />
 
 </beans>

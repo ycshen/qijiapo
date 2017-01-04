@@ -16,7 +16,7 @@
 		class="org.apache.shiro.realm.activedirectory.ActiveDirectoryRealm">
 		<property name="ldapContextFactory" ref="contextFactory" />
 	</bean>
-	<bean id="jdbcRealm" class="com.brp.realm.JdbcRealm" />
+	<bean id="jdbcRealm" class="com.qjp.realm.JdbcRealm" />
 
 	<bean id="authenticator" class="org.apache.shiro.authc.pam.ModularRealmAuthenticator">
 		<property name="authenticationStrategy">
@@ -38,7 +38,7 @@
 	</bean>
 
 	<!-- 用于处理非AD用户不能访问除/domain以外的资源 -->
-	<bean id="domainFilter" class="com.brp.realm.DomainFilter" />
+	<bean id="domainFilter" class="com.qjp.realm.DomainFilter" />
 
 	<!-- 安全认证过滤器 -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">

@@ -13,7 +13,7 @@
 		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 	<import resource="classpath:properties-config.xml" />
 
-	<context:component-scan base-package="com.brp" />
+	<context:component-scan base-package="com.qjp" />
 	<!-- <mvc:default-servlet-handler /> -->
 	<mvc:annotation-driven/>
 	<mvc:resources location="/img/" mapping="/img/**"/> 
@@ -53,7 +53,7 @@
 			<mvc:exclude-mapping path="/js/**"/>
 			<mvc:exclude-mapping path="/css/**"/>
 			<mvc:exclude-mapping path="/img/**"/>
-			<bean id="loginInterceptor" class="com.brp.interceptors.LoginInterceptor"></bean>
+			<bean id="loginInterceptor" class="com.qjp.interceptors.LoginInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
 
