@@ -15,11 +15,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.qjp.base.Config;
 import com.qjp.base.ResponseStatus;
 import com.qjp.base.UserStatus;
+import com.qjp.entity.ConfigEntity;
 import com.qjp.entity.Constant;
 import com.qjp.entity.DepartmentEntity;
 import com.qjp.entity.UserEntity;
+import com.qjp.service.ConfigService;
 import com.qjp.service.DepartmentService;
 import com.qjp.service.UserService;
 import com.qjp.util.UserUtils;
@@ -41,6 +44,8 @@ public class UserController {
 	private UserService userService;
 	@Autowired
 	private DepartmentService departmentService;
+	@Autowired
+	private ConfigService configService;
 	
 	@RequestMapping(value = "/saveOrUpdate", method = RequestMethod.POST)
 	@ResponseBody
@@ -55,6 +60,7 @@ public class UserController {
 			user.setPassword(initPass);
 			user.setStatus(UserStatus.NORMAL_INT);
 			userService.insertUser(user);
+			
 			result = 1;
 		}else{
 			user.setUpdateTime(new Date());
