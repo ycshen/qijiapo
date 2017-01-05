@@ -62,7 +62,7 @@ public class HomeController {
 			}
 		}
 		
-		mv.setViewName("redirect:inner/company/list");
+		mv.setViewName("redirect:home");
 		try {
 			// 设置记住密码
 			if ("true".equals(request.getParameter("rememberMe"))) {
@@ -119,6 +119,17 @@ public class HomeController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/gateway/system/list");
 		return mv;
+	}
+	
+	@RequestMapping("/home")
+	public ModelAndView home(HttpServletRequest request){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/home");
+		HttpSession seesion = request.getSession();
+		UserEntity loginUser = (UserEntity) seesion.getAttribute("loginUser");
+		mav.addObject("loginUser", loginUser); //不想直接取
+		
+		return mav;
 	}
 
 
