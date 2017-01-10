@@ -34,13 +34,13 @@
       <ul class="sidebar-menu">
         <li class="header">菜单</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="${ctx}/inner/memo/memo"><i class="fa fa-link"></i> <span>子公司管理</span></a></li>
-        <li class="active"><a href="${ctx}/inner/memo/memo"><i class="fa fa-link"></i> <span>部门与员工</span></a></li>
-        <li class="active"><a href="${ctx}/inner/memo/memo"><i class="fa fa-link"></i> <span>权限管理</span></a></li>
-        <li class="active"><a href="${ctx}/inner/memo/memo"><i class="fa fa-link"></i> <span>菜单自定义</span></a></li>
-        <li class="active"><a href="${ctx}/inner/memo/memo"><i class="fa fa-link"></i> <span>管理日志</span></a></li>
-        <li class="active"><a href="${ctx}/inner/memo/memo"><i class="fa fa-link"></i> <span>公告管理</span></a></li>
-        <li class="active"><a href="${ctx}/inner/memo/memo"><i class="fa fa-link"></i> <span>话题管理</span></a></li>
+        <li class="active"><a href="${ctx}/inner/memo/memo"><i class="fa fa-sitemap"></i> <span>分公司管理</span></a></li>
+        <li class="active"><a href="${ctx}/inner/memo/memo"><i class="fa fa-group"></i> <span>部门与员工</span></a></li>
+        <li class="active"><a href="${ctx}/inner/memo/memo"><i class="fa fa-unlock-alt"></i> <span>权限管理</span></a></li>
+        <li class="active"><a href="${ctx}/inner/memo/memo"><i class="fa fa-cog"></i> <span>菜单自定义</span></a></li>
+        <li class="active"><a href="${ctx}/inner/memo/memo"><i class="fa fa-file-text"></i> <span>管理日志</span></a></li>
+        <li class="active"><a href="${ctx}/inner/memo/memo"><i class="fa fa-bullhorn"></i> <span>公告管理</span></a></li>
+        <li class="active"><a href="${ctx}/inner/memo/memo"><i class="fa fa-weibo"></i> <span>话题管理</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>

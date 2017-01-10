@@ -41,6 +41,9 @@ public class Constant {
 	@Value("${mybase}")
 	private String mybase_url;
 	public static String mybase;
+	@Value("${mybase.getSubCompanyPage}")
+	private String mybase_getSubCompanyPage_url;
+	public static String mybase_getSubCompanyPage;
 	@Value("${mybase.login}")
 	private String mybase_login_url;
 	public static String mybase_login;
@@ -49,6 +52,7 @@ public class Constant {
 	public void init() {
 		mybase_login = this.mybase_login_url;
 		mybase = this.mybase_url;
+		mybase_getSubCompanyPage = this.mybase_getSubCompanyPage_url;
 	}
 	
 }

@@ -1,5 +1,6 @@
 package com.qjp.util.api;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -43,6 +44,36 @@ public class MyBaseApiUtils {
 			maps.put("account", account);
 			maps.put("password", password);
 			String secret = SHA1Utils.SHA1(maps);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+			System.out.println(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 获取子公司信息列表
+	 * @param companyId
+	 * @param pageSize
+	 * @param currentPage
+	 * @return
+	 */
+	public static String getSubCompanyPage(Long companyId, Integer pageSize, Integer currentPage){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + Constant.mybase_getSubCompanyPage;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("id", companyId);
+			maps.put("pageSize", pageSize);
+			maps.put("currentPage", currentPage);
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("id", companyId);
+			jsonObject.put("pageSize", pageSize);
+			jsonObject.put("currentPage",currentPage);
 			jsonObject.put("secret", secret);
 			result = HttpUtils.postUrl(url, jsonObject);
 			System.out.println(result);
