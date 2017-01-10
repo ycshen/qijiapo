@@ -9,16 +9,7 @@
   <title>AdminLTE 2 | Starter</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="${ctx}/js/bootstrap/css/bootstrap.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="${ctx}/js/adminlte/dist/css/AdminLTE.min.css">
-
-  <link rel="stylesheet" href="${ctx}/js/adminlte/dist/css/skins/skin-blue-light.min.css">
+  <%@include file="../share/common_css.jsp"%>
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -42,8 +33,134 @@
 
     <!-- Main content -->
     <section class="content">
+		
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">分公司数据列表</h3>
+            </div>
+            <div class="box">
+        <div class="box-header with-border">
+          <h3 class="box-title">查询条件</h3>
 
-      
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="隐藏">
+              <i class="fa fa-minus"></i></button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="移除">
+              <i class="fa fa-times"></i></button>
+          </div>
+        </div>
+        <div class="box-body">
+          	<form class="form-inline" role="form">
+			  <div class="form-group">
+			    <label class="sr-only" for="exampleInputEmail2">Email address</label>
+			    <input type="email" class="form-control" id="exampleInputEmail2" placeholder="分公司名称">
+			  </div>
+			  
+			  <button type="submit" class="btn btn-default">查询</button>
+			</form>
+        </div>
+        
+      </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th></th>
+                  <th>分公司名称</th>
+                  <th>公司地址</th>
+                  <th>联系方式</th>
+                  <th>公司网址</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td><input type="checkbox"/></td>
+                  <td>聚美优品
+                  </td>
+                  <td>北京市朝阳区</td>
+                  <td> 01063696331</td>
+                  <td>www.jemei.com</td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox"/></td>
+                  <td>聚美优品
+                  </td>
+                  <td>北京市朝阳区</td>
+                  <td> 01063696331</td>
+                  <td>www.jemei.com</td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox"/></td>
+                  <td>聚美优品
+                  </td>
+                  <td>北京市朝阳区</td>
+                  <td> 01063696331</td>
+                  <td>www.jemei.com</td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox"/></td>
+                  <td>聚美优品
+                  </td>
+                  <td>北京市朝阳区</td>
+                  <td> 01063696331</td>
+                  <td>www.jemei.com</td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox"/></td>
+                  <td>聚美优品
+                  </td>
+                  <td>北京市朝阳区</td>
+                  <td> 01063696331</td>
+                  <td>www.jemei.com</td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox"/></td>
+                  <td>聚美优品
+                  </td>
+                  <td>北京市朝阳区</td>
+                  <td> 01063696331</td>
+                  <td>www.jemei.com</td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox"/></td>
+                  <td>聚美优品
+                  </td>
+                  <td>北京市朝阳区</td>
+                  <td> 01063696331</td>
+                  <td>www.jemei.com</td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox"/></td>
+                  <td>聚美优品
+                  </td>
+                  <td>北京市朝阳区</td>
+                  <td> 01063696331</td>
+                  <td>www.jemei.com</td>
+                </tr>
+                
+                <tr>
+                  <td><input type="checkbox"/></td>
+                  <td>聚美优品
+                  </td>
+                  <td>北京市朝阳区</td>
+                  <td> 01063696331</td>
+                  <td>www.jemei.com</td>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+
+          
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
 
     </section>
     <!-- /.content -->

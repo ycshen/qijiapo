@@ -41,13 +41,13 @@ public class CompanyController extends BaseController{
 	@Autowired
 	private ConfigService configService;
 	
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/subList", method = RequestMethod.GET)
 	public ModelAndView listCompany(@ModelAttribute CompanyQuery companyQuery){
-		ModelAndView mav = new ModelAndView("/company/company_list");
-		companyQuery = companyService.getCompanyList(companyQuery);
+		ModelAndView mav = new ModelAndView("/company/sub_company_list");
+		/*companyQuery = companyService.getCompanyList(companyQuery);
 		mav.addObject("companyQuery", companyQuery);
 		List<ConfigEntity> configList = configService.getConfigListByCode(Constant.VIPCODE);
-		mav.addObject("configList", configList);
+		mav.addObject("configList", configList);*/
 		
 		return mav;
 	}

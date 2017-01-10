@@ -34,7 +34,7 @@
       <ul class="sidebar-menu">
         <li class="header">菜单</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="${ctx}/inner/memo/memo"><i class="fa fa-sitemap"></i> <span>分公司管理</span></a></li>
+        <li class="active"><a href="${ctx}/inner/company/subList"><i class="fa fa-sitemap"></i> <span>分公司管理</span></a></li>
         <li class="active"><a href="${ctx}/inner/memo/memo"><i class="fa fa-group"></i> <span>部门与员工</span></a></li>
         <li class="active"><a href="${ctx}/inner/memo/memo"><i class="fa fa-unlock-alt"></i> <span>权限管理</span></a></li>
         <li class="active"><a href="${ctx}/inner/memo/memo"><i class="fa fa-cog"></i> <span>菜单自定义</span></a></li>
