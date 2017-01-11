@@ -12,7 +12,7 @@
   <%@include file="../share/common_css.jsp"%>
 
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-black sidebar-mini">
 <div class="wrapper">
 	<%@include file="../share/qjp_header.jsp"%>
  	<%@include file="../share/qjp_admin_menu.jsp"%>
@@ -59,6 +59,9 @@
 			  </div>
 			  
 			  <button type="submit" class="btn btn-default">查询</button>
+			  <button type="submit" class="btn btn-default">添加分公司</button>
+			  <button type="submit" class="btn btn-default">编辑</button>
+			  <button type="submit" class="btn btn-default">禁用</button>
 			</form>
         </div>
         
@@ -76,80 +79,18 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td><input type="checkbox"/></td>
-                  <td>聚美优品
-                  </td>
-                  <td>北京市朝阳区</td>
-                  <td> 01063696331</td>
-                  <td>www.jemei.com</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox"/></td>
-                  <td>聚美优品
-                  </td>
-                  <td>北京市朝阳区</td>
-                  <td> 01063696331</td>
-                  <td>www.jemei.com</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox"/></td>
-                  <td>聚美优品
-                  </td>
-                  <td>北京市朝阳区</td>
-                  <td> 01063696331</td>
-                  <td>www.jemei.com</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox"/></td>
-                  <td>聚美优品
-                  </td>
-                  <td>北京市朝阳区</td>
-                  <td> 01063696331</td>
-                  <td>www.jemei.com</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox"/></td>
-                  <td>聚美优品
-                  </td>
-                  <td>北京市朝阳区</td>
-                  <td> 01063696331</td>
-                  <td>www.jemei.com</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox"/></td>
-                  <td>聚美优品
-                  </td>
-                  <td>北京市朝阳区</td>
-                  <td> 01063696331</td>
-                  <td>www.jemei.com</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox"/></td>
-                  <td>聚美优品
-                  </td>
-                  <td>北京市朝阳区</td>
-                  <td> 01063696331</td>
-                  <td>www.jemei.com</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox"/></td>
-                  <td>聚美优品
-                  </td>
-                  <td>北京市朝阳区</td>
-                  <td> 01063696331</td>
-                  <td>www.jemei.com</td>
-                </tr>
-                
-                <tr>
-                  <td><input type="checkbox"/></td>
-                  <td>聚美优品
-                  </td>
-                  <td>北京市朝阳区</td>
-                  <td> 01063696331</td>
-                  <td>www.jemei.com</td>
-                </tr>
-                </tfoot>
+                	<c:if test="${companyQuery.items != null &&  companyQuery.items.size() > 0}">
+                		<c:forEach items="${companyQuery.items}" var="company">
+                			<tr>
+		                		<td><input type="checkbox"/></td>
+		                		<td>${company.companyName }</td>
+		                		<td>${company.companyAddress }</td>
+		                		<td>${company.companyTelephone }</td>
+		                		<td>${company.companySite }</td>
+	                		</tr>
+                		</c:forEach>
+                	</c:if>
+                </tbody>
               </table>
             </div>
             <!-- /.box-body -->

@@ -61,7 +61,7 @@ public class MyBaseApiUtils {
 	 * @param currentPage
 	 * @return
 	 */
-	public static String getSubCompanyPage(Long companyId, Integer pageSize, Integer currentPage){
+	public static String getSubCompanyPage(String companyName, String companyId, String pageSize, String currentPage){
 		String result = StringUtils.EMPTY;
 		try {	
 			String url = getMyBaseUrl() + Constant.mybase_getSubCompanyPage;
@@ -69,11 +69,13 @@ public class MyBaseApiUtils {
 			maps.put("id", companyId);
 			maps.put("pageSize", pageSize);
 			maps.put("currentPage", currentPage);
+			maps.put("companyName", companyName);
 			String secret = SHA1Utils.SHA1(maps);
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("id", companyId);
 			jsonObject.put("pageSize", pageSize);
 			jsonObject.put("currentPage",currentPage);
+			jsonObject.put("companyName",companyName);
 			jsonObject.put("secret", secret);
 			result = HttpUtils.postUrl(url, jsonObject);
 			System.out.println(result);

@@ -7,4 +7,4 @@
   <link rel="stylesheet" href="${ctx}/js/ionicons-2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="${ctx}/js/adminlte/dist/css/AdminLTE.min.css">
-  <link rel="stylesheet" href="${ctx}/js/adminlte/dist/css/skins/skin-blue-light.min.css">
+  <link rel="stylesheet" href="${ctx}/js/adminlte/dist/css/skins/skin-black.min.css">

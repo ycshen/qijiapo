@@ -42,12 +42,12 @@ public class CompanyController extends BaseController{
 	private ConfigService configService;
 	
 	@RequestMapping(value = "/subList", method = RequestMethod.GET)
-	public ModelAndView listCompany(@ModelAttribute CompanyQuery companyQuery){
+	public ModelAndView listCompany(@ModelAttribute CompanyQuery companyQuery, HttpServletRequest request){
 		ModelAndView mav = new ModelAndView("/company/sub_company_list");
-		/*companyQuery = companyService.getCompanyList(companyQuery);
+		UserEntity user = UserUtils.getLoginUser(request);
+		companyQuery.setCompanyId(user.getCompanyId());
+		companyQuery = companyService.getCompanyList(companyQuery);
 		mav.addObject("companyQuery", companyQuery);
-		List<ConfigEntity> configList = configService.getConfigListByCode(Constant.VIPCODE);
-		mav.addObject("configList", configList);*/
 		
 		return mav;
 	}
