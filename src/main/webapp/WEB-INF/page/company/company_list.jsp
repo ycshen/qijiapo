@@ -135,8 +135,6 @@
 								</c:forEach>
 							</tbody>
 						</table>
-					</div>
-					<div class="panel-footer" style="padding: 0.3em;">
 						<nav class="text-center">
 							<jsp:include page="../share/page.jsp">
 								<jsp:param name="url"

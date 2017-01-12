@@ -47,6 +47,12 @@ public class CompanyServiceImpl implements CompanyService{
 							List<CompanyEntity> list = JSONObject.parseArray(data, CompanyEntity.class);
 							companyQuery.setItems(list);
 						}
+						
+						Object countObj = jsonObject.get("count");
+						if(countObj != null){
+							String count = countObj.toString();
+							companyQuery.setCount(Integer.parseInt(count));
+						}
 					}
 				}
 			}

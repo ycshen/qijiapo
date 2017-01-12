@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.qjp.base.VipLevel;
 import com.qjp.entity.CompanyEntity;
 import com.qjp.entity.ConfigEntity;
@@ -40,15 +41,29 @@ public class CompanyController extends BaseController{
 	private CompanyService companyService;
 	@Autowired
 	private ConfigService configService;
+
+	@RequestMapping(value = "/subList", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public String subList(@ModelAttribute CompanyQuery companyQuery, HttpServletRequest request){
+		String result = StringUtils.EMPTY;
+		UserEntity user = UserUtils.getLoginUser(request);
+		companyQuery.setCompanyId(user.getCompanyId());
+		companyQuery = companyService.getCompanyList(companyQuery);
+		List<CompanyEntity> list = companyQuery.getItems();
+		if(list != null && list.size() > 0){
+			result = new Gson().toJson(list);
+		}
+		
+		return result;
+	}
 	
-	@RequestMapping(value = "/subList", method = RequestMethod.GET)
-	public ModelAndView listCompany(@ModelAttribute CompanyQuery companyQuery, HttpServletRequest request){
+	@RequestMapping(value = "/list", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+	public ModelAndView list(@ModelAttribute CompanyQuery companyQuery, HttpServletRequest request){
 		ModelAndView mav = new ModelAndView("/company/sub_company_list");
 		UserEntity user = UserUtils.getLoginUser(request);
 		companyQuery.setCompanyId(user.getCompanyId());
 		companyQuery = companyService.getCompanyList(companyQuery);
 		mav.addObject("companyQuery", companyQuery);
-		
 		return mav;
 	}
 	

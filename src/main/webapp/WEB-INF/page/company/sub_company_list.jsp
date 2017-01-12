@@ -6,11 +6,18 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}"></c:set>
 <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Starter</title>
+  <title>企家婆-专业的企业好管家</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <%@include file="../share/common_css.jsp"%>
-
+	<script src="${ctx}/js/jQuery/jquery-2.2.3.min.js"></script>
+<script src="${ctx}/js/bootstrap/js/bootstrap.min.js"></script>
+<!-- AdminLTE App -->
+<script src="${ctx}/js/adminlte/dist/js/app.min.js"></script>
+<script type="text/javascript" src="${ctx}/js/pagination/jquery.pagination.js"></script>
+<script type="text/javascript">
+	var ctx = "${ctx}";
+</script>
 </head>
 <body class="hold-transition skin-black sidebar-mini">
 <div class="wrapper">
@@ -42,8 +49,6 @@
             </div>
             <div class="box">
         <div class="box-header with-border">
-          <h3 class="box-title">查询条件</h3>
-
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="隐藏">
               <i class="fa fa-minus"></i></button>
@@ -68,7 +73,7 @@
       </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="example2" class="table table-bordered table-hover">
+              <table id="syslist" class="table table-bordered table-hover">
                 <thead>
                 <tr>
                   <th></th>
@@ -91,20 +96,25 @@
                 		</c:forEach>
                 	</c:if>
                 </tbody>
+                
+                 
+               
               </table>
+            
             </div>
-            <!-- /.box-body -->
+            <div class="box-header" style="text-align:center">
+            	<%@include file="sub_company_list_page.jsp" %>
+					<input type="hidden" value="${companyQuery.count}" id="count"/>
+					
+					<input type="hidden" value="${companyQuery.companyId}" id="txtCompanyId"/>
+					
+            </div>
           </div>
-          <!-- /.box -->
 
-          
-          <!-- /.box -->
         </div>
-        <!-- /.col -->
       </div>
 
     </section>
-    <!-- /.content -->
   </div>
 
   <%@include file="../share/qjp_footer.jsp"%>
@@ -181,20 +191,9 @@
       <!-- /.tab-pane -->
     </div>
   </aside>
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
   <div class="control-sidebar-bg"></div>
 </div>
-<!-- ./wrapper -->
 
-<!-- REQUIRED JS SCRIPTS -->
-
-<!-- jQuery 2.2.3 -->
-<script src="${ctx}/js/jQuery/jquery-2.2.3.min.js"></script>
-<script src="${ctx}/js/bootstrap/js/bootstrap.min.js"></script>
-<!-- AdminLTE App -->
-<script src="${ctx}/js/adminlte/dist/js/app.min.js"></script>
 
 </body>
 </html>

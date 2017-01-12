@@ -50,11 +50,6 @@
 	<%
 		}
 	%>
-	<%-- 	<li class="active"><a href="#">1<span class="sr-only">(current)</span></a></li>
-	<li><a href="#">2</a></li>
-	<li><a href="#">3</a></li>
-	<li><a href="#">4</a></li>
-	<li><a href="#">5</a></li> --%>
 	<li <%=isLastPage ? "class='disabled'" : ""%>><a
 		href="<%=isLastPage ? "#" : (url + totalPage)%>" aria-label="Last">
 			<span aria-hidden="true">&raquo;</span>
