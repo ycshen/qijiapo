@@ -7,14 +7,14 @@
 <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>企家婆-专业的企业好管家</title>
-  <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <%@include file="../share/common_css.jsp"%>
-	<script src="${ctx}/js/jQuery/jquery-2.2.3.min.js"></script>
+<script src="${ctx}/js/jQuery/jquery-2.2.3.min.js"></script>
 <script src="${ctx}/js/bootstrap/js/bootstrap.min.js"></script>
-<!-- AdminLTE App -->
 <script src="${ctx}/js/adminlte/dist/js/app.min.js"></script>
 <script type="text/javascript" src="${ctx}/js/pagination/jquery.pagination.js"></script>
+<script type="text/javascript" src="${ctx}/js/layer/layer.js"></script>
+<script type="text/javascript" src="${ctx}/js/pages/company/sub_company_list.js"></script>
 <script type="text/javascript">
 	var ctx = "${ctx}";
 </script>
@@ -59,14 +59,13 @@
         <div class="box-body">
           	<form class="form-inline" role="form">
 			  <div class="form-group">
-			    <label class="sr-only" for="exampleInputEmail2">Email address</label>
-			    <input type="email" class="form-control" id="exampleInputEmail2" placeholder="分公司名称">
+			    <input type="text" class="form-control" id="txtCompanyName" placeholder="分公司名称">
 			  </div>
 			  
-			  <button type="submit" class="btn btn-default">查询</button>
-			  <button type="submit" class="btn btn-default">添加分公司</button>
-			  <button type="submit" class="btn btn-default">编辑</button>
-			  <button type="submit" class="btn btn-default">禁用</button>
+			  <button type="button" class="btn btn-default">查询</button>
+			  <button type="button" class="btn btn-default" onclick="addCompany();">添加分公司</button>
+			  <button type="button" class="btn btn-default">编辑</button>
+			  <button type="button" class="btn btn-default">禁用</button>
 			</form>
         </div>
         

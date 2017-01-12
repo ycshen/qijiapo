@@ -69,7 +69,7 @@ public class CompanyController extends BaseController{
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView editCompany(String id){
-		ModelAndView mav = new ModelAndView("/company/company_edit");
+		ModelAndView mav = new ModelAndView("/company/sub_company_edit");
 		CompanyEntity company = null;
 		if(StringUtils.isNotBlank(id)){
 			Long companyId = Long.parseLong(id);
@@ -101,9 +101,9 @@ public class CompanyController extends BaseController{
 			Long id = company.getId();
 			UserEntity user = UserUtils.getLoginUser(request);
 			if(id == null){
-				company.setCreateTime(new Date());
 				company.setCreateUser(user.getUserName());
-				company.setLevel(VipLevel.VIP);				
+				company.setParentCompanyId(user.getCompanyId().toString());
+				company.setParentCompanyName(user.getCompanyName());
 				companyService.insertCompany(company);
 				result = 1;
 			}else{

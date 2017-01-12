@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.google.gson.Gson;
 import com.qjp.entity.CompanyEntity;
 import com.qjp.service.CompanyService;
 import com.qjp.util.api.MyBaseApiUtils;
@@ -25,6 +26,8 @@ public class CompanyServiceImpl implements CompanyService{
 
 	@Override
 	public void insertCompany(CompanyEntity company) {
+		String companyJson = new Gson().toJson(company);
+		MyBaseApiUtils.insertCompany(companyJson);
 	}
 	
 	@Override

@@ -86,5 +86,31 @@ public class MyBaseApiUtils {
 		return result;
 	}
 
+	/**
+	 * 获取子公司信息列表
+	 * @param companyId
+	 * @param pageSize
+	 * @param currentPage
+	 * @return
+	 */
+	public static String insertCompany(String companyJson){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + Constant.mybase_insertCompany;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("companyJson", companyJson);
+			
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("companyJson", companyJson);
+			jsonObject.put("secret", secret);
+			HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
 }
 
