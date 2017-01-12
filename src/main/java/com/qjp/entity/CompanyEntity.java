@@ -64,5 +64,14 @@ public class CompanyEntity extends BaseEntity{
 	public void setParentCompanyName(String parentCompanyName) {
 		this.parentCompanyName = parentCompanyName;
 	}
+	
+	public String toLogString() {
+		return "[公司名称：" + companyName
+				+ ", 联系方式=" + companyTelephone + ", 公司负责人="
+				+ companyCeo + ", 公司网址=" + companySite
+				+ ", 公司地址=" + companyAddress + ", 总公司名称="
+				+ parentCompanyName + "]";
+	}
+	
 }
 

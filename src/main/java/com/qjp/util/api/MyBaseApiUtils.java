@@ -1,6 +1,5 @@
 package com.qjp.util.api;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -112,5 +111,104 @@ public class MyBaseApiUtils {
 		return result;
 	}
 	
+	/**
+	 * 禁用子公司信息
+	 * @param id
+	 * @return
+	 */
+	public static String deleteCompany(String id){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + Constant.mybase_close;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("id", id);
+			
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("id", id);
+			jsonObject.put("secret", secret);
+			HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 激活子公司信息
+	 * @param id
+	 * @return
+	 */
+	public static String activateCompany(String id){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + Constant.mybase_activate;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("id", id);
+			
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("id", id);
+			jsonObject.put("secret", secret);
+			HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 记录日志
+	 * @param id
+	 * @return
+	 */
+	public static String log(String logJson){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + Constant.mybase_log;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("logJson", logJson);
+			
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("logJson", logJson);
+			jsonObject.put("secret", secret);
+			HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 记录日志
+	 * @param id
+	 * @return
+	 */
+	public static String getAdminLogs(String companyId, String pageSize, String currentPage){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + Constant.mybase_getAdminLogs;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("companyId", companyId);
+			maps.put("pageSize", pageSize);
+			maps.put("currentPage", currentPage);
+			
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("companyId", companyId);
+			jsonObject.put("pageSize", pageSize);
+			jsonObject.put("currentPage", currentPage);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }
 

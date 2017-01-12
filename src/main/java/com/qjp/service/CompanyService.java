@@ -16,5 +16,7 @@ public interface CompanyService {
 	CompanyQuery getCompanyList(CompanyQuery companyQuery);
 	void updateCompany(CompanyEntity company);
 	CompanyEntity getCompanyById(Long id);
+	void deleteCompany(String id);
+	void activateCompany(String id);
 }
 

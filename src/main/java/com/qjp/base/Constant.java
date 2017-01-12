@@ -50,13 +50,28 @@ public class Constant {
 	@Value("${mybase.login}")
 	private String mybase_login_url;
 	public static String mybase_login;
-	
+	@Value("${mybase.close}")
+	private String mybase_close_url;
+	public static String mybase_close;
+	@Value("${mybase.activate}")
+	private String mybase_activate_url;
+	public static String mybase_activate;
+	@Value("${mybase.log}")
+	private String mybase_log_url;
+	public static String mybase_log;
+	@Value("${mybase.getAdminLogs}")
+	private String mybase_getAdminLogs_url;
+	public static String mybase_getAdminLogs;
 	@PostConstruct
 	public void init() {
 		mybase_login = this.mybase_login_url;
 		mybase = this.mybase_url;
 		mybase_getSubCompanyPage = this.mybase_getSubCompanyPage_url;
 		mybase_insertCompany = this.mybase_insertCompany_url;
+		mybase_close = this.mybase_close_url;
+		mybase_activate = this.mybase_activate_url;
+		mybase_log = this.mybase_log_url;
+		mybase_getAdminLogs = this.mybase_getAdminLogs_url;
 	}
 	
 }

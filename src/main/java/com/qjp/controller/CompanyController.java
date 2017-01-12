@@ -23,6 +23,7 @@ import com.qjp.entity.Constant;
 import com.qjp.entity.UserEntity;
 import com.qjp.service.CompanyService;
 import com.qjp.service.ConfigService;
+import com.qjp.util.LogUtils;
 import com.qjp.util.UserUtils;
 import com.qjp.util.query.CompanyQuery;
 
@@ -105,17 +106,44 @@ public class CompanyController extends BaseController{
 				company.setParentCompanyId(user.getCompanyId().toString());
 				company.setParentCompanyName(user.getCompanyName());
 				companyService.insertCompany(company);
+				LogUtils.logAdmin("新增分公司信息：" + company.toLogString(), user);
 				result = 1;
 			}else{
+				CompanyEntity oldCompany = companyService.getCompanyById(id);
 				company.setUpdateUser(user.getUserName());
 				company.setUpdateTime(new Date());
 				companyService.updateCompany(company);
+				LogUtils.logAdmin("更新分公司信息,更新前：" + oldCompany.toLogString() + "，更新后：" + company.toLogString(), user);
 				result = 2;
 			}
 		}catch(Exception e){
 			//暂时不记录监控
 			e.printStackTrace();
 			result = 0;
+		}
+		
+		return result;
+	}
+	
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	@ResponseBody
+	public Integer deleteCompany(@ModelAttribute String id, HttpServletRequest request){
+		Integer result = 0;
+		if(StringUtils.isNotBlank(id)){
+			companyService.deleteCompany(id);
+			result = 1;
+		}
+		
+		return result;
+	}
+	
+	@RequestMapping(value = "/activate", method = RequestMethod.GET)
+	@ResponseBody
+	public Integer activateCompany(@ModelAttribute String id, HttpServletRequest request){
+		Integer result = 0;
+		if(StringUtils.isNotBlank(id)){
+			companyService.activateCompany(id);
+			result = 1;
 		}
 		
 		return result;

@@ -73,5 +73,15 @@ public class CompanyServiceImpl implements CompanyService{
 		
 		return null;
 	}
+
+	@Override
+	public void deleteCompany(String id) {
+		MyBaseApiUtils.deleteCompany(id);
+	}
+
+	@Override
+	public void activateCompany(String id) {
+		MyBaseApiUtils.deleteCompany(id);
+	}
 }
 

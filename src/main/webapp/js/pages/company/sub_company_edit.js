@@ -74,12 +74,18 @@ function editCompany(){
         		  
       		});
           }else if(data == 2){
-        	  layer.alert('更新成功', function(index){
+        	  layer.alert('更新成功', 
+        			  {closeBtn: false,
+  		  		skin: 'layui-layer-molv'
+  			  },function(index){
         		  window.parent.addSuccess();
         		  
       		});
           }else{
-        	  layer.alert("操作失败！"); 
+        	  layer.alert("操作失败！",
+        			  {closeBtn: false,
+  		  		skin: 'layui-layer-molv'
+  			  }); 
           }
         }
     });
