@@ -140,7 +140,7 @@ public class UserController {
 	@ResponseBody
 	public String getUserListByDepartmentId(@ModelAttribute UserQuery userQuery, HttpServletRequest request){
 		String result = StringUtils.EMPTY;
-		List<UserEntity> list = userService.getUserPage(userQuery);
+		List<UserEntity> list = userService.getUserPage(userQuery).getItems();
 		if(list != null && list.size() > 0){
 			result = new Gson().toJson(list);
 		}

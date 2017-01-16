@@ -18,7 +18,7 @@ public interface MenuService {
 	MenuQuery getMenuPage(MenuQuery menuQuery);
 	void updateMenu(MenuEntity menu);
 	MenuEntity getMenuById(Integer id);
-	List<MenuEntity> getMenuListByCode(String code);
+	List<MenuEntity> getMenuList(String userId);
 	void deleteMenuById(String id);
 	MenuEntity getMenuByNameAndType(String menuName, String menuType);
 	MenuEntity getMenuByNameAndSystemId(String menuName, String systemId);

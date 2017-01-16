@@ -18,14 +18,22 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.qjp.base.Config;
 import com.qjp.base.MenuEnum;
+import com.qjp.base.UserStatus;
+import com.qjp.entity.CompanyEntity;
 import com.qjp.entity.ConfigEntity;
+import com.qjp.entity.DepartmentEntity;
 import com.qjp.entity.MenuEntity;
 import com.qjp.entity.UserEntity;
+import com.qjp.service.CompanyService;
 import com.qjp.service.ConfigService;
+import com.qjp.service.DepartmentService;
 import com.qjp.service.MenuService;
+import com.qjp.service.UserService;
 import com.qjp.util.UserUtils;
+import com.qjp.util.query.CompanyQuery;
 import com.qjp.util.query.MenuQuery;
-import com.qjp.util.vo.MenuTreeVO;
+import com.qjp.util.query.UserQuery;
+import com.qjp.util.vo.BTreeVO;
 import com.google.gson.Gson;
 
 /** 
@@ -43,12 +51,45 @@ public class AdminController extends BaseController{
 	private MenuService menuService;
 	@Autowired
 	private ConfigService configService;
+	@Autowired
+	private DepartmentService departmentService;
+	@Autowired
+	private UserService userService;
+	@Autowired
+	private CompanyService companyService;
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public ModelAndView adminIndex(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView("/admin/home");
 		HttpSession seesion = request.getSession();
 		UserEntity loginUser = (UserEntity) seesion.getAttribute("loginUser");
 		mav.addObject("loginUser", loginUser); 
+		return mav;
+	}
+	
+	@RequestMapping(value = "/userList", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public String userList(@ModelAttribute UserQuery userQuery, HttpServletRequest request){
+		String result = StringUtils.EMPTY;
+		UserEntity loginUser = UserUtils.getAdminLoginUser(request);
+		userQuery.setCompanyId(loginUser.getCompanyId().toString());
+		userQuery = userService.getUserPage(userQuery);
+		result = new Gson().toJson(userQuery);
+		
+		return result;
+	}
+	
+	@RequestMapping(value = "/departmentUserList", method = RequestMethod.GET)
+	public ModelAndView departmentUserList(HttpServletRequest request){
+		ModelAndView mav = new ModelAndView("/admin/dept_user_list");
+		UserEntity loginUser = UserUtils.getAdminLoginUser(request);
+		mav.addObject("loginUser", loginUser); 
+		UserQuery userQuery = new UserQuery();
+		userQuery.setPage(1);
+		userQuery.setSize(10);
+		userQuery.setCompanyId(loginUser.getCompanyId().toString());
+		userQuery.setStatus(UserStatus.NORMAL_INT);
+		userQuery = userService.getUserList(userQuery);
+		mav.addObject("userQuery", userQuery); 
 		return mav;
 	}
 	
@@ -115,64 +156,15 @@ public class AdminController extends BaseController{
 		return mav;
 	}
 	
-	@RequestMapping(value = "/treeData", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+	@RequestMapping(value = "/deptree", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	@ResponseBody
-	public String treeData(@ModelAttribute MenuQuery menuQuery, HttpServletRequest request){
-		menuQuery.setMenuType(MenuEnum.SYSTEM.getMenuType().toString());
-		menuQuery = menuService.getMenuPage(menuQuery);
-		List<MenuEntity> list = menuQuery.getItems();
-		String tree = StringUtils.EMPTY;
-		List<MenuTreeVO> treeList = null;
-		if(list != null && list.size() > 0){
-			treeList = new LinkedList<MenuTreeVO>();
-			MenuTreeVO treeVO = null;
-			for (MenuEntity menuEntity : list) {
-				treeVO = new MenuTreeVO();
-				treeVO.setText(menuEntity.getMenuName());
-				Integer idInt = menuEntity.getId().intValue();
-				treeVO.setId(idInt);
-				treeVO.setNodeId(idInt);
-				String id = menuEntity.getId().toString();
-				menuQuery = new MenuQuery();
-				menuQuery.setParentMenuId(id);
-				menuQuery = menuService.getMenuPage(menuQuery);
-				List<MenuTreeVO> nodes = this.getNodes(menuQuery.getItems(), menuQuery);
-				treeVO.setNodes(nodes);
-				treeList.add(treeVO);
-			}
-			
-			tree = new Gson().toJson(treeList);
-		}
+	public String treeData(HttpServletRequest request){
+		UserEntity loginUser = UserUtils.getAdminLoginUser(request);
+		String tree = companyService.getCompanyStaffTreeById(loginUser.getCompanyId().toString());
 		
 		return tree;
 	}
 	
-	private List<MenuTreeVO> getNodes(List<MenuEntity> list, MenuQuery menuQuery){
-		List<MenuTreeVO> treeList = null;
-		if(list != null && list.size() > 0){
-			treeList = new LinkedList<MenuTreeVO>();
-			MenuTreeVO treeVO = null;
-			for (MenuEntity menuEntity : list) {
-				treeVO = new MenuTreeVO();
-				treeVO.setText(menuEntity.getMenuName());
-				//treeVO.setId(menuEntity.getId().toString());
-				Integer idInt = menuEntity.getId().intValue();
-				String id = menuEntity.getId().toString();
-				menuQuery = new MenuQuery();
-				menuQuery.setParentMenuId(id);
-				menuQuery = menuService.getMenuPage(menuQuery);
-				List<MenuTreeVO> nodes = this.getNodes(menuQuery.getItems(), menuQuery);
-				treeVO.setId(idInt);
-				treeVO.setNodeId(idInt);
-				treeVO.setNodes(nodes);
-				
-				treeList.add(treeVO);
-			}
-			
-		}
-		
-		return treeList;
-	}
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	@ResponseBody

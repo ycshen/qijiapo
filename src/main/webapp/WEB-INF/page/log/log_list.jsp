@@ -55,9 +55,9 @@
               <table id="syslist" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>序号</th>
+                  <th></th>
                   <th>操作人</th>
-                  <th>操作日志</th>
+                  <th>操作内容</th>
                   <th>操作时间</th>
                 </tr>
                 </thead>

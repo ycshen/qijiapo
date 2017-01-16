@@ -32,21 +32,12 @@
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu">
-        <li class="header">菜单</li>
-        <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="${ctx}/inner/memo/memo"><i class="fa fa-link"></i> <span>备忘录</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
-        <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#">Link in level 2</a></li>
-            <li><a href="#">Link in level 2</a></li>
-          </ul>
-        </li>
+      	<c:if test="${menuList != null && menuList.size() > 0 }">
+	        <c:forEach var="menu" items="${menuList}">
+	        	 <li><a href="${ctx}${menu.menuUrl}"><i class="fa fa-link"></i> <span>${menu.menuName}</span></a></li>
+	        	 
+	        </c:forEach>
+        </c:if>
       </ul>
       <!-- /.sidebar-menu -->
     </section>

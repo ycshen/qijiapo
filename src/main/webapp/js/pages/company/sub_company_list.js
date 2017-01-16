@@ -18,6 +18,17 @@ function addSuccess(){
 	layer.closeAll();
 }
 
+function editCompany(id){
+	layer.open({
+		  type: 2,
+		  area: ['700px', '400px'],
+		  fixed: false, //不固定
+		  maxmin: true,
+		  title: "编辑分公司信息",
+		  content: ctx + "/inner/company/edit?id=" + id
+		});
+}
+
 function addCompany(){
 	layer.open({
 		  type: 2,

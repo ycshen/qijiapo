@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.qjp.entity.DepartmentEntity;
 import com.qjp.entity.UserEntity;
 import com.qjp.service.UserService;
 import com.qjp.util.api.MyBaseApiUtils;
@@ -30,7 +31,35 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public UserQuery getUserList(UserQuery userQuery) {
-		
+		String companyId = userQuery.getCompanyId();
+		String departmentId = userQuery.getDepartmentId();
+		String pageSize = userQuery.getSize().toString();
+		String currentPage = userQuery.getPage().toString();
+		String status = userQuery.getStatus().toString();
+		String result = MyBaseApiUtils.getUserPage(status, companyId, departmentId, pageSize, currentPage);
+		if(StringUtils.isNotBlank(result)){
+			JSONObject jsonObject = JSONObject.parseObject(result);
+			if(jsonObject != null){
+				Object codeObj = jsonObject.get("code");
+				if(codeObj != null){
+					String code = codeObj.toString();
+					if (ApiCode.OK.toString().equals(code)) {
+						Object dataObj = jsonObject.get("data");
+						if(dataObj != null){
+							String data = dataObj.toString();
+							List<UserEntity> list = JSONObject.parseArray(data, UserEntity.class);
+							userQuery.setItems(list);
+						}
+						
+						Object countObj = jsonObject.get("count");
+						if(countObj != null){
+							String count = countObj.toString();
+							userQuery.setCount(Integer.parseInt(count));
+						}
+					}
+				}
+			}
+		}
 		
 		return userQuery;
 	}
@@ -83,9 +112,39 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public List<UserEntity> getUserPage(UserQuery userQuery) {
+	public UserQuery getUserPage(UserQuery userQuery) {
+		String companyId = userQuery.getCompanyId();
+		String departmentId = userQuery.getDepartmentId();
+		String pageSize = userQuery.getSize().toString();
+		String currentPage = userQuery.getPage().toString();
+		String status = userQuery.getStatus().toString();
+		List<UserEntity> list = null;
+		String result = MyBaseApiUtils.getUserPage(status, companyId, departmentId, pageSize, currentPage);
+		if(StringUtils.isNotBlank(result)){
+			JSONObject jsonObject = JSONObject.parseObject(result);
+			if(jsonObject != null){
+				Object codeObj = jsonObject.get("code");
+				if(codeObj != null){
+					String code = codeObj.toString();
+					if (ApiCode.OK.toString().equals(code)) {
+						Object dataObj = jsonObject.get("data");
+						if(dataObj != null){
+							String data = dataObj.toString();
+							list = JSONObject.parseArray(data, UserEntity.class);
+							userQuery.setItems(list);
+						}
+						
+						Object countObj = jsonObject.get("count");
+						if(countObj != null){
+							String count = countObj.toString();
+							userQuery.setCount(Integer.parseInt(count));
+						}
+					}
+				}
+			}
+		}
 		
-		return null;
+		return userQuery;
 	}
 	
 }

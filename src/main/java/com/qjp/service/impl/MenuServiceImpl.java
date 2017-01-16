@@ -2,10 +2,15 @@ package com.qjp.service.impl;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSONObject;
+import com.qjp.entity.LogEntity;
 import com.qjp.entity.MenuEntity;
 import com.qjp.service.MenuService;
+import com.qjp.util.api.MyBaseApiUtils;
+import com.qjp.util.api.model.ApiCode;
 import com.qjp.util.query.MenuQuery;
 
 /** 
@@ -42,10 +47,27 @@ public class MenuServiceImpl implements MenuService{
 	}
 
 	@Override
-	public List<MenuEntity> getMenuListByCode(String code) {
+	public List<MenuEntity> getMenuList(String userId) {
+		String result = MyBaseApiUtils.getMenus(userId);
+		List<MenuEntity> list = null;
+		if(StringUtils.isNotBlank(result)){
+			JSONObject jsonObject = JSONObject.parseObject(result);
+			if(jsonObject != null){
+				Object codeObj = jsonObject.get("code");
+				if(codeObj != null){
+					String code = codeObj.toString();
+					if (ApiCode.OK.toString().equals(code)) {
+						Object dataObj = jsonObject.get("data");
+						if(dataObj != null){
+							String data = dataObj.toString();
+							list = JSONObject.parseArray(data, MenuEntity.class);
+						}
+					}
+				}
+			}
+		}
 		
-		
-		return null;
+		return list;
 	}
 
 	@Override

@@ -45,5 +45,26 @@ public class UserUtils {
 		return loginUser;
 	}
 	
+	/**
+	 * 获取用户登录信息
+	 * @param request
+	 * @return
+	 */
+	public static UserEntity getAdminLoginUser(HttpServletRequest request){
+		UserEntity loginUser = (UserEntity) request.getSession().getAttribute("loginUser");
+		if(CommonUtils.getLocalEnv() && loginUser == null){
+			//本地随便取一个
+			loginUser = new UserEntity();
+			loginUser.setUserName("申鱼川");
+			loginUser.setId(1l);
+			loginUser.setUpdateUser("申鱼川");
+			loginUser.setCompanyId(15l);
+			loginUser.setCompanyName("嘉年华");
+			request.getSession().setAttribute("loginUser", loginUser);
+		}
+		
+		return loginUser;
+	}
+	
 }
 

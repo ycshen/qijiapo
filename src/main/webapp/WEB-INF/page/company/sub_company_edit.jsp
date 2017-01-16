@@ -16,6 +16,8 @@
 
 <div class="container" style="margin-top: 10px;">
 <form class="layui-form" method="post" id="companyForm">
+	<input type="hidden" value="${company.id}" name="id"/>
+	
   <div class="layui-form-item">
     <label class="layui-form-label" style="width:100px;">分公司名称</label>
     <div class="layui-input-block">

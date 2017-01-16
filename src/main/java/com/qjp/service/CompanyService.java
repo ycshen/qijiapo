@@ -18,5 +18,6 @@ public interface CompanyService {
 	CompanyEntity getCompanyById(Long id);
 	void deleteCompany(String id);
 	void activateCompany(String id);
+	String getCompanyStaffTreeById(String companyId);
 }
 

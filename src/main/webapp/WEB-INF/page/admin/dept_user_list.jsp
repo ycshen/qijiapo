@@ -14,7 +14,8 @@
 <script src="${ctx}/js/adminlte/dist/js/app.min.js"></script>
 <script type="text/javascript" src="${ctx}/js/pagination/jquery.pagination.js"></script>
 <script type="text/javascript" src="${ctx}/js/layer/layer.js"></script>
-<script type="text/javascript" src="${ctx}/js/pages/company/sub_company_list.js"></script>
+<script type="text/javascript" src="${ctx}/js/treeview/bootstrap-treeview.js"></script>
+<script type="text/javascript" src="${ctx}/js/pages/admin/dept_user_list.js"></script>
 <script type="text/javascript">
 	var ctx = "${ctx}";
 </script>
@@ -29,12 +30,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-  		分公司管理
+  		部门与员工
         <small></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> 企家婆</a></li>
         <li class="active">企业管理</li>
+        <li class="active">部门与员工</li>
       </ol>
     </section>
 
@@ -42,56 +44,66 @@
     <section class="content">
 		
       <div class="row">
-        <div class="col-xs-12">
+       <div class="col-xs-3">
+       		<div class="box">
+       			<div id="tree"></div>
+       		</div>
+       </div>
+        <div class="col-xs-9">
           <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">分公司数据列表</h3>
-            </div>
+
             <div class="box">
-        <div class="box-header with-border">
-          <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="隐藏">
-              <i class="fa fa-minus"></i></button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="移除">
-              <i class="fa fa-times"></i></button>
-          </div>
-        </div>
-        <div class="box-body">
-          	<form class="form-inline" role="form">
-			  <div class="form-group">
-			    <input type="text" class="form-control" id="txtCompanyName" placeholder="分公司名称">
-			  </div>
-			  
-			  <button type="button" class="btn btn-default">查询</button>
-			  <button type="button" class="btn btn-default" onclick="addCompany();">添加分公司</button>
-			  <button type="button" class="btn btn-default">禁用</button>
-			</form>
-        </div>
+		        <div class="box-header with-border">
+		          <div class="box-tools pull-right">
+		            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="隐藏">
+		              <i class="fa fa-minus"></i></button>
+		            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="移除">
+		              <i class="fa fa-times"></i></button>
+		          </div>
+		        </div>
+		        <div class="box-body">
+		          	<form class="form-inline" role="form">
+		          	 <div class="form-group">
+		          		<h5><span id="spanName">${loginUser.companyName}</span>（<span id="spanCount">${userQuery.count}</span>名员工）</h5> 
+		          	 </div>
+					  <div class="form-group">
+					    <input type="text" class="form-control" id="txtUserName" placeholder="员工姓名">
+					  </div>
+					  <div class="form-group">
+					    <input type="text" class="form-control" id="txtUserName" placeholder="电话号码">
+					  </div>
+					  <button type="button" class="btn btn-default">查询</button>
+					  <button type="button" class="btn btn-default" onclick="addCompany();">添加分公司</button>
+					  <button type="button" class="btn btn-default">禁用</button>
+					</form>
+		        </div>
         
       </div>
             <!-- /.box-header -->
             <div class="box-body">
               <table id="syslist" class="table table-bordered table-hover">
                 <thead>
-                <tr class="info">
-                  <th></th>
-                  <th>分公司名称</th>
-                  <th>公司地址</th>
-                  <th>联系方式</th>
-                  <th>公司网址</th>
+                <tr>
+                  <th>操作</th>
+                  <th>员工姓名</th>
+                  <th>员工账号</th>
+                  <th>联系电话</th>
+                  <th>所属部门</th>
+                  <th>职务</th>
                 </tr>
                 </thead>
                 <tbody>
-                	<c:if test="${companyQuery.items != null &&  companyQuery.items.size() > 0}">
-                		<c:forEach items="${companyQuery.items}" var="company">
+                	<c:if test="${userQuery.items != null &&  userQuery.items.size() > 0}">
+                		<c:forEach items="${userQuery.items}" var="user">
                 			<tr>
 		                		<td>
-									<button type="button" class="btn btn-link" onclick="editCompany('${company.id}')">编辑</button>
+									<button type="button" class="btn btn-link" onclick="editCompany('${user.id}')">编辑</button>
 								</td>
-		                		<td>${company.companyName }</td>
-		                		<td>${company.companyAddress }</td>
-		                		<td>${company.companyTelephone }</td>
-		                		<td>${company.companySite }</td>
+		                		<td>${user.userName }</td>
+		                		<td>${user.userName }</td>
+		                		<td>${user.telphone }</td>
+		                		<td>${user.departmentName }</td>
+		                		<td></td>
 	                		</tr>
                 		</c:forEach>
                 	</c:if>
@@ -103,11 +115,11 @@
             
             </div>
             <div class="box-header" style="text-align:center">
-            	<%@include file="sub_company_list_page.jsp" %>
-					<input type="hidden" value="${companyQuery.count}" id="count"/>
+            	<%@include file="dept_user_list_page.jsp" %>
+					<input type="hidden" value="${userQuery.count}" id="count"/>
 					
-					<input type="hidden" value="${companyQuery.companyId}" id="txtCompanyId"/>
-					
+					<input type="hidden" value="${userQuery.userName}" id="txtUserName"/>
+					<input type="hidden" value="${userQuery.telphone}" id="txtTelphone"/>
             </div>
           </div>
 

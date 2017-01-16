@@ -6,40 +6,31 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}"></c:set>
 <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Starter</title>
+  <title>企家婆-专业的企业服务好帮手</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="${ctx}/js/bootstrap/css/bootstrap.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+   <%@include file="../share/common_css.jsp"%>
   <link rel="stylesheet" href="${ctx}/js/plugins/fullcalendar/fullcalendar.min.css">
   <link rel="stylesheet" href="${ctx}/js/plugins/fullcalendar/fullcalendar.print.css" media="print">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="${ctx}/js/adminlte/dist/css/AdminLTE.min.css">
-
-  <link rel="stylesheet" href="${ctx}/js/adminlte/dist/css/skins/skin-blue-light.min.css">
+ 
 
 
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-black sidebar-mini">
 <div class="wrapper">
 
  <%@include file="../share/qjp_header.jsp"%>
-  <%@include file="../share/qjp_aside.jsp"%>
-  <!-- Content Wrapper. Contains page content -->
+  <%@include file="../share/qjp_menu.jsp"%>
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Calendar
-        <small>Control panel</small>
+        	备忘录行程
+        <small>管理你的行程</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Calendar</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> 企家婆</a></li>
+        <li class="active">备忘录行程</li>
       </ol>
     </section>
 
@@ -49,10 +40,9 @@
         <div class="col-md-3">
           <div class="box box-solid">
             <div class="box-header with-border">
-              <h4 class="box-title">Draggable Events</h4>
+              <h4 class="box-title">事件</h4>
             </div>
             <div class="box-body">
-              <!-- the events -->
               <div id="external-events">
                 <div class="external-event bg-green">Lunch</div>
                 <div class="external-event bg-yellow">Go home</div>

@@ -110,10 +110,16 @@ public class CompanyController extends BaseController{
 				result = 1;
 			}else{
 				CompanyEntity oldCompany = companyService.getCompanyById(id);
-				company.setUpdateUser(user.getUserName());
-				company.setUpdateTime(new Date());
-				companyService.updateCompany(company);
-				LogUtils.logAdmin("更新分公司信息,更新前：" + oldCompany.toLogString() + "，更新后：" + company.toLogString(), user);
+				String oldCompanyStr = oldCompany.toLogString();
+				oldCompany.setUpdateTime(new Date());
+				oldCompany.setCompanyAddress(company.getCompanyAddress());
+				oldCompany.setCompanyCeo(company.getCompanyCeo());
+				oldCompany.setCompanyName(company.getCompanyName());
+				oldCompany.setCompanySite(company.getCompanySite());
+				oldCompany.setCompanyTelephone(company.getCompanyTelephone());
+				oldCompany.setUpdateUser(user.getUserName());
+				companyService.updateCompany(oldCompany);
+				LogUtils.logAdmin("更新分公司信息,更新前：" + oldCompanyStr + "，更新后：" + oldCompany.toLogString(), user);
 				result = 2;
 			}
 		}catch(Exception e){

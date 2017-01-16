@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.qjp.entity.CompanyEntity;
 import com.qjp.service.CompanyService;
 import com.qjp.util.api.MyBaseApiUtils;
@@ -66,12 +67,32 @@ public class CompanyServiceImpl implements CompanyService{
 
 	@Override
 	public void updateCompany(CompanyEntity company) {
+		String companyJson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJson(company);
+		MyBaseApiUtils.updateCompany(companyJson);
 	}
 
 	@Override
 	public CompanyEntity getCompanyById(Long id) {
+		String result = MyBaseApiUtils.getCompanyById(id.toString());
+		CompanyEntity company = null;
+		if(StringUtils.isNotBlank(result)){
+			JSONObject jsonObject = JSONObject.parseObject(result);
+			if(jsonObject != null){
+				Object codeObj = jsonObject.get("code");
+				if(codeObj != null){
+					String code = codeObj.toString();
+					if (ApiCode.OK.toString().equals(code)) {
+						Object dataObj = jsonObject.get("data");
+						if(dataObj != null){
+							String data = dataObj.toString();
+							company = JSONObject.parseObject(data, CompanyEntity.class);
+						}
+					}
+				}
+			}
+		}
 		
-		return null;
+		return company;
 	}
 
 	@Override
@@ -82,6 +103,29 @@ public class CompanyServiceImpl implements CompanyService{
 	@Override
 	public void activateCompany(String id) {
 		MyBaseApiUtils.deleteCompany(id);
+	}
+
+	@Override
+	public String getCompanyStaffTreeById(String companyId) {
+		String result = MyBaseApiUtils.getCompanyStaffTreeById(companyId);
+		if(StringUtils.isNotBlank(result)){
+			JSONObject jsonObject = JSONObject.parseObject(result);
+			if(jsonObject != null){
+				Object codeObj = jsonObject.get("code");
+				if(codeObj != null){
+					String code = codeObj.toString();
+					if (ApiCode.OK.toString().equals(code)) {
+						Object dataObj = jsonObject.get("data");
+						if(dataObj != null){
+							String data = dataObj.toString();
+							return data;
+						}
+					}
+				}
+			}
+		}
+		
+		return StringUtils.EMPTY;
 	}
 }
 

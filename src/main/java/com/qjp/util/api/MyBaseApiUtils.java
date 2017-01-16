@@ -112,6 +112,29 @@ public class MyBaseApiUtils {
 	}
 	
 	/**
+	 * 更新公司信息
+	 * @param companyJson
+	 * @return
+	 */
+	public static String updateCompany(String companyJson){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + Constant.mybase_updateCompany;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("companyJson", companyJson);
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("companyJson", companyJson);
+			jsonObject.put("secret", secret);
+			HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	/**
 	 * 禁用子公司信息
 	 * @param id
 	 * @return
@@ -210,5 +233,130 @@ public class MyBaseApiUtils {
 		
 		return result;
 	}
+	
+	
+	/**
+	 * 获取菜单
+	 * @param id
+	 * @return
+	 */
+	public static String getMenus(String userId){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + Constant.mybase_getMenus;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("userId", userId);			
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("userId", userId);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 根据公司id获取公司信息
+	 * @param id
+	 * @return
+	 */
+	public static String getCompanyById(String id){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + Constant.mybase_getCompanyById;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("id", id);			
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("id", id);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 记录日志
+	 * @param id
+	 * @return
+	 */
+	public static String getDepartmentByCompanyId(String id){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + Constant.mybase_getDepByCompanyId;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("id", id);
+			
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("id", id);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public static String getUserPage(String status, String companyId, String departmentId, String pageSize, String currentPage){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + Constant.mybase_getUserPage;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("companyId", companyId);
+			maps.put("departmentId", departmentId);
+			maps.put("pageSize", pageSize);
+			maps.put("status", status);
+			maps.put("currentPage", currentPage);
+			
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("companyId", companyId);
+			jsonObject.put("departmentId", departmentId);
+			jsonObject.put("pageSize", pageSize);
+			jsonObject.put("currentPage", currentPage);
+			jsonObject.put("secret", secret);
+			jsonObject.put("status", status);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 获取子公司信息列表
+	 * @param companyId
+	 * @param pageSize
+	 * @param currentPage
+	 * @return
+	 */
+	public static String getCompanyStaffTreeById(String companyId){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + Constant.mybase_getCompanyStaffTreeById;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("companyId", companyId);
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("companyId", companyId);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	
 }
 

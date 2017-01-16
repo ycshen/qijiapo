@@ -1,6 +1,7 @@
 package com.qjp.controller;
 
 import java.net.URLEncoder;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,9 +26,11 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.qjp.entity.MenuEntity;
 import com.qjp.entity.ResultEnum;
 import com.qjp.entity.UserEntity;
 import com.qjp.model.ResultModel;
+import com.qjp.service.MenuService;
 import com.qjp.service.UserService;
 
 
@@ -38,6 +41,8 @@ public class HomeController {
 	private final static Logger LOG = LoggerFactory.getLogger(HomeController.class);
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private MenuService menuService;
 /*	@RequestMapping("/")
 	public String main() {
 		return "main";
@@ -56,6 +61,9 @@ public class HomeController {
 			if(loginUser != null){
 				HttpSession seesion = request.getSession();
 				seesion.setAttribute("loginUser",loginUser);
+				Long userId = loginUser.getId();
+				List<MenuEntity> list = menuService.getMenuList(userId.toString());
+				seesion.setAttribute("menuList",list);
 			}else{
 				mv.addObject("msg", "用户名或者密码有误");
 				return mv;
