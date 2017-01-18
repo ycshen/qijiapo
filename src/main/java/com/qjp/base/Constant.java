@@ -134,7 +134,7 @@ public class Constant {
 		
 		//user
 		mybase_updateUser = this.mybase_updateUser_url;
-		mybase_insertUser = this.mybase_updateUser_url;
+		mybase_insertUser = this.mybase_insertUser_url;
 		mybase_getUserPage = this.mybase_getUserPage_url;
 	}
 	

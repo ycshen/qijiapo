@@ -133,7 +133,6 @@ function addSuccess(name, id){
 	var zTree = $.fn.zTree.getZTreeObj("treeDemo");
 	var treeNode = zTree.getNodeByTId("treeDemo_" + tid);
 	var idStr = id + "_";
-	var nodeType = "3";
 	var pNodeId = addPid.split("_")[0];
 	var pNodeType = addPid.split("_")[1];
 	if(pNodeType == 3){
@@ -155,9 +154,7 @@ var zTreeObj;
 // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
 var setting = {
         view: {
-            addHoverDom: addHoverDom,
-            removeHoverDom: removeHoverDom,
-            selectedMulti: false
+            addHoverDom: addHoverDom
         },
         data: {
             simpleData: {

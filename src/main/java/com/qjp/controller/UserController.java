@@ -54,9 +54,10 @@ public class UserController {
 		Long id = user.getId();
 		UserEntity loginUser = UserUtils.getLoginUser(request);
 		if(id == null){
-			user.setCreateTime(new Date());
 			user.setCreateUser(loginUser.getUserName());
 			String initPass = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 10);
+			user.setCompanyId(loginUser.getCompanyId());
+			user.setCompanyName(user.getCompanyName());
 			user.setPassword(initPass);
 			user.setStatus(UserStatus.NORMAL_INT);
 			userService.insertUser(user);

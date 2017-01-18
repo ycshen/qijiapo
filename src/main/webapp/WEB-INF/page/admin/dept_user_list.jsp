@@ -77,7 +77,6 @@
 					  </div>
 					  <button type="button" class="btn btn-default">查询</button>
 					  
-					  <button type="button" class="btn btn-default">禁用</button>
 					</form>
 		        </div>
         
@@ -100,7 +99,8 @@
                 		<c:forEach items="${userQuery.items}" var="user">
                 			<tr>
 		                		<td>
-									<button type="button" class="btn btn-link" onclick="editCompany('${user.id}')">编辑</button>
+									<a href="#" onclick="editUser('${user.id}')"><img src="${ctx}/img/org/edit_user.png" alt="编辑"/></a>
+									<a href="#" onclick="editUser('${user.id}')"><img src="${ctx}/img/org/edit.png" alt="编辑"/></a>
 								</td>
 		                		<td>${user.userName }</td>
 		                		<td>${user.userName }</td>

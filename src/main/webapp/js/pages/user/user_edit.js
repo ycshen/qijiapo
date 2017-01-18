@@ -12,7 +12,8 @@ function isBlank(args){
 	return result;
 }
 function editUser(){
-	var departmentId = $("select[name='departmentId']").val();
+	var departmentId = $("#hidDepartmentId").val();
+	/*var departmentId = $("select[name='departmentId']").val();
 	if(isBlank(departmentId)){
 		layer.alert("请选择部门");
 		return;
@@ -25,7 +26,7 @@ function editUser(){
 	if(isBlank(txtuserName)){
 		layer.alert("员工姓名不能为空");
 		return;
-	}
+	}*/
 	
 	var telphone = $("#txtTelphone").val();
 	var reg = /^1[3|7|5|8|4]\d{9}$/;
@@ -55,7 +56,7 @@ function editUser(){
 	      			return;
 	          }else{
 	        	  var url = ctx + "/inner/user/saveOrUpdate";
-	        		var data = $('#userForm').serialize();
+	        		var data = $('#myForm').serialize();
 	        		$.ajax({
 	        	        cache: true,
 	        	        type: "POST",
