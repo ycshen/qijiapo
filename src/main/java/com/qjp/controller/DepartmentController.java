@@ -20,6 +20,7 @@ import com.qjp.entity.UserEntity;
 import com.qjp.service.CompanyService;
 import com.qjp.service.DepartmentService;
 import com.qjp.service.UserService;
+import com.qjp.util.LogUtils;
 import com.qjp.util.UserUtils;
 import com.qjp.util.query.DepartmentQuery;
 import com.qjp.util.query.UserQuery;
@@ -43,27 +44,35 @@ public class DepartmentController extends BaseController{
 	private UserService userService;
 	@RequestMapping(value = "/saveOrUpdate", method = RequestMethod.POST)
 	@ResponseBody
-	public Integer saveOrUpdate(@ModelAttribute DepartmentEntity department, HttpServletRequest request){
-		Integer result = ResponseStatus.INIT;
+	public String saveOrUpdate(@ModelAttribute DepartmentEntity department, String nodeType, HttpServletRequest request){
+		String result = ResponseStatus.INIT_Str;
 		String departmentName = department.getDepartmentName();
-		Long companyId = department.getCompanyId();
-		boolean isExist = departmentService.isExistDepartment(departmentName, companyId.toString());
+		UserEntity adminLoginUser = UserUtils.getAdminLoginUser(request);
+		Long companyId = adminLoginUser.getCompanyId();
+		Boolean isCompany = true;
+		if(StringUtils.isNotBlank(nodeType) && "3".equals(nodeType)){
+			isCompany = false;
+		}
+		
+		boolean isExist = departmentService.isExistDepartment(departmentName, companyId.toString(), isCompany);
 		if(isExist){
-			result = ResponseStatus.EXIST;
+			result = ResponseStatus.EXIST_Str;
 		}else{
 			Long id = department.getId();
 			UserEntity user = UserUtils.getLoginUser(request);
 			if(id == null){
-				department.setCreateTime(new Date());
 				department.setStatus(0);
 				department.setCreateUser(user.getUserName());
-				departmentService.insertDepartment(department);
-				result = ResponseStatus.INSERT_SUCCESS;
+				department.setCompanyId(companyId);
+				department.setCompanyName(adminLoginUser.getCompanyName());
+				String newId = departmentService.insertDepartment(department);
+				LogUtils.logAdmin("新增部门信息：" + department.toLogString(), user);
+				result = ResponseStatus.INSERT_SUCCESS_Str + "_id" + newId;
 			}else{
 				department.setUpdateTime(new Date());
 				department.setUpdateUser(user.getUserName());
 				departmentService.updateDepartment(department);
-				result = ResponseStatus.UPDATE_SUCCESS;
+				result = ResponseStatus.UPDATE_SUCCESS_Str;
 			}
 		}
 

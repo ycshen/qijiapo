@@ -6,6 +6,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.google.gson.Gson;
+import com.qjp.base.Constant;
 import com.qjp.entity.CompanyEntity;
 import com.qjp.entity.DepartmentEntity;
 import com.qjp.service.DepartmentService;
@@ -25,7 +27,28 @@ import com.qjp.util.query.DepartmentQuery;
 public class DepartmentServiceImpl implements DepartmentService{
 	
 	@Override
-	public void insertDepartment(DepartmentEntity department) {
+	public String insertDepartment(DepartmentEntity department) {
+		String departmentJson = new Gson().toJson(department);
+		String id = StringUtils.EMPTY;
+		String result = MyBaseApiUtils.insertDepartment(departmentJson);
+		if(StringUtils.isNotBlank(result)){
+			JSONObject jsonObject = JSONObject.parseObject(result);
+			if(jsonObject != null){
+				Object codeObj = jsonObject.get("code");
+				if(codeObj != null){
+					String code = codeObj.toString();
+					if (ApiCode.OK.toString().equals(code)) {
+						Object dataObj = jsonObject.get("data");
+						if(dataObj != null){
+							String data = dataObj.toString();
+							id = data;
+						}
+					}
+				}
+			}
+		}
+		
+		return id;
 	}
 	
 	@Override
@@ -36,20 +59,35 @@ public class DepartmentServiceImpl implements DepartmentService{
 
 	@Override
 	public void updateDepartment(DepartmentEntity department) {
+		String departmentJson = new Gson().toJson(department);
+		MyBaseApiUtils.updateDepartment(departmentJson);
 	}
 
 	@Override
 	public DepartmentEntity getDepartmentById(Integer id) {
+		String result = MyBaseApiUtils.getDepById(id.toString());
+		DepartmentEntity department = null;
+		if(StringUtils.isNotBlank(result)){
+			JSONObject jsonObject = JSONObject.parseObject(result);
+			if(jsonObject != null){
+				Object codeObj = jsonObject.get("code");
+				if(codeObj != null){
+					String code = codeObj.toString();
+					if (ApiCode.OK.toString().equals(code)) {
+						Object dataObj = jsonObject.get("data");
+						if(dataObj != null){
+							String data = dataObj.toString();
+							department = JSONObject.parseObject(data, DepartmentEntity.class);
+						}
+					}
+				}
+			}
+		}
 		
-		return null;
+		return department;
 	}
 
-	@Override
-	public boolean isExistDepartment(String departmentName, String companyId) {
-		
-		
-		return false;
-	}
+	
 
 	@Override
 	public List<DepartmentEntity> getListByCompanyId(String companyId) {
@@ -79,6 +117,33 @@ public class DepartmentServiceImpl implements DepartmentService{
 	public List<DepartmentEntity> getDepartmentByParentId(
 			String parentDepartmentId) {
 		return null;
+	}
+
+	@Override
+	public boolean isExistDepartment(String departmentName, String pid,
+			Boolean isCompany) {
+		boolean isExist = true;
+		String result = MyBaseApiUtils.isExistDepartment(pid, departmentName, isCompany.toString());
+		if(StringUtils.isNotBlank(result)){
+			JSONObject jsonObject = JSONObject.parseObject(result);
+			if(jsonObject != null){
+				Object codeObj = jsonObject.get("code");
+				if(codeObj != null){
+					String code = codeObj.toString();
+					if (ApiCode.OK.toString().equals(code)) {
+						Object dataObj = jsonObject.get("data");
+						if(dataObj != null){
+							String data = dataObj.toString();
+							if(Constant.FALSE.equals(data)){
+								isExist = false;
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		return isExist;
 	}
 }
 

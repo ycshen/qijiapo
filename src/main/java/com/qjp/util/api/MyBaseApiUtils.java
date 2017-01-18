@@ -357,6 +357,143 @@ public class MyBaseApiUtils {
 		return result;
 	}
 	
+	/**
+	 * 是否存在相同部门
+	 * @param id
+	 * @param departmentName
+	 * @param isCompany
+	 * @return
+	 */
+	public static String isExistDepartment(String id, String departmentName, String isCompany){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + Constant.mybase_isExistDepartment;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("departmentName", departmentName);
+			maps.put("id", id);
+			maps.put("isCompany", isCompany);
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("departmentName", departmentName);
+			jsonObject.put("id", id);
+			jsonObject.put("isCompany", isCompany);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+	/**
+	 * 新增部门
+	 * @param departmentJson
+	 * @return
+	 */
+	public static String insertDepartment(String departmentJson){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + Constant.mybase_insertDepartment;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("departmentJson", departmentJson);
+			
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("departmentJson", departmentJson);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 	
+	/**
+	 * 更新公司信息
+	 * @param companyJson
+	 * @return
+	 */
+	public static String updateDepartment(String departmentJson){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + Constant.mybase_updateDepartment;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("departmentJson", departmentJson);
+			
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("departmentJson", departmentJson);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	
+	public static String insertUser(String userJson){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + Constant.mybase_insertUser;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("userJson", userJson);
+			
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("userJson", userJson);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 更新员工信息
+	 * @param companyJson
+	 * @return
+	 */
+	public static String updateUser(String userJson){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + Constant.mybase_updateUser;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("userJson", userJson);
+			
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("userJson", userJson);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public static String getDepById(String id){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + Constant.mybase_getDepById;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("id", id);			
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("id", id);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }
 

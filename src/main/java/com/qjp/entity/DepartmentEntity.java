@@ -13,6 +13,7 @@ public class DepartmentEntity extends BaseEntity{
 	private String departmentName;
 	private Integer status;
 	private Long parentDepartmentId;
+	private String parentDepartmentName;
 	public Long getCompanyId() {
 		return companyId;
 	}
@@ -42,6 +43,25 @@ public class DepartmentEntity extends BaseEntity{
 	}
 	public void setParentDepartmentId(Long parentDepartmentId) {
 		this.parentDepartmentId = parentDepartmentId;
+	}
+	public String getParentDepartmentName() {
+		return parentDepartmentName;
+	}
+	public void setParentDepartmentName(String parentDepartmentName) {
+		this.parentDepartmentName = parentDepartmentName;
+	}
+	@Override
+	public String toString() {
+		return "DepartmentEntity [companyId=" + companyId + ", companyName="
+				+ companyName + ", departmentName=" + departmentName
+				+ ", status=" + status + ", parentDepartmentId="
+				+ parentDepartmentId + ", parentDepartmentName="
+				+ parentDepartmentName + "]";
+	}
+	
+	public String toLogString() {
+		return "部门信息 [部门名称=" + departmentName + ", 上级部门="
+				+ parentDepartmentName+ "]";
 	}
 	
 }

@@ -5,98 +5,71 @@
 <head>
 <c:set var="ctx" value="${pageContext.request.contextPath}"></c:set>
 <meta charset="UTF-8">
-<title>部门信息编辑</title>
-
-<link href="${ctx}/js/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="${ctx}/css/common.css" rel="stylesheet">
+<title>部门编辑</title>
+<%@include file="../share/common_css.jsp"%>
+<link rel="stylesheet" href="${ctx}/js/layui/css/layui.css">
 <script type="text/javascript">
 	var ctx = "${pageContext.request.contextPath}";
 </script>
 </head>
 <body>
-	
-	<div class="container">
-		<table class="table">
-	<form method="post" id="userForm">
-		<input type="hidden" value="${user.id}" name="id"/>
-			<input type="hidden" value="${user.companyId}" name="companyId"/>
-			<tr>
-				<td style="border:0px;text-align:right;">
-					<label ><span style="color:red;">*</span>公司名称：</label>
-				</td>
-				<td style="border:0px;">
-					<input name="companyName" id="txtcompanyName"
-							value="${user.companyName}" maxlength="20"
-							class="form-control" type="text"
-							style="width: 300px;" readonly="readonly">
-				</td>
-			</tr>
-			<tr>
-				<td style="border:0px;text-align:right;">
-					<label ><span style="color:red;">*</span>部门名称：</label>
-				</td>
-				<td style="border:0px;">
-					<input name="departmentName" id="txtdepartmentName"
-							value="${user.departmentName}" maxlength="20"
-							class="form-control" type="hidden" 
-							style="width: 300px;" > 
-					<select class="form-control" style="width: 300px;" name="departmentId">
-						<option value="">请选择部门信息</option>
-						<c:if test="${departmentList != null && departmentList.size() > 0 }">
-							<c:forEach items="${departmentList }" var="department">
-								<c:choose>
-									<c:when test="${department.id == user.departmentId}">
-										<option value="${department.id}" selected="selected">${department.departmentName}</option>
-									</c:when>
-									<c:otherwise>
-										<option value="${department.id}">${department.departmentName}</option>
-									</c:otherwise>
-								</c:choose>
-								
-							</c:forEach>
-						</c:if>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td style="border:0px;text-align:right;">
-					<label ><span style="color:red;">*</span>用户名：</label>
-				</td>
-				<td style="border:0px;">
-					<input name="userName" id="txtuserName"
-							 maxlength="20"
-							class="form-control" type="text" placeholder="请输入用户名"
-							style="width: 300px;" value="${user.userName}">
-				</td>
-			</tr>
-			<tr>
-				<td style="border:0px;text-align:right;">
-					<label ><span style="color:red;">*</span>联系电话：</label>
-				</td>
-				<td style="border:0px;">
-					<input name="telphone" id="txtTelphone"
-							 maxlength="20"
-							class="form-control" type="text" placeholder="请输入联系电话"
-							style="width: 300px;" value="${user.telphone}">
-				</td>
-			</tr>
-			
-		</form>
-			<tr>
-				<td style="border:0px;">
-					
-				</td>
-				<td style="border:0px;">
-					<button class="btn btn-default" onclick="cancelEdit();">取消</button>
-					&nbsp;&nbsp;&nbsp;
-					<button onclick="editUser();" class="btn btn-default">确定</button>
-				</td>
-			</tr>
-		</table>
-	</div>
+
+<div class="container" style="margin-top: 10px;">
+<form class="layui-form" method="post" id="myForm">
+	<input type="hidden" value="${department.id}" name="id"/>
+	<input type="hidden" value="${department.parentDepartmentId}" name="parentDepartmentId" id="hidPid"/>
+  <div class="layui-form-item">
+    <label class="layui-form-label" style="width:100px;">所属部门</label>
+    <div class="layui-input-block">
+      <input name="departmentName" id="txtparentDepartmentName"
+							value="${department.departmentName}" maxlength="20"
+							class="layui-input" type="text" placeholder="请输入上级部门">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label" style="width:100px;">员工姓名</label>
+    <div class="layui-input-block">
+      <input name="departmentName" id="txtdepartmentName"
+							value="${department.departmentName}" maxlength="20"
+							class="layui-input" type="text" placeholder="请输入部门名称"">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label" style="width:100px;">联系电话</label>
+    <div class="layui-input-block">
+      <input id="txtCompanyTelphone"
+							value="${company.companyTelephone}" maxlength="11"
+							class="layui-input" type="text" placeholder="请输入部门负责人">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label" style="width:100px;">职位</label>
+    <div class="layui-input-block">
+      <input id="txtCompanyTelphone"
+							value="${company.companyTelephone}" maxlength="11"
+							class="layui-input" type="text" placeholder="请输入部门负责人">
+    </div>
+  </div>
+   <div class="layui-form-item">
+    <label class="layui-form-label" style="width:100px;">登录账号</label>
+    <div class="layui-input-block">
+      <input id="txtCompanyTelphone"
+							value="${company.companyTelephone}" maxlength="11"
+							class="layui-input" type="text" placeholder="请输入部门负责人">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" type="button"  onclick="editDepartment();">立即提交</button>
+      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+      <button type="button" class="layui-btn layui-btn-primary" onclick="cancelEdit();">取消</button>
+    </div>
+  </div>
+</form>
+
+</div>	
 <script type="text/javascript" src="${ctx}/js/jquery.js"></script>
-<script type="text/javascript" src="${ctx}/js/laydate/laydate.js"></script>
 <script type="text/javascript" src="${ctx}/js/layer/layer.js"></script>
-<script type="text/javascript" src="${ctx}/js/pages/user/user_edit.js"></script>
+<script type="text/javascript" src="${ctx}/js/pages/admin/dept_user_dept_edit.js"></script>
 </body>
 </html>

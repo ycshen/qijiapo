@@ -90,21 +90,14 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public ModelAndView addUser(String id, HttpServletRequest request){
+	public ModelAndView addUser(String did, HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/user/user_edit");
 		DepartmentEntity department = null;
-		if(StringUtils.isNotBlank(id)){
-			mav.setViewName("/user/user_add");
-			List<DepartmentEntity> departmentList = departmentService.getDepartmentByParentId(id);
+		if(StringUtils.isNotBlank(did)){
+			department = departmentService.getDepartmentById(Integer.parseInt(did));
 			mav.addObject("department", department);
-			if(departmentList != null && departmentList.size() > 0){
-				mav.addObject("departmentList", departmentList);
-			}else{
-				department = departmentService.getDepartmentById(Integer.parseInt(id));
-				mav.addObject("department", department);
-			}
 		}else{
-			mav.setViewName("/user/user_edit");
 			UserEntity loginUser = UserUtils.getLoginUser(request);
 			Long companyId = loginUser.getCompanyId();
 			List<DepartmentEntity> departmentList = departmentService.getListByCompanyId(companyId.toString());

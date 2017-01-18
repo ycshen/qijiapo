@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.google.gson.Gson;
 import com.qjp.entity.DepartmentEntity;
 import com.qjp.entity.UserEntity;
 import com.qjp.service.UserService;
@@ -26,7 +27,8 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public void insertUser(UserEntity user) {
-		
+		String userJson = new Gson().toJson(user);
+		MyBaseApiUtils.insertUser(userJson);
 	}
 
 	@Override
@@ -66,7 +68,8 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public void updateUser(UserEntity user) {
-		
+		String userJson = new Gson().toJson(user);
+		MyBaseApiUtils.updateUser(userJson);
 	}
 
 	@Override

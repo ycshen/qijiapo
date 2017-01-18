@@ -237,5 +237,13 @@ public class AdminController extends BaseController{
 		
 		return isExist;
 	}
+	
+	@RequestMapping(value = "/addSubDept", method = RequestMethod.GET)
+	public ModelAndView addSubDepartment(DepartmentEntity department){
+		ModelAndView mav = new ModelAndView("/admin/dept_user_dept_edit");
+		mav.addObject("department", department);
+		
+		return mav;
+	}
 }
 

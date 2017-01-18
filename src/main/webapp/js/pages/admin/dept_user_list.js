@@ -62,11 +62,6 @@ function deleteMenu(id){
 	
 }
 
-function addSuccess(parentMenuId, menuName){
-	$("#tree").treeview("addNode", [nodeId, { node: { text: menuName, href: "001005" } }]);  
-	layer.closeAll();
-	
-}
 
 function queryMenu(page){
 	var url = ctx + "/inner/menu/list?page=" + page;
@@ -102,105 +97,130 @@ $(function(){
 	initTree();
 })
 
+var tid = "";
+var addPid = "";
+function addHoverDom(treeId, treeNode) {
+    var sObj = $("#" + treeNode.tId + "_span");
+    if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
+
+	
+	var title = "添加下级部门";	
+    var addStr = "<span class='button add' id='addBtn_" + treeNode.tId
+        + "' title='" + title + "' onfocus='this.blur();'></span>";
+    sObj.after(addStr);
+    var btn = $("#addBtn_"+treeNode.tId);
+    if (btn) btn.bind("click", function(){	
+    	addPid = treeNode.id;
+    	tid = treeNode.tId;
+    	var pid = addPid.split("_")[0];
+    	var nodeType = addPid.split("_")[1];
+    	var name = treeNode.name;
+    	var layTitle = "添加下级部门("+ name +")";
+    	layer.open({
+  		  type: 2,
+  		  area: ['700px', '400px'],
+  		  fixed: false, //不固定
+  		  maxmin: true,
+  		  title: layTitle,
+  		  content: ctx + "/inner/admin/addSubDept?parentDepartmentId=" + pid + "&parentDepartmentName=" + name + "&nodeType=" + nodeType 
+  		});
+        return false;
+    });
+};
+
+
+function addSuccess(name, id){
+	var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+	var treeNode = zTree.getNodeByTId("treeDemo_" + tid);
+	var idStr = id + "_";
+	var nodeType = "3";
+	var pNodeId = addPid.split("_")[0];
+	var pNodeType = addPid.split("_")[1];
+	if(pNodeType == 3){
+		idStr += "3_" + pNodeId;
+	}
+	
+    zTree.addNodes(treeNode, {id:idStr, pId:addPid, name:name});
+
+	layer.closeAll();
+	
+}
+
+function removeHoverDom(treeId, treeNode) {
+    $("#addBtn_"+treeNode.tId).unbind().remove();
+};
+        
+var nodeId = "";
+var zTreeObj;
+// zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
+var setting = {
+        view: {
+            addHoverDom: addHoverDom,
+            removeHoverDom: removeHoverDom,
+            selectedMulti: false
+        },
+        data: {
+            simpleData: {
+                enable: true
+            }
+        },
+        edit: {
+            enable: true,
+            drag: {
+    			isCopy: false,
+    			isMove: false
+    		}
+        },
+        callback:{
+        	onClick: showStaff
+        }
+    };
+// zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
 var nodeId = "";
 function initTree() {
    $.ajax({
 	   type : 'get',
 	   url : ctx + "/inner/admin/deptree",
-	   success: function(data){
-		   $('#tree').treeview({
-			   data: data,
-			   selectedBackColor: "#4b646f",
-			   onNodeSelected: function(event, data) {
-				    var departmentId = data.id;
-				    var departmentName = data.text;
-				    $("#spanName").text(departmentName);
-				    var userName = $("#txtUserName").val();
-					var telphone = $("#txtTelphone").val();
-					getJsonData(departmentId, userName, telphone, 1);
-					var count = $("#count").val();
-					$("#spanCount").text(count);
-					$(".pagination").pagination(count, {
-					    num_edge_entries: 5,
-					    num_display_entries: 10,
-					    callback: pageselectCallback,
-					    items_per_page:10,
-					    maxentries: count,
-					    prev_text: "上一页",
-					    next_text: "下一页"
-					});
-			   }
-		   });
+	   success: function(zNodes){
+		   zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+		   zTreeObj.expandAll(true); 
 		   
 	   }
-   })  
-   
-   
-   
-   $("#btnView").click(function (e) {
-	   var arr = $('#tree').treeview('getSelected');
-	   var menuId = "";
-	   for (var key in arr) {
-		   menuId = arr[key].id;
-	   }
-	   
-	   if(isNotBlank(menuId)){
-		   var url = ctx + "/inner/menu/view?id=" + menuId;
-			layer.open({
-				type: 2,
-				title: '查看菜单详细信息',
-				shadeClose: true,
-				shade: 0.8,
-				area: ['550px', '400px'],
-				content: url
-			});
-	   }else{
-		   layer.alert("请选择菜单"); 
-	   }
-   });
-   
-   $("#btnAddSub").click(function (e) {
-	   var arr = $('#tree').treeview('getSelected');
-	   var menuId = "";
-	   for (var key in arr) {
-		   menuId = arr[key].id;
-		   nodeId = arr[key].nodeId;
-	   }
-	   
-	   if(isNotBlank(menuId)){
-		  var url = ctx + "/inner/menu/isSystemOrUrl?id=" + menuId;
-		   $.ajax({
-			   type: "get",
-			   url: url,
-			   success: function(isSystem){
-				   if(isSystem == 1){
-					   addSub(menuId, 3);
-				   }else if(isSystem == 2){
-					   addMultiSub(menuId);
-				   }else{
-					   layer.alert("请选择菜单或者系统,事件不能拥有子元素!");
-				   }
-			   }
-			   
-		   });
-		   
-	   }else{
-		   layer.alert("请选择父菜单"); 
-	   }
-   });
-        
+   })         
 }
  
-function addSub(id, menuType){
-	var url = ctx + "/inner/menu/addSubMenu?isTree=1&parentMenuId=" + id + "&menuType=" + menuType;
+
+function showStaff(event, treeId, treeNode){
+	var nodeIdStr = treeNode.id;
+	var id = nodeIdStr.split("_")[0];
+	var nodeType = nodeIdStr.split("_")[1];
+	if(nodeType == 3){
+		//获取对应部门的员工
+		$("#btnAddUser").show();
+		$("#btnAddUser").text("添加" + treeNode.name + "旗下员工");
+		$("#spanName").text(treeNode.name);
+		$("#hidDid").val(id);
+		var userName = $("#txtUserName").val();
+		var telphone = $("#txtTelphone").val();
+		getJsonData(id, userName, telphone, 1);
+	}else if(nodeType == 1){
+		//获取全部员工
+		$("#spanName").text(treeNode.name);
+		$("#btnAddUser").hide();
+		getJsonData(id, userName, telphone, 1);
+	}
+}
+
+function addUser(){
+	var did = $("#hidDid").val();
 	layer.open({
-		type: 2,
-		title: '新增菜单信息',
-		shadeClose: true,
-		shade: 0.8,
-		area: ['550px', '400px'],
-		content: url
-	});
+		  type: 2,
+		  area: ['700px', '400px'],
+		  fixed: false, //不固定
+		  maxmin: true,
+		  title: "添加员工",
+		  content: ctx + "/inner/user/add?did=" + did 
+		});
 }
 
 function addMultiSub(id){

@@ -37,6 +37,9 @@ public class Constant {
 	public static final String local = "local";
 	public static final String test = "test";
 	public static final String prod = "prod";
+
+	public static final String TRUE = "true";
+	public static final String FALSE = "false";
 	
 	@Value("${mybase}")
 	private String mybase_url;
@@ -71,12 +74,38 @@ public class Constant {
 	@Value("${mybase.getCompanyById}")
 	private String mybase_getCompanyById_url;
 	public static String mybase_getCompanyById;
+	
+	//department
 	@Value("${mybase.getDepByCompanyId}")
 	private String mybase_getDepByCompanyId_url;
 	public static String mybase_getDepByCompanyId;
+	@Value("${mybase.isExistDepartment}")
+	private String mybase_isExistDepartment_url;
+	public static String mybase_isExistDepartment;
+	@Value("${mybase.insertDepartment}")
+	private String mybase_insertDepartment_url;
+	public static String mybase_insertDepartment;
+	@Value("${mybase.updateDepartment}")
+	private String mybase_updateDepartment_url; //更新部门信息
+	public static String mybase_updateDepartment; 
+	@Value("${mybase.getDepById}")
+	private String mybase_getDepById_url; //根据部门id获取部门信息
+	public static String mybase_getDepById;
+	
+	
+	//User
 	@Value("${mybase.getUserPage}")
 	private String mybase_getUserPage_url;
 	public static String mybase_getUserPage;
+	@Value("${mybase.updateUser}")
+	private String mybase_updateUser_url;
+	public static String mybase_updateUser;
+	@Value("${mybase.insertUser}")
+	private String mybase_insertUser_url;
+	public static String mybase_insertUser;
+	
+	
+	//Company
 	@Value("${mybase.getCompanyStaffTreeById}")
 	private String mybase_getCompanyStaffTreeById_url;
 	public static String mybase_getCompanyStaffTreeById;
@@ -95,9 +124,18 @@ public class Constant {
 		mybase_getAdminLogs = this.mybase_getAdminLogs_url;
 		mybase_getMenus = this.mybase_getMenus_url;
 		mybase_getCompanyById = this.mybase_getCompanyById_url;
-		mybase_getDepByCompanyId = this.mybase_getDepByCompanyId_url;
-		mybase_getUserPage = this.mybase_getUserPage_url;
 		mybase_getCompanyStaffTreeById = this.mybase_getCompanyStaffTreeById_url;
+		//department
+		mybase_getDepByCompanyId = this.mybase_getDepByCompanyId_url;
+		mybase_isExistDepartment = this.mybase_isExistDepartment_url;
+		mybase_updateDepartment = this.mybase_updateDepartment_url;
+		mybase_insertDepartment = this.mybase_insertDepartment_url;
+		mybase_getDepById = this.mybase_getDepById_url;
+		
+		//user
+		mybase_updateUser = this.mybase_updateUser_url;
+		mybase_insertUser = this.mybase_updateUser_url;
+		mybase_getUserPage = this.mybase_getUserPage_url;
 	}
 	
 }

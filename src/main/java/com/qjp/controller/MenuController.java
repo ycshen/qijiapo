@@ -150,7 +150,7 @@ public class MenuController extends BaseController{
 		
 		return mav;
 	}
-	
+	/*
 	@RequestMapping(value = "/treeData", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public String treeData(@ModelAttribute MenuQuery menuQuery, HttpServletRequest request){
@@ -181,9 +181,9 @@ public class MenuController extends BaseController{
 		}
 		
 		return tree;
-	}
+	}*/
 	
-	private List<BTreeVO> getNodes(List<MenuEntity> list, MenuQuery menuQuery){
+	/*private List<BTreeVO> getNodes(List<MenuEntity> list, MenuQuery menuQuery){
 		List<BTreeVO> treeList = null;
 		if(list != null && list.size() > 0){
 			treeList = new LinkedList<BTreeVO>();
@@ -208,7 +208,7 @@ public class MenuController extends BaseController{
 		}
 		
 		return treeList;
-	}
+	}*/
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	@ResponseBody
