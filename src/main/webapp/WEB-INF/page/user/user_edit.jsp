@@ -44,8 +44,9 @@
   <div class="layui-form-item">
     <label class="layui-form-label" style="width:100px;">职位</label>
     <div class="layui-input-block">
-      <input id="txtCompanyTelphone"  maxlength="11"
-							class="layui-input" type="text" placeholder="请输入部门负责人">
+      	<button class="layui-btn   layui-btn-primary  layui-btn-radius"  onclick="selectPosition();">
+			  <i class="layui-icon">&#xe608;</i> 选择职位
+		</button>
     </div>
   </div>
   <div class="layui-form-item">
@@ -53,6 +54,7 @@
       <button class="layui-btn" type="button"  onclick="editUser();">立即提交</button>
       <button type="reset" class="layui-btn layui-btn-primary">重置</button>
       <button type="button" class="layui-btn layui-btn-primary" onclick="cancelEdit();">取消</button>
+      <button class="layui-btn" type="button"  onclick="selectPosition();">选择职位</button>
     </div>
   </div>
 </form>

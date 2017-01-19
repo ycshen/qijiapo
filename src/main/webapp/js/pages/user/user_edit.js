@@ -11,6 +11,19 @@ function isBlank(args){
 	
 	return result;
 }
+
+function selectPosition(){
+	var url = ctx + "/inner/position/list"
+	layer.open({
+		type: 2,
+		title: '职位选择',
+		shadeClose: true,
+		shade: 0.8,
+		area: ['550px', '300px'],
+		content: url
+	});
+}
+
 function editUser(){
 	var departmentId = $("#hidDepartmentId").val();
 	/*var departmentId = $("select[name='departmentId']").val();

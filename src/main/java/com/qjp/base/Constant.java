@@ -109,7 +109,13 @@ public class Constant {
 	@Value("${mybase.getCompanyStaffTreeById}")
 	private String mybase_getCompanyStaffTreeById_url;
 	public static String mybase_getCompanyStaffTreeById;
-	
+	//Position
+	@Value("${mybase.getSystemPosition}")
+	private String mybase_getSystemPosition_url;
+	public static String mybase_getSystemPosition;
+	@Value("${mybase.getPositionByCompanyId}")
+	private String mybase_getPositionByCompanyId_url;
+	public static String mybase_getPositionByCompanyId;	
 	
 	@PostConstruct
 	public void init() {
@@ -136,6 +142,9 @@ public class Constant {
 		mybase_updateUser = this.mybase_updateUser_url;
 		mybase_insertUser = this.mybase_insertUser_url;
 		mybase_getUserPage = this.mybase_getUserPage_url;
+		//position
+		mybase_getSystemPosition = this.mybase_getSystemPosition_url;
+		mybase_getPositionByCompanyId = this.mybase_getPositionByCompanyId_url;
 	}
 	
 }
