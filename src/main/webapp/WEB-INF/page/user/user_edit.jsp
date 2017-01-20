@@ -16,13 +16,12 @@
 
 <div class="container" style="margin-top: 10px;">
 <form class="layui-form" method="post" id="myForm">
+<input type="hidden" value="${user.positionId}" name="positionId" id="hidPositionId"/>
 	<input type="hidden" value="${department.id}" name="departmentId" id="hidDepartmentId"/>
   <div class="layui-form-item">
     <label class="layui-form-label" style="width:100px;">所属部门</label>
     <div class="layui-input-block">
-      <input name="departmentName" id="txtDepartmentName"
-							value="${department.departmentName}" maxlength="20"
-							class="layui-input" type="text" placeholder="请输入上级部门">
+	<a name="departmentName" class="layui-btn layui-btn-small layui-btn-normal layui-btn-radius">${department.departmentName}</a>
     </div>
   </div>
   <div class="layui-form-item">

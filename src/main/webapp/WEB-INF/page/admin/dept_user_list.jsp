@@ -95,12 +95,22 @@
                 </tr>
                 </thead>
                 <tbody>
+                
                 	<c:if test="${userQuery.items != null &&  userQuery.items.size() > 0}">
                 		<c:forEach items="${userQuery.items}" var="user">
                 			<tr>
 		                		<td>
-									<a href="#" onclick="editUser('${user.id}')"><img src="${ctx}/img/org/edit_user.png" alt="编辑"/></a>
-									<a href="#" onclick="editUser('${user.id}')"><img src="${ctx}/img/org/edit.png" alt="编辑"/></a>
+		                		<div class="btn-group">
+			                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+			                          <span class="caret"></span>
+			                        </button>
+			                        <ul class="dropdown-menu">
+			                          <li><a href="#">编辑</a></li>
+			                          <li><a href="#">禁止登陆</a></li>
+			                          <li><a href="#">重置密码</a></li>
+			                          <li><a href="#">停用</a></li>
+			                        </ul>
+			                      </div>
 								</td>
 		                		<td>${user.userName }</td>
 		                		<td>${user.userName }</td>
@@ -111,9 +121,6 @@
                 		</c:forEach>
                 	</c:if>
                 </tbody>
-                
-                 
-               
               </table>
             
             </div>

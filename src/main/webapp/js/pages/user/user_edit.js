@@ -44,6 +44,7 @@ function editUser(){
 		layer.alert("员工姓名不能为空");
 		return;
 	}*/
+
 	
 	var telphone = $("#txtTelphone").val();
 	var reg = /^1[3|7|5|8|4]\d{9}$/;
@@ -72,6 +73,11 @@ function editUser(){
 	        	  layer.alert("该手机号码已被使用！");
 	      			return;
 	          }else{
+	        	  var positionId = $("#hidPositionId").val();
+	        	  if (isBlank(positionId)) {
+	        		  layer.alert("请选择职位！");
+		      			return; 
+	        	  }
 	        	  var url = ctx + "/inner/user/saveOrUpdate";
 	        		var data = $('#myForm').serialize();
 	        		$.ajax({
@@ -111,5 +117,6 @@ function selectSuccess(id, positionName){
 	$("#btnSelect").hide();
 	$("#btnPositionName").html(positionName);
 	$("#btnPositionName").show();
+	$("#hidPositionId").val(id);
 }
 

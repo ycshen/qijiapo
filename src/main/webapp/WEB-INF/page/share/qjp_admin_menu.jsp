@@ -35,14 +35,23 @@
         <li class="header">菜单</li>
         <!-- Optionally, you can add icons to the links -->
         <li class="active"><a href="${ctx}/inner/company/list"><i class="fa fa-sitemap"></i> <span>分公司管理</span></a></li>
-        <li class="active"><a href="${ctx}/inner/admin/departmentUserList"><i class="fa fa-group"></i> <span>部门与员工</span></a></li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>组织架构</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="${ctx}/inner/admin/departmentUserList"><i class="fa fa-group"></i> 部门与员工</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> 职位管理</a></li>
+          </ul>
+        </li>
         <li class="active"><a href="${ctx}/inner/memo/memo"><i class="fa fa-unlock-alt"></i> <span>权限管理</span></a></li>
         <li class="active"><a href="${ctx}/inner/memo/memo"><i class="fa fa-cog"></i> <span>菜单自定义</span></a></li>
         <li class="active"><a href="${ctx}/inner/log/logs"><i class="fa fa-file-text"></i> <span>管理日志</span></a></li>
         <li class="active"><a href="${ctx}/inner/memo/memo"><i class="fa fa-bullhorn"></i> <span>公告管理</span></a></li>
         <li class="active"><a href="${ctx}/inner/memo/memo"><i class="fa fa-weibo"></i> <span>话题管理</span></a></li>
       </ul>
-      <!-- /.sidebar-menu -->
     </section>
-    <!-- /.sidebar -->
   </aside>
