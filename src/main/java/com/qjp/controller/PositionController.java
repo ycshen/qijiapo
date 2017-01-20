@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.qjp.base.ResponseStatus;
 import com.qjp.base.VipLevel;
 import com.qjp.entity.CompanyEntity;
 import com.qjp.entity.ConfigEntity;
@@ -56,5 +57,24 @@ public class PositionController extends BaseController{
 		return mav;
 	}
 	
+	@RequestMapping(value = "/addPostion", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public String addPostion(HttpServletRequest request){
+		UserEntity user = UserUtils.getLoginUser(request);
+		Long companyId = user.getCompanyId();
+		PositionEntity position = new PositionEntity();
+		String positionName = request.getParameter("postionName");
+		String result = ResponseStatus.EXIST_Str;
+		boolean isExist = positionService.isExistPosition(companyId.toString(), positionName);
+		if(!isExist){
+			position.setCompanyId(companyId);
+			position.setPostionName(positionName);
+			String id = positionService.insertPosition(position);
+			position.setId(Long.parseLong(id));
+			result = new Gson().toJson(position);
+		}
+		
+		return result;
+	}
 }
 

@@ -20,8 +20,12 @@ function selectPosition(){
 		shadeClose: true,
 		shade: 0.8,
 		area: ['550px', '300px'],
-		content: url
+		content: url,
+		closeBtn: 0
 	});
+	
+
+	
 }
 
 function editUser(){
@@ -98,10 +102,14 @@ function editUser(){
 	        }
 	    });
 	}
-	
-	
-	
-	
-	
+
+}
+
+
+function selectSuccess(id, positionName){
+	$("#btnSelectAgain").show();
+	$("#btnSelect").hide();
+	$("#btnPositionName").html(positionName);
+	$("#btnPositionName").show();
 }
 

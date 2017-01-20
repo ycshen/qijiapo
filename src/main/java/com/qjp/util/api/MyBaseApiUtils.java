@@ -5,7 +5,7 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
 import com.alibaba.fastjson.JSONObject;
-import com.qjp.base.Constant;
+import com.qjp.base.url.MyBaseApiUrl;
 import com.qjp.util.CommonUtils;
 import com.qjp.util.HttpUtils;
 import com.qjp.util.SHA1Utils;
@@ -25,9 +25,9 @@ public class MyBaseApiUtils {
 	 */
 	private static String getMyBaseUrl(){
 		if(CommonUtils.getProdEnv()){
-			return Constant.mybase;
+			return MyBaseApiUrl.mybase;
 		}else {
-			return Constant.mybase ;
+			return MyBaseApiUrl.mybase ;
 		}
 	}
 	
@@ -35,7 +35,7 @@ public class MyBaseApiUtils {
 	public static String login(String account, String password){
 		String result = StringUtils.EMPTY;
 		try {	
-			String url = getMyBaseUrl() + Constant.mybase_login;	
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_login;	
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("account", account);
 			jsonObject.put("password", password);
@@ -63,7 +63,7 @@ public class MyBaseApiUtils {
 	public static String getSubCompanyPage(String companyName, String companyId, String pageSize, String currentPage){
 		String result = StringUtils.EMPTY;
 		try {	
-			String url = getMyBaseUrl() + Constant.mybase_getSubCompanyPage;
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_getSubCompanyPage;
 			Map<String,Object> maps = SHA1Utils.getSha1Map();
 			maps.put("id", companyId);
 			maps.put("pageSize", pageSize);
@@ -95,7 +95,7 @@ public class MyBaseApiUtils {
 	public static String insertCompany(String companyJson){
 		String result = StringUtils.EMPTY;
 		try {	
-			String url = getMyBaseUrl() + Constant.mybase_insertCompany;
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_insertCompany;
 			Map<String,Object> maps = SHA1Utils.getSha1Map();
 			maps.put("companyJson", companyJson);
 			
@@ -119,7 +119,7 @@ public class MyBaseApiUtils {
 	public static String updateCompany(String companyJson){
 		String result = StringUtils.EMPTY;
 		try {	
-			String url = getMyBaseUrl() + Constant.mybase_updateCompany;
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_updateCompany;
 			Map<String,Object> maps = SHA1Utils.getSha1Map();
 			maps.put("companyJson", companyJson);
 			String secret = SHA1Utils.SHA1(maps);
@@ -142,7 +142,7 @@ public class MyBaseApiUtils {
 	public static String deleteCompany(String id){
 		String result = StringUtils.EMPTY;
 		try {	
-			String url = getMyBaseUrl() + Constant.mybase_close;
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_close;
 			Map<String,Object> maps = SHA1Utils.getSha1Map();
 			maps.put("id", id);
 			
@@ -166,7 +166,7 @@ public class MyBaseApiUtils {
 	public static String activateCompany(String id){
 		String result = StringUtils.EMPTY;
 		try {	
-			String url = getMyBaseUrl() + Constant.mybase_activate;
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_activate;
 			Map<String,Object> maps = SHA1Utils.getSha1Map();
 			maps.put("id", id);
 			
@@ -190,7 +190,7 @@ public class MyBaseApiUtils {
 	public static String log(String logJson){
 		String result = StringUtils.EMPTY;
 		try {	
-			String url = getMyBaseUrl() + Constant.mybase_log;
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_log;
 			Map<String,Object> maps = SHA1Utils.getSha1Map();
 			maps.put("logJson", logJson);
 			
@@ -214,7 +214,7 @@ public class MyBaseApiUtils {
 	public static String getAdminLogs(String companyId, String pageSize, String currentPage){
 		String result = StringUtils.EMPTY;
 		try {	
-			String url = getMyBaseUrl() + Constant.mybase_getAdminLogs;
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_getAdminLogs;
 			Map<String,Object> maps = SHA1Utils.getSha1Map();
 			maps.put("companyId", companyId);
 			maps.put("pageSize", pageSize);
@@ -243,7 +243,7 @@ public class MyBaseApiUtils {
 	public static String getMenus(String userId){
 		String result = StringUtils.EMPTY;
 		try {	
-			String url = getMyBaseUrl() + Constant.mybase_getMenus;
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_getMenus;
 			Map<String,Object> maps = SHA1Utils.getSha1Map();
 			maps.put("userId", userId);			
 			String secret = SHA1Utils.SHA1(maps);
@@ -266,7 +266,7 @@ public class MyBaseApiUtils {
 	public static String getCompanyById(String id){
 		String result = StringUtils.EMPTY;
 		try {	
-			String url = getMyBaseUrl() + Constant.mybase_getCompanyById;
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_getCompanyById;
 			Map<String,Object> maps = SHA1Utils.getSha1Map();
 			maps.put("id", id);			
 			String secret = SHA1Utils.SHA1(maps);
@@ -289,7 +289,7 @@ public class MyBaseApiUtils {
 	public static String getDepartmentByCompanyId(String id){
 		String result = StringUtils.EMPTY;
 		try {	
-			String url = getMyBaseUrl() + Constant.mybase_getDepByCompanyId;
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_getDepByCompanyId;
 			Map<String,Object> maps = SHA1Utils.getSha1Map();
 			maps.put("id", id);
 			
@@ -308,7 +308,7 @@ public class MyBaseApiUtils {
 	public static String getUserPage(String status, String companyId, String departmentId, String pageSize, String currentPage){
 		String result = StringUtils.EMPTY;
 		try {	
-			String url = getMyBaseUrl() + Constant.mybase_getUserPage;
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_getUserPage;
 			Map<String,Object> maps = SHA1Utils.getSha1Map();
 			maps.put("companyId", companyId);
 			maps.put("departmentId", departmentId);
@@ -342,7 +342,7 @@ public class MyBaseApiUtils {
 	public static String getCompanyStaffTreeById(String companyId){
 		String result = StringUtils.EMPTY;
 		try {	
-			String url = getMyBaseUrl() + Constant.mybase_getCompanyStaffTreeById;
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_getCompanyStaffTreeById;
 			Map<String,Object> maps = SHA1Utils.getSha1Map();
 			maps.put("companyId", companyId);
 			String secret = SHA1Utils.SHA1(maps);
@@ -367,7 +367,7 @@ public class MyBaseApiUtils {
 	public static String isExistDepartment(String id, String departmentName, String isCompany){
 		String result = StringUtils.EMPTY;
 		try {	
-			String url = getMyBaseUrl() + Constant.mybase_isExistDepartment;
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_isExistDepartment;
 			Map<String,Object> maps = SHA1Utils.getSha1Map();
 			maps.put("departmentName", departmentName);
 			maps.put("id", id);
@@ -394,7 +394,7 @@ public class MyBaseApiUtils {
 	public static String insertDepartment(String departmentJson){
 		String result = StringUtils.EMPTY;
 		try {	
-			String url = getMyBaseUrl() + Constant.mybase_insertDepartment;
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_insertDepartment;
 			Map<String,Object> maps = SHA1Utils.getSha1Map();
 			maps.put("departmentJson", departmentJson);
 			
@@ -418,7 +418,7 @@ public class MyBaseApiUtils {
 	public static String updateDepartment(String departmentJson){
 		String result = StringUtils.EMPTY;
 		try {	
-			String url = getMyBaseUrl() + Constant.mybase_updateDepartment;
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_updateDepartment;
 			Map<String,Object> maps = SHA1Utils.getSha1Map();
 			maps.put("departmentJson", departmentJson);
 			
@@ -438,7 +438,7 @@ public class MyBaseApiUtils {
 	public static String insertUser(String userJson){
 		String result = StringUtils.EMPTY;
 		try {	
-			String url = getMyBaseUrl() + Constant.mybase_insertUser;
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_insertUser;
 			Map<String,Object> maps = SHA1Utils.getSha1Map();
 			maps.put("userJson", userJson);
 			
@@ -462,7 +462,7 @@ public class MyBaseApiUtils {
 	public static String updateUser(String userJson){
 		String result = StringUtils.EMPTY;
 		try {	
-			String url = getMyBaseUrl() + Constant.mybase_updateUser;
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_updateUser;
 			Map<String,Object> maps = SHA1Utils.getSha1Map();
 			maps.put("userJson", userJson);
 			
@@ -481,7 +481,7 @@ public class MyBaseApiUtils {
 	public static String getDepById(String id){
 		String result = StringUtils.EMPTY;
 		try {	
-			String url = getMyBaseUrl() + Constant.mybase_getDepById;
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_getDepById;
 			Map<String,Object> maps = SHA1Utils.getSha1Map();
 			maps.put("id", id);			
 			String secret = SHA1Utils.SHA1(maps);
@@ -499,7 +499,7 @@ public class MyBaseApiUtils {
 	public static String getSystemPosition(){
 		String result = StringUtils.EMPTY;
 		try {	
-			String url = getMyBaseUrl() + Constant.mybase_getSystemPosition;
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_getSystemPosition;
 			Map<String,Object> maps = SHA1Utils.getSha1Map();
 			String secret = SHA1Utils.SHA1(maps);
 			JSONObject jsonObject = new JSONObject();
@@ -515,12 +515,70 @@ public class MyBaseApiUtils {
 	public static String getPositionByCompanyId(String companyId){
 		String result = StringUtils.EMPTY;
 		try {	
-			String url = getMyBaseUrl() + Constant.mybase_getPositionByCompanyId;
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_getPositionByCompanyId;
 			Map<String,Object> maps = SHA1Utils.getSha1Map();
 			maps.put("companyId", companyId);			
 			String secret = SHA1Utils.SHA1(maps);
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("companyId", companyId);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public static String isExistPosition(String companyId, String positionName){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_isExistPosition;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("companyId", companyId);		
+			maps.put("positionName", positionName);
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("companyId", companyId);
+			jsonObject.put("positionName", positionName);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+		return result;
+	}
+	
+	public static String updatePosition(String positionJson){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_updatePosition;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("positionJson", positionJson);
+			
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("positionJson", positionJson);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public static String insertPosition(String positionJson){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_insertPosition;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("positionJson", positionJson);
+			
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("positionJson", positionJson);
 			jsonObject.put("secret", secret);
 			result = HttpUtils.postUrl(url, jsonObject);
 		} catch (Exception e) {

@@ -21,20 +21,26 @@
       <div class="box" style="border-top:0px; margin-bottom: 0px;">
         <div class="box-header" style="background-color: #fff;padding:0px;">
           <h6 class="box-title">自定义
-         	 <button class="layui-btn  layui-btn-mini  layui-btn-primary  layui-btn-radius">
+         	 <button id="btnAddDefined" class="layui-btn  layui-btn-mini  layui-btn-primary  layui-btn-radius">
 			  <i class="layui-icon">&#xe608;</i> 添加自定义职位
+			</button>
+			<div class="layui-input-inline" >
+		      <input type="text" id="txtPositionName" style="height: 20px;font-size:14px;width: 100px;display:none;" lay-verify="required" placeholder="请输入职位" autocomplete="off" class="layui-input">
+		    </div>
+		     <button id="btnAdd" class="layui-btn  layui-btn-mini  layui-btn-primary  layui-btn-radius" style="display:none;">
+			  <i class="layui-icon">&#xe608;</i> 确定添加
 			</button>
 		</h6>
 
         </div>
-        <div class="box-body" style="line-height:30px;">
+        <div class="box-body" style="line-height:30px;" id="divUserDefined">
          	<c:if test="${userPositionList != null && userPositionList.size() > 0 }">
 			<c:forEach items="${userPositionList}" var="position" varStatus="status">
 				<c:if test="${status.index == 0 }">
-					<button class="layui-btn layui-btn-radius layui-btn-mini" style="margin-left: 10px;">${position.postionName }</button>
+					<button class="layui-btn layui-btn-radius layui-btn-mini" style="margin-left: 10px;"  onclick="selectPosition('${position.id}', '${position.postionName}')">${position.postionName }</button>
 				</c:if>
 				<c:if test="${status.index != 0 }">
-					<button class="layui-btn layui-btn-radius layui-btn-mini">${position.postionName }</button>
+					<button class="layui-btn layui-btn-radius layui-btn-mini"  onclick="selectPosition('${position.id}', '${position.postionName}')">${position.postionName }</button>
 				</c:if>
 			</c:forEach>
 			</c:if>
@@ -48,7 +54,7 @@
         <div class="box-body" style="line-height:30px;">
          	<c:if test="${systemPositionList != null && systemPositionList.size() > 0 }">
 			<c:forEach items="${systemPositionList}" var="position" varStatus="status"> 
-				<button class=" layui-btn-primary  layui-btn-radius layui-btn-mini" style="margin-left: 10px;">${position.postionName }</button>
+				<button class=" layui-btn-primary  layui-btn-radius layui-btn-mini" style="margin-left: 10px;" onclick="selectPosition('${position.id}', '${position.postionName}')">${position.postionName }</button>
 				
 			
 			</c:forEach>
@@ -62,6 +68,6 @@
 <script type="text/javascript" src="${ctx}/js/laydate/laydate.js"></script>
 <script type="text/javascript" src="${ctx}/js/layer/layer.js"></script>
 <script type="text/javascript" src="${ctx}/js/layer/layui.js"></script>
-<script type="text/javascript" src="${ctx}/js/pages/menu/menu_edit.js"></script>
+<script type="text/javascript" src="${ctx}/js/pages/position/position_list.js"></script>
 </body>
 </html>

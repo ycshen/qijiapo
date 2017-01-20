@@ -15,5 +15,8 @@ import com.qjp.entity.PositionEntity;
 public interface PositionService {
 	List<PositionEntity> getSystemPosition();
 	List<PositionEntity> getPositionByCompanyId(String companyId);
+	String insertPosition(PositionEntity position);
+	void updatePosition(PositionEntity position);
+	Boolean isExistPosition(String companyId, String positionName);
 }
 

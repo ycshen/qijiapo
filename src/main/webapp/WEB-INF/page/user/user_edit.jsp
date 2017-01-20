@@ -44,17 +44,20 @@
   <div class="layui-form-item">
     <label class="layui-form-label" style="width:100px;">职位</label>
     <div class="layui-input-block">
-      	<button class="layui-btn   layui-btn-primary  layui-btn-radius"  onclick="selectPosition();">
+      	<a class="layui-btn   layui-btn-primary  layui-btn-radius"  onclick="selectPosition();" id="btnSelect">
 			  <i class="layui-icon">&#xe608;</i> 选择职位
-		</button>
+		</a>
+		<a style="display: none" class="layui-btn layui-btn-small layui-btn-normal layui-btn-radius" id="btnPositionName"></a>
+		<a style="display: none" class="layui-btn   layui-btn-primary  layui-btn-radius"  onclick="selectPosition();" id="btnSelectAgain">
+			  <i class="layui-icon">&#xe608;</i> 重新选择
+		</a>
     </div>
   </div>
   <div class="layui-form-item">
     <div class="layui-input-block">
-      <button class="layui-btn" type="button"  onclick="editUser();">立即提交</button>
-      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+      <button class="layui-btn" type="button"  onclick="editUser();">添加</button>
+      <button class="layui-btn" type="button"  onclick="editUser();">添加后继续添加</button>
       <button type="button" class="layui-btn layui-btn-primary" onclick="cancelEdit();">取消</button>
-      <button class="layui-btn" type="button"  onclick="selectPosition();">选择职位</button>
     </div>
   </div>
 </form>

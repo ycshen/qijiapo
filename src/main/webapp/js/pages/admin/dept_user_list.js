@@ -1,3 +1,5 @@
+
+var layerIndex;
 function addMenu(){
 	var url = ctx + "/inner/menu/edit";
 	layer.open({
@@ -9,7 +11,6 @@ function addMenu(){
 		content: url
 	});
 }
-
 
 function modifyConfig(id){
 	var url = ctx + "/inner/config/edit?id=" + id;
@@ -246,3 +247,4 @@ function confirmType(){
 function cancleType(){
 	layer.closeAll();
 }
+
