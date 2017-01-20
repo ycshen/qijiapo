@@ -37,8 +37,8 @@ public class UserServiceImpl implements UserService{
 		String departmentId = userQuery.getDepartmentId();
 		String pageSize = userQuery.getSize().toString();
 		String currentPage = userQuery.getPage().toString();
-		String status = userQuery.getStatus().toString();
-		String result = MyBaseApiUtils.getUserPage(status, companyId, departmentId, pageSize, currentPage);
+		//String status = userQuery.getStatus().toString();
+		String result = MyBaseApiUtils.getUserPage("", companyId, departmentId, pageSize, currentPage);
 		if(StringUtils.isNotBlank(result)){
 			JSONObject jsonObject = JSONObject.parseObject(result);
 			if(jsonObject != null){
@@ -148,6 +148,11 @@ public class UserServiceImpl implements UserService{
 		}
 		
 		return userQuery;
+	}
+
+	@Override
+	public void forbidUser(String id, String updateUser) {
+		MyBaseApiUtils.forbidUser(id, updateUser);
 	}
 	
 }

@@ -25,6 +25,7 @@ import com.qjp.entity.UserEntity;
 import com.qjp.service.ConfigService;
 import com.qjp.service.DepartmentService;
 import com.qjp.service.UserService;
+import com.qjp.util.LogUtils;
 import com.qjp.util.UserUtils;
 import com.qjp.util.query.UserQuery;
 import com.google.gson.Gson;
@@ -72,6 +73,22 @@ public class UserController {
 		
 		return result;
 	}
+	
+	@RequestMapping(value = "/forbidUser", method = RequestMethod.GET)
+	@ResponseBody
+	public Integer forbidUser(String id, String userName,  HttpServletRequest request){
+		Integer result = ResponseStatus.ERROR;
+		UserEntity loginUser = UserUtils.getLoginUser(request);
+		if(StringUtils.isNotBlank(id)){
+			String updateUser = loginUser.getUserName();
+			userService.forbidUser(id, updateUser);
+			LogUtils.logAdmin("停用员工(" + userName + ")", loginUser);
+			result = ResponseStatus.UPDATE_SUCCESS;
+		}
+		
+		return result;
+	}
+	
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView editUser(String id, HttpServletRequest request){

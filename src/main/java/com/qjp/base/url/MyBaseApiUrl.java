@@ -76,7 +76,9 @@ public class MyBaseApiUrl {
 	@Value("${mybase.insertUser}")
 	private String mybase_insertUser_url;
 	public static String mybase_insertUser;
-	
+	@Value("${mybase.forbidUser}")
+	private String mybase_forbidUser_url;
+	public static String mybase_forbidUser;
 	
 	//Company
 	@Value("${mybase.getCompanyStaffTreeById}")
@@ -129,6 +131,7 @@ public class MyBaseApiUrl {
 		mybase_updateUser = this.mybase_updateUser_url;
 		mybase_insertUser = this.mybase_insertUser_url;
 		mybase_getUserPage = this.mybase_getUserPage_url;
+		mybase_forbidUser = this.mybase_forbidUser_url;
 		//position
 		mybase_getSystemPosition = this.mybase_getSystemPosition_url;
 		mybase_getPositionByCompanyId = this.mybase_getPositionByCompanyId_url;

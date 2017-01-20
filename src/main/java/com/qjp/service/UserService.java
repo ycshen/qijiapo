@@ -24,5 +24,6 @@ public interface UserService {
 	boolean isExistTelphone(String departmentId, String telphone);
 	void deleteUserById(String id);
 	UserQuery getUserPage(UserQuery userQuery);
+	void forbidUser(String id, String updateUser);
 }
 

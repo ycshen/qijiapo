@@ -87,7 +87,7 @@ public class AdminController extends BaseController{
 		userQuery.setPage(1);
 		userQuery.setSize(10);
 		userQuery.setCompanyId(loginUser.getCompanyId().toString());
-		userQuery.setStatus(UserStatus.NORMAL_INT);
+		//userQuery.setStatus(UserStatus.NORMAL_INT);
 		userQuery = userService.getUserList(userQuery);
 		mav.addObject("userQuery", userQuery); 
 		return mav;

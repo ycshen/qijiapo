@@ -87,6 +87,7 @@
                 <thead>
                 <tr>
                   <th>操作</th>
+                  <th>员工状态</th>
                   <th>员工姓名</th>
                   <th>员工账号</th>
                   <th>联系电话</th>
@@ -108,9 +109,20 @@
 			                          <li><a href="#">编辑</a></li>
 			                          <li><a href="#">禁止登陆</a></li>
 			                          <li><a href="#">重置密码</a></li>
-			                          <li><a href="#">停用</a></li>
+			                          <c:if test="${user.status == 101}">
+			                         	 <li><a href="#" onclick="forbidUser('${user.id}', '${user.userName}')">停用</a></li>
+			                         	</c:if>
 			                        </ul>
 			                      </div>
+								</td>
+								<td>
+									<c:if test="${user.status == 101}">
+										<span class="label label-success">正常</span>
+									</c:if>
+									<c:if test="${user.status == 102}">
+										<span class="label label-warning">停用</span>
+									</c:if>
+									
 								</td>
 		                		<td>${user.userName }</td>
 		                		<td>${user.userName }</td>
