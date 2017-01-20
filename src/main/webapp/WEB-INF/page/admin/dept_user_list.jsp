@@ -107,7 +107,9 @@
 			                        </button>
 			                        <ul class="dropdown-menu">
 			                          <li><a href="#">编辑</a></li>
-			                          <li><a href="#">禁止登陆</a></li>
+			                          <c:if test="${user.status != 103}">
+			                          	<li><a href="#" onclick="forbidLogin('${user.id}', '${user.userName}')">禁止登陆</a></li>
+			                          </c:if>
 			                          <li><a href="#">重置密码</a></li>
 			                          <c:if test="${user.status == 101}">
 			                         	 <li><a href="#" onclick="forbidUser('${user.id}', '${user.userName}')">停用</a></li>
@@ -122,6 +124,10 @@
 									<c:if test="${user.status == 102}">
 										<span class="label label-warning">停用</span>
 									</c:if>
+									<c:if test="${user.status == 103}">
+										<span class="label label-danger">禁止登陆</span>
+									</c:if>
+									
 									
 								</td>
 		                		<td>${user.userName }</td>

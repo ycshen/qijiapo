@@ -155,5 +155,10 @@ public class UserServiceImpl implements UserService{
 		MyBaseApiUtils.forbidUser(id, updateUser);
 	}
 	
+	@Override
+	public void forbidLogin(String id, String updateUser) {
+		MyBaseApiUtils.forbidLogin(id, updateUser);
+	}
+	
 }
 

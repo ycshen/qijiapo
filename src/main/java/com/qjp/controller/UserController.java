@@ -89,6 +89,20 @@ public class UserController {
 		return result;
 	}
 	
+	@RequestMapping(value = "/forbidLogin", method = RequestMethod.GET)
+	@ResponseBody
+	public Integer forbidLogin(String id, String userName,  HttpServletRequest request){
+		Integer result = ResponseStatus.ERROR;
+		UserEntity loginUser = UserUtils.getLoginUser(request);
+		if(StringUtils.isNotBlank(id)){
+			String updateUser = loginUser.getUserName();
+			userService.forbidLogin(id, updateUser);
+			LogUtils.logAdmin("员工(" + userName + ")禁止登陆", loginUser);
+			result = ResponseStatus.UPDATE_SUCCESS;
+		}
+		
+		return result;
+	}
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView editUser(String id, HttpServletRequest request){

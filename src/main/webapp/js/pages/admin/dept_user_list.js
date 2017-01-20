@@ -264,3 +264,20 @@ function forbidUser(id, userName){
 		}
 	});
 }
+
+function forbidLogin(id, userName){
+	
+	$.ajax({
+		type: "get",
+		url: ctx + "/inner/user/forbidLogin?id=" + id + "&userName=" + userName,
+		success: function(result){
+			if(result == 2){
+				//成功
+				layer.alert("停用员工成功");
+			}else{
+				//失败
+				layer.alert("停用员工失败");
+			}
+		}
+	});
+}
