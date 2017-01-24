@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.qjp.base.Constant;
 import com.qjp.entity.PositionEntity;
 import com.qjp.service.PositionService;
+import com.qjp.util.JsonUtils;
 import com.qjp.util.api.MyBaseApiUtils;
 import com.qjp.util.api.model.ApiCode;
 import com.qjp.util.query.PositionQuery;
@@ -100,7 +101,7 @@ public class PositionServiceImpl implements PositionService{
 
 	@Override
 	public void updatePosition(PositionEntity position) {
-		String positionJson = new Gson().toJson(position);
+		String positionJson = JsonUtils.json2Str(position);
 		MyBaseApiUtils.updatePosition(positionJson);
 	}
 
@@ -161,6 +162,50 @@ public class PositionServiceImpl implements PositionService{
 		}
 		
 		return positionQuery;
+	}
+
+	@Override
+	public PositionEntity getPositionById(String id) {
+		String result = MyBaseApiUtils.getPositionById(id);
+		PositionEntity  position = null;
+		if(StringUtils.isNotBlank(result)){
+			JSONObject jsonObject = JSONObject.parseObject(result);
+			if(jsonObject != null){
+				Object codeObj = jsonObject.get("code");
+				if(codeObj != null){
+					String code = codeObj.toString();
+					if (ApiCode.OK.toString().equals(code)) {
+						Object dataObj = jsonObject.get("data");
+						if(dataObj != null){
+							String data = dataObj.toString();
+							position = JSONObject.parseObject(data, PositionEntity.class);
+						}
+					}
+				}
+			}
+		}
+		
+		return position;
+	}
+
+	@Override
+	public boolean changePositionStatus(String id, String status) {
+		String result = MyBaseApiUtils.changePositionStatus(id, status);
+		boolean success = false;
+		if(StringUtils.isNotBlank(result)){
+			JSONObject jsonObject = JSONObject.parseObject(result);
+			if(jsonObject != null){
+				Object codeObj = jsonObject.get("code");
+				if(codeObj != null){
+					String code = codeObj.toString();
+					if (ApiCode.OK.toString().equals(code)) {
+						success = true;
+					}
+				}
+			}
+		}
+		
+		return success;
 	}
 	
 }

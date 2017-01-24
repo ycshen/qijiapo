@@ -20,5 +20,7 @@ public interface PositionService {
 	void updatePosition(PositionEntity position);
 	Boolean isExistPosition(String companyId, String positionName);
 	PositionQuery getPositionPage(PositionQuery positionQuery);
+	PositionEntity getPositionById(String id);
+	boolean changePositionStatus(String id, String status);
 }
 

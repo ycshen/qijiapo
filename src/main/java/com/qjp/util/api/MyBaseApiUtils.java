@@ -662,5 +662,43 @@ public class MyBaseApiUtils {
 		return result;
 	}
 	
+	public static String changePositionStatus(String id, String status){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_changePositionStatus;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("id", id);
+			maps.put("status", status);
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("id", id);
+			jsonObject.put("status", status);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public static String getPositionById(String id){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_getPositionById;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("id", id);
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("id", id);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
 }
 
