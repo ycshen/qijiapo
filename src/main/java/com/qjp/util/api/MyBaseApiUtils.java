@@ -633,6 +633,34 @@ public class MyBaseApiUtils {
 		return result;
 	}
 	
+	/**
+	 *得到职位列表
+	 * @param companyId
+	 * @param pageSize
+	 * @param currentPage
+	 * @return
+	 */
+	public static String getPositionPage(String companyId, String pageSize, String currentPage){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_getPositionPage;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("companyId", companyId);
+			maps.put("pageSize", pageSize);
+			maps.put("currentPage", currentPage);
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("companyId", companyId);
+			jsonObject.put("pageSize", pageSize);
+			jsonObject.put("currentPage",currentPage);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 	
 }
 

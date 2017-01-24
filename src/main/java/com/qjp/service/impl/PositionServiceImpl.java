@@ -12,6 +12,7 @@ import com.qjp.entity.PositionEntity;
 import com.qjp.service.PositionService;
 import com.qjp.util.api.MyBaseApiUtils;
 import com.qjp.util.api.model.ApiCode;
+import com.qjp.util.query.PositionQuery;
 
 /** 
  * <p>Project: qijiapo</p> 
@@ -127,6 +128,39 @@ public class PositionServiceImpl implements PositionService{
 		}
 		
 		return false;
+	}
+
+	@Override
+	public PositionQuery getPositionPage(PositionQuery positionQuery) {
+		Long companyId = positionQuery.getCompanyId();
+		Integer pageSize = positionQuery.getSize();
+		Integer currentPage = positionQuery.getPage();
+		String loginResult = MyBaseApiUtils.getPositionPage(companyId.toString(), pageSize.toString(), currentPage.toString());
+		if(StringUtils.isNotBlank(loginResult)){
+			JSONObject jsonObject = JSONObject.parseObject(loginResult);
+			if(jsonObject != null){
+				Object codeObj = jsonObject.get("code");
+				if(codeObj != null){
+					String code = codeObj.toString();
+					if (ApiCode.OK.toString().equals(code)) {
+						Object dataObj = jsonObject.get("data");
+						if(dataObj != null){
+							String data = dataObj.toString();
+							List<PositionEntity> list = JSONObject.parseArray(data, PositionEntity.class);
+							positionQuery.setItems(list);
+						}
+						
+						Object countObj = jsonObject.get("count");
+						if(countObj != null){
+							String count = countObj.toString();
+							positionQuery.setCount(Integer.parseInt(count));
+						}
+					}
+				}
+			}
+		}
+		
+		return positionQuery;
 	}
 	
 }

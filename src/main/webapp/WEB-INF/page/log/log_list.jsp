@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -65,9 +66,18 @@
                 	<c:if test="${logQuery.items != null &&  logQuery.items.size() > 0}">
                 		<c:forEach items="${logQuery.items}" var="log" varStatus="status">
                 			<tr>
-		                		<td>${status.index + 1}</td>
-		                		<td>${log.userName }</td>
-		                		<td>${log.logMsg }</td>
+		                		<td style="width:50px;">${status.index + 1}</td>
+		                		<td style="width:80px;">${log.userName }</td>
+		                		<td>
+		                			<c:choose> 
+									     <c:when test="${fn:length(log.logMsg) > 50}"> 
+									      <c:out value="${fn:substring(log.logMsg, 0, 50)}......" /> 
+									     </c:when> 
+									     <c:otherwise> 
+									      <c:out value="${log.logMsg}" /> 
+									     </c:otherwise>
+								    </c:choose>
+		                		</td>
 		                		<td><f:formatDate value="${log.createTime}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
 		                												
 		                		
@@ -81,7 +91,7 @@
               </table>
             
             </div>
-            <div class="box-header" style="text-align:center">
+            <div class="box-header" style="text-align:center;padding:0px;">
             	<%@include file="log_list_page.jsp" %>
 					<input type="hidden" value="${logQuery.count}" id="count"/>
 					<input type="hidden" value="${logQuery.companyId}" id="txtCompanyId"/>

@@ -33,9 +33,11 @@
 			url: url,
 			success: function(data){
 				var tbody = "<tbody>";
+				var index = 0;
 				$.each(data, function(index, obj){
-					tbody += getTr(obj);
+					tbody += getTr(obj, index);
 				})
+				
 				var tableHead = getHead();
 				tbody += "</tbody>";
 				tableHead += tbody;
@@ -46,13 +48,22 @@
 		
 	}
 	
-	function getTr(obj){
+	function getTr(obj, index){
+		index = Number(index) + 1;
 		var tr = "";
 		tr+="<tr>";
-		tr+="<td><input type=\"checkbox\"/></td>";
-		tr+="<td>" + obj.userName + "</td>";
-		tr += "<td>" + obj.logMsg + "</td>";			
-		tr += "<td>" + obj.createTime + "</td>";	
+		tr+="<td style=\"width: 50px;\">" + index + "</td>";
+		tr+="<td style=\"width: 80px;\">" + obj.userName + "</td>";
+		var logMsg = obj.logMsg;
+		if(isNotBlank(logMsg) && logMsg.length > 50){
+			logMsg = logMsg.substr(0, 50) + "......";
+		}
+		tr += "<td>" + logMsg + "</td>";		
+		var createTime = "";
+		if(isNotBlank(obj.createTime)){
+			createTime = new Date(obj.createTime).Format("yyyy-MM-dd hh:mm:ss"); 
+		}	
+		tr += "<td>" + createTime + "</td>";	
 		
 		tr+="</tr>";
 

@@ -104,6 +104,10 @@ public class MyBaseApiUrl {
 	@Value("${mybase.insertPosition}")
 	private String mybase_insertPosition_url;
 	public static String mybase_insertPosition;	
+	@Value("${mybase.getPositionPage}")
+	private String mybase_getPositionPage_url;
+	public static String mybase_getPositionPage;	
+	
 	@PostConstruct
 	public void init() {
 		mybase_login = this.mybase_login_url;
@@ -138,6 +142,7 @@ public class MyBaseApiUrl {
 		mybase_updatePosition = this.mybase_updatePosition_url;
 		mybase_isExistPosition = this.mybase_isExistPosition_url;
 		mybase_insertPosition = this.mybase_insertPosition_url;
+		mybase_getPositionPage = this.mybase_getPositionPage_url;
 	}
 	
 }
