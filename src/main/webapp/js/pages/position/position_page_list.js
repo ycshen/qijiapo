@@ -116,7 +116,7 @@ function setStart(id, positionName){
 	oper +=" <span class=\"caret\"></span>";
 	oper +="</button>";
 	oper +="<ul class=\"dropdown-menu\">";
-	oper +="<li><a href=\"#\">编辑</a></li>";
+	oper +="<li><a href=\"#\" onclick=\"editPosition('" + id + "');\">编辑</a></li>";
 	oper +="<li><a href=\"#\" onclick=\"stopPosition('" + id + "', '" + positionName+ "')\">停用</a></li>";
 	oper +="</ul>";
 	oper +="</div>";

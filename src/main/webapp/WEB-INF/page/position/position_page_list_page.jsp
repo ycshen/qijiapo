@@ -15,8 +15,7 @@
 	});
 
 	function pageselectCallback(page){
-		var companyId = $("#txtCompanyId").val();
-		getJsonData(companyId, page + 1);
+		getJsonData(page + 1);
         return false;
 	}
 	
@@ -26,16 +25,16 @@
 		return head;
 	}
 
-	function getJsonData(companyId, page){
-		var url = ctx + "/inner/log/list?companyId=" + companyId + "&page=" + page
+	function getJsonData(page){
+		var url = ctx + "/inner/position/page?page=" + page
 		$.ajax({
 			type: "get",
 			url: url,
 			success: function(data){
 				var tbody = "<tbody>";
-				var index = 0;
-				$.each(data, function(index, obj){
-					tbody += getTr(obj, index);
+				var plist = data.items;
+				$.each(plist, function(index, obj){
+					tbody += getTr(obj);
 				})
 				
 				var tableHead = getHead();
@@ -48,22 +47,14 @@
 		
 	}
 	
-	function getTr(obj, index){
-		index = Number(index) + 1;
+	function getTr(obj){
+		var operStr = getOper(obj.isDelete, obj.id, obj.postionName);
 		var tr = "";
 		tr+="<tr>";
-		tr+="<td style=\"width: 50px;\">" + index + "</td>";
-		tr+="<td style=\"width: 80px;\">" + obj.userName + "</td>";
-		var logMsg = obj.logMsg;
-		if(isNotBlank(logMsg) && logMsg.length > 50){
-			logMsg = logMsg.substr(0, 50) + "......";
-		}
-		tr += "<td>" + logMsg + "</td>";		
-		var createTime = "";
-		if(isNotBlank(obj.createTime)){
-			createTime = new Date(obj.createTime).Format("yyyy-MM-dd hh:mm:ss"); 
-		}	
-		tr += "<td>" + createTime + "</td>";	
+		tr+="<td id=\"positionOper" + obj.id + "\">" + operStr + "</td>";
+		tr+="<td id=\"positionName" + obj.id + "\">" + obj.postionName + "</td>";
+		var status = getStatus(obj.isDelete);
+		tr+="<td id=\"positionStatus" + obj.id + "\">" + status + "</td>";
 		
 		tr+="</tr>";
 
@@ -71,6 +62,34 @@
 	
 	}
 
+	function getOper(status, id, positionName){
+		var operStr = "<div class=\"btn-group\">";
+		operStr +="<button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\">";
+		operStr +=" <span class=\"caret\"></span>";
+		operStr +="</button>";
+		operStr +="<ul class=\"dropdown-menu\">";
+		if(status == 0){
+			operStr +="<li><a href=\"#\" onclick=\"editPosition('" + id + "');\">编辑</a></li>";
+			operStr +=" <li><a href=\"#\" onclick=\"stopPosition('" + id + "', '" + positionName + "')\">停用</a></li>";
+		}else{
+            
+			operStr +=" <li><a href=\"#\" onclick=\"startPosition('" + id + "', '" + positionName + "')\">启用</a></li>";
+		}
+
+		operStr +="</ul>";
+		operStr +="</div>";
+
+		return operStr;
+	}
+	
+	function getStatus(status){
+		if(status == 0){
+			return "<span class=\"label label-success\">正常</span>";
+		}else{
+			return "<span class=\"label label-warning\">停用</span>";
+		}
+		
+	}
 	function isNotBlank(args){
 		var result = false;
 		if(args != null && args != "" && args != undefined){

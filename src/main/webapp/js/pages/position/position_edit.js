@@ -29,7 +29,12 @@ function editPosition(){
 				layer.alert(title +"成功",{closeBtn: false,
 			  		skin: 'layui-layer-molv'
 				  }, function(){
-					  window.parent.updateSuccess(id, positionName);
+					  
+					  if(isNotBlank(id)){
+						  window.parent.updateSuccess(id, positionName);
+					  }else{
+						  window.parent.addSuccess();
+					  }
 				  });
 			}else if(position == 4){
 				layer.alert("职位名称已经存在",{closeBtn: false,
@@ -39,7 +44,12 @@ function editPosition(){
 				layer.alert(title + "成功",{closeBtn: false,
 			  		skin: 'layui-layer-molv'
 				  }, function(){
-					  window.parent.updateSuccess(id, positionName);
+					  if(isNotBlank(id)){
+						  window.parent.updateSuccess(id, positionName);
+					  }else{
+						  window.parent.addSuccess();
+					  }
+					  
 				  });
 			}
 			
