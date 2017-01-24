@@ -11,6 +11,34 @@ function addPosition(){
 	});
 }
 
+function queryPosition(){
+	var positionName = $("#txtpositionName").val();
+	var url = ctx + "/inner/position/page";
+	if(isNotBlank(positionName)){
+		url += "?postionName=" + positionName;
+		
+	}
+	
+	$.ajax({
+		type: "get",
+		url: url,
+		success: function(query){
+			var count = query.count;
+			var data = query.items;
+			showTable(data);
+			$(".pagination").pagination(count, {
+			    num_edge_entries: 5,
+			    num_display_entries: 10,
+			    callback: pageselectCallback,
+			    items_per_page:10,
+			    maxentries: count,
+			    prev_text: "上一页",
+			    next_text: "下一页"
+			}); 
+		}
+	});
+	
+}
 function editPosition(id){
 	var url = ctx + "/inner/position/edit?id=" + id;
 	layer.open({

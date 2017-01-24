@@ -136,7 +136,8 @@ public class PositionServiceImpl implements PositionService{
 		Long companyId = positionQuery.getCompanyId();
 		Integer pageSize = positionQuery.getSize();
 		Integer currentPage = positionQuery.getPage();
-		String loginResult = MyBaseApiUtils.getPositionPage(companyId.toString(), pageSize.toString(), currentPage.toString());
+		String positionName = positionQuery.getPostionName();
+		String loginResult = MyBaseApiUtils.getPositionPage(positionName, companyId.toString(), pageSize.toString(), currentPage.toString());
 		if(StringUtils.isNotBlank(loginResult)){
 			JSONObject jsonObject = JSONObject.parseObject(loginResult);
 			if(jsonObject != null){

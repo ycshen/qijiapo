@@ -64,7 +64,7 @@
 			    <input type="text" class="form-control" id="txtpositionName" placeholder="职位名称">
 			  </div>
 			  
-			  <button type="button" class="btn btn-default">查询</button>
+			  <button type="button" class="btn btn-default" onclick="queryPosition();">查询</button>
 			  <button type="button" class="btn btn-default" onclick="addPosition();">添加职位</button>
 			</form>
         </div>

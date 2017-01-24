@@ -31,22 +31,25 @@
 			type: "get",
 			url: url,
 			success: function(data){
-				var tbody = "<tbody>";
-				var plist = data.items;
-				$.each(plist, function(index, obj){
-					tbody += getTr(obj);
-				})
-				
-				var tableHead = getHead();
-				tbody += "</tbody>";
-				tableHead += tbody;
-				$("#syslist").html(tableHead)
+				var items = data.items;
+				showTable(items);
 			}
 			
 		})
 		
 	}
-	
+
+	function showTable(items){
+		var tbody = "<tbody>";
+		$.each(items, function(index, obj){
+			tbody += getTr(obj);
+		})
+		
+		var tableHead = getHead();
+		tbody += "</tbody>";
+		tableHead += tbody;
+		$("#syslist").html(tableHead)
+	}
 	function getTr(obj){
 		var operStr = getOper(obj.isDelete, obj.id, obj.postionName);
 		var tr = "";
