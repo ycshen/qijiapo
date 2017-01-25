@@ -36,6 +36,7 @@ public class MyBaseApiUrl {
 	@Value("${mybase.activate}")
 	private String mybase_activate_url;
 	public static String mybase_activate;
+	
 	//log
 	@Value("${mybase.log}")
 	private String mybase_log_url;
@@ -43,6 +44,12 @@ public class MyBaseApiUrl {
 	@Value("${mybase.getAdminLogs}")
 	private String mybase_getAdminLogs_url;	
 	public static String mybase_getAdminLogs;
+	
+	//menu
+	
+	@Value("${mybase.getOuterSystemPage}")
+	private String mybase_getOuterSystemPage_url;
+	public static String mybase_getOuterSystemPage;
 	@Value("${mybase.getMenus}")
 	private String mybase_getMenus_url;
 	public static String mybase_getMenus;
@@ -127,6 +134,8 @@ public class MyBaseApiUrl {
 		mybase_activate = this.mybase_activate_url;
 		mybase_log = this.mybase_log_url;
 		mybase_getAdminLogs = this.mybase_getAdminLogs_url;
+		//menu
+		mybase_getOuterSystemPage = this.mybase_getOuterSystemPage_url;
 		mybase_getMenus = this.mybase_getMenus_url;
 		mybase_getCompanyById = this.mybase_getCompanyById_url;
 		mybase_getCompanyStaffTreeById = this.mybase_getCompanyStaffTreeById_url;
