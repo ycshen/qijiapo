@@ -66,7 +66,7 @@
 		}
 			
 		tr += "<td>" + deaprtmentName + "</td>";
-		tr += "<td></td>";
+		tr += "<td>"  + obj.positionName + "</td>";
 		
 		tr+="</tr>";
 

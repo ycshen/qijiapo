@@ -134,7 +134,7 @@
 		                		<td>${user.userName }</td>
 		                		<td>${user.telphone }</td>
 		                		<td>${user.departmentName }</td>
-		                		<td></td>
+		                		<td>${user.positionName }</td>
 	                		</tr>
                 		</c:forEach>
                 	</c:if>
