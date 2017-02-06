@@ -89,7 +89,7 @@ function editUser(){
 	        	        success: function(data) {
 	        	          if(data == 1){
 	        	        	  layer.alert('新增成功', function(index){
-	        	        		  window.parent.addSuccess();
+	        	        		  window.parent.addUserSuccess();
 	        	        		  
 	        	      		});
 	        	          }else if(data == 2){

@@ -53,10 +53,19 @@
 		var tr = "";
 		tr+="<tr>";
 		tr+="<td></td>";
-		tr+="<td>" + obj.userName + "</td>";
+		var spanStr = getStatusSpan(obj.status)
+		tr+="<td>" + spanStr + "</td>";
 		tr += "<td>" + obj.userName + "</td>";			
+		tr += "<td>" + obj.userName + "</td>";		
 		tr += "<td>" + obj.telphone + "</td>";	
-		tr += "<td>" + obj.departmentName + "</td>";
+		var deaprtmentName = "";
+		if(isBlank(obj.departmentName)){
+			deaprtmentName = "<span class=\"label label-warning\">无部门状态</span>";
+		}else{
+			deaprtmentName = obj.departmentName;
+		}
+			
+		tr += "<td>" + deaprtmentName + "</td>";
 		tr += "<td></td>";
 		
 		tr+="</tr>";
@@ -65,9 +74,35 @@
 	
 	}
 
+	function getStatusSpan(status){
+		var spanStr = "";
+		if(status == 101){
+			spanStr = "<span class=\"label label-success\">正常</span>";
+		}
+
+		if(status == 102){
+			spanStr = "<span class=\"label label-warning\">停用</span>";
+		}
+
+		if(status == 103){
+			spanStr = "<span class=\"label label-danger\">禁止登陆</span>";
+		}
+
+		return spanStr;
+	}
+	
 	function isNotBlank(args){
 		var result = false;
 		if(args != null && args != "" && args != undefined){
+			result = true;
+		}
+
+		return result;
+	}
+
+	function isBlank(args){
+		var result = false;
+		if(args == null || args == "" || args == undefined){
 			result = true;
 		}
 

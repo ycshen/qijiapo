@@ -129,7 +129,37 @@ function addHoverDom(treeId, treeNode) {
     });
 };
 
-
+function addUserSuccess(){
+	var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+	var selectedTreeNode = zTree.getSelectedNodes();
+	var treeNode = selectedTreeNode[0];
+	var nodeIdStr = treeNode.id;
+	var id = nodeIdStr.split("_")[0];
+	var nodeType = nodeIdStr.split("_")[1];
+	//判断有没有子节点
+	var childrenNodes = treeNode.children;
+	if(childrenNodes.length > 0){
+		$("#btnAddUser").hide();
+	}else{
+		$("#btnAddUser").show();
+	}
+	if(nodeType == 3){
+		//获取对应部门的员工
+		$("#btnAddUser").text("添加" + treeNode.name + "旗下员工");
+		$("#spanName").text(treeNode.name);
+		$("#hidDid").val(id);
+		var userName = $("#txtUserName").val();
+		var telphone = $("#txtTelphone").val();
+		getJsonData(id, userName, telphone, 1);
+	}else if(nodeType == 1){
+		//获取全部员工
+		$("#spanName").text(treeNode.name);
+		getJsonData('', userName, telphone, 1);
+	}
+	
+	layer.closeAll();
+	
+}
 function addSuccess(name, id){
 	var zTree = $.fn.zTree.getZTreeObj("treeDemo");
 	var treeNode = zTree.getNodeByTId("treeDemo_" + tid);
@@ -162,7 +192,7 @@ var setting = {
                 enable: true
             }
         },
-        edit: {
+       edit: {
             enable: true,
             drag: {
     			isCopy: false,
@@ -192,9 +222,15 @@ function showStaff(event, treeId, treeNode){
 	var nodeIdStr = treeNode.id;
 	var id = nodeIdStr.split("_")[0];
 	var nodeType = nodeIdStr.split("_")[1];
+	//判断有没有子节点
+	var childrenNodes = treeNode.children;
+	if(childrenNodes.length > 0){
+		$("#btnAddUser").hide();
+	}else{
+		$("#btnAddUser").show();
+	}
 	if(nodeType == 3){
 		//获取对应部门的员工
-		$("#btnAddUser").show();
 		$("#btnAddUser").text("添加" + treeNode.name + "旗下员工");
 		$("#spanName").text(treeNode.name);
 		$("#hidDid").val(id);
@@ -204,8 +240,7 @@ function showStaff(event, treeId, treeNode){
 	}else if(nodeType == 1){
 		//获取全部员工
 		$("#spanName").text(treeNode.name);
-		$("#btnAddUser").hide();
-		getJsonData(id, userName, telphone, 1);
+		getJsonData('', userName, telphone, 1);
 	}
 }
 
