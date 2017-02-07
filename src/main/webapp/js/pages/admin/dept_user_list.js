@@ -301,18 +301,77 @@ function forbidUser(id, userName){
 }
 
 function forbidLogin(id, userName){
+	layer.confirm("确定禁止登陆吗？",{closeBtn: false,
+  		skin: 'layui-layer-molv'
+	  }, function(){
+		  $.ajax({
+				type: "get",
+				url: ctx + "/inner/user/forbidLogin?id=" + id + "&userName=" + userName,
+				success: function(result){
+					if(result == 2){
+						//成功
+						layer.alert("禁止登陆成功",{closeBtn: false,
+					  		skin: 'layui-layer-molv'
+						  }, function(){
+							  $("#tdStatus" + id).html("<span class=\"label label-danger\">禁止登陆</span>");
+							  var operHtml = switchOper(103);
+							  $("#ulOper" + id).html(operHtml);
+							  layer.closeAll();
+						  });
+					}else{
+						//失败
+						layer.alert("禁止登陆失败",{closeBtn: false,
+					  		skin: 'layui-layer-molv'
+						  }, function(){
+							  layer.closeAll();
+						  });
+					}
+				}
+			});
+	})
 	
-	$.ajax({
-		type: "get",
-		url: ctx + "/inner/user/forbidLogin?id=" + id + "&userName=" + userName,
-		success: function(result){
-			if(result == 2){
-				//成功
-				layer.alert("停用员工成功");
-			}else{
-				//失败
-				layer.alert("停用员工失败");
-			}
-		}
-	});
 }
+
+function enableUser(id, userName){
+	layer.confirm("确定启用员工吗？",{closeBtn: false,
+  		skin: 'layui-layer-molv'
+	  }, function(){
+		  $.ajax({
+				type: "get",
+				url: ctx + "/inner/user/enable?id=" + id + "&userName=" + userName,
+				success: function(result){
+					if(result == 2){
+						//成功
+						layer.alert("启用员工成功",{closeBtn: false,
+					  		skin: 'layui-layer-molv'
+						  }, function(){
+							  $("#tdStatus" + id).html("<span class=\"label label-success\">正常</span>");
+							  layer.closeAll();
+						  });
+					}else{
+						//失败
+						layer.alert("启用员工失败",{closeBtn: false,
+					  		skin: 'layui-layer-molv'
+						  }, function(){
+							  layer.closeAll();
+						  });
+					}
+				}
+			});
+	})
+	
+}
+
+function switchOper(status){
+	var operHtml = "";
+	if(status == 103){
+		operHtml += "<li><a href=\"#\" onclick=\"editUser('${user.id}')\">编辑</a></li>";
+    	operHtml += "<li><a href=\"#\" onclick=\"resetPass('${user.id}', '${user.userName}')\">重置密码</a></li>";
+     	operHtml += "<li><a href=\"#\" onclick=\"enableUser('${user.id}', '${user.userName}')\">启用</a></li>";
+     	operHtml += "<li><a href=\"#\" onclick=\"forbidUser('${user.id}', '${user.userName}')\">停用</a></li>";
+	}
+	
+	
+	return operHtml;
+}
+

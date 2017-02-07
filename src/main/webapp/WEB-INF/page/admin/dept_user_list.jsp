@@ -105,19 +105,29 @@
 			                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 			                          <span class="caret"></span>
 			                        </button>
-			                        <ul class="dropdown-menu">
-			                          <li><a href="#">编辑</a></li>
-			                          <c:if test="${user.status != 103}">
-			                          	<li><a href="#" onclick="forbidLogin('${user.id}', '${user.userName}')">禁止登陆</a></li>
+			                        <ul class="dropdown-menu" id="ulOper${user.id}">
+			                        	<c:if test="${user.status== 103}">
+					                         <li><a href="#" onclick="editUser('${user.id}')">编辑</a></li>
+			                             	 <li><a href="#" onclick="resetPass('${user.id}', '${user.userName}')">重置密码</a></li>
+				                          	 <li><a href="#" onclick="enableUser('${user.id}', '${user.userName}')">启用</a></li>
+				                          	 <li><a href="#" onclick="forbidUser('${user.id}', '${user.userName}')">停用</a></li>
 			                          </c:if>
-			                          <li><a href="#">重置密码</a></li>
+			                          <c:if test="${user.status == 102}">
+			                          	 <li><a href="#" onclick="editUser('${user.id}')">编辑</a></li>
+			                             <li><a href="#" onclick="resetPass('${user.id}', '${user.userName}')">重置密码</a></li>
+			                          	 <li><a href="#" onclick="forbidLogin('${user.id}', '${user.userName}')">禁止登陆</a></li>
+			                          	 <li><a href="#" onclick="enableUser('${user.id}', '${user.userName}')">启用</a></li>
+			                          </c:if>
 			                          <c:if test="${user.status == 101}">
-			                         	 <li><a href="#" onclick="forbidUser('${user.id}', '${user.userName}')">停用</a></li>
-			                         	</c:if>
+			                         	 <li><a href="#" onclick="editUser('${user.id}')">编辑</a></li>
+			                             <li><a href="#" onclick="resetPass('${user.id}', '${user.userName}')">重置密码</a></li>
+			                          	 <li><a href="#" onclick="forbidLogin('${user.id}', '${user.userName}')">禁止登陆</a></li>
+			                          	 <li><a href="#" onclick="forbidUser('${user.id}', '${user.userName}')">停用</a></li>
+			                         </c:if>
 			                        </ul>
 			                      </div>
 								</td>
-								<td>
+								<td id="tdStatus${user.id}">
 									<c:if test="${user.status == 101}">
 										<span class="label label-success">正常</span>
 									</c:if>

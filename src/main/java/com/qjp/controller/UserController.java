@@ -214,5 +214,21 @@ public class UserController {
 			
 		return ResponseStatus.UPDATE_SUCCESS;
 	}
+	
+	@RequestMapping(value = "/enable", method = RequestMethod.GET)
+	@ResponseBody
+	public Integer enableUser(String id, HttpServletRequest request){
+		UserEntity loginUser = UserUtils.getLoginUser(request);
+		if(StringUtils.isNotBlank(id)){
+			UserEntity user = userService.getUserById(Integer.parseInt(id));
+			user.setUpdateTime(new Date());
+			user.setUpdateUser(loginUser.getUserName());
+			user.setStatus(UserStatus.NORMAL_INT);
+			userService.updateUser(user);
+			LogUtils.logAdmin("启用了员工【" + user.getUserName() + "】", loginUser);
+		}
+			
+		return ResponseStatus.UPDATE_SUCCESS;
+	}
 }
 
