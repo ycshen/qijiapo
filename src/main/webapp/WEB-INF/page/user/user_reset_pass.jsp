@@ -21,7 +21,7 @@
     <label class="layui-form-label" style="width:100px;">方式一：</label>
     <div class="layui-input-block">
     
-      <input type="text" id="txtPass" autocomplete="off" class="layui-input" style="width: 300px;float:left;">
+      <input type="text" id="txtPass" autocomplete="off" class="layui-input" style="width: 300px;float:left;" placeholder="请输入8-16位重置密码">
       <button class="layui-btn" type="button"  onclick="resetByPass('${user.id}','${user.userName }');"  style="width: 100px;float:left;">重置</button>
 							 
     </div>

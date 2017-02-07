@@ -160,6 +160,10 @@ function addUserSuccess(){
 	layer.closeAll();
 	
 }
+
+function resetSuccess(){
+	layer.closeAll();
+}
 function addSuccess(name, id){
 	var zTree = $.fn.zTree.getZTreeObj("treeDemo");
 	var treeNode = zTree.getNodeByTId("treeDemo_" + tid);
