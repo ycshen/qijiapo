@@ -26,6 +26,7 @@ public interface UserService {
 	UserQuery getUserPage(UserQuery userQuery);
 	void forbidUser(String id, String updateUser);
 	void forbidLogin(String id, String updateUser);
+	void enableUser(String id, String updateUser);
 	
 }
 

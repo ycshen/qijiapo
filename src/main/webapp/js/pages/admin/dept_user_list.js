@@ -284,20 +284,34 @@ function cancleType(){
 }
 
 function forbidUser(id, userName){
+	layer.confirm("确定停用吗？",{closeBtn: false,
+  		skin: 'layui-layer-molv'
+	  }, function(){
+		  $.ajax({
+				type: "get",
+				url: ctx + "/inner/user/forbidUser?id=" + id + "&userName=" + userName,				success: function(result){
+					if(result == 2){
+						//成功
+						layer.alert("停用成功",{closeBtn: false,
+					  		skin: 'layui-layer-molv'
+						  }, function(){
+							  $("#tdStatus" + id).html("<span class=\"label label-warning\">停用</span>");
+							  var operHtml = switchOper(102, id, userName);
+							  $("#ulOper" + id).html(operHtml);
+							  layer.closeAll();
+						  });
+					}else{
+						//失败
+						layer.alert("停用失败",{closeBtn: false,
+					  		skin: 'layui-layer-molv'
+						  }, function(){
+							  layer.closeAll();
+						  });
+					}
+				}
+			});
+	})
 	
-	$.ajax({
-		type: "get",
-		url: ctx + "/inner/user/forbidUser?id=" + id + "&userName=" + userName,
-		success: function(result){
-			if(result == 2){
-				//成功
-				layer.alert("停用员工成功");
-			}else{
-				//失败
-				layer.alert("停用员工失败");
-			}
-		}
-	});
 }
 
 function forbidLogin(id, userName){
@@ -314,7 +328,7 @@ function forbidLogin(id, userName){
 					  		skin: 'layui-layer-molv'
 						  }, function(){
 							  $("#tdStatus" + id).html("<span class=\"label label-danger\">禁止登陆</span>");
-							  var operHtml = switchOper(103);
+							  var operHtml = switchOper(103, id, userName);
 							  $("#ulOper" + id).html(operHtml);
 							  layer.closeAll();
 						  });
@@ -346,6 +360,8 @@ function enableUser(id, userName){
 					  		skin: 'layui-layer-molv'
 						  }, function(){
 							  $("#tdStatus" + id).html("<span class=\"label label-success\">正常</span>");
+							  var operHtml = switchOper(101, id, userName);
+							  $("#ulOper" + id).html(operHtml);
 							  layer.closeAll();
 						  });
 					}else{
@@ -362,13 +378,23 @@ function enableUser(id, userName){
 	
 }
 
-function switchOper(status){
+function switchOper(status, id, userName){
 	var operHtml = "";
 	if(status == 103){
-		operHtml += "<li><a href=\"#\" onclick=\"editUser('${user.id}')\">编辑</a></li>";
-    	operHtml += "<li><a href=\"#\" onclick=\"resetPass('${user.id}', '${user.userName}')\">重置密码</a></li>";
-     	operHtml += "<li><a href=\"#\" onclick=\"enableUser('${user.id}', '${user.userName}')\">启用</a></li>";
-     	operHtml += "<li><a href=\"#\" onclick=\"forbidUser('${user.id}', '${user.userName}')\">停用</a></li>";
+		operHtml += "<li><a href=\"#\" onclick=\"editUser('" + id + "')\">编辑</a></li>";
+    	operHtml += "<li><a href=\"#\" onclick=\"resetPass('" + id + "', '" + userName + "')\">重置密码</a></li>";
+     	operHtml += "<li><a href=\"#\" onclick=\"enableUser('" + id + "', '" + userName + "')\">启用</a></li>";
+     	operHtml += "<li><a href=\"#\" onclick=\"forbidUser('" + id + "', '" + userName + "')\">停用</a></li>";
+	}else if(status == 102){
+		operHtml += "<li><a href=\"#\" onclick=\"editUser('" + id + "')\">编辑</a></li>";
+        operHtml += "<li><a href=\"#\" onclick=\"resetPass('" + id + "', '" + userName + "')\">重置密码</a></li>";
+     	operHtml += "<li><a href=\"#\" onclick=\"forbidLogin('" + id + "', '" + userName + "')\">禁止登陆</a></li>";
+     	operHtml += "<li><a href=\"#\" onclick=\"enableUser('" + id + "', '" + userName + "')\">启用</a></li>";
+	}else if(status == 101){
+		operHtml += "<li><a href=\"#\" onclick=\"editUser('" + id + "')\">编辑</a></li>";
+        operHtml += "<li><a href=\"#\" onclick=\"resetPass('" + id + "', '" + userName + "')\">重置密码</a></li>";
+     	operHtml += "<li><a href=\"#\" onclick=\"forbidLogin('" + id + "', '" + userName + "')\">禁止登陆</a></li>";
+     	operHtml += "<li><a href=\"#\" onclick=\"forbidUser('" + id + "', '" + userName + "')\">停用</a></li>";
 	}
 	
 	
