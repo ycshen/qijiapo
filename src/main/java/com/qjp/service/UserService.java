@@ -23,7 +23,7 @@ public interface UserService {
 	void forbidUser(String id, String updateUser);
 	void forbidLogin(String id, String updateUser);
 	void enableUser(String id, String updateUser);
-	void resetPassword(String id, String password);
+	void resetPassword(String id, String password, String resetType, String email);
 	
 }
 

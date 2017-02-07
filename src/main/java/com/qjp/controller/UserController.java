@@ -229,7 +229,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/reset", method = RequestMethod.GET)
-	public ModelAndView resetPassword(String id, HttpServletRequest request){
+	public ModelAndView reset(String id, HttpServletRequest request){
 		ModelAndView mav = new ModelAndView("/user/user_reset_pass");
 		if(StringUtils.isNotBlank(id)){
 			UserEntity user = userService.getUserById(id);
@@ -237,6 +237,34 @@ public class UserController {
 		}
 		
 		return mav;
+	}
+	
+	@RequestMapping(value = "/resetByEmail", method = RequestMethod.GET)
+	@ResponseBody
+	public Integer resetByEmail(String id, String email, String userName, HttpServletRequest request){
+		Integer result = ResponseStatus.ERROR;
+		UserEntity loginUser = UserUtils.getLoginUser(request);
+		if(StringUtils.isNotBlank(id)){
+			userService.resetPassword(id, "", "2", email);
+			LogUtils.logAdmin("邮件随机重置了员工(" + userName + ")密码", loginUser);
+			result = ResponseStatus.UPDATE_SUCCESS;
+		}
+		
+		return result;
+	}
+	
+	@RequestMapping(value = "/resetByPass", method = RequestMethod.GET)
+	@ResponseBody
+	public Integer resetByPass(String id, String password, String userName, HttpServletRequest request){
+		Integer result = ResponseStatus.ERROR;
+		UserEntity loginUser = UserUtils.getLoginUser(request);
+		if(StringUtils.isNotBlank(id)){
+			userService.resetPassword(id, password, "1", "");
+			LogUtils.logAdmin("密码填写重置了员工(" + userName + ")密码", loginUser);
+			result = ResponseStatus.UPDATE_SUCCESS;
+		}
+		
+		return result;
 	}
 }
 

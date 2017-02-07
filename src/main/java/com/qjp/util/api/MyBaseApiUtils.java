@@ -655,17 +655,21 @@ public class MyBaseApiUtils {
 		return result;
 	}
 	
-	public static String resetPassword(String id, String password){
+	public static String resetPassword(String id, String password, String resetType, String email){
 		String result = StringUtils.EMPTY;
 		try {	
 			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_resetPassword;
 			Map<String,Object> maps = SHA1Utils.getSha1Map();
 			maps.put("id", id);
 			maps.put("password", password);
+			maps.put("resetType", resetType);
+			maps.put("email", email);
 			String secret = SHA1Utils.SHA1(maps);
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("id", id);
 			jsonObject.put("password", password);
+			jsonObject.put("resetType", resetType);
+			jsonObject.put("email", email);
 			jsonObject.put("secret", secret);
 			result = HttpUtils.postUrl(url, jsonObject);
 		} catch (Exception e) {

@@ -21,8 +21,8 @@
     <label class="layui-form-label" style="width:100px;">方式一：</label>
     <div class="layui-input-block">
     
-      <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input" style="width: 300px;float:left;">
-      <button class="layui-btn" type="button"  onclick="editUser();"  style="width: 100px;float:left;">重置</button>
+      <input type="text" id="txtPass" autocomplete="off" class="layui-input" style="width: 300px;float:left;">
+      <button class="layui-btn" type="button"  onclick="resetByPass('${user.id}','${user.userName }');"  style="width: 100px;float:left;">重置</button>
 							 
     </div>
 
@@ -56,6 +56,6 @@
 </div>	
 <script type="text/javascript" src="${ctx}/js/jquery.js"></script>
 <script type="text/javascript" src="${ctx}/js/layer/layer.js"></script>
-<script type="text/javascript" src="${ctx}/js/pages/user/user_edit.js"></script>
+<script type="text/javascript" src="${ctx}/js/pages/user/user_reset_pass.js"></script>
 </body>
 </html>

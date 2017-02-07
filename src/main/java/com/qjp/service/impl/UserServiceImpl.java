@@ -184,8 +184,8 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void resetPassword(String id, String password) {
-		MyBaseApiUtils.resetPassword(id, password);
+	public void resetPassword(String id, String password, String resetType, String email) {
+		MyBaseApiUtils.resetPassword(id, password, resetType, email);
 	}
 	
 }
