@@ -401,3 +401,25 @@ function switchOper(status, id, userName){
 	return operHtml;
 }
 
+function editUser(id){
+	layer.open({
+		  type: 2,
+		  area: ['700px', '400px'],
+		  fixed: false, //不固定
+		  maxmin: true,
+		  title: "编辑员工",
+		  content: ctx + "/inner/user/edit?id=" + id 
+		});
+}
+
+function resetPass(id){
+	layer.open({
+		  type: 2,
+		  area: ['600px', '300px'],
+		  fixed: false, //不固定
+		  maxmin: true,
+		  title: "重置密码",
+		  content: ctx + "/inner/user/reset?id=" + id 
+		});
+}
+

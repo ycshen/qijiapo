@@ -15,10 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.qjp.base.Config;
+import com.google.gson.Gson;
 import com.qjp.base.ResponseStatus;
 import com.qjp.base.UserStatus;
-import com.qjp.entity.ConfigEntity;
 import com.qjp.entity.Constant;
 import com.qjp.entity.DepartmentEntity;
 import com.qjp.entity.UserEntity;
@@ -28,7 +27,6 @@ import com.qjp.service.UserService;
 import com.qjp.util.LogUtils;
 import com.qjp.util.UserUtils;
 import com.qjp.util.query.UserQuery;
-import com.google.gson.Gson;
 
 /** 
  * <p>Project: MyBase</p> 
@@ -110,7 +108,7 @@ public class UserController {
 		UserEntity user = null;
 		List<DepartmentEntity> departmentList = null;
 		if(StringUtils.isNotBlank(id)){
-			user = userService.getUserById(Integer.parseInt(id));
+			user = userService.getUserById(id);
 			Long companyId = user.getCompanyId();
 			departmentList = departmentService.getListByCompanyId(companyId.toString());
 		}
@@ -144,7 +142,7 @@ public class UserController {
 		ModelAndView mav = new ModelAndView("/user/user_detail");
 		UserEntity user = null;
 		if(StringUtils.isNotBlank(id)){
-			user = userService.getUserById(Integer.parseInt(id));
+			user = userService.getUserById(id);
 		}
 		
 		mav.addObject("user", user);
@@ -190,7 +188,7 @@ public class UserController {
 	public Integer leave(String id, HttpServletRequest request){
 		UserEntity loginUser = UserUtils.getLoginUser(request);
 		if(StringUtils.isNotBlank(id)){
-			UserEntity user = userService.getUserById(Integer.parseInt(id));
+			UserEntity user = userService.getUserById(id);
 			user.setUpdateTime(new Date());
 			user.setUpdateUser(loginUser.getUserName());
 			user.setStatus(UserStatus.LEAVE_INT);
@@ -205,7 +203,7 @@ public class UserController {
 	public Integer deleteUser(String id, HttpServletRequest request){
 		UserEntity loginUser = UserUtils.getLoginUser(request);
 		if(StringUtils.isNotBlank(id)){
-			UserEntity user = userService.getUserById(Integer.parseInt(id));
+			UserEntity user = userService.getUserById(id);
 			user.setUpdateTime(new Date());
 			user.setUpdateUser(loginUser.getUserName());
 			user.setStatus(UserStatus.FORBIDDEN_INT);
@@ -228,6 +226,17 @@ public class UserController {
 		}
 		
 		return result;
+	}
+	
+	@RequestMapping(value = "/reset", method = RequestMethod.GET)
+	public ModelAndView resetPassword(String id, HttpServletRequest request){
+		ModelAndView mav = new ModelAndView("/user/user_reset_pass");
+		if(StringUtils.isNotBlank(id)){
+			UserEntity user = userService.getUserById(id);
+			mav.addObject("user", user);
+		}
+		
+		return mav;
 	}
 }
 

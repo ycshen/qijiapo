@@ -655,6 +655,26 @@ public class MyBaseApiUtils {
 		return result;
 	}
 	
+	public static String resetPassword(String id, String password){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_resetPassword;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("id", id);
+			maps.put("password", password);
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("id", id);
+			jsonObject.put("password", password);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
 	/**
 	 *得到职位列表
 	 * @param companyId
@@ -742,6 +762,23 @@ public class MyBaseApiUtils {
 		return result;
 	}
 	
-	
+	public static String getUserById(String id){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_getUserById;	
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("id", id);
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("id", id);
+			String secret = SHA1Utils.SHA1(maps);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+			System.out.println(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }
 

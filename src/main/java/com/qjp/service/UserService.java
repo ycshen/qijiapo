@@ -1,10 +1,6 @@
 package com.qjp.service;
 
-import java.util.List;
-
-import com.qjp.entity.DepartmentEntity;
 import com.qjp.entity.UserEntity;
-import com.qjp.util.query.DepartmentQuery;
 import com.qjp.util.query.UserQuery;
 
 /** 
@@ -19,7 +15,7 @@ public interface UserService {
 	void insertUser(UserEntity user);
 	UserQuery getUserList(UserQuery userQuery);
 	void updateUser(UserEntity user);
-	UserEntity getUserById(Integer id);
+	UserEntity getUserById(String id);
 	UserEntity login(String account, String password);
 	boolean isExistTelphone(String departmentId, String telphone);
 	void deleteUserById(String id);
@@ -27,6 +23,7 @@ public interface UserService {
 	void forbidUser(String id, String updateUser);
 	void forbidLogin(String id, String updateUser);
 	void enableUser(String id, String updateUser);
+	void resetPassword(String id, String password);
 	
 }
 

@@ -86,6 +86,12 @@ public class MyBaseApiUrl {
 	@Value("${mybase.forbidUser}")
 	private String mybase_forbidUser_url;
 	public static String mybase_forbidUser;
+	@Value("${mybase.resetPassword}")
+	private String mybase_resetPassword_url;
+	public static String mybase_resetPassword;
+	@Value("${mybase.getUserById}")
+	private String mybase_getUserById_url;
+	public static String mybase_getUserById;
 	
 	//Company
 	@Value("${mybase.getCompanyStaffTreeById}")
@@ -151,6 +157,8 @@ public class MyBaseApiUrl {
 		mybase_insertUser = this.mybase_insertUser_url;
 		mybase_getUserPage = this.mybase_getUserPage_url;
 		mybase_forbidUser = this.mybase_forbidUser_url;
+		mybase_resetPassword = this.mybase_resetPassword_url;
+		mybase_getUserById = this.mybase_getUserById_url;
 		//position
 		mybase_getSystemPosition = this.mybase_getSystemPosition_url;
 		mybase_getPositionByCompanyId = this.mybase_getPositionByCompanyId_url;

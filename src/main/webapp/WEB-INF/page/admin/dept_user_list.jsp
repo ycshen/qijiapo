@@ -91,6 +91,7 @@
                   <th>员工姓名</th>
                   <th>员工账号</th>
                   <th>联系电话</th>
+                  <th>邮箱</th>
                   <th>所属部门</th>
                   <th>职务</th>
                 </tr>
@@ -143,6 +144,7 @@
 		                		<td>${user.userName }</td>
 		                		<td>${user.userName }</td>
 		                		<td>${user.telphone }</td>
+		                		<td>${user.email }</td>
 		                		<td>${user.departmentName }</td>
 		                		<td>${user.positionName }</td>
 	                		</tr>

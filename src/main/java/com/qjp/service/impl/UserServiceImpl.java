@@ -73,9 +73,27 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public UserEntity getUserById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	public UserEntity getUserById(String id) {
+		String loginResult = MyBaseApiUtils.getUserById(id);
+		UserEntity user = null;
+		if(StringUtils.isNotBlank(loginResult)){
+			JSONObject jsonObject = JSONObject.parseObject(loginResult);
+			if(jsonObject != null){
+				Object codeObj = jsonObject.get("code");
+				if(codeObj != null){
+					String code = codeObj.toString();
+					if (ApiCode.OK.toString().equals(code)) {
+						Object dataObj = jsonObject.get("data");
+						if(dataObj != null){
+							String data = dataObj.toString();
+							user = JSONObject.parseObject(data, UserEntity.class);
+						}
+					}
+				}
+			}
+		}
+		
+		return user;
 	}
 
 	@Override
@@ -163,6 +181,11 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void enableUser(String id, String updateUser) {
 		MyBaseApiUtils.enableUser(id, updateUser);
+	}
+
+	@Override
+	public void resetPassword(String id, String password) {
+		MyBaseApiUtils.resetPassword(id, password);
 	}
 	
 }
