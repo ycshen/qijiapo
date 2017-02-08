@@ -176,10 +176,10 @@ public class UserController {
 	
 	@RequestMapping(value = "/isExistTelphone", method = RequestMethod.GET)
 	@ResponseBody
-	public Integer isExistTelphone(String departmentId, String telphone, HttpServletRequest request){
+	public Integer isExistTelphone(String departmentId, String telphone, String userId, HttpServletRequest request){
 		Integer result = Constant.EXIST;
 		if(StringUtils.isNotBlank(telphone) && StringUtils.isNotBlank(departmentId)){
-			boolean isExist = userService.isExistTelphone(departmentId, telphone);
+			boolean isExist = userService.isExistTelphone(departmentId, telphone, userId);
 			result = isExist ? Constant.EXIST : Constant.NO_EXIST;
 		}
 		

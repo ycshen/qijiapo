@@ -52,12 +52,21 @@
 	function getTr(obj){
 		var tr = "";
 		tr+="<tr>";
-		tr+="<td></td>";
+		var operHtml = getOper(obj.id, obj.status, obj.userName);
+		tr+="<td>"  + operHtml + "</td>";
 		var spanStr = getStatusSpan(obj.status)
 		tr+="<td>" + spanStr + "</td>";
 		tr += "<td>" + obj.userName + "</td>";			
 		tr += "<td>" + obj.userName + "</td>";		
-		tr += "<td>" + obj.telphone + "</td>";	
+		tr += "<td>" + obj.telphone + "</td>";
+		var email = "";
+		if(isBlank(obj.email)){
+			email = "";
+		}else{
+			email = obj.email;
+		}
+				
+		tr += "<td>" + email + "</td>";	
 		var deaprtmentName = "";
 		if(isBlank(obj.departmentName)){
 			deaprtmentName = "<span class=\"label label-warning\">无部门状态</span>";
@@ -74,6 +83,39 @@
 	
 	}
 
+	function getOper(id, status, userName){
+		var operHtml = "<div class=\"btn-group\">";
+		operHtml +="<button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\">";
+		operHtml +="<span class=\"caret\"></span>";
+		operHtml +="</button>";
+		operHtml +=" <ul class=\"dropdown-menu\" id=\"ulOper" + id +"\">";
+        if(status == 103){
+        	operHtml +="<li><a href=\"#\" onclick=\"editUser('" + id + "')\">编辑</a></li>";
+        	operHtml +="<li><a href=\"#\" onclick=\"resetPass('" + id + "', '" + userName + "')\">重置密码</a></li>";
+        	operHtml +="<li><a href=\"#\" onclick=\"enableUser('" + id + "', '" + userName + "')\">启用</a></li>";
+        	operHtml +="<li><a href=\"#\" onclick=\"forbidUser('" + id + "', '" + userName + "')\">停用</a></li>";
+        }else if(status == 102){
+        	 operHtml +=" <li><a href=\"#\" onclick=\"editUser('" + id + "')\">编辑</a></li>";
+             operHtml +=" <li><a href=\"#\" onclick=\"resetPass('" + id + "', '" + userName + "')\">重置密码</a></li>";
+             operHtml +=" <li><a href=\"#\" onclick=\"forbidLogin('" + id + "', '" + userName + "')\">禁止登陆</a></li>";
+             operHtml +=" <li><a href=\"#\" onclick=\"enableUser('" + id + "', '" + userName + "')\">启用</a></li>";
+              
+        }else if(status == 101){
+        	 operHtml +=" <li><a href=\"#\" onclick=\"editUser('" + id + "')\">编辑</a></li>";
+             operHtml +="  <li><a href=\"#\" onclick=\"resetPass('" + id + "', '" + userName + "')\">重置密码</a></li>";
+             operHtml +="  <li><a href=\"#\" onclick=\"forbidLogin('" + id + "', '" + userName + "')\">禁止登陆</a></li>";
+             operHtml +="  <li><a href=\"#\" onclick=\"forbidUser('" + id + "', '" + userName + "')\">停用</a></li>";
+            
+        }
+                 
+       
+         
+        operHtml +=" </ul>";
+        operHtml +="  </div>";
+
+        return operHtml;
+	}
+	
 	function getStatusSpan(status){
 		var spanStr = "";
 		if(status == 101){

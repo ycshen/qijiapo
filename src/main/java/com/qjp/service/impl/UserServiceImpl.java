@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.qjp.entity.DepartmentEntity;
 import com.qjp.entity.UserEntity;
 import com.qjp.service.UserService;
+import com.qjp.util.JsonUtils;
 import com.qjp.util.api.MyBaseApiUtils;
 import com.qjp.util.api.model.ApiCode;
 import com.qjp.util.query.UserQuery;
@@ -27,7 +28,7 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public void insertUser(UserEntity user) {
-		String userJson = new Gson().toJson(user);
+		String userJson = JsonUtils.json2Str(user);
 		MyBaseApiUtils.insertUser(userJson);
 	}
 
@@ -68,7 +69,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public void updateUser(UserEntity user) {
-		String userJson = new Gson().toJson(user);
+		String userJson = JsonUtils.json2Str(user);
 		MyBaseApiUtils.updateUser(userJson);
 	}
 
@@ -121,7 +122,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public boolean isExistTelphone(String departmentId, String telphone) {
+	public boolean isExistTelphone(String departmentId, String telphone, String userId) {
 		
 		
 		return false;

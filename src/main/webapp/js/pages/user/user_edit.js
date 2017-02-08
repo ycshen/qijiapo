@@ -29,21 +29,25 @@ function selectPosition(){
 }
 
 function editUser(){
-	var departmentId = $("#hidDepartmentId").val();
-	/*var departmentId = $("select[name='departmentId']").val();
-	if(isBlank(departmentId)){
-		layer.alert("请选择部门");
-		return;
-	}else{
-		var departmentName = $("select[name='departmentId']").find("option:selected").text();
-		$("#txtdepartmentName").val(departmentName);
+	var editType = $("#hidEditType").val();
+	if( editType == 2){
+		var editDepartmentId = $("select[name='departmentId']").val();
+		if(isBlank(editDepartmentId)){
+			layer.alert("请选择部门");
+			return;
+		}else{
+			/*var departmentName = $("select[name='departmentId']").find("option:selected").text();
+			$("#txtdepartmentName").val(departmentName);*/
+			$("#hidDepartmentId").val(editDepartmentId);
+		}
 	}
 	
-	var txtuserName = $("#txtuserName").val();
+	var departmentId = $("#hidDepartmentId").val();
+	var txtuserName = $("#txtUserName").val();
 	if(isBlank(txtuserName)){
 		layer.alert("员工姓名不能为空");
 		return;
-	}*/
+	}
 
 	
 	var telphone = $("#txtTelphone").val();
