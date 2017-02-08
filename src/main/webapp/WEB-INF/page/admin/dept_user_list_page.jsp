@@ -42,7 +42,17 @@
 				var tableHead = getHead();
 				tbody += "</tbody>";
 				tableHead += tbody;
-				$("#syslist").html(tableHead)
+				$("#syslist").html(tableHead);
+				$("#spanCount").text(data.count);
+				$(".pagination").pagination(data.count, {
+				    num_edge_entries: 5,
+				    num_display_entries: 10,
+				    callback: pageselectCallback,
+				    items_per_page:10,
+				    maxentries: count,
+				    prev_text: "上一页",
+				    next_text: "下一页"
+				}); 
 			}
 			
 		})
@@ -113,9 +123,7 @@
              operHtml +="  <li><a href=\"#\" onclick=\"forbidUser('" + id + "', '" + userName + "')\">停用</a></li>";
             
         }
-                 
-       
-         
+           
         operHtml +=" </ul>";
         operHtml +="  </div>";
 

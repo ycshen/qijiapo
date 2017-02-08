@@ -246,6 +246,7 @@ function showStaff(event, treeId, treeNode){
 		$("#spanName").text(treeNode.name);
 		getJsonData('', userName, telphone, 1);
 	}
+	
 }
 
 function addUser(){
