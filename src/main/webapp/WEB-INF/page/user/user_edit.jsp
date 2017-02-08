@@ -8,6 +8,7 @@
 <title>部门编辑</title>
 <%@include file="../share/common_css.jsp"%>
 <link rel="stylesheet" href="${ctx}/js/layui/css/layui.css">
+<link rel="stylesheet" href="${ctx}/js/select2/select2.min.css">
 <script type="text/javascript">
 	var ctx = "${pageContext.request.contextPath}";
 </script>
@@ -17,11 +18,23 @@
 <div class="container" style="margin-top: 10px;">
 <form class="layui-form" method="post" id="myForm">
 <input type="hidden" value="${user.positionId}" name="positionId" id="hidPositionId"/>
+<input type="hidden" value="${editType}" id="hidEditType"/>
 	<input type="hidden" value="${department.id}" name="departmentId" id="hidDepartmentId"/>
   <div class="layui-form-item">
     <label class="layui-form-label" style="width:100px;">所属部门</label>
     <div class="layui-input-block">
-	<a name="departmentName" class="layui-btn layui-btn-small layui-btn-normal layui-btn-radius">${department.departmentName}</a>
+    	<c:if test="${editType == 2}">
+                <select class="form-control select2" style="width: 100%;display:inline">
+                  <c:if test="${departmentList != null && departmentList.size() > 0 }">
+                  	<c:forEach items="${departmentList}" var="department">
+                  		 <option <c:if test="${department.id == user.departmentId}"></c:if>selected="selected" value="${department.id}">${department.departmentName }</option>
+                  	</c:forEach>
+                  </c:if>
+                </select>
+    	</c:if>
+    	<c:if test="${editType == 1}">
+    		<a name="departmentName" class="layui-btn layui-btn-small layui-btn-normal layui-btn-radius">${department.departmentName}</a>
+    	</c:if>
     </div>
   </div>
   <div class="layui-form-item">
@@ -38,6 +51,14 @@
       <input id="txtTelphone" name="telphone"
 							value="${user.telphone}" maxlength="11"
 							class="layui-input" type="text" placeholder="请输入联系电话">
+    </div>
+  </div>
+   <div class="layui-form-item">
+    <label class="layui-form-label" style="width:100px;">邮箱</label>
+    <div class="layui-input-block">
+      <input id="txtTelphone" name="email"
+							value="${user.email}" 
+							class="layui-input" type="text" placeholder="请输入邮箱地址">
     </div>
   </div>
   <div class="layui-form-item">
@@ -64,6 +85,7 @@
 </div>	
 <script type="text/javascript" src="${ctx}/js/jquery.js"></script>
 <script type="text/javascript" src="${ctx}/js/layer/layer.js"></script>
+<script src="${ctx}/js/select2/select2.full.min.js"></script>
 <script type="text/javascript" src="${ctx}/js/pages/user/user_edit.js"></script>
 </body>
 </html>

@@ -71,6 +71,9 @@ public class MyBaseApiUrl {
 	@Value("${mybase.getDepById}")
 	private String mybase_getDepById_url; //根据部门id获取部门信息
 	public static String mybase_getDepById;
+	@Value("${mybase.getNoSubDepListByCId}")
+	private String mybase_getNoSubDepListByCId_url; //根据部门id获取部门信息
+	public static String mybase_getNoSubDepListByCId;
 	
 	
 	//User
@@ -151,7 +154,7 @@ public class MyBaseApiUrl {
 		mybase_updateDepartment = this.mybase_updateDepartment_url;
 		mybase_insertDepartment = this.mybase_insertDepartment_url;
 		mybase_getDepById = this.mybase_getDepById_url;
-		
+		mybase_getNoSubDepListByCId = this.mybase_getNoSubDepListByCId_url;
 		//user
 		mybase_updateUser = this.mybase_updateUser_url;
 		mybase_insertUser = this.mybase_insertUser_url;

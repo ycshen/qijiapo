@@ -107,12 +107,15 @@ public class UserController {
 		ModelAndView mav = new ModelAndView("/user/user_edit");
 		UserEntity user = null;
 		List<DepartmentEntity> departmentList = null;
+		Integer editType = 1; //新增
 		if(StringUtils.isNotBlank(id)){
 			user = userService.getUserById(id);
 			Long companyId = user.getCompanyId();
-			departmentList = departmentService.getListByCompanyId(companyId.toString());
+			departmentList = departmentService.getNoSubDeptListByCompanyId(companyId.toString());
+			editType = 2;//编辑
 		}
 		
+		mav.addObject("editType", editType);
 		mav.addObject("user", user);
 		mav.addObject("departmentList", departmentList);
 		

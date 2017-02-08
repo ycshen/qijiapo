@@ -26,5 +26,6 @@ public interface DepartmentService {
 	boolean isExistDepartment(String departmentName, String pid, Boolean isCompany);
 	List<DepartmentEntity> getListByCompanyId(String companyId);
 	List<DepartmentEntity> getDepartmentByParentId(String parentDepartmentId);
+	List<DepartmentEntity> getNoSubDeptListByCompanyId(String id);
 }
 

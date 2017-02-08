@@ -145,5 +145,29 @@ public class DepartmentServiceImpl implements DepartmentService{
 		
 		return isExist;
 	}
+
+	@Override
+	public List<DepartmentEntity> getNoSubDeptListByCompanyId(String id) {
+		List<DepartmentEntity> list = null;
+		String result = MyBaseApiUtils.getNoSubDeptListByCompanyId(id);
+		if(StringUtils.isNotBlank(result)){
+			JSONObject jsonObject = JSONObject.parseObject(result);
+			if(jsonObject != null){
+				Object codeObj = jsonObject.get("code");
+				if(codeObj != null){
+					String code = codeObj.toString();
+					if (ApiCode.OK.toString().equals(code)) {
+						Object dataObj = jsonObject.get("data");
+						if(dataObj != null){
+							String data = dataObj.toString();
+							list = JSONObject.parseArray(data, DepartmentEntity.class);
+						}
+					}
+				}
+			}
+		}
+		
+		return list;
+	}
 }
 
