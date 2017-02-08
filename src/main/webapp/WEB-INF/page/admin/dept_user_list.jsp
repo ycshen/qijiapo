@@ -145,7 +145,14 @@
 		                		<td>${user.userName }</td>
 		                		<td>${user.telphone }</td>
 		                		<td>${user.email }</td>
-		                		<td>${user.departmentName }</td>
+		                		<td>
+		                			<c:if test="${user.departmentName == null || user.departmentName == ''}">
+		                				<span class="label label-warning">无部门状态</span>
+		                			</c:if>
+		                			<c:if test="${user.departmentName != null || user.departmentName != ''}">
+		                			${user.departmentName}
+		                			</c:if>
+		                		</td>
 		                		<td>${user.positionName }</td>
 	                		</tr>
                 		</c:forEach>

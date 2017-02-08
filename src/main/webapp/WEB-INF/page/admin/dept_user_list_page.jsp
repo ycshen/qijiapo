@@ -18,7 +18,7 @@
 		var userName = $("#txtUserName").val();
 		var telphone = $("#txtTelphone").val();
 		var departmentId = "";
-		getJsonData(departmentId, userName, telphone, page + 1);
+		getJsonData(departmentId, userName, telphone, page + 1, false);
         return false;
 	}
 	
@@ -28,7 +28,7 @@
 		return head;
 	}
 
-	function getJsonData(departmentId, userName, telphone, page){
+	function getJsonData(departmentId, userName, telphone, page, isInit){
 		var url = ctx + "/inner/admin/userList?telphone=" + telphone + "&userName=" + userName + "&departmentId=" + departmentId +  "&page=" + page + "&status=101"
 		$.ajax({
 			type: "get",
@@ -44,19 +44,21 @@
 				tableHead += tbody;
 				$("#syslist").html(tableHead);
 				$("#spanCount").text(data.count);
-				$(".pagination").pagination(data.count, {
-				    num_edge_entries: 5,
-				    num_display_entries: 10,
-				    callback: pageselectCallback,
-				    items_per_page:10,
-				    maxentries: count,
-				    prev_text: "上一页",
-				    next_text: "下一页"
-				}); 
+				if(isInit){
+					$(".pagination").pagination(data.count, {
+					    num_edge_entries: 5,
+					    num_display_entries: 10,
+					    callback: pageselectCallback,
+					    items_per_page:10,
+					    maxentries: count,
+					    prev_text: "上一页",
+					    next_text: "下一页"
+					});
+				}
 			}
 			
 		})
-		
+
 	}
 	
 	function getTr(obj){

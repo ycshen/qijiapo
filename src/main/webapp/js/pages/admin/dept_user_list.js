@@ -104,10 +104,72 @@ function addHoverDom(treeId, treeNode) {
     var sObj = $("#" + treeNode.tId + "_span");
     if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
 
-	
+    var deleteTitle = "删除部门";	
+    var deleteStr = "<span class='button remove' id='deleteBtn_" + treeNode.tId
+        + "' title='" + deleteTitle + "' onfocus='this.blur();'></span>";
+    
+    sObj.after(deleteStr);
+    var deletebtn = $("#deleteBtn_"+treeNode.tId);
+    if (deletebtn) deletebtn.bind("click", function(){	
+    	addPid = treeNode.id;
+    	tid = treeNode.tId;
+    	var pid = addPid.split("_")[0];
+    	var nodeType = addPid.split("_")[1];
+    	var name = treeNode.name;
+    	layer.confirm("删除部门，会把该部门下所有员工置为无部门状态，确定要删除吗？",
+    			{closeBtn: false,
+      			skin: 'layui-layer-molv',
+      			title: '删除提示'
+    	  }, function(){
+    		 $.ajax({
+    			 type: "get",
+    			 url: ctx + "/inner/department/delete?id=" + pid,
+    			 success: function(result){
+    				if(result == 2){
+    					layer.alert('删除成功', function(index){
+    					  var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+    					  zTree.removeNode(treeNode);
+  			      		  layer.closeAll();
+  			    	});
+    				} else{
+    					layer.alert('删除失败', function(index){
+    			      		  layer.closeAll();
+    			    	});
+    				}
+    			 }
+    		 }); 
+    	  });
+        return false;
+    });
+    
+    var edittitle = "编辑部门";	
+    var editStr = "<span class='button edit' id='editBtn_" + treeNode.tId
+        + "' title='" + edittitle + "' onfocus='this.blur();'></span>";
+    
+    sObj.after(editStr);
+    var editbtn = $("#editBtn_"+treeNode.tId);
+    if (editbtn) editbtn.bind("click", function(){	
+    	addPid = treeNode.id;
+    	tid = treeNode.tId;
+    	var pid = addPid.split("_")[0];
+    	var nodeType = addPid.split("_")[1];
+    	var name = treeNode.name;
+    	var layTitle = "添加下级部门("+ name +")";
+    	layer.open({
+  		  type: 2,
+  		  area: ['700px', '400px'],
+  		  fixed: false, //不固定
+  		  maxmin: true,
+  		  title: layTitle,
+  		  content: ctx + "/inner/admin/addSubDept?parentDepartmentId=" + pid + "&parentDepartmentName=" + name + "&nodeType=" + nodeType 
+  		});
+        return false;
+    });
+    
 	var title = "添加下级部门";	
     var addStr = "<span class='button add' id='addBtn_" + treeNode.tId
         + "' title='" + title + "' onfocus='this.blur();'></span>";
+    
     sObj.after(addStr);
     var btn = $("#addBtn_"+treeNode.tId);
     if (btn) btn.bind("click", function(){	
@@ -127,6 +189,8 @@ function addHoverDom(treeId, treeNode) {
   		});
         return false;
     });
+    
+    
 };
 
 function addUserSuccess(){
@@ -138,7 +202,7 @@ function addUserSuccess(){
 	var nodeType = nodeIdStr.split("_")[1];
 	//判断有没有子节点
 	var childrenNodes = treeNode.children;
-	if(childrenNodes.length > 0){
+	if(childrenNodes != undefined && childrenNodes.length > 0){
 		$("#btnAddUser").hide();
 	}else{
 		$("#btnAddUser").show();
@@ -182,6 +246,8 @@ function addSuccess(name, id){
 
 function removeHoverDom(treeId, treeNode) {
     $("#addBtn_"+treeNode.tId).unbind().remove();
+    $("#editBtn_"+treeNode.tId).unbind().remove();
+    $("#deleteBtn_"+treeNode.tId).unbind().remove();
 };
         
 var nodeId = "";
@@ -189,22 +255,17 @@ var zTreeObj;
 // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
 var setting = {
         view: {
-            addHoverDom: addHoverDom
+            addHoverDom: addHoverDom,
+            removeHoverDom: removeHoverDom
         },
         data: {
             simpleData: {
                 enable: true
             }
         },
-       edit: {
-            enable: true,
-            drag: {
-    			isCopy: false,
-    			isMove: false
-    		}
-        },
         callback:{
-        	onClick: showStaff
+        	onClick: showStaff,
+        	onRemove: deleteDepartment
         }
     };
 // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
@@ -221,18 +282,22 @@ function initTree() {
    })         
 }
  
-
+function deleteDepartment(event, treeId, treeNode) {
+	alert(treeNode.tId + ", " + treeNode.name);
+}
 function showStaff(event, treeId, treeNode){
 	var nodeIdStr = treeNode.id;
 	var id = nodeIdStr.split("_")[0];
 	var nodeType = nodeIdStr.split("_")[1];
 	//判断有没有子节点
 	var childrenNodes = treeNode.children;
-	if(childrenNodes.length > 0){
+	if(childrenNodes != undefined && childrenNodes.length > 0){
 		$("#btnAddUser").hide();
 	}else{
 		$("#btnAddUser").show();
 	}
+	
+	 
 	if(nodeType == 3){
 		//获取对应部门的员工
 		$("#btnAddUser").text("添加" + treeNode.name + "旗下员工");
@@ -240,11 +305,11 @@ function showStaff(event, treeId, treeNode){
 		$("#hidDid").val(id);
 		var userName = $("#txtUserName").val();
 		var telphone = $("#txtTelphone").val();
-		getJsonData(id, userName, telphone, 1);
+		getJsonData(id, userName, telphone, 1, true);
 	}else if(nodeType == 1){
 		//获取全部员工
 		$("#spanName").text(treeNode.name);
-		getJsonData('', userName, telphone, 1);
+		 getJsonData('', userName, telphone, 1, true);
 	}
 	
 }

@@ -145,5 +145,19 @@ public class DepartmentController extends BaseController{
 		
 		return mav;
 	}
+	
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	@ResponseBody
+	public Integer delete(String id, HttpServletRequest request){
+		Integer result = ResponseStatus.ERROR;
+		if(StringUtils.isNotBlank(id)){
+			UserEntity adminLoginUser = UserUtils.getAdminLoginUser(request);
+			Long companyId = adminLoginUser.getCompanyId();
+			departmentService.deleteDepartmentById(id, companyId.toString());
+			result = ResponseStatus.UPDATE_SUCCESS;
+		}
+		
+		return result;
+	}
 }
 

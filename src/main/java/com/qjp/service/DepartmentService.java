@@ -27,5 +27,6 @@ public interface DepartmentService {
 	List<DepartmentEntity> getListByCompanyId(String companyId);
 	List<DepartmentEntity> getDepartmentByParentId(String parentDepartmentId);
 	List<DepartmentEntity> getNoSubDeptListByCompanyId(String id);
+	void deleteDepartmentById(String id, String companyId);
 }
 

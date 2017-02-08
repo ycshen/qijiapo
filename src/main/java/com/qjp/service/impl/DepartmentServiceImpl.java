@@ -169,5 +169,10 @@ public class DepartmentServiceImpl implements DepartmentService{
 		
 		return list;
 	}
+
+	@Override
+	public void deleteDepartmentById(String id, String companyId) {
+		MyBaseApiUtils.deleteDepartmentById(id, companyId);
+	}
 }
 

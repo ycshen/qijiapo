@@ -803,5 +803,26 @@ public class MyBaseApiUtils {
 		
 		return result;
 	}
+	
+	public static String deleteDepartmentById(String id, String companyId){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_deleteDepartmentById;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("id", id);
+			maps.put("companyId", companyId);
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("id", id);
+			jsonObject.put("companyId", companyId);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			System.out.println("errrrrrrrrrrrrrrrrrrrrrrrr");
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }
 
