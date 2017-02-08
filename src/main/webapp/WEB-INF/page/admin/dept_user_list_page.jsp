@@ -75,7 +75,13 @@
 		}
 			
 		tr += "<td>" + deaprtmentName + "</td>";
-		tr += "<td>"  + obj.positionName + "</td>";
+		var positionName = "";
+		if(isBlank(obj.positionName)){
+			positionName = "";
+		}else{
+			positionName = obj.positionName;
+		}
+		tr += "<td>"  + positionName + "</td>";
 		
 		tr+="</tr>";
 
