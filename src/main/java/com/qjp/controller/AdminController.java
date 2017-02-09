@@ -79,11 +79,10 @@ public class AdminController extends BaseController{
 	}
 	
 	@RequestMapping(value = "/departmentUserList", method = RequestMethod.GET)
-	public ModelAndView departmentUserList(HttpServletRequest request){
+	public ModelAndView departmentUserList(@ModelAttribute UserQuery userQuery, HttpServletRequest request){
 		ModelAndView mav = new ModelAndView("/admin/dept_user_list");
 		UserEntity loginUser = UserUtils.getAdminLoginUser(request);
 		mav.addObject("loginUser", loginUser); 
-		UserQuery userQuery = new UserQuery();
 		userQuery.setPage(1);
 		userQuery.setSize(10);
 		userQuery.setCompanyId(loginUser.getCompanyId().toString());

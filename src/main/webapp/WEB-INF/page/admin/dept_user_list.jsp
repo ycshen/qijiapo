@@ -66,16 +66,14 @@
 		          	<form class="form-inline" role="form">
 		          	 <div class="form-group">
 		          	 	<input type="hidden" value="" id="hidDid"/>
+		          	 	<input type="hidden" value="" id="hidIsCompany"/>
 		          		<h5><span id="spanName">${loginUser.companyName}</span>（<span id="spanCount">${userQuery.count}</span>名员工）</h5> 
 		          	 </div>
 		          	 <button type="button" id="btnAddUser" class="btn btn-default" style="display:none;" onclick="addUser();">添加本部门员工</button>
 					  <div class="form-group">
-					    <input type="text" class="form-control" id="txtUserName" placeholder="员工姓名">
+					    <input type="text" class="form-control" id="txtUserName" placeholder="员工姓名" value="${userQuery.userName}">
 					  </div>
-					  <div class="form-group">
-					    <input type="text" class="form-control" id="txtUserName" placeholder="电话号码">
-					  </div>
-					  <button type="button" class="btn btn-default">查询</button>
+					  <button type="button" class="btn btn-default" onclick="query()">查询</button>
 					  
 					</form>
 		        </div>
@@ -125,6 +123,9 @@
 			                          	 <li><a href="#" onclick="forbidLogin('${user.id}', '${user.userName}')">禁止登陆</a></li>
 			                          	 <li><a href="#" onclick="forbidUser('${user.id}', '${user.userName}')">停用</a></li>
 			                         </c:if>
+			                         <c:if test="${user.departmentId == null || user.departmentId == -1}">
+			                        	 <li><a href="#" onclick="cascadeDept('${user.id}', '${user.userName}')">关联部门</a></li>
+			                         </c:if>
 			                        </ul>
 			                      </div>
 								</td>
@@ -141,11 +142,11 @@
 									
 									
 								</td>
-		                		<td>${user.userName }</td>
-		                		<td>${user.userName }</td>
-		                		<td>${user.telphone }</td>
-		                		<td>${user.email }</td>
-		                		<td>
+		                		<td id="tdUserName${user.id}">${user.userName }</td>
+		                		<td id="tdUserName${user.id}">${user.userName }</td>
+		                		<td  id="tdTelephone${user.id}">${user.telphone }</td>
+		                		<td  id="tdEmail${user.id}">${user.email }</td>
+		                		<td  id="tdDeptName${user.id}">
 		                			<c:if test="${user.departmentName == null || user.departmentName == ''}">
 		                				<span class="label label-warning">无部门状态</span>
 		                			</c:if>
@@ -153,7 +154,7 @@
 		                			${user.departmentName}
 		                			</c:if>
 		                		</td>
-		                		<td>${user.positionName }</td>
+		                		<td id="tdPosition${user.id}">${user.positionName }</td>
 	                		</tr>
                 		</c:forEach>
                 	</c:if>

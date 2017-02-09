@@ -1,6 +1,7 @@
 package com.qjp.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -163,6 +164,36 @@ public class DepartmentController extends BaseController{
 		}
 		
 		return result;
+	}
+	
+	@RequestMapping(value = "/cascade", method = RequestMethod.GET)
+	public ModelAndView cascade(String userId, HttpServletRequest request){
+		ModelAndView mav = new ModelAndView("/department/department_cascade");
+		if(StringUtils.isNotBlank(userId)){
+			UserEntity user = userService.getUserById(userId);
+			Long companyId = user.getCompanyId();
+			List<DepartmentEntity> departmentList = departmentService.getNoSubDeptListByCompanyId(companyId.toString());
+			mav.addObject("departmentList", departmentList);
+			mav.addObject("userId", userId);
+		}
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/cascadeDepartment", method = RequestMethod.GET)
+	@ResponseBody
+	public Integer cascade(String userId, String departmentId, String departmentName, HttpServletRequest request){
+		Integer response = ResponseStatus.INIT;
+		if(StringUtils.isNotBlank(userId)){
+			UserEntity user = userService.getUserById(userId);
+			user.setDepartmentId(Integer.parseInt(departmentId));
+			userService.updateUser(user);
+			UserEntity loginUser = UserUtils.getAdminLoginUser(request);
+			LogUtils.logAdmin("关联员工【" + user.getUserName() + "】部门为【" + departmentName + "】", loginUser);
+			response = ResponseStatus.UPDATE_SUCCESS;
+		}
+		
+		return response;
 	}
 }
 

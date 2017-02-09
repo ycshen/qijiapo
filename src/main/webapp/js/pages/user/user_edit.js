@@ -1,6 +1,6 @@
 
 function cancelEdit(){
-	layer.closeAll();
+	window.parent.layer.closeAll();
 }
 
 function isBlank(args){
@@ -30,14 +30,15 @@ function selectPosition(){
 
 function editUser(){
 	var editType = $("#hidEditType").val();
+	var departmentName = "";
 	if( editType == 2){
 		var editDepartmentId = $("select[name='departmentId']").val();
 		if(isBlank(editDepartmentId)){
 			layer.alert("请选择部门");
 			return;
 		}else{
-			/*var departmentName = $("select[name='departmentId']").find("option:selected").text();
-			$("#txtdepartmentName").val(departmentName);*/
+			departmentName = $("select[name='departmentId']").find("option:selected").text();
+			$("#txtdepartmentName").val(departmentName);
 			$("#hidDepartmentId").val(editDepartmentId);
 		}
 	}
@@ -66,6 +67,7 @@ function editUser(){
 		layer.alert("员工手机号码格式异常");
 		return;
 	}else{
+		var email = $("#txtEmail").val();
 		var url = ctx + "/inner/user/isExistTelphone?departmentId=" + departmentId + "&telphone=" + telphone;
 		$.ajax({
 	        cache: true,
@@ -97,8 +99,10 @@ function editUser(){
 	        	        		  
 	        	      		});
 	        	          }else if(data == 2){
+	        	        	  var position = $("#btnPositionName").html();
+	        	        	  var id = $("#hidId").val();
 	        	        	  layer.alert('更新成功', function(index){
-	        	        		  window.parent.addSuccess();
+	        	        		  window.parent.updateSuccess(id, txtuserName, telphone, email, departmentName, position)
 	        	        		  
 	        	      		});
 	        	          }else if(data == 4){
@@ -124,3 +128,6 @@ function selectSuccess(id, positionName){
 	$("#hidPositionId").val(id);
 }
 
+$(function(){
+	$(".select2").select2();
+})

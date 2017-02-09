@@ -29,6 +29,12 @@
 	}
 
 	function getJsonData(departmentId, userName, telphone, page, isInit){
+		if(userName == undefined){
+			userName = '';
+		}
+		if(telphone == undefined){
+			telphone = '';
+		}
 		var url = ctx + "/inner/admin/userList?telphone=" + telphone + "&userName=" + userName + "&departmentId=" + departmentId +  "&page=" + page + "&status=101"
 		$.ajax({
 			type: "get",
@@ -64,13 +70,13 @@
 	function getTr(obj){
 		var tr = "";
 		tr+="<tr>";
-		var operHtml = getOper(obj.id, obj.status, obj.userName);
+		var operHtml = getOper(obj.id, obj.status, obj.userName, obj.departmentId);
 		tr+="<td>"  + operHtml + "</td>";
 		var spanStr = getStatusSpan(obj.status)
 		tr+="<td>" + spanStr + "</td>";
-		tr += "<td>" + obj.userName + "</td>";			
-		tr += "<td>" + obj.userName + "</td>";		
-		tr += "<td>" + obj.telphone + "</td>";
+		tr += "<td id=\"tdUserName"+obj.id+"\">" + obj.userName + "</td>";			
+		tr += "<td id=\"tdUserName"+obj.id+"\">" + obj.userName + "</td>";		
+		tr += "<td  id=\"tdTelephone"+obj.id+"\" id=\"tdUserName"+obj.id+"\">" + obj.telphone + "</td>";
 		var email = "";
 		if(isBlank(obj.email)){
 			email = "";
@@ -78,7 +84,7 @@
 			email = obj.email;
 		}
 				
-		tr += "<td>" + email + "</td>";	
+		tr += "<td id=\"tdEmail"+obj.id+"\">" + email + "</td>";	
 		var deaprtmentName = "";
 		if(isBlank(obj.departmentName)){
 			deaprtmentName = "<span class=\"label label-warning\">无部门状态</span>";
@@ -86,14 +92,14 @@
 			deaprtmentName = obj.departmentName;
 		}
 			
-		tr += "<td>" + deaprtmentName + "</td>";
+		tr += "<td id=\"tdDeptName"+obj.id+"\">" + deaprtmentName + "</td>";
 		var positionName = "";
 		if(isBlank(obj.positionName)){
 			positionName = "";
 		}else{
 			positionName = obj.positionName;
 		}
-		tr += "<td>"  + positionName + "</td>";
+		tr += "<td id=\"tdPosition"+obj.id+"\">"  + positionName + "</td>";
 		
 		tr+="</tr>";
 
@@ -101,7 +107,7 @@
 	
 	}
 
-	function getOper(id, status, userName){
+	function getOper(id, status, userName,departmentId){
 		var operHtml = "<div class=\"btn-group\">";
 		operHtml +="<button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\">";
 		operHtml +="<span class=\"caret\"></span>";
@@ -125,7 +131,11 @@
              operHtml +="  <li><a href=\"#\" onclick=\"forbidUser('" + id + "', '" + userName + "')\">停用</a></li>";
             
         }
-           
+		if(departmentId == -1){
+			 operHtml +="<li><a href=\"#\" onclick=\"cascadeDept('" + id + "', '" + userName + "')\">关联部门</a></li>";
+		}
+        
+        
         operHtml +=" </ul>";
         operHtml +="  </div>";
 

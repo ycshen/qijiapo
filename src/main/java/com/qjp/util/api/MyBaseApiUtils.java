@@ -325,7 +325,7 @@ public class MyBaseApiUtils {
 		return result;
 	}
 	
-	public static String getUserPage(String status, String companyId, String departmentId, String pageSize, String currentPage){
+	public static String getUserPage(String userName, String companyId, String departmentId, String pageSize, String currentPage){
 		String result = StringUtils.EMPTY;
 		try {	
 			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_getUserPage;
@@ -333,7 +333,7 @@ public class MyBaseApiUtils {
 			maps.put("companyId", companyId);
 			maps.put("departmentId", departmentId);
 			maps.put("pageSize", pageSize);
-			maps.put("status", status);
+			maps.put("userName", userName);
 			maps.put("currentPage", currentPage);
 			
 			String secret = SHA1Utils.SHA1(maps);
@@ -343,7 +343,7 @@ public class MyBaseApiUtils {
 			jsonObject.put("pageSize", pageSize);
 			jsonObject.put("currentPage", currentPage);
 			jsonObject.put("secret", secret);
-			jsonObject.put("status", status);
+			jsonObject.put("userName", userName);
 			result = HttpUtils.postUrl(url, jsonObject);
 		} catch (Exception e) {
 			e.printStackTrace();

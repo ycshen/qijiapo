@@ -137,6 +137,8 @@ public class UserController {
 			mav.addObject("departmentList", departmentList);
 		}
 		
+		mav.addObject("editType", 1);
+		
 		return mav;
 	}
 	

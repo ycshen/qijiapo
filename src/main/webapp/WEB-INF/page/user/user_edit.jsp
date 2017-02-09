@@ -16,6 +16,7 @@
 <body>
 
 <div class="container" style="margin-top: 10px;">
+  
 <form class="layui-form" method="post" id="myForm">
 <input type="hidden" value="${user.positionId}" name="positionId" id="hidPositionId"/>
 <input type="hidden" value="${editType}" id="hidEditType"/>
@@ -25,10 +26,11 @@
     <label class="layui-form-label" style="width:100px;">所属部门</label>
     <div class="layui-input-block">
     	<c:if test="${editType == 2}">
-                <select class="form-control select2" style="width: 100%;display:inline" name="departmentId">
+                <select class="form-control select2" style="width: 100%;display:inline;" name="departmentId">
+                  <option value="-1">无部门状态</option>
                   <c:if test="${departmentList != null && departmentList.size() > 0 }">
                   	<c:forEach items="${departmentList}" var="department">
-                  		 <option <c:if test="${department.id == user.departmentId}"></c:if>selected="selected" value="${department.id}">${department.departmentName }</option>
+                  		 <option <c:if test="${department.id == user.departmentId}">selected="selected"</c:if> value="${department.id}">${department.departmentName }</option>
                   	</c:forEach>
                   </c:if>
                 </select>
