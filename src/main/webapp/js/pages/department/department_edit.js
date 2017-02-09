@@ -1,6 +1,6 @@
 
 function cancelEdit(){
-	layer.closeAll();
+	window.parent.layer.closeAll();
 }
 
 function isBlank(args){
@@ -14,7 +14,7 @@ function isBlank(args){
 function editDepartment(){
 	var txtdepartmentName = $("#txtdepartmentName").val();
 	if(isBlank(txtdepartmentName)){
-		layer.alert("部门名称为空");
+		layer.alert("部门名称不能为空");
 		return;
 	}
 	
@@ -27,18 +27,19 @@ function editDepartment(){
         data: data,
         async: false,
         success: function(data) {
-          if(data == 1){
-        	  layer.alert('新增成功', function(index){
-        		  window.parent.addSuccess();
-        		  
-      		});
-          }else if(data == 2){
-        	  layer.alert('更新成功', function(index){
-        		  window.parent.addSuccess();
+          if(data == 2){
+        	  layer.alert('更新成功',{closeBtn: false,
+        	  		skin: 'layui-layer-molv'
+        	  }, function(index){
+        		  window.parent.layer.closeAll();
+        		  var departmentId = $("#hidId").val();
+        		  window.parent.updateDeptSuccess(departmentId, txtdepartmentName);
         		  
       		});
           }else{
-        	  layer.alert("操作失败！"); 
+        	  layer.alert("操作失败！",{closeBtn: false,
+        	  		skin: 'layui-layer-molv'
+        	  }); 
           }
         }
     });

@@ -11,6 +11,7 @@ import com.qjp.base.Constant;
 import com.qjp.entity.CompanyEntity;
 import com.qjp.entity.DepartmentEntity;
 import com.qjp.service.DepartmentService;
+import com.qjp.util.JsonUtils;
 import com.qjp.util.api.MyBaseApiUtils;
 import com.qjp.util.api.model.ApiCode;
 import com.qjp.util.query.DepartmentQuery;
@@ -59,7 +60,7 @@ public class DepartmentServiceImpl implements DepartmentService{
 
 	@Override
 	public void updateDepartment(DepartmentEntity department) {
-		String departmentJson = new Gson().toJson(department);
+		String departmentJson = JsonUtils.json2Str(department);
 		MyBaseApiUtils.updateDepartment(departmentJson);
 	}
 
@@ -121,9 +122,9 @@ public class DepartmentServiceImpl implements DepartmentService{
 
 	@Override
 	public boolean isExistDepartment(String departmentName, String pid,
-			Boolean isCompany) {
+			Boolean isCompany, String departmentId) {
 		boolean isExist = true;
-		String result = MyBaseApiUtils.isExistDepartment(pid, departmentName, isCompany.toString());
+		String result = MyBaseApiUtils.isExistDepartment(pid, departmentName, isCompany.toString(), departmentId);
 		if(StringUtils.isNotBlank(result)){
 			JSONObject jsonObject = JSONObject.parseObject(result);
 			if(jsonObject != null){

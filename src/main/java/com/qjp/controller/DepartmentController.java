@@ -54,11 +54,16 @@ public class DepartmentController extends BaseController{
 			isCompany = false;
 		}
 		
-		boolean isExist = departmentService.isExistDepartment(departmentName, companyId.toString(), isCompany);
+		Long id = department.getId();
+		String departmentId = "";
+		if(id != null){
+			departmentId = id.toString();
+		}
+		
+		boolean isExist = departmentService.isExistDepartment(departmentName, companyId.toString(), isCompany, departmentId);
 		if(isExist){
 			result = ResponseStatus.EXIST_Str;
 		}else{
-			Long id = department.getId();
 			UserEntity user = UserUtils.getLoginUser(request);
 			if(id == null){
 				department.setStatus(0);

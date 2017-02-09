@@ -23,7 +23,7 @@
     <div class="layui-input-block">
       <input name="parentDepartmentName" id="txtparentDepartmentName"
 							value="${department.parentDepartmentName}" maxlength="20"
-							class="layui-input" type="text" placeholder="请输入上级部门">
+							class="layui-input" type="text" placeholder="请输入上级部门" disabled="disabled" style="border:0px;">
     </div>
   </div>
   <div class="layui-form-item">
@@ -45,8 +45,7 @@
   
   <div class="layui-form-item">
     <div class="layui-input-block">
-      <button class="layui-btn" type="button"  onclick="editDepartment();">立即提交</button>
-      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+      <button class="layui-btn" type="button"  onclick="editDepartment();">添加</button>
       <button type="button" class="layui-btn layui-btn-primary" onclick="cancelEdit();">取消</button>
     </div>
   </div>

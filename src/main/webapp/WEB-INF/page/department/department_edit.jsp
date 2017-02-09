@@ -20,7 +20,7 @@
 			
 			
 	<form method="post" id="departmentForm">
-			<input type="hidden" value="${department.id}" name="id"/>
+			<input type="hidden" value="${department.id}" name="id" id="hidId"/>
 			<input type="hidden" value="${department.companyId}" name="companyId"/>
 			<tr>
 				<td style="border:0px;text-align:right;">
@@ -53,12 +53,7 @@
 				<td style="border:0px;">
 					<button class="btn btn-default" onclick="cancelEdit();">取消</button>
 					&nbsp;&nbsp;&nbsp;
-					<c:if test="${department.id == null || department.id == ''}">
-						<button onclick="editDepartment();" class="btn btn-default">确定</button>
-					</c:if>
-					<c:if test="${department.id != null && department.id != ''}">
-						<button onclick="editDepartment();" class="btn btn-default">修改</button>
-					</c:if>
+					<button onclick="editDepartment();" class="btn btn-default">确定</button>
 				</td>
 			</tr>
 		</table>

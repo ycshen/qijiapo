@@ -100,6 +100,7 @@ $(function(){
 
 var tid = "";
 var addPid = "";
+var operTreeNode;
 function addHoverDom(treeId, treeNode) {
     var sObj = $("#" + treeNode.tId + "_span");
     if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
@@ -116,7 +117,7 @@ function addHoverDom(treeId, treeNode) {
     	var pid = addPid.split("_")[0];
     	var nodeType = addPid.split("_")[1];
     	var name = treeNode.name;
-    	layer.confirm("删除部门，会把该部门下所有员工置为无部门状态，确定要删除吗？",
+    	layer.confirm("删除部门，会把该部门下所有员工置为无部门状态，同时删除该部门下的所有子部门，确定要删除吗？",
     			{closeBtn: false,
       			skin: 'layui-layer-molv',
       			title: '删除提示'
@@ -149,19 +150,20 @@ function addHoverDom(treeId, treeNode) {
     sObj.after(editStr);
     var editbtn = $("#editBtn_"+treeNode.tId);
     if (editbtn) editbtn.bind("click", function(){	
+    	operTreeNode = treeNode;
     	addPid = treeNode.id;
     	tid = treeNode.tId;
     	var pid = addPid.split("_")[0];
     	var nodeType = addPid.split("_")[1];
     	var name = treeNode.name;
-    	var layTitle = "添加下级部门("+ name +")";
+    	var layTitle = "编辑部门("+ name +")";
     	layer.open({
   		  type: 2,
-  		  area: ['700px', '400px'],
+  		  area: ['500px', '200px'],
   		  fixed: false, //不固定
   		  maxmin: true,
   		  title: layTitle,
-  		  content: ctx + "/inner/admin/addSubDept?parentDepartmentId=" + pid + "&parentDepartmentName=" + name + "&nodeType=" + nodeType 
+  		  content: ctx + "/inner/department/edit?id=" + pid 
   		});
         return false;
     });
@@ -193,6 +195,11 @@ function addHoverDom(treeId, treeNode) {
     
 };
 
+function updateDeptSuccess(id,departmentName){
+	var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+	operTreeNode.name = departmentName;
+	zTree.updateNode(operTreeNode);
+}
 function addUserSuccess(){
 	var zTree = $.fn.zTree.getZTreeObj("treeDemo");
 	var selectedTreeNode = zTree.getSelectedNodes();

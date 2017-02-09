@@ -384,17 +384,19 @@ public class MyBaseApiUtils {
 	 * @param isCompany
 	 * @return
 	 */
-	public static String isExistDepartment(String id, String departmentName, String isCompany){
+	public static String isExistDepartment(String id, String departmentName, String isCompany, String departmentId){
 		String result = StringUtils.EMPTY;
 		try {	
 			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_isExistDepartment;
 			Map<String,Object> maps = SHA1Utils.getSha1Map();
 			maps.put("departmentName", departmentName);
+			maps.put("departmentId", departmentId);
 			maps.put("id", id);
 			maps.put("isCompany", isCompany);
 			String secret = SHA1Utils.SHA1(maps);
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("departmentName", departmentName);
+			jsonObject.put("departmentId", departmentId);
 			jsonObject.put("id", id);
 			jsonObject.put("isCompany", isCompany);
 			jsonObject.put("secret", secret);

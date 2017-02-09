@@ -23,7 +23,7 @@ public interface DepartmentService {
 	DepartmentQuery getDepartmentList(DepartmentQuery departmentQuery);
 	void updateDepartment(DepartmentEntity department);
 	DepartmentEntity getDepartmentById(Integer id);
-	boolean isExistDepartment(String departmentName, String pid, Boolean isCompany);
+	boolean isExistDepartment(String departmentName, String pid, Boolean isCompany, String departmentId);
 	List<DepartmentEntity> getListByCompanyId(String companyId);
 	List<DepartmentEntity> getDepartmentByParentId(String parentDepartmentId);
 	List<DepartmentEntity> getNoSubDeptListByCompanyId(String id);
