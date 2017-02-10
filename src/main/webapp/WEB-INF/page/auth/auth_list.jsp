@@ -81,11 +81,11 @@
                 <tbody>
                 	<c:if test="${authQuery.items != null &&  authQuery.items.size() > 0}">
                 		<c:forEach items="${authQuery.items}" var="auth" varStatus="status">
-                			<tr onclick="showAuthDetail('${auth.id}')">
+                			<tr onclick="showAuthDetail('${auth.id}', '${auth.authName}')">
                 				<td>${status.index + 1 }</td>
 		                		<td>${auth.authName }</td>
-		                		<td></td>
-		                		<td></td>
+		                		<td>${auth.count }</td>
+		                		<td>${auth.userList }</td>
 	                		</tr>
                 		</c:forEach>
                 	</c:if>

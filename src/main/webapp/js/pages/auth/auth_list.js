@@ -1,11 +1,11 @@
-function showAuthDetail(id){
-	var url = ctx + "/inner/config/edit";
+function showAuthDetail(id, authName){
+	var url = ctx + "/inner/auth/authUserList?id=" + id;
 	layer.open({
 		type: 2,
-		title: '权限详细',
+		title: authName,
 		shadeClose: true,
 		shade: 0.8,
-		area: ['1000px', '600px'],
+		area: ['1000px', '500px'],
 		content: url
 	});
 }

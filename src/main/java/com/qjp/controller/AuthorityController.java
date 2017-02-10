@@ -28,7 +28,9 @@ import com.qjp.service.ConfigService;
 import com.qjp.util.LogUtils;
 import com.qjp.util.UserUtils;
 import com.qjp.util.query.AuthorityQuery;
+import com.qjp.util.query.AuthorityVOQuery;
 import com.qjp.util.query.CompanyQuery;
+import com.qjp.util.vo.AuthorityVO;
 
 /** 
  * <p>Project: MyBase</p> 
@@ -49,12 +51,12 @@ public class AuthorityController extends BaseController{
 	private AuthorityService authService;
 	@RequestMapping(value = "/listAsync", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	@ResponseBody
-	public String listAsync(@ModelAttribute AuthorityQuery authQuery, HttpServletRequest request){
+	public String listAsync(@ModelAttribute AuthorityVOQuery authQuery, HttpServletRequest request){
 		String result = StringUtils.EMPTY;
 		UserEntity user = UserUtils.getLoginUser(request);
 		authQuery.setCompanyId(user.getCompanyId().toString());
 		authQuery = authService.getAuthorityList(authQuery);
-		List<AuthorityEntity> list = authQuery.getItems();
+		List<AuthorityVO> list = authQuery.getItems();
 		if(list != null && list.size() > 0){
 			result = new Gson().toJson(list);
 		}
@@ -63,7 +65,7 @@ public class AuthorityController extends BaseController{
 	}
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
-	public ModelAndView list(@ModelAttribute AuthorityQuery authQuery, HttpServletRequest request){
+	public ModelAndView list(@ModelAttribute AuthorityVOQuery authQuery, HttpServletRequest request){
 		ModelAndView mav = new ModelAndView("/auth/auth_list");
 		UserEntity user = UserUtils.getLoginUser(request);
 		authQuery.setCompanyId(user.getCompanyId().toString());
@@ -86,15 +88,15 @@ public class AuthorityController extends BaseController{
 		return mav;
 	}
 	
-	@RequestMapping(value = "/addSub", method = RequestMethod.GET)
-	public ModelAndView addSubCompany(String id){
-		ModelAndView mav = new ModelAndView("/company/company_addsub");
-		CompanyEntity company = null;
+	@RequestMapping(value = "/authUserList", method = RequestMethod.GET)
+	public ModelAndView authUserList(String id){
+		ModelAndView mav = new ModelAndView("/auth/auth_user_list");
+		AuthorityEntity auth = null;
 		if(StringUtils.isNotBlank(id)){
 			Long companyId = Long.parseLong(id);
-			company = companyService.getCompanyById(companyId);
+			auth = authService.getAuthById(id);
 		}
-		mav.addObject("company", company);
+		mav.addObject("auth", auth);
 		
 		return mav;
 	}

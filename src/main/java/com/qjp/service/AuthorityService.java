@@ -1,6 +1,7 @@
 package com.qjp.service;
 
-import com.qjp.util.query.AuthorityQuery;
+import com.qjp.entity.AuthorityEntity;
+import com.qjp.util.query.AuthorityVOQuery;
 
 /** 
  * <p>Project: MyBase</p> 
@@ -11,6 +12,7 @@ import com.qjp.util.query.AuthorityQuery;
  * @author <a href="mailto:shenyuchuan@itiaoling.com">申鱼川</a>
  */
 public interface AuthorityService {
-	AuthorityQuery getAuthorityList(AuthorityQuery authQuery);
+	AuthorityVOQuery getAuthorityList(AuthorityVOQuery authQuery);
+	AuthorityEntity getAuthById(String id);
 }
 

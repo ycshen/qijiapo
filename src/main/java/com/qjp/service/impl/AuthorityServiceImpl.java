@@ -7,10 +7,13 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.qjp.entity.AuthorityEntity;
+import com.qjp.entity.CompanyEntity;
 import com.qjp.service.AuthorityService;
 import com.qjp.util.api.MyBaseApiUtils;
 import com.qjp.util.api.model.ApiCode;
 import com.qjp.util.query.AuthorityQuery;
+import com.qjp.util.query.AuthorityVOQuery;
+import com.qjp.util.vo.AuthorityVO;
 
 /** 
  * <p>Project: MyBase</p> 
@@ -24,7 +27,7 @@ import com.qjp.util.query.AuthorityQuery;
 public class AuthorityServiceImpl implements AuthorityService{
 
 	@Override
-	public AuthorityQuery getAuthorityList(AuthorityQuery authQuery) {
+	public AuthorityVOQuery getAuthorityList(AuthorityVOQuery authQuery) {
 		String authName = authQuery.getAuthName();
 		String companyId = authQuery.getCompanyId();
 		Integer pageSize = authQuery.getSize();
@@ -40,7 +43,7 @@ public class AuthorityServiceImpl implements AuthorityService{
 						Object dataObj = jsonObject.get("data");
 						if(dataObj != null){
 							String data = dataObj.toString();
-							List<AuthorityEntity> list = JSONObject.parseArray(data, AuthorityEntity.class);
+							List<AuthorityVO> list = JSONObject.parseArray(data, AuthorityVO.class);
 							authQuery.setItems(list);
 						}
 						
@@ -55,6 +58,30 @@ public class AuthorityServiceImpl implements AuthorityService{
 		}
 		
 		return authQuery;
+	}
+
+	@Override
+	public AuthorityEntity getAuthById(String id) {
+		String result = MyBaseApiUtils.getAuthById(id);
+		AuthorityEntity auth = null;
+		if(StringUtils.isNotBlank(result)){
+			JSONObject jsonObject = JSONObject.parseObject(result);
+			if(jsonObject != null){
+				Object codeObj = jsonObject.get("code");
+				if(codeObj != null){
+					String code = codeObj.toString();
+					if (ApiCode.OK.toString().equals(code)) {
+						Object dataObj = jsonObject.get("data");
+						if(dataObj != null){
+							String data = dataObj.toString();
+							auth = JSONObject.parseObject(data, AuthorityEntity.class);
+						}
+					}
+				}
+			}
+		}
+		
+		return auth;
 	}
 
 	

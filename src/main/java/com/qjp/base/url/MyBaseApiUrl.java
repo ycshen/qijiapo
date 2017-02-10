@@ -137,6 +137,9 @@ public class MyBaseApiUrl {
 	@Value("${mybase.getAuthPage}")
 	private String mybase_getAuthPage_url;
 	public static String mybase_getAuthPage;
+	@Value("${mybase.getAuthById}")
+	private String mybase_getAuthById_url;
+	public static String mybase_getAuthById;
 	
 	@PostConstruct
 	public void init() {
@@ -183,6 +186,7 @@ public class MyBaseApiUrl {
 		
 		//authority
 		mybase_getAuthPage = this.mybase_getAuthPage_url;
+		mybase_getAuthById = this.mybase_getAuthById_url;
 	}
 	
 }
