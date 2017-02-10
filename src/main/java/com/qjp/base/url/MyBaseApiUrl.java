@@ -133,6 +133,11 @@ public class MyBaseApiUrl {
 	private String mybase_getPositionById_url;
 	public static String mybase_getPositionById;
 
+	//authority
+	@Value("${mybase.getAuthPage}")
+	private String mybase_getAuthPage_url;
+	public static String mybase_getAuthPage;
+	
 	@PostConstruct
 	public void init() {
 		mybase_login = this.mybase_login_url;
@@ -175,6 +180,9 @@ public class MyBaseApiUrl {
 		mybase_getPositionPage = this.mybase_getPositionPage_url;
 		mybase_changePositionStatus = this.mybase_changePositionStatus_url;
 		mybase_getPositionById = this.mybase_getPositionById_url;
+		
+		//authority
+		mybase_getAuthPage = this.mybase_getAuthPage_url;
 	}
 	
 }

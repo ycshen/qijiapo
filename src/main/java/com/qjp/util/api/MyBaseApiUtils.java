@@ -55,6 +55,38 @@ public class MyBaseApiUtils {
 	}
 	
 	/**
+	 * 获取权限列表
+	 * @param authName
+	 * @param companyId
+	 * @param pageSize
+	 * @param currentPage
+	 * @return
+	 */
+	public static String getAuthPage(String authName, String companyId, String pageSize, String currentPage){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_getAuthPage;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("id", companyId);
+			maps.put("pageSize", pageSize);
+			maps.put("currentPage", currentPage);
+			maps.put("authName", authName);
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("id", companyId);
+			jsonObject.put("pageSize", pageSize);
+			jsonObject.put("currentPage",currentPage);
+			jsonObject.put("authName",authName);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	/**
 	 * 获取子公司信息列表
 	 * @param companyId
 	 * @param pageSize
@@ -78,7 +110,6 @@ public class MyBaseApiUtils {
 			jsonObject.put("companyName",companyName);
 			jsonObject.put("secret", secret);
 			result = HttpUtils.postUrl(url, jsonObject);
-			System.out.println(result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
