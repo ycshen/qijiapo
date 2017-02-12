@@ -16,7 +16,7 @@
 <script src="${ctx}/js/adminlte/dist/js/app.min.js"></script>
 <script type="text/javascript" src="${ctx}/js/pagination/jquery.pagination.js"></script>
 <script type="text/javascript" src="${ctx}/js/layer/layer.js"></script>
-<script type="text/javascript" src="${ctx}/js/pages/user/user_page_list.js"></script>
+<script type="text/javascript" src="${ctx}/js/pages/auth/auth_user_list.js"></script>
 <script type="text/javascript">
 	var ctx = "${ctx}";
 </script>
@@ -39,16 +39,22 @@
       <div class="row">
         <div class="col-xs-12">
 	        <div class="box-body">
-	          	<form class="form-inline" role="form">
-				  <button type="button" class="btn btn-default" onclick="adduser();">添加授权</button>
-				</form>
+				  <button type="button" class="btn btn-default" onclick="adduser();" id="addAuth">添加授权</button>
+				  <button type="button" class="btn btn-default" onclick="adduser();" id="cancelAuth" style="display: none;">取消授权</button>
 	        </div>
       
             <!-- /.box-header -->
-            <div class="box-body">
+            <div class="box-body"  style="height: 200px;overflow-x:auto;">
               <table id="syslist" class="table table-bordered table-hover">
                 <thead>
                 <tr class="info">
+                	<th>
+                	<div class="checkbox"  style="margin: 0px">
+					    <label>
+					      <input type="checkbox"  id="chkAll">
+					    </label>
+					  </div>
+                	</th>
                   <th>姓名</th>
                   <th>部门</th>
                   <th>职务</th>
@@ -57,8 +63,14 @@
                 <tbody>
                 	<c:if test="${userQuery.items != null &&  userQuery.items.size() > 0}">
                 		<c:forEach items="${userQuery.items}" var="user">
-                			<tr>
-		                		
+                			<tr >
+		                		<td>
+		                			<div class="checkbox" style="margin: 0px">
+								    <label>
+								      <input type="checkbox" id="chkUser${user.id}">
+								    </label>
+								  </div>
+		                		</td>
 		                		<td id="userName${user.id}">${user.userName }</td>
 		                		<td id="userStatus${user.id}">
 		                			${user.departmentName }
@@ -66,6 +78,8 @@
 		                		<td>${user.positionName }</td>
 	                		</tr>
                 		</c:forEach>
+                		
+                		
                 	</c:if>
                 </tbody>
                 
