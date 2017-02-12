@@ -24,6 +24,7 @@ public interface UserService {
 	void forbidLogin(String id, String updateUser);
 	void enableUser(String id, String updateUser);
 	void resetPassword(String id, String password, String resetType, String email);
+	UserQuery getUserListByAuthId(UserQuery userQuery);
 	
 }
 

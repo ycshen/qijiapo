@@ -6,8 +6,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.google.gson.Gson;
-import com.qjp.entity.DepartmentEntity;
 import com.qjp.entity.UserEntity;
 import com.qjp.service.UserService;
 import com.qjp.util.JsonUtils;
@@ -191,6 +189,40 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void resetPassword(String id, String password, String resetType, String email) {
 		MyBaseApiUtils.resetPassword(id, password, resetType, email);
+	}
+
+	@Override
+	public UserQuery getUserListByAuthId(UserQuery userQuery) {
+		String authId = userQuery.getAuthId();
+		String pageSize = userQuery.getSize().toString();
+		String currentPage = userQuery.getPage().toString();
+		String companyId = userQuery.getCompanyId();
+		String result = MyBaseApiUtils.getUserListByAuthId(authId, companyId, pageSize, currentPage);
+		if(StringUtils.isNotBlank(result)){
+			JSONObject jsonObject = JSONObject.parseObject(result);
+			if(jsonObject != null){
+				Object codeObj = jsonObject.get("code");
+				if(codeObj != null){
+					String code = codeObj.toString();
+					if (ApiCode.OK.toString().equals(code)) {
+						Object dataObj = jsonObject.get("data");
+						if(dataObj != null){
+							String data = dataObj.toString();
+							List<UserEntity> list = JSONObject.parseArray(data, UserEntity.class);
+							userQuery.setItems(list);
+						}
+						
+						Object countObj = jsonObject.get("count");
+						if(countObj != null){
+							String count = countObj.toString();
+							userQuery.setCount(Integer.parseInt(count));
+						}
+					}
+				}
+			}
+		}
+		
+		return userQuery;
 	}
 	
 }

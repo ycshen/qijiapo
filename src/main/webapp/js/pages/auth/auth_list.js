@@ -1,5 +1,5 @@
 function showAuthDetail(id, authName){
-	var url = ctx + "/inner/auth/authUserList?id=" + id;
+	var url = ctx + "/inner/auth/authUserList?authId=" + id;
 	layer.open({
 		type: 2,
 		title: authName,

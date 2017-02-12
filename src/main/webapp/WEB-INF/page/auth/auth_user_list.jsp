@@ -16,7 +16,7 @@
 <script src="${ctx}/js/adminlte/dist/js/app.min.js"></script>
 <script type="text/javascript" src="${ctx}/js/pagination/jquery.pagination.js"></script>
 <script type="text/javascript" src="${ctx}/js/layer/layer.js"></script>
-<script type="text/javascript" src="${ctx}/js/pages/position/position_page_list.js"></script>
+<script type="text/javascript" src="${ctx}/js/pages/user/user_page_list.js"></script>
 <script type="text/javascript">
 	var ctx = "${ctx}";
 </script>
@@ -40,7 +40,7 @@
         <div class="col-xs-12">
 	        <div class="box-body">
 	          	<form class="form-inline" role="form">
-				  <button type="button" class="btn btn-default" onclick="addPosition();">添加授权</button>
+				  <button type="button" class="btn btn-default" onclick="adduser();">添加授权</button>
 				</form>
 	        </div>
       
@@ -49,45 +49,24 @@
               <table id="syslist" class="table table-bordered table-hover">
                 <thead>
                 <tr class="info">
-                  <th>操作</th>
-                  <th>职位</th>
-                  <th>状态</th>
+                  <th>姓名</th>
+                  <th>部门</th>
+                  <th>职务</th>
                 </tr>
                 </thead>
                 <tbody>
-                	<%-- <c:if test="${positionQuery.items != null &&  positionQuery.items.size() > 0}">
-                		<c:forEach items="${positionQuery.items}" var="position">
+                	<c:if test="${userQuery.items != null &&  userQuery.items.size() > 0}">
+                		<c:forEach items="${userQuery.items}" var="user">
                 			<tr>
-		                		<td id="positionOper${position.id}">
-									<div class="btn-group">
-			                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-			                          <span class="caret"></span>
-			                        </button>
-			                        <ul class="dropdown-menu">
-			                          
-			                          <c:if test="${position.isDelete == 0}">
-			                         	 <li><a href="#" onclick="editPosition('${position.id}');">编辑</a></li>
-			                         	 <li><a href="#" onclick="stopPosition('${position.id}', '${position.postionName}')">停用</a></li>
-			                         	</c:if>
-			                         	<c:if test="${position.isDelete == 1}">
-			                         	 <li><a href="#" onclick="startPosition('${position.id}', '${position.postionName}')">启用</a></li>
-			                         	</c:if>
-			                        </ul>
-			                      </div>
-								</td>
-		                		<td id="positionName${position.id}">${position.postionName }</td>
-		                		<td id="positionStatus${position.id}">
-		                			<c:if test="${position.isDelete == 0}">
-										<span class="label label-success">正常</span>
-									</c:if>
-									<c:if test="${position.isDelete == 1}">
-										<span class="label label-warning">停用</span>
-									</c:if>
-								
+		                		
+		                		<td id="userName${user.id}">${user.userName }</td>
+		                		<td id="userStatus${user.id}">
+		                			${user.departmentName }
 		                		</td>
+		                		<td>${user.positionName }</td>
 	                		</tr>
                 		</c:forEach>
-                	</c:if> --%>
+                	</c:if>
                 </tbody>
                 
                  
@@ -96,8 +75,8 @@
             
             </div>
             <div class="box-header" style="text-align:center">
-            	<%-- <%@include file="position_page_list_page.jsp" %>
-					<input type="hidden" value="${positionQuery.count}" id="count"/> --%>
+            	<%-- <%@include file="user_page_list_page.jsp" %>
+					<input type="hidden" value="${userQuery.count}" id="count"/> --%>
 					
             </div>
           </div>

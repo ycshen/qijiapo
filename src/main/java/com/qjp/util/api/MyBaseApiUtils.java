@@ -402,6 +402,39 @@ public class MyBaseApiUtils {
 	}
 	
 	/**
+	 * 根据权限id获取用户信息列表
+	 * @param authId
+	 * @param pageSize
+	 * @param currentPage
+	 * @return
+	 */
+	public static String getUserListByAuthId(String authId, String companyId, String pageSize, String currentPage){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_getUserListByAuthId;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("authId", authId);
+			maps.put("companyId", companyId);
+			maps.put("pageSize", pageSize);
+			maps.put("currentPage", currentPage);
+			
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("authId", authId);
+			jsonObject.put("companyId", companyId);
+			jsonObject.put("pageSize", pageSize);
+			jsonObject.put("currentPage", currentPage);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	
+	/**
 	 * 获取子公司信息列表
 	 * @param companyId
 	 * @param pageSize

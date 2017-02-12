@@ -25,11 +25,13 @@ import com.qjp.entity.UserEntity;
 import com.qjp.service.AuthorityService;
 import com.qjp.service.CompanyService;
 import com.qjp.service.ConfigService;
+import com.qjp.service.UserService;
 import com.qjp.util.LogUtils;
 import com.qjp.util.UserUtils;
 import com.qjp.util.query.AuthorityQuery;
 import com.qjp.util.query.AuthorityVOQuery;
 import com.qjp.util.query.CompanyQuery;
+import com.qjp.util.query.UserQuery;
 import com.qjp.util.vo.AuthorityVO;
 
 /** 
@@ -46,7 +48,7 @@ public class AuthorityController extends BaseController{
 	@Autowired
 	private CompanyService companyService;
 	@Autowired
-	private ConfigService configService;
+	private UserService userService;
 	@Autowired
 	private AuthorityService authService;
 	@RequestMapping(value = "/listAsync", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
@@ -89,14 +91,19 @@ public class AuthorityController extends BaseController{
 	}
 	
 	@RequestMapping(value = "/authUserList", method = RequestMethod.GET)
-	public ModelAndView authUserList(String id){
+	public ModelAndView authUserList(UserQuery userQuery, HttpServletRequest request){
 		ModelAndView mav = new ModelAndView("/auth/auth_user_list");
 		AuthorityEntity auth = null;
-		if(StringUtils.isNotBlank(id)){
-			Long companyId = Long.parseLong(id);
-			auth = authService.getAuthById(id);
+		String authId = userQuery.getAuthId();
+		if(StringUtils.isNotBlank(authId)){
+			UserEntity loginUser = UserUtils.getLoginUser(request);
+			String companyId = loginUser.getCompanyId().toString();
+			userQuery.setCompanyId(companyId);
+			auth = authService.getAuthById(authId);
+			userQuery = userService.getUserListByAuthId(userQuery);
 		}
 		mav.addObject("auth", auth);
+		mav.addObject("userQuery", userQuery);
 		
 		return mav;
 	}

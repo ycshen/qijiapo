@@ -19,7 +19,7 @@ public class UserQuery extends Page<UserEntity>{
 	private String telphone;
 	private String companyId;
 	private Integer status;
-	
+	private String authId;
 
 	public String getDepartmentId() {
 		return departmentId;
@@ -67,6 +67,14 @@ public class UserQuery extends Page<UserEntity>{
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public String getAuthId() {
+		return authId;
+	}
+
+	public void setAuthId(String authId) {
+		this.authId = authId;
 	}	
 	
 	
