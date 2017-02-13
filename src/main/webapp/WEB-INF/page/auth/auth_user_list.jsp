@@ -11,15 +11,22 @@
   <title>企家婆-专业的企业好管家</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <%@include file="../share/common_css.jsp"%>
+<link rel="stylesheet" type="text/css" href="${ctx}/js/multi/multi.min.css">
 <script src="${ctx}/js/jQuery/jquery-2.2.3.min.js"></script>
 <script src="${ctx}/js/bootstrap/js/bootstrap.min.js"></script>
 <script src="${ctx}/js/adminlte/dist/js/app.min.js"></script>
 <script type="text/javascript" src="${ctx}/js/pagination/jquery.pagination.js"></script>
 <script type="text/javascript" src="${ctx}/js/layer/layer.js"></script>
 <script type="text/javascript" src="${ctx}/js/pages/auth/auth_user_list.js"></script>
+	<script src="${ctx}/js/multi/multi.min.js"></script>
 <script type="text/javascript">
 	var ctx = "${ctx}";
 </script>
+<style type="text/css">
+body {
+                font-family: sans-serif;
+            }
+</style>
 </head>
 <body>
 
@@ -39,8 +46,8 @@
       <div class="row">
         <div class="col-xs-12">
 	        <div class="box-body">
-				  <button type="button" class="btn btn-default" onclick="adduser();" id="addAuth">添加授权</button>
-				  <button type="button" class="btn btn-default" onclick="adduser();" id="cancelAuth" style="display: none;">取消授权</button>
+				  <button type="button" class="btn btn-default" onclick="addAuth();" id="addAuth">添加授权</button>
+				  <button type="button" class="btn btn-default" onclick="cancelAuth();" id="cancelAuth" style="display: none;">取消授权</button>
 	        </div>
       
             <!-- /.box-header -->
@@ -82,16 +89,7 @@
                 		
                 	</c:if>
                 </tbody>
-                
-                 
-               
               </table>
-            
-            </div>
-            <div class="box-header" style="text-align:center">
-            	<%-- <%@include file="user_page_list_page.jsp" %>
-					<input type="hidden" value="${userQuery.count}" id="count"/> --%>
-					
             </div>
           </div>
 
@@ -99,7 +97,25 @@
 
     </section>
 
-
-
+<div style="display: none;" id="multiDiv">
+	<select multiple="multiple" name="favorite_fruits" id="fruit_select">
+                <option>Apple</option>
+                <option>Banana</option>
+                <option>Blueberry</option>
+                <option>Cherry</option>
+                <option>Coconut</option>
+                <option>Grapefruit</option>
+                <option>Kiwi</option>
+                <option>Lemon</option>
+                <option>Lime</option>
+                <option>Mango</option>
+                <option>Orange</option>
+                <option>Papaya</option>
+            </select>
+</div>
+<script>
+            var select = document.getElementById('fruit_select');
+            multi( select );
+</script>
 </body>
 </html>
