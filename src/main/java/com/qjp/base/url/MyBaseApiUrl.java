@@ -143,6 +143,12 @@ public class MyBaseApiUrl {
 	@Value("${mybase.getAuthById}")
 	private String mybase_getAuthById_url;
 	public static String mybase_getAuthById;
+	@Value("${mybase.cancelAuth}")
+	private String mybase_cancelAuth_url;
+	public static String mybase_cancelAuth;
+	@Value("${mybase.insertAuth}")
+	private String mybase_insertAuth_url;
+	public static String mybase_insertAuth;
 	
 	@PostConstruct
 	public void init() {
@@ -191,6 +197,8 @@ public class MyBaseApiUrl {
 		//authority
 		mybase_getAuthPage = this.mybase_getAuthPage_url;
 		mybase_getAuthById = this.mybase_getAuthById_url;
+		mybase_cancelAuth = this.mybase_cancelAuth_url;
+		mybase_insertAuth = this.mybase_insertAuth_url;
 	}
 	
 }

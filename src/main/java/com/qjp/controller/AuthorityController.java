@@ -1,6 +1,7 @@
 package com.qjp.controller;
 
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.qjp.base.VipLevel;
 import com.qjp.entity.AuthorityEntity;
+import com.qjp.entity.AuthorityUserEntity;
 import com.qjp.entity.CompanyEntity;
 import com.qjp.entity.ConfigEntity;
 import com.qjp.entity.Constant;
@@ -31,6 +33,7 @@ import com.qjp.util.UserUtils;
 import com.qjp.util.query.AuthorityQuery;
 import com.qjp.util.query.AuthorityVOQuery;
 import com.qjp.util.query.CompanyQuery;
+import com.qjp.util.query.UserAuthQuery;
 import com.qjp.util.query.UserQuery;
 import com.qjp.util.vo.AuthorityVO;
 
@@ -91,19 +94,19 @@ public class AuthorityController extends BaseController{
 	}
 	
 	@RequestMapping(value = "/authUserList", method = RequestMethod.GET)
-	public ModelAndView authUserList(UserQuery userQuery, HttpServletRequest request){
+	public ModelAndView authUserList(UserAuthQuery userAuthQuery, HttpServletRequest request){
 		ModelAndView mav = new ModelAndView("/auth/auth_user_list");
 		AuthorityEntity auth = null;
-		String authId = userQuery.getAuthId();
+		String authId = userAuthQuery.getAuthId();
 		if(StringUtils.isNotBlank(authId)){
 			UserEntity loginUser = UserUtils.getLoginUser(request);
 			String companyId = loginUser.getCompanyId().toString();
-			userQuery.setCompanyId(companyId);
+			userAuthQuery.setCompanyId(companyId);
 			auth = authService.getAuthById(authId);
-			userQuery = userService.getUserListByAuthId(userQuery);
+			userAuthQuery = userService.getUserListByAuthId(userAuthQuery);
 		}
 		mav.addObject("auth", auth);
-		mav.addObject("userQuery", userQuery);
+		mav.addObject("userAuthQuery", userAuthQuery);
 		
 		return mav;
 	}
@@ -151,6 +154,32 @@ public class AuthorityController extends BaseController{
 		Integer result = 0;
 		if(StringUtils.isNotBlank(id)){
 			companyService.deleteCompany(id);
+			result = 1;
+		}
+		
+		return result;
+	}
+	
+	@RequestMapping(value = "/cancelAuth", method = RequestMethod.GET)
+	@ResponseBody
+	public Integer cancelAuth(String idList, String authId, String userList, String authName, HttpServletRequest request){
+		Integer result = 0;
+		if(StringUtils.isNotBlank(idList) && StringUtils.isNotBlank(authId)){
+			
+			UserEntity user = UserUtils.getLoginUser(request);
+			String[] userIdArr = idList.split("\\^");
+			AuthorityUserEntity auth = null;
+			List<AuthorityUserEntity> authUserList = new LinkedList<AuthorityUserEntity>();
+			for (String id : userIdArr) {
+				auth = new AuthorityUserEntity();
+				auth.setAuthId(Integer.parseInt(authId));
+				auth.setCompanyId(user.getCompanyId().intValue());
+				auth.setId(Integer.parseInt(id));
+				authUserList.add(auth);
+			}
+			
+			authService.cancelAuth(authUserList);
+			LogUtils.logAdmin("取消【" + userList +"】的权限【"+ authName+ "】", user);
 			result = 1;
 		}
 		

@@ -1,6 +1,7 @@
 package com.qjp.service;
 
 import com.qjp.entity.UserEntity;
+import com.qjp.util.query.UserAuthQuery;
 import com.qjp.util.query.UserQuery;
 
 /** 
@@ -24,7 +25,7 @@ public interface UserService {
 	void forbidLogin(String id, String updateUser);
 	void enableUser(String id, String updateUser);
 	void resetPassword(String id, String password, String resetType, String email);
-	UserQuery getUserListByAuthId(UserQuery userQuery);
+	UserAuthQuery getUserListByAuthId(UserAuthQuery userAuthQuery);
 	
 }
 

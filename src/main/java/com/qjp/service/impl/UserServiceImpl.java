@@ -11,7 +11,9 @@ import com.qjp.service.UserService;
 import com.qjp.util.JsonUtils;
 import com.qjp.util.api.MyBaseApiUtils;
 import com.qjp.util.api.model.ApiCode;
+import com.qjp.util.query.UserAuthQuery;
 import com.qjp.util.query.UserQuery;
+import com.qjp.util.vo.UserAuthVO;
 
 /** 
  * <p>Project: MyBase</p> 
@@ -192,11 +194,11 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public UserQuery getUserListByAuthId(UserQuery userQuery) {
-		String authId = userQuery.getAuthId();
-		String pageSize = userQuery.getSize().toString();
-		String currentPage = userQuery.getPage().toString();
-		String companyId = userQuery.getCompanyId();
+	public UserAuthQuery getUserListByAuthId(UserAuthQuery userAuthQuery) {
+		String authId = userAuthQuery.getAuthId();
+		String pageSize = userAuthQuery.getSize().toString();
+		String currentPage = userAuthQuery.getPage().toString();
+		String companyId = userAuthQuery.getCompanyId();
 		String result = MyBaseApiUtils.getUserListByAuthId(authId, companyId, pageSize, currentPage);
 		if(StringUtils.isNotBlank(result)){
 			JSONObject jsonObject = JSONObject.parseObject(result);
@@ -208,21 +210,21 @@ public class UserServiceImpl implements UserService{
 						Object dataObj = jsonObject.get("data");
 						if(dataObj != null){
 							String data = dataObj.toString();
-							List<UserEntity> list = JSONObject.parseArray(data, UserEntity.class);
-							userQuery.setItems(list);
+							List<UserAuthVO> list = JSONObject.parseArray(data, UserAuthVO.class);
+							userAuthQuery.setItems(list);
 						}
 						
 						Object countObj = jsonObject.get("count");
 						if(countObj != null){
 							String count = countObj.toString();
-							userQuery.setCount(Integer.parseInt(count));
+							userAuthQuery.setCount(Integer.parseInt(count));
 						}
 					}
 				}
 			}
 		}
 		
-		return userQuery;
+		return userAuthQuery;
 	}
 	
 }

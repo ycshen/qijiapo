@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.qjp.entity.AuthorityEntity;
+import com.qjp.entity.AuthorityUserEntity;
 import com.qjp.entity.CompanyEntity;
 import com.qjp.service.AuthorityService;
+import com.qjp.util.JsonUtils;
 import com.qjp.util.api.MyBaseApiUtils;
 import com.qjp.util.api.model.ApiCode;
 import com.qjp.util.query.AuthorityQuery;
@@ -82,6 +84,12 @@ public class AuthorityServiceImpl implements AuthorityService{
 		}
 		
 		return auth;
+	}
+
+	@Override
+	public void cancelAuth(List<AuthorityUserEntity> authUserList) {
+		String authUserJson = JsonUtils.json2Str(authUserList);
+		MyBaseApiUtils.cancelAuthoritys(authUserJson);
 	}
 
 	

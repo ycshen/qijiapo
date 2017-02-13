@@ -908,5 +908,43 @@ public class MyBaseApiUtils {
 		
 		return result;
 	}
+	
+	public static String cancelAuthoritys(String authUserJson){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_cancelAuth;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("authUserJson", authUserJson);
+			
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("authUserJson", authUserJson);
+			jsonObject.put("secret", secret);
+			HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public static String insertAuthoritys(String authUserJson){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_insertAuth;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("authUserJson", authUserJson);
+			
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("authUserJson", authUserJson);
+			jsonObject.put("secret", secret);
+			HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }
 

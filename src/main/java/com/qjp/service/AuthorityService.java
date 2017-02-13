@@ -1,6 +1,9 @@
 package com.qjp.service;
 
+import java.util.List;
+
 import com.qjp.entity.AuthorityEntity;
+import com.qjp.entity.AuthorityUserEntity;
 import com.qjp.util.query.AuthorityVOQuery;
 
 /** 
@@ -14,5 +17,6 @@ import com.qjp.util.query.AuthorityVOQuery;
 public interface AuthorityService {
 	AuthorityVOQuery getAuthorityList(AuthorityVOQuery authQuery);
 	AuthorityEntity getAuthById(String id);
+	void cancelAuth(List<AuthorityUserEntity> authUserList);
 }
 
