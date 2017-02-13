@@ -91,3 +91,7 @@ function isNotBlank(args){
 	return result;
 }
 
+function authSuccess(authId, userName, count){
+	$("#authCount" + authId).html(count);
+	$("#authUser" + authId).html(userName);
+}

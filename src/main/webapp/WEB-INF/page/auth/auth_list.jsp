@@ -84,8 +84,8 @@
                 			<tr onclick="showAuthDetail('${auth.id}', '${auth.authName}')">
                 				<td>${status.index + 1 }</td>
 		                		<td>${auth.authName }</td>
-		                		<td>${auth.count }</td>
-		                		<td>${auth.userList }</td>
+		                		<td id="authCount${auth.id}">${auth.count }</td>
+		                		<td id="authUser${auth.id}">${auth.userList }</td>
 	                		</tr>
                 		</c:forEach>
                 	</c:if>

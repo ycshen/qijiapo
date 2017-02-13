@@ -28,6 +28,7 @@ import com.qjp.service.AuthorityService;
 import com.qjp.service.CompanyService;
 import com.qjp.service.ConfigService;
 import com.qjp.service.UserService;
+import com.qjp.util.JsonUtils;
 import com.qjp.util.LogUtils;
 import com.qjp.util.UserUtils;
 import com.qjp.util.query.AuthorityQuery;
@@ -110,6 +111,21 @@ public class AuthorityController extends BaseController{
 		
 		return mav;
 	}
+	
+	@RequestMapping(value = "/authUserListAsyc", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public String authUserListAsyc(UserAuthQuery userAuthQuery, HttpServletRequest request){
+		String authId = userAuthQuery.getAuthId();
+		if(StringUtils.isNotBlank(authId)){
+			UserEntity loginUser = UserUtils.getLoginUser(request);
+			String companyId = loginUser.getCompanyId().toString();
+			userAuthQuery.setCompanyId(companyId);
+			userAuthQuery = userService.getUserListByAuthId(userAuthQuery);
+		}
+		
+		return JsonUtils.json2Str(userAuthQuery);
+	}
+	
 	
 	@RequestMapping(value = "/saveOrUpdate", method = RequestMethod.POST)
 	@ResponseBody

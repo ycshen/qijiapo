@@ -43,7 +43,10 @@ function cancelAuth(){
 				type: "get",
 				success: function(result){
 					if(result == 1){
-						layer.alert("取消授权成功");
+						layer.alert("取消授权成功",function(){
+							reloadAuthUser(authId);
+							layer.closeAll();
+						});
 						
 					}else{
 						layer.alert("取消授权失败");
@@ -55,6 +58,70 @@ function cancelAuth(){
 	
 	
 }
+
+function reloadAuthUser(authId){
+	var url = ctx + "/inner/auth/authUserListAsyc?authId=" + authId;
+	$.ajax({
+		type: "get",
+		url: url,
+		success: function(data){
+			var count = data.count;
+				var tbody = "<tbody>";
+				var userNameList = "";
+				$.each(data.items, function(index, obj){
+					tbody += getTr(obj);
+					userNameList += obj.userName + ";"
+				})
+				
+				if(userNameList.length > 0){
+					userNameList = userNameList.substring(0, userNameList.length - 1)
+				}
+				
+				parent.authSuccess(authId, userNameList, count)
+				var tableHead = getHead();
+				tbody += "</tbody>";
+				tableHead += tbody;
+				$("#syslist").html(tableHead);
+				
+		}
+	});
+}
+
+function getTr(obj){
+	var tr = "";
+	tr+="<tr>";
+	tr+="<td>";
+	tr+="<div class=\"checkbox\" style=\"margin: 0px\">";
+	tr+="<label>";
+	tr+="<input type=\"checkbox\" id=\"chkUser" + obj.authUserId + "\" value=\"" + obj.authUserId + "\">";
+	tr+="</label>";
+	tr+="</div>";
+	tr+="</td>";
+	tr+="<td id=\"userName" + obj.authUserId + "\">" + obj.userName + "</td>";
+	tr+="<td id=\"userStatus" + obj.id + "\">";
+	var departmentName = "";
+	if(isNotBlank(obj.departmentName)){
+		departmentName = obj.departmentName;
+	}
+	tr+="" + departmentName + "";
+	tr+="</td>";
+	var positionName = "";
+	if(isNotBlank(obj.positionName)){
+		positionName = obj.positionName;
+	}
+	tr+="<td>" + positionName + "</td>";
+	tr+="</tr>";
+
+	return tr;
+
+}
+
+function getHead(tableId){
+	var head =  $("#syslist").find("thead").html();
+	head = "<thead>" + head  + "</thead>";
+	return head;
+}
+
 function addAuth(){
 	var html = $("#multiDiv");
 	layer.open({
