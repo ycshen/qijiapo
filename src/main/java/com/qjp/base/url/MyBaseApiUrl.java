@@ -101,6 +101,10 @@ public class MyBaseApiUrl {
 	@Value("${mybase.getUserListByAuthId}")
 	private String mybase_getUserListByAuthId_url;
 	public static String mybase_getUserListByAuthId;
+	@Value("${mybase.getAuthUserByCidAndAuthId}")
+	private String mybase_getAuthUserByCidAndAuthId_url;
+	public static String mybase_getAuthUserByCidAndAuthId;
+	
 	
 	//Company
 	@Value("${mybase.getCompanyStaffTreeById}")
@@ -184,6 +188,7 @@ public class MyBaseApiUrl {
 		mybase_resetPassword = this.mybase_resetPassword_url;
 		mybase_getUserById = this.mybase_getUserById_url;
 		mybase_getUserListByAuthId = this.mybase_getUserListByAuthId_url;
+		mybase_getAuthUserByCidAndAuthId = this.mybase_getAuthUserByCidAndAuthId_url;
 		//position
 		mybase_getSystemPosition = this.mybase_getSystemPosition_url;
 		mybase_getPositionByCompanyId = this.mybase_getPositionByCompanyId_url;

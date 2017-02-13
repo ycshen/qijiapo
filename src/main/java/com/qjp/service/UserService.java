@@ -1,5 +1,7 @@
 package com.qjp.service;
 
+import java.util.List;
+
 import com.qjp.entity.UserEntity;
 import com.qjp.util.query.UserAuthQuery;
 import com.qjp.util.query.UserQuery;
@@ -26,6 +28,7 @@ public interface UserService {
 	void enableUser(String id, String updateUser);
 	void resetPassword(String id, String password, String resetType, String email);
 	UserAuthQuery getUserListByAuthId(UserAuthQuery userAuthQuery);
+	List<UserEntity> getAuthUserByCidAndAuthId(String companyId, String authId, Boolean isAuth);
 	
 }
 

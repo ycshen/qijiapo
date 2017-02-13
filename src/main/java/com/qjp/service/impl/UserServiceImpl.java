@@ -226,6 +226,31 @@ public class UserServiceImpl implements UserService{
 		
 		return userAuthQuery;
 	}
+
+	@Override
+	public List<UserEntity> getAuthUserByCidAndAuthId(String companyId,
+			String authId, Boolean isAuth) {
+		List<UserEntity> list = null;
+		String result = MyBaseApiUtils.getAuthUserByCidAndAuthId(companyId, authId, isAuth.toString());
+		if(StringUtils.isNotBlank(result)){
+			JSONObject jsonObject = JSONObject.parseObject(result);
+			if(jsonObject != null){
+				Object codeObj = jsonObject.get("code");
+				if(codeObj != null){
+					String code = codeObj.toString();
+					if (ApiCode.OK.toString().equals(code)) {
+						Object dataObj = jsonObject.get("data");
+						if(dataObj != null){
+							String data = dataObj.toString();
+							list = JSONObject.parseArray(data, UserEntity.class);
+						}
+					}
+				}
+			}
+		}
+		
+		return list;
+	}
 	
 }
 

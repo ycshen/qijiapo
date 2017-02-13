@@ -332,6 +332,35 @@ public class MyBaseApiUtils {
 	}
 	
 	/**
+	 * 获取授权用户通过公司id和授权id
+	 * @param companyId
+	 * @param authId
+	 * @param isAuth 获取的是否是授权的
+	 * @return
+	 */
+	public static String getAuthUserByCidAndAuthId(String companyId, String authId, String isAuth){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_getAuthUserByCidAndAuthId;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("companyId", companyId);			
+			maps.put("authId", authId);		
+			maps.put("isAuth", isAuth);		
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("companyId", companyId);
+			jsonObject.put("authId", authId);
+			jsonObject.put("isAuth", isAuth);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	/**
 	 * 记录日志
 	 * @param id
 	 * @return
