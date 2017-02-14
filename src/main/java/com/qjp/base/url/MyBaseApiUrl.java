@@ -153,6 +153,9 @@ public class MyBaseApiUrl {
 	@Value("${mybase.insertAuth}")
 	private String mybase_insertAuth_url;
 	public static String mybase_insertAuth;
+	@Value("${mybase.batchAuth}")
+	private String mybase_batchAuth_url;
+	public static String mybase_batchAuth;
 	
 	@PostConstruct
 	public void init() {
@@ -204,6 +207,7 @@ public class MyBaseApiUrl {
 		mybase_getAuthById = this.mybase_getAuthById_url;
 		mybase_cancelAuth = this.mybase_cancelAuth_url;
 		mybase_insertAuth = this.mybase_insertAuth_url;
+		mybase_batchAuth = this.mybase_batchAuth_url;
 	}
 	
 }

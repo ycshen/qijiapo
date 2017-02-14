@@ -92,6 +92,12 @@ public class AuthorityServiceImpl implements AuthorityService{
 		MyBaseApiUtils.cancelAuthoritys(authUserJson);
 	}
 
+	@Override
+	public void batchAuth(String companyId, String authId,
+			String authUserIdArray, String notAuthUserIdArray) {
+		MyBaseApiUtils.batchAuth(companyId, authId, authUserIdArray, notAuthUserIdArray);
+	}
+
 	
 }
 

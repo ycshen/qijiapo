@@ -49,11 +49,11 @@ $(function(){
 			  this.qs1.cache();
 			  this.qs2.cache();
 			  if(isNotBlank(authList)){
-				  authList = userId;
-			  }else{
 				  authList += "^" +  userId;
+			  }else{
+				  authList = userId;
 			  }
-			  if(isNotBlank(notAuthList)){
+			  if(isNotBlank(notAuthList) && notAuthList.indexOf("^") > 0){
 				  var notAuthArr = notAuthList.split("^");
 				  notAuthList = "";
 				  for(var i=0; i< notAuthArr.length;i++){
@@ -65,6 +65,8 @@ $(function(){
 				  if(isNotBlank(notAuthList)){
 					  notAuthList = notAuthList.substring(0, notAuthList.length - 1)
 				  }
+			  }else{
+				  notAuthList = "";
 			  }
 
 			  $("#hidAuthStr").val(authList);
@@ -74,12 +76,12 @@ $(function(){
 			  this.qs1.cache();
 			  this.qs2.cache();	
 			  if(isNotBlank(notAuthList)){
-				  notAuthList = userId;
-			  }else{
 				  notAuthList += "^" +  userId;
+			  }else{
+				  notAuthList = userId;
 			  }
 			  
-			  if(isNotBlank(authList)){
+			  if(isNotBlank(authList) && authList.indexOf("^") > 0){
 				  var authArr = authList.split("^");
 				  authList = "";
 				  for(var i=0; i< authArr.length;i++){
@@ -92,6 +94,8 @@ $(function(){
 				  if(isNotBlank(authList)){
 					  authList = authList.substring(0, authList.length - 1)
 				  }
+			  }else{
+				  authList = "";
 			  }
 			  
 			  $("#hidAuthStr").val(authList);
@@ -108,8 +112,16 @@ function addAuth(authId){
 	$.ajax({
 		type: "get",
 		url: url,
-		success: function(){
-			
+		success: function(result){
+			if(result == 1){
+				layer.alert("授权成功", function(){
+					
+					parent.reloadAuthUser(authId);
+					parent.layer.closeAll();
+				})
+			}else{
+				layer.alert("授权失败")
+			}
 		}
 	})
 }

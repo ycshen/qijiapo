@@ -957,6 +957,31 @@ public class MyBaseApiUtils {
 		return result;
 	}
 	
+	public static String batchAuth(String companyId, String authId, String authUserIdArray, String notAuthUserIdArray){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_batchAuth;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("companyId", companyId);
+			maps.put("authId", authId);
+			maps.put("authUserIdArray", authUserIdArray);
+			maps.put("notAuthUserIdArray", notAuthUserIdArray);
+			
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("companyId", companyId);
+			jsonObject.put("authId", authId);
+			jsonObject.put("authUserIdArray", authUserIdArray);
+			jsonObject.put("notAuthUserIdArray", notAuthUserIdArray);
+			jsonObject.put("secret", secret);
+			HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
 	public static String insertAuthoritys(String authUserJson){
 		String result = StringUtils.EMPTY;
 		try {	

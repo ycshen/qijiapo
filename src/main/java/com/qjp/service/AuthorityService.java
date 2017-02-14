@@ -18,5 +18,6 @@ public interface AuthorityService {
 	AuthorityVOQuery getAuthorityList(AuthorityVOQuery authQuery);
 	AuthorityEntity getAuthById(String id);
 	void cancelAuth(List<AuthorityUserEntity> authUserList);
+	void batchAuth(String companyId, String authId, String authUserIdArray, String notAuthUserIdArray);
 }
 

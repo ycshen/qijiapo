@@ -57,11 +57,11 @@ input.search-input {
 				  <button type="button" class="btn btn-default" onclick="addAuth('${auth.id}','${auth.authName}');" id="addAuth">添加授权</button>
 				  <button type="button" class="btn btn-default" onclick="cancelAuth();" id="cancelAuth" style="display: none;">取消授权</button>
 	        </div>
-      
+      <input type="hidden" value="${auth.id }" id="hidAuthId">
+            <input type="hidden" value="${auth.authName }" id="hidAuthName">
             <!-- /.box-header -->
             <div class="box-body"  style="height: 200px;overflow-x:auto;">
-            <input type="hidden" value="${auth.id }" id="hidAuthId">
-            <input type="hidden" value="${auth.authName }" id="hidAuthName">
+            
               <table id="syslist" class="table table-bordered table-hover">
                 <thead>
                 <tr class="info">

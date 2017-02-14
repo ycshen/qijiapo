@@ -43,13 +43,14 @@ input.search-input {
 		<select id='custom-headers' multiple='multiple'>
 			<c:if test="${authUserList != null && authUserList.size() > 0}">
 				<c:forEach items="${authUserList}" var="authUser">
-					<c:if test="${authUser.authUserId == null || authUser.authUserId != userAuthQuery.authId}">
-						<option value='${authUser.id}'>${authUser.userName}</option>
-					</c:if>
-					
-					<c:if test="${authUser.authUserId != null && authUser.authUserId == userAuthQuery.authId}">
-						<option value='${authUser.id}' selected>${authUser.userName}</option>
-					</c:if>
+					<c:choose>
+						<c:when test="${authUser.authUserId != null && authUser.authUserId == userAuthQuery.authId}">
+							<option value='${authUser.id}' selected>${authUser.userName}</option>
+						</c:when>
+						<c:otherwise>
+							<option value='${authUser.id}'>${authUser.userName}</option>
+						</c:otherwise>
+					</c:choose>
 				</c:forEach>
 			</c:if>
 		</select>

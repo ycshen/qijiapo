@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.qjp.base.ResponseStatus;
 import com.qjp.base.VipLevel;
 import com.qjp.entity.AuthorityEntity;
 import com.qjp.entity.AuthorityUserEntity;
@@ -131,11 +132,20 @@ public class AuthorityController extends BaseController{
 	public ModelAndView authUserPage(UserAuthQuery userAuthQuery, HttpServletRequest request){
 		String authId = userAuthQuery.getAuthId();
 		ModelAndView mav = new ModelAndView("/auth/auth_user");
-		List<UserAuthVO> authUserList = null;
+		List<UserAuthVO> authUserList = new LinkedList<UserAuthVO>();
 		if(StringUtils.isNotBlank(authId)){
 			UserEntity loginUser = UserUtils.getLoginUser(request);
 			String companyId = loginUser.getCompanyId().toString();
-			authUserList = userService.getAuthUserByCidAndAuthId(companyId, authId, "3");
+			List<UserAuthVO> authList = userService.getAuthUserByCidAndAuthId(companyId, authId, "1");
+			List<UserAuthVO> notAuthList = userService.getAuthUserByCidAndAuthId(companyId, authId, "2");
+			if(authList != null && authList.size() > 0){
+				authUserList.addAll(authList);
+			}
+			
+			if(notAuthList != null && notAuthList.size() > 0){
+				authUserList.addAll(notAuthList);
+			}
+			
 			if(authUserList != null && authUserList.size() > 0){
 				String authStr = "";
 				String notAuthStr = "";
@@ -261,9 +271,12 @@ public class AuthorityController extends BaseController{
 	@ResponseBody
 	public Integer addAuth(String authStr, String notAuthStr, String authId, HttpServletRequest request){
 		Integer result = 0;
-		System.out.println(authStr);
-		System.out.println(notAuthStr);
-		System.out.println(authId);
+		if(StringUtils.isNotBlank(authId)){
+			UserEntity user = UserUtils.getLoginUser(request);
+			String companyId = user.getCompanyId().toString();
+			authService.batchAuth(companyId, authId, authStr, notAuthStr);
+			result = ResponseStatus.INSERT_SUCCESS;
+		}
 		
 		return result;
 	}
