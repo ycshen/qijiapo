@@ -68,7 +68,12 @@ $(function(){
 			  }else{
 				  notAuthList = "";
 			  }
-
+			  
+			  var noCount = $("#spanNotAuth").html();
+			  var count = $("#spanAuth").html();
+			  
+			  $("#spanNotAuth").html(Number(noCount) - 1);
+			  $("#spanAuth").html(Number(count) + 1)
 			  $("#hidAuthStr").val(authList);
 			  $("#hidNotAuthStr").val(notAuthList);
 		  },
@@ -98,6 +103,11 @@ $(function(){
 				  authList = "";
 			  }
 			  
+			  var noCount = $("#spanNotAuth").html();
+			  var count = $("#spanAuth").html();
+			  
+			  $("#spanNotAuth").html(Number(noCount) + 1);
+			  $("#spanAuth").html(Number(count) - 1)
 			  $("#hidAuthStr").val(authList);
 			  $("#hidNotAuthStr").val(notAuthList);
 		  }
