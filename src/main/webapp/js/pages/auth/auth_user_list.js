@@ -122,17 +122,16 @@ function getHead(tableId){
 	return head;
 }
 
-function addAuth(){
-	var html = $("#multiDiv");
+function addAuth(authId, authName){
+	var url = ctx + "/inner/auth/authUserPage?authId=" + authId;
 	layer.open({
-		  type: 1,
-		  title: false,
-		  closeBtn: 0,
-		  shadeClose: true,
-		  skin: 'yourclass',
-		  area: ['600px', '300px'],
-		  content: html
-		});
+		type: 2,
+		title: "[" + authName + "]授权",
+		shadeClose: true,
+		shade: 0.8,
+		area: ['400px', '400px'],
+		content: url
+	});
 }
 function initAllCheckEvt(){
 	$("#chkAll").change(function(){

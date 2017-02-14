@@ -37,6 +37,7 @@ import com.qjp.util.query.CompanyQuery;
 import com.qjp.util.query.UserAuthQuery;
 import com.qjp.util.query.UserQuery;
 import com.qjp.util.vo.AuthorityVO;
+import com.qjp.util.vo.UserAuthVO;
 
 /** 
  * <p>Project: MyBase</p> 
@@ -126,6 +127,48 @@ public class AuthorityController extends BaseController{
 		return JsonUtils.json2Str(userAuthQuery);
 	}
 	
+	@RequestMapping(value = "/authUserPage", method = RequestMethod.GET)
+	public ModelAndView authUserPage(UserAuthQuery userAuthQuery, HttpServletRequest request){
+		String authId = userAuthQuery.getAuthId();
+		ModelAndView mav = new ModelAndView("/auth/auth_user");
+		List<UserAuthVO> authUserList = null;
+		if(StringUtils.isNotBlank(authId)){
+			UserEntity loginUser = UserUtils.getLoginUser(request);
+			String companyId = loginUser.getCompanyId().toString();
+			authUserList = userService.getAuthUserByCidAndAuthId(companyId, authId, "3");
+			if(authUserList != null && authUserList.size() > 0){
+				String authStr = "";
+				String notAuthStr = "";
+				Integer authCount = 0;
+				Integer notAuthCount = 0;
+				for (UserAuthVO userAuth : authUserList) {
+					Integer authUserId = userAuth.getAuthUserId();
+					if(authUserId != null && authUserId.toString().equals(authId)){
+						authCount ++;
+						authStr += userAuth.getId() + "^";
+					}else{
+						notAuthCount ++;
+						notAuthStr += userAuth.getId() + "^";
+					}
+				}
+				if(StringUtils.isNotBlank(authStr)){
+					authStr = authStr.substring(0, authStr.length() - 1);
+				}
+				if(StringUtils.isNotBlank(notAuthStr)){
+					notAuthStr = notAuthStr.substring(0, notAuthStr.length() - 1);
+				}
+				mav.addObject("authStr", authStr);
+				mav.addObject("notAuthStr", notAuthStr);
+				mav.addObject("authCount", authCount);
+				mav.addObject("notAuthCount", notAuthCount);
+			}
+			mav.addObject("authUserList", authUserList);
+		}
+		
+		mav.addObject("userAuthQuery", userAuthQuery);
+		
+		return mav;
+	}
 	
 	@RequestMapping(value = "/saveOrUpdate", method = RequestMethod.POST)
 	@ResponseBody
@@ -210,6 +253,17 @@ public class AuthorityController extends BaseController{
 			companyService.activateCompany(id);
 			result = 1;
 		}
+		
+		return result;
+	}
+	
+	@RequestMapping(value = "/addAuth", method = RequestMethod.GET)
+	@ResponseBody
+	public Integer addAuth(String authStr, String notAuthStr, String authId, HttpServletRequest request){
+		Integer result = 0;
+		System.out.println(authStr);
+		System.out.println(notAuthStr);
+		System.out.println(authId);
 		
 		return result;
 	}

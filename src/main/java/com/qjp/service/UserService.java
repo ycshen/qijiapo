@@ -5,6 +5,7 @@ import java.util.List;
 import com.qjp.entity.UserEntity;
 import com.qjp.util.query.UserAuthQuery;
 import com.qjp.util.query.UserQuery;
+import com.qjp.util.vo.UserAuthVO;
 
 /** 
  * <p>Project: MyBase</p> 
@@ -28,7 +29,14 @@ public interface UserService {
 	void enableUser(String id, String updateUser);
 	void resetPassword(String id, String password, String resetType, String email);
 	UserAuthQuery getUserListByAuthId(UserAuthQuery userAuthQuery);
-	List<UserEntity> getAuthUserByCidAndAuthId(String companyId, String authId, Boolean isAuth);
+	/**
+	 * 
+	 * @param companyId
+	 * @param authId
+	 * @param isAuth 1-已授权 2-未授权 3-全部用户
+	 * @return
+	 */
+	List<UserAuthVO> getAuthUserByCidAndAuthId(String companyId, String authId, String isAuth);
 	
 }
 

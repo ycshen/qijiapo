@@ -54,7 +54,7 @@ input.search-input {
       <div class="row">
         <div class="col-xs-12">
 	        <div class="box-body">
-				  <button type="button" class="btn btn-default" onclick="addAuth();" id="addAuth">添加授权</button>
+				  <button type="button" class="btn btn-default" onclick="addAuth('${auth.id}','${auth.authName}');" id="addAuth">添加授权</button>
 				  <button type="button" class="btn btn-default" onclick="cancelAuth();" id="cancelAuth" style="display: none;">取消授权</button>
 	        </div>
       
@@ -107,64 +107,5 @@ input.search-input {
 
     </section>
 
-<div  id="multiDiv">
-	<select id='custom-headers' multiple='multiple'>
-	  <option value='elem_1' selected>elem 1</option>
-	  <option value='elem_2'>elem 2</option>
-	  <option value='elem_3'>elem 3</option>
-	  <option value='elem_4' selected>elem 4</option>
-	  
-	  <option value='elem_5' selected>elem 5</option>
-	  <option value='elem_6' selected>elem 6</option>
-	  <option value='elem_7' selected>elem 7</option>
-	  <option value='elem_8' selected>elem 8</option>
-	  <option value='elem_9' selected>elem 9</option>
-	  <option value='elem_10' selected>elem 999</option>
-	  <option value='elem_11' selected>elem 99</option>
-	  <option value='elem_100'>elem 100</option>
-	</select>
-</div>
-<script>
-
-$('#custom-headers').multiSelect({
-	  selectableHeader: "<input type='text' class='search-input' autocomplete='off' placeholder='搜索未授权员工'>",
-	  selectionHeader: "<input type='text' class='search-input' autocomplete='off' placeholder='搜索已授权员工'>",
-	  selectableFooter: "<div class='custom-header'>未授权员工【70】</div>",
-	  selectionFooter: "<div class='custom-header'>已授权员工【70】</div>",
-	  afterInit: function(ms){
-	    var that = this,
-	        $selectableSearch = that.$selectableUl.prev(),
-	        $selectionSearch = that.$selectionUl.prev(),
-	        selectableSearchString = '#'+that.$container.attr('id')+' .ms-elem-selectable:not(.ms-selected)',
-	        selectionSearchString = '#'+that.$container.attr('id')+' .ms-elem-selection.ms-selected';
-
-	    that.qs1 = $selectableSearch.quicksearch(selectableSearchString)
-	    .on('keydown', function(e){
-	      if (e.which === 40){
-	        that.$selectableUl.focus();
-	        return false;
-	      }
-	    });
-
-	    that.qs2 = $selectionSearch.quicksearch(selectionSearchString)
-	    .on('keydown', function(e){
-	      if (e.which == 40){
-	        that.$selectionUl.focus();
-	        return false;
-	      }
-	    });
-	  },
-	  afterSelect: function(){
-	    this.qs1.cache();
-	    this.qs2.cache();
-	  },
-	  afterDeselect: function(){
-	    this.qs1.cache();
-	    this.qs2.cache();
-	  }
-	});    
-
-	
-</script>
 </body>
 </html>
