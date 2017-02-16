@@ -46,19 +46,19 @@
     <!-- Main content -->
     <section class="content">
       <div class="error-page">
-        <h2 class="headline text-yellow"> OK!</h2>
+        <h2 class="headline text-teal"> OK!</h2>
 
         <div class="error-content">
-          <h3><i class="fa fa-check text-yellow "></i>恭喜您! 注册成功.</h3>
+          <h3><i class="fa fa-check text-teal "></i>恭喜您! 注册成功.</h3>
 
           <p class="myfont">
           	尊敬的${user.userName}:<br/>
-           	 感谢您注册企家婆(www.qijiapo.com),企家婆专业致力于企业管理软件服务！<br/>
-			企家婆旗下拥有企家婆客户关系管理（CRM)、进销存管理、财务管理、oa管理等各种企业管理软件，我们致力于为客户提供更好的企业管理服务。<br/>
-			请妥善保管好你的账户信息!
+           	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;感谢您注册企家婆(www.qijiapo.com),企家婆专业致力于企业管理软件服务！<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;企家婆旗下拥有企家婆客户关系管理（CRM)、进销存管理、财务管理、oa管理等各种企业管理软件，我们致力于为客户提供更好的企业管理服务。<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;请妥善保管好你的账户信息!
           </p>
 			<form class="search-form">
-				<a href="${ctx}/login"  class="btn bg-orange btn-flat myfont">去登录</a>
+				<a href="${ctx}/login"  class="btn bg-info btn-flat myfont">去登录</a>
 			</form>
         
         </div>
