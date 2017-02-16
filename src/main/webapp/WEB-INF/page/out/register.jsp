@@ -11,7 +11,6 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
 <%@include file="../share/common_css.jsp"%>
-<link rel="stylesheet" href="${ctx}/js/iCheck/square/blue.css">
 <style type="text/css">
 .myfont{
 	font: 14px 'Microsoft Yahei', Verdana, 宋体, sans-serif;
@@ -35,25 +34,25 @@
     <a href="http://www.qijiapo.com">欢迎注册企家婆</a>
   </div>
   <div class="register-box-body">
-    <form action="../../index.html" method="post">
+    <form  method="post" id="registerForm">
       <div class="form-group has-feedback">
-        <input type="text" class="form-control myfont my-borderradius" placeholder="请输入公司名称">
+        <input type="text" class="form-control myfont my-borderradius" name="companyName" placeholder="请输入公司名称">
         <span class="glyphicon glyphicon-tower form-control-feedback"></span>
       </div>
        <div class="form-group has-feedback">
-        <input type="text" class="form-control myfont my-borderradius" placeholder="请输入姓名">
+        <input type="text" class="form-control myfont my-borderradius" name="userName" placeholder="请输入姓名">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="text" class="form-control myfont my-borderradius" placeholder="请输入电话号码">
+        <input type="text" class="form-control myfont my-borderradius" name="telphone" placeholder="请输入电话号码">
         <span class="glyphicon glyphicon-earphone form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="email" class="form-control myfont my-borderradius" placeholder="请输入邮箱">
+        <input type="email" class="form-control myfont my-borderradius" name="email" placeholder="请输入邮箱">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control myfont my-borderradius" placeholder="请输入密码">
+        <input type="password" class="form-control myfont my-borderradius"  name="password" placeholder="请输入密码">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
@@ -72,7 +71,7 @@
       </div>
       <div class="row">
         <div class="col-xs-12">
-         <button type="submit" class="btn btn-primary btn-block btn-sm myfont">同意，注册</button>
+         <button type="button" class="btn btn-primary btn-block btn-sm myfont"  onclick="submit();">同意，注册</button>
         </div>
         </div>
          <div class="row">
@@ -92,16 +91,7 @@
 
 <script src="${ctx}/js/jQuery/jquery-2.2.3.min.js"></script>
 <script src="${ctx}/js/bootstrap/js/bootstrap.min.js"></script>
-<!-- iCheck -->
-<script src="${ctx}/js/iCheck/icheck.min.js"></script>
-<script>
-  $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
-      increaseArea: '20%' // optional
-    });
-  });
-</script>
+<script src="${ctx}/js/pages/out/register.js"></script>
+
 </body>
 </html>

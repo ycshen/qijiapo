@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -22,14 +23,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.qjp.base.UserStatus;
+import com.qjp.entity.CompanyEntity;
 import com.qjp.entity.MenuEntity;
 import com.qjp.entity.ResultEnum;
 import com.qjp.entity.UserEntity;
 import com.qjp.model.ResultModel;
+import com.qjp.service.CompanyService;
 import com.qjp.service.MenuService;
 import com.qjp.service.UserService;
 
@@ -43,6 +49,8 @@ public class OuterController {
 	private UserService userService;
 	@Autowired
 	private MenuService menuService;
+	@Autowired
+	private CompanyService companyService;
 /*	@RequestMapping("/")
 	public String main() {
 		return "main";
@@ -149,6 +157,13 @@ public class OuterController {
 	@RequestMapping("/clause")
 	public ModelAndView clause(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView("/out/clause");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public ModelAndView register(@ModelAttribute UserEntity user, HttpServletRequest request){
+		ModelAndView mav = new ModelAndView("/out/register_success");
+		userService.register(user);
 		return mav;
 	}
 

@@ -251,6 +251,12 @@ public class UserServiceImpl implements UserService{
 		
 		return list;
 	}
+
+	@Override
+	public void register(UserEntity user) {
+		String userJson = JsonUtils.json2Str(user);
+		MyBaseApiUtils.register(userJson);
+	}
 	
 }
 

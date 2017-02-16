@@ -587,6 +587,25 @@ public class MyBaseApiUtils {
 		return result;
 	}
 	
+	public static String register(String userJson){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_register;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("userJson", userJson);
+			
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("userJson", userJson);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
 	/**
 	 * 更新员工信息
 	 * @param companyJson

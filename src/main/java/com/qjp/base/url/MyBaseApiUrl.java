@@ -104,6 +104,9 @@ public class MyBaseApiUrl {
 	@Value("${mybase.getAuthUserByCidAndAuthId}")
 	private String mybase_getAuthUserByCidAndAuthId_url;
 	public static String mybase_getAuthUserByCidAndAuthId;
+	@Value("${mybase.register}")
+	private String mybase_register_url;
+	public static String mybase_register;
 	
 	
 	//Company
@@ -192,6 +195,7 @@ public class MyBaseApiUrl {
 		mybase_getUserById = this.mybase_getUserById_url;
 		mybase_getUserListByAuthId = this.mybase_getUserListByAuthId_url;
 		mybase_getAuthUserByCidAndAuthId = this.mybase_getAuthUserByCidAndAuthId_url;
+		mybase_register = this.mybase_register_url;
 		//position
 		mybase_getSystemPosition = this.mybase_getSystemPosition_url;
 		mybase_getPositionByCompanyId = this.mybase_getPositionByCompanyId_url;

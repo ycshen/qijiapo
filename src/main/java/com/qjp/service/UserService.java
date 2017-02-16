@@ -17,6 +17,7 @@ import com.qjp.util.vo.UserAuthVO;
  */
 public interface UserService {
 	void insertUser(UserEntity user);
+	void register(UserEntity user);
 	UserQuery getUserList(UserQuery userQuery);
 	void updateUser(UserEntity user);
 	UserEntity getUserById(String id);
