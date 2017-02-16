@@ -37,8 +37,8 @@
        	 注册成功
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> 企家婆</a></li>
-        <li><a href="#">注册</a></li>
+        <li><a href="http://www.qijiapo.com"><i class="fa fa-dashboard"></i> 企家婆</a></li>
+        <li><a href="${ctx}/out/register">注册</a></li>
         <li class="active">注册成功</li>
       </ol>
     </section>
