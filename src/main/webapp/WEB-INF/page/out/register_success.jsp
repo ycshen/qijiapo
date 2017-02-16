@@ -46,7 +46,7 @@
     <!-- Main content -->
     <section class="content">
       <div class="error-page">
-        <h2 class="headline text-teal"> OK!</h2>
+        <h2 class="headline text-teal"> OK</h2>
 
         <div class="error-content">
           <h3><i class="fa fa-check text-teal "></i>恭喜您! 注册成功.</h3>

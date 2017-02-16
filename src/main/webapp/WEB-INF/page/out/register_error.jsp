@@ -46,7 +46,7 @@
     <!-- Main content -->
     <section class="content">
       <div class="error-page">
-        <h2 class="headline text-red"> ERROR!</h2>
+        <h2 class="headline text-red"> ERROR</h2>
 
         <div class="error-content">
           <h3><i class="fa  fa-close text-red "></i>很遗憾! 注册失败.</h3>

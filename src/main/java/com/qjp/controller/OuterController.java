@@ -164,14 +164,75 @@ public class OuterController {
 	public ModelAndView register(@ModelAttribute UserEntity user, HttpServletRequest request){
 		ModelAndView mav = new ModelAndView("/out/register_success");
 		mav.addObject("user", user);
-		boolean isOk = false;
-		if(isOk){
+		String tip = this.validateUser(user);
+		if(StringUtils.isBlank(tip)){
 			userService.register(user);
 		}else{
 			mav.setViewName("/out/register_error");
+			mav.addObject("tip", tip);
 		}
 		
 		return mav;
 	}
+	
+	private String validateUser(UserEntity user){
+		String tip = StringUtils.EMPTY;
+		String companyName = user.getCompanyName();
+		if(StringUtils.isBlank(companyName)){
+			tip = "亲，公司名称不能为空哦~~~";
+			return tip;
+		}else if(companyName.length() > 20){
+			tip = "亲，公司名称的长度不能超过20位哦~~~";
+			return tip;
+		}
+		
+		String userName = user.getUserName();
+		if(StringUtils.isBlank(userName)){
+			tip = "亲，姓名不能为空哦~~~";
+			return tip;
+		}else if(userName.length() > 15){
+			tip = "亲，姓名的长度不能超过15位哦~~~";
+			return tip;
+		}
+		
+		String telephone = user.getTelphone();
+		if(StringUtils.isBlank(telephone)){
+			tip = "亲，手机号码不能为空哦~~~";
+			return tip;
+		}else if(telephone.length() != 11){
+			tip = "亲，姓名的长度是11位哦~~~";
+			return tip;
+		}else{
+			Pattern p = Pattern.compile("^[1][3,4,5,7,8][0-9]{9}$");;
+			Matcher m = p.matcher(telephone);
+			boolean isTel = m.matches();
+			if(!isTel){
+				tip = "亲，请输入正确的手机号码格式~~~";
+				return tip;
+			}
+		}
+		
+		String email = user.getEmail();
+		if(StringUtils.isBlank(email)){
+			tip = "亲，电子邮箱不能为空哦~~~";
+			return tip;
+		}else{
+			Pattern p = Pattern.compile("^[A-Za-z0-9\\u4e00-\\u9fa5]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$");
+			Matcher m = p.matcher(email);
+			boolean isEmail = m.matches();
+			if(!isEmail){
+				tip = "亲，请输入正确的电子邮箱格式~~~";
+				return tip;
+			}
+		}
+		
+		return tip;
+	}
 
+	public static void main(String[] args) {
+		Pattern p = Pattern.compile("^[A-Za-z0-9\\u4e00-\\u9fa5]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$");
+		Matcher m = p.matcher("4496qq.com");
+		boolean isEmail = m.matches();
+		System.out.println(isEmail);
+	}
 }

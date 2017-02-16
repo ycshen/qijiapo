@@ -26,6 +26,12 @@
 .my-borderradius{
 	border-radius: 5px;
 }
+
+.my-tip{
+	text-align: center;
+	font: 14px 'Microsoft Yahei', Verdana, 宋体, sans-serif;
+	color: red;
+}
 </style>
 </head>
 <body class="hold-transition  my-background">
@@ -35,16 +41,17 @@
   </div>
   <div class="register-box-body">
     <form  method="post" id="registerForm">
+    	<div class="form-group has-feedback my-tip" id="tipDiv"></div>
       <div class="form-group has-feedback">
-        <input type="text" class="form-control myfont my-borderradius" name="companyName" placeholder="请输入公司名称">
+        <input type="text" class="form-control myfont my-borderradius" name="companyName" placeholder="请输入公司名称" maxlength="20" value="${user.companyName}" id="txtCompanyName">
         <span class="glyphicon glyphicon-tower form-control-feedback"></span>
       </div>
        <div class="form-group has-feedback">
-        <input type="text" class="form-control myfont my-borderradius" name="userName" placeholder="请输入姓名">
+        <input type="text" class="form-control myfont my-borderradius" name="userName" placeholder="请输入姓名" maxlength="15" value="${user.userName}" id="txtUserName">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="text" class="form-control myfont my-borderradius" name="telphone" placeholder="请输入电话号码">
+        <input type="text" class="form-control myfont my-borderradius" name="telphone" placeholder="请输入手机号码"  maxlength="11" value="${user.telephone}" id="txtTelephone">
         <span class="glyphicon glyphicon-earphone form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
@@ -71,7 +78,7 @@
       </div>
       <div class="row">
         <div class="col-xs-12">
-         <button type="button" class="btn btn-primary btn-block btn-sm myfont"  onclick="submit();">同意，注册</button>
+         <a  class="btn btn-primary btn-block btn-sm myfont"  onclick="submit();">同意，注册</a>
         </div>
         </div>
          <div class="row">
