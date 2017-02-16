@@ -51,6 +51,14 @@
 						<button class="btn btn-success" type="submit" style="width: 200px;">登 陆</button>
 					</td>
 				</tr>
+				<tr>
+					<td> 
+					 </td>
+					<td style="text-align: center;"> 
+					</span>
+						<a href="${ctx}/out/register">注册</a>
+					</td>
+				</tr>
 			</table>
 			
 			<br />

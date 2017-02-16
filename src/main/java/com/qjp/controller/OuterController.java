@@ -35,10 +35,10 @@ import com.qjp.service.UserService;
 
 
 @Controller
-@RequestMapping("/")
-public class HomeController {
+@RequestMapping("/out")
+public class OuterController {
 
-	private final static Logger LOG = LoggerFactory.getLogger(HomeController.class);
+	private final static Logger LOG = LoggerFactory.getLogger(OuterController.class);
 	@Autowired
 	private UserService userService;
 	@Autowired
@@ -142,9 +142,14 @@ public class HomeController {
 	
 	@RequestMapping("/register")
 	public ModelAndView register(HttpServletRequest request){
-		ModelAndView mav = new ModelAndView("/register");
+		ModelAndView mav = new ModelAndView("/out/register");
 		return mav;
 	}
 
+	@RequestMapping("/clause")
+	public ModelAndView clause(HttpServletRequest request){
+		ModelAndView mav = new ModelAndView("/out/clause");
+		return mav;
+	}
 
 }
