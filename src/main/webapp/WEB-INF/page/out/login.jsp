@@ -67,7 +67,7 @@
          <div class="row">
         <div class="col-xs-12 myfont" style="text-align:center;">
         	<br/>
-         	   没有账号<a href="${ctx}/out/register" class="text-center">免费注册</a>
+         	   没有账号? <a href="${ctx}/out/register" class="text-center">免费注册</a>
         </div>
         </div>
     </form>
