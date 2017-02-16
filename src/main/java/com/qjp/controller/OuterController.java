@@ -163,7 +163,8 @@ public class OuterController {
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ModelAndView register(@ModelAttribute UserEntity user, HttpServletRequest request){
 		ModelAndView mav = new ModelAndView("/out/register_success");
-		userService.register(user);
+		mav.addObject("user", user);
+		//userService.register(user);
 		return mav;
 	}
 

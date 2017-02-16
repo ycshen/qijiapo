@@ -28,11 +28,49 @@
 }
 </style>
 </head>
-<body class="hold-transition  my-background">
-<div class="register-box my-register-box">
- 
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
 
-  12313
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+       	 注册成功
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> 企家婆</a></li>
+        <li><a href="#">注册</a></li>
+        <li class="active">注册成功</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="error-page">
+        <h2 class="headline text-yellow"> OK!</h2>
+
+        <div class="error-content">
+          <h3><i class="fa fa-check text-yellow "></i>恭喜您! 注册成功.</h3>
+
+          <p class="myfont">
+          	尊敬的${user.userName}:<br/>
+           	 感谢您注册企家婆(www.qijiapo.com),企家婆专业致力于企业管理软件服务！<br/>
+			企家婆旗下拥有企家婆客户关系管理（CRM)、进销存管理、财务管理、oa管理等各种企业管理软件，我们致力于为客户提供更好的企业管理服务。<br/>
+			请妥善保管好你的账户信息!
+          </p>
+			<form class="search-form">
+				<a href="${ctx}/login"  class="btn bg-orange btn-flat myfont">去登录</a>
+			</form>
+        
+        </div>
+        <!-- /.error-content -->
+      </div>
+      <!-- /.error-page -->
+    </section>
+
+
+  
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
 </div>
 <!-- /.register-box -->
 
