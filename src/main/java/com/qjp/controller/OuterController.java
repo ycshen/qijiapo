@@ -164,7 +164,13 @@ public class OuterController {
 	public ModelAndView register(@ModelAttribute UserEntity user, HttpServletRequest request){
 		ModelAndView mav = new ModelAndView("/out/register_success");
 		mav.addObject("user", user);
-		//userService.register(user);
+		boolean isOk = false;
+		if(isOk){
+			userService.register(user);
+		}else{
+			mav.setViewName("/out/register_error");
+		}
+		
 		return mav;
 	}
 
