@@ -87,7 +87,7 @@
         </div>
         </div>
          <div class="row">
-        <div class="col-xs-12 myfont">
+        <div class="col-xs-12 myfont" style="text-align:center;">
         	<br/>
          	   已有账户，在这里<a href="${ctx}/login" class="text-center">登录</a>
         </div>
