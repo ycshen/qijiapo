@@ -226,12 +226,26 @@ public class OuterController {
 			}
 		}
 		
+		String password = user.getPassword();
+		if(StringUtils.isBlank(password)){
+			tip = "亲，密码不能为空哦~~~";
+			return tip;
+		}else{
+			Pattern p = Pattern.compile("^[A-Za-z0-9\\u4e00-\\u9fa5]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$");
+			Matcher m = p.matcher(email);
+			boolean isEmail = m.matches();
+			if(!isEmail){
+				tip = "亲，密码的长度是由6-15位的数字、字母、特殊字符组成~~~";
+				return tip;
+			}
+		}
+		
 		return tip;
 	}
 
 	public static void main(String[] args) {
-		Pattern p = Pattern.compile("^[A-Za-z0-9\\u4e00-\\u9fa5]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$");
-		Matcher m = p.matcher("4496qq.com");
+		Pattern p = Pattern.compile("(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{6,15}");
+		Matcher m = p.matcher("4496qAq@1");
 		boolean isEmail = m.matches();
 		System.out.println(isEmail);
 	}

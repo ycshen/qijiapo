@@ -11,6 +11,9 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
 <%@include file="../share/common_css.jsp"%>
+<script type="text/javascript">
+	var ctx = "${ctx}";
+</script>
 <style type="text/css">
 .myfont{
 	font: 14px 'Microsoft Yahei', Verdana, 宋体, sans-serif;
@@ -21,6 +24,8 @@
 
 .my-background{
 	background: #ffffff;
+	background-image: url('${ctx}/img/bg_register.jpg');
+	background-size: cover;
 }
 
 .my-borderradius{
@@ -55,15 +60,15 @@
         <span class="glyphicon glyphicon-earphone form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="email" class="form-control myfont my-borderradius" name="email" placeholder="请输入邮箱">
+        <input type="email" class="form-control myfont my-borderradius" name="email" placeholder="请输入电子邮箱" value="${user.email}" id="txtEmail">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control myfont my-borderradius"  name="password" placeholder="请输入密码">
+        <input type="password" class="form-control myfont my-borderradius"  name="password" placeholder="请输入密码" id="txtPass" maxlength="15">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control myfont my-borderradius" placeholder="确认密码">
+        <input type="password" class="form-control myfont my-borderradius" placeholder="确认密码" id="txtConfirmPass" maxlength="15">>
         <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
       </div>
       <div class="row">

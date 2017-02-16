@@ -29,6 +29,7 @@
 </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
+<div class="container">
 <div class="wrapper">
 
     <!-- Content Header (Page header) -->
@@ -70,7 +71,7 @@
        immediately after the control sidebar -->
 </div>
 <!-- /.register-box -->
-
+</div>
 <script src="${ctx}/js/jQuery/jquery-2.2.3.min.js"></script>
 <script src="${ctx}/js/bootstrap/js/bootstrap.min.js"></script>
 
