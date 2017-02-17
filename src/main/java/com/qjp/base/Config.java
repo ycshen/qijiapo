@@ -10,5 +10,6 @@ package com.qjp.base;
 public class Config {
 	public static final String MENU = "MENU";
 	public static final String INIT_MEMOEVENT = "INIT_MEMOEVENT";
+	public static final String MEMOTYPE = "MEMOTYPE";
 }
 

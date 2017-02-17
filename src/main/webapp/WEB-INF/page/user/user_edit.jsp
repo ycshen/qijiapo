@@ -27,7 +27,7 @@
     <div class="layui-input-block">
     	<c:if test="${editType == 2}">
                 <select class="form-control select2" style="width: 100%;display:inline;" name="departmentId">
-                  <option value="-1">无部门状态</option>
+                  <option value="-1">请选择部门</option>
                   <c:if test="${departmentList != null && departmentList.size() > 0 }">
                   	<c:forEach items="${departmentList}" var="department">
                   		 <option <c:if test="${department.id == user.departmentId}">selected="selected"</c:if> value="${department.id}">${department.departmentName }</option>

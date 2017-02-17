@@ -18,7 +18,7 @@ public class ValidateUtils {
 	 * @return true 是
 	 */
 	public static boolean isTelephone(String telephone){
-		Pattern p = Pattern.compile("^[A-Za-z0-9\\u4e00-\\u9fa5]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$");
+		Pattern p = Pattern.compile("^[1][3,4,5,7,8][0-9]{9}$");
 		Matcher m = p.matcher(telephone);
 		boolean isTel = m.matches();
 		
@@ -31,7 +31,7 @@ public class ValidateUtils {
 	 * @return true 是
 	 */
 	public static boolean isValidPass(String password){
-		Pattern p = Pattern.compile("^[A-Za-z0-9\\u4e00-\\u9fa5]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$");
+		Pattern p = Pattern.compile("(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{6,15}");
 		Matcher m = p.matcher(password);
 		boolean isValid = m.matches();
 		
@@ -49,6 +49,10 @@ public class ValidateUtils {
 		boolean isEmail = m.matches();
 		
 		return isEmail;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(isValidPass("Shenlian0_"));
 	}
 }
 

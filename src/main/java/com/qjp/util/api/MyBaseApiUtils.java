@@ -1037,5 +1037,24 @@ public class MyBaseApiUtils {
 		
 		return result;
 	}
+	
+	public static String insertMemo(String memoJson){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_insertMemo;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("memoJson", memoJson);
+			
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("memoJson", memoJson);
+			jsonObject.put("secret", secret);
+			HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }
 

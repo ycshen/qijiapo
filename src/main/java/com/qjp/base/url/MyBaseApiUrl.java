@@ -162,6 +162,10 @@ public class MyBaseApiUrl {
 	@Value("${mybase.batchAuth}")
 	private String mybase_batchAuth_url;
 	public static String mybase_batchAuth;
+	//memo
+	@Value("${mybase.insertMemo}")
+	private String mybase_insertMemo_url;
+	public static String mybase_insertMemo;
 	
 	@PostConstruct
 	public void init() {
@@ -216,6 +220,9 @@ public class MyBaseApiUrl {
 		mybase_insertAuth = this.mybase_insertAuth_url;
 		mybase_batchAuth = this.mybase_batchAuth_url;
 		mybase_isExistTelephone = this.mybase_isExistTelephone_url;
+		
+		//memo
+		mybase_insertMemo = this.mybase_insertMemo_url;
 	}
 	
 }

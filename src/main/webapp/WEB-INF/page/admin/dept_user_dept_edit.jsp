@@ -33,16 +33,7 @@
 							value="${department.departmentName}" maxlength="20"
 							class="layui-input" type="text" placeholder="请输入部门名称"">
     </div>
-  </div>
-  <div class="layui-form-item">
-    <label class="layui-form-label" style="width:100px;">部门负责人</label>
-    <div class="layui-input-block">
-      <input id="txtCompanyTelphone"
-							value="${company.companyTelephone}" maxlength="11"
-							class="layui-input" type="text" placeholder="请输入部门负责人">
-    </div>
-  </div>
-  
+  </div>  
   <div class="layui-form-item">
     <div class="layui-input-block">
       <button class="layui-btn" type="button"  onclick="editDepartment();">添加</button>

@@ -131,14 +131,16 @@ public class UserController {
 		if(StringUtils.isNotBlank(did)){
 			department = departmentService.getDepartmentById(Integer.parseInt(did));
 			mav.addObject("department", department);
+			mav.addObject("editType", 1);
 		}else{
 			UserEntity loginUser = UserUtils.getLoginUser(request);
 			Long companyId = loginUser.getCompanyId();
 			List<DepartmentEntity> departmentList = departmentService.getListByCompanyId(companyId.toString());
 			mav.addObject("departmentList", departmentList);
+			mav.addObject("editType", 2);
 		}
 		
-		mav.addObject("editType", 1);
+		
 		
 		return mav;
 	}
