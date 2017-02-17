@@ -47,7 +47,7 @@
   <div class="register-box-body">
     <form  method="POST" action="login">
     	<c:if test="${msg != null && msg != ''}">
-				<div class="alert alert-warning" role="alert" style="text-align:center;">${msg}</div>
+				<div class="alert alert-info" role="alert" style="text-align:center;">${msg}</div>
 			</c:if>
        <div class="form-group has-feedback">
         <input type="text" class="form-control myfont my-borderradius" name="account" placeholder="请输入手机号码/电子邮箱" id="inputAccount">
