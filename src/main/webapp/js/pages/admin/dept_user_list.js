@@ -206,6 +206,7 @@ function addHoverDom(treeId, treeNode) {
     var btn = $("#addBtn_"+treeNode.tId);
     if (btn) btn.bind("click", function(){	
     	removeHoverDom(treeId, treeNode);
+    	$("#btnAddUser").hide();
     	addPid = treeNode.id;
     	tid = treeNode.tId;
     	var pid = addPid.split("_")[0];
@@ -280,6 +281,7 @@ function getRoot() {
 } 
 
 function addSuccess(name, id){
+	
 	var zTree = $.fn.zTree.getZTreeObj("treeDemo");
 	var treeNode = zTree.getNodeByTId("treeDemo_" + tid);
 	var idStr = id + "_";
