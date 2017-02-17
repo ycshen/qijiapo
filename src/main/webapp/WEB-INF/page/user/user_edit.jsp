@@ -89,7 +89,7 @@
     <div class="layui-input-block">
     	<c:if test="${editType == 1}">
 	      <button class="layui-btn" type="button"  onclick="editUser();">添加</button>
-	      <button class="layui-btn" type="button"  onclick="editUser();">添加后继续添加</button>
+	      <button class="layui-btn" type="button"  onclick="editAgainUser();">添加后继续添加</button>
       </c:if>
       <c:if test="${editType == 2}">
 	      <button class="layui-btn" type="button"  onclick="editUser();">确定</button>
