@@ -881,6 +881,24 @@ public class MyBaseApiUtils {
 		return result;
 	}
 	
+	
+	public static String isExistTelephone(String telephone){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_isExistTelephone;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("telephone", telephone);
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("telephone", telephone);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 	public static String getPositionById(String id){
 		String result = StringUtils.EMPTY;
 		try {	

@@ -26,6 +26,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
@@ -176,6 +177,17 @@ public class OuterController {
 		return mav;
 	}
 	
+	@RequestMapping(value = "/isExistTelephone", method = RequestMethod.GET)
+	@ResponseBody
+	public Integer isExistTelephone(String telephone, HttpServletRequest request){
+		Integer isExist = 0;
+		if(StringUtils.isNotBlank(telephone)){
+			isExist = userService.isExistTelephone(telephone);
+		}
+		
+		return isExist;
+	}
+	
 	private String validateUser(UserEntity user){
 		String tip = StringUtils.EMPTY;
 		String companyName = user.getCompanyName();
@@ -203,9 +215,13 @@ public class OuterController {
 		}else if(telephone.length() != 11){
 			tip = "亲，姓名的长度是11位哦~~~";
 			return tip;
+		}else if(!ValidateUtils.isTelephone(telephone)){
+			tip = "亲，请输入正确的手机号码格式~~~";
+			return tip;
 		}else{
-			if(!ValidateUtils.isTelephone(telephone)){
-				tip = "亲，请输入正确的手机号码格式~~~";
+			Integer isExist = userService.isExistTelephone(telephone);
+			if(isExist > 0){
+				tip = "亲，该手机号码已经注册~~~";
 				return tip;
 			}
 		}

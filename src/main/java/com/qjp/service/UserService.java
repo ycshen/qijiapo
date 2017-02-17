@@ -38,6 +38,7 @@ public interface UserService {
 	 * @return
 	 */
 	List<UserAuthVO> getAuthUserByCidAndAuthId(String companyId, String authId, String isAuth);
+	Integer isExistTelephone(String telephone);
 	
 }
 

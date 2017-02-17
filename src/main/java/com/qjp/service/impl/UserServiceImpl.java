@@ -257,6 +257,30 @@ public class UserServiceImpl implements UserService{
 		String userJson = JsonUtils.json2Str(user);
 		MyBaseApiUtils.register(userJson);
 	}
+
+	@Override
+	public Integer isExistTelephone(String telephone) {
+		String loginResult = MyBaseApiUtils.isExistTelephone(telephone);
+		Integer isExist = 0;
+		if(StringUtils.isNotBlank(loginResult)){
+			JSONObject jsonObject = JSONObject.parseObject(loginResult);
+			if(jsonObject != null){
+				Object codeObj = jsonObject.get("code");
+				if(codeObj != null){
+					String code = codeObj.toString();
+					if (ApiCode.OK.toString().equals(code)) {
+						Object dataObj = jsonObject.get("data");
+						if(dataObj != null){
+							String data = dataObj.toString();
+							isExist = Integer.parseInt(data);
+						}
+					}
+				}
+			}
+		}
+		
+		return isExist;
+	}
 	
 }
 

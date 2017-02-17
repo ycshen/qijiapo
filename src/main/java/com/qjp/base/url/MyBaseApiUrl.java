@@ -107,6 +107,9 @@ public class MyBaseApiUrl {
 	@Value("${mybase.register}")
 	private String mybase_register_url;
 	public static String mybase_register;
+	@Value("${mybase.isExistTelephone}")
+	private String mybase_isExistTelephone_url;
+	public static String mybase_isExistTelephone;
 	
 	
 	//Company
@@ -212,6 +215,7 @@ public class MyBaseApiUrl {
 		mybase_cancelAuth = this.mybase_cancelAuth_url;
 		mybase_insertAuth = this.mybase_insertAuth_url;
 		mybase_batchAuth = this.mybase_batchAuth_url;
+		mybase_isExistTelephone = this.mybase_isExistTelephone_url;
 	}
 	
 }

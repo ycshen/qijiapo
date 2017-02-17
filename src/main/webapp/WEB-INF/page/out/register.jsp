@@ -94,7 +94,7 @@
         </div>
     </form>
 
-    
+    <input type="hidden" value="1" id="hidIsSubmit"/>
 
   </div>
   <!-- /.form-box -->
