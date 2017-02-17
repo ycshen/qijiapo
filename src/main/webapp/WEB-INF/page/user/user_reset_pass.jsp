@@ -38,8 +38,8 @@
     <label class="layui-form-label" style="width:100px;">方式二：</label>
     <div class="layui-input-block">
     
-      <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input" style="width: 300px;float:left;">
-      <button class="layui-btn" type="button"  onclick="editUser();"  style="width: 100px;float:left;">发送邮件</button>
+      <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input" style="width: 300px;float:left;" id="txtEmail"  placeholder="请输入电子邮箱">
+      <button class="layui-btn" type="button"  onclick="resetByEmail('${user.id}','${user.userName }');"  style="width: 100px;float:left;">发送邮件</button>
 							 
     </div>
 

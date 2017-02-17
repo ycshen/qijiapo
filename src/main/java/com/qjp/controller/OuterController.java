@@ -38,6 +38,7 @@ import com.qjp.model.ResultModel;
 import com.qjp.service.CompanyService;
 import com.qjp.service.MenuService;
 import com.qjp.service.UserService;
+import com.qjp.util.ValidateUtils;
 
 
 @Controller
@@ -203,10 +204,7 @@ public class OuterController {
 			tip = "亲，姓名的长度是11位哦~~~";
 			return tip;
 		}else{
-			Pattern p = Pattern.compile("^[1][3,4,5,7,8][0-9]{9}$");;
-			Matcher m = p.matcher(telephone);
-			boolean isTel = m.matches();
-			if(!isTel){
+			if(!ValidateUtils.isTelephone(telephone)){
 				tip = "亲，请输入正确的手机号码格式~~~";
 				return tip;
 			}
@@ -217,10 +215,7 @@ public class OuterController {
 			tip = "亲，电子邮箱不能为空哦~~~";
 			return tip;
 		}else{
-			Pattern p = Pattern.compile("^[A-Za-z0-9\\u4e00-\\u9fa5]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$");
-			Matcher m = p.matcher(email);
-			boolean isEmail = m.matches();
-			if(!isEmail){
+			if(!ValidateUtils.isEmail(email)){
 				tip = "亲，请输入正确的电子邮箱格式~~~";
 				return tip;
 			}
@@ -231,10 +226,7 @@ public class OuterController {
 			tip = "亲，密码不能为空哦~~~";
 			return tip;
 		}else{
-			Pattern p = Pattern.compile("^[A-Za-z0-9\\u4e00-\\u9fa5]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$");
-			Matcher m = p.matcher(email);
-			boolean isEmail = m.matches();
-			if(!isEmail){
+			if(!ValidateUtils.isValidPass(password)){
 				tip = "亲，密码的长度是由6-15位的数字、字母、特殊字符组成~~~";
 				return tip;
 			}

@@ -26,6 +26,7 @@ import com.qjp.service.DepartmentService;
 import com.qjp.service.UserService;
 import com.qjp.util.LogUtils;
 import com.qjp.util.UserUtils;
+import com.qjp.util.ValidateUtils;
 import com.qjp.util.query.UserQuery;
 
 /** 
@@ -249,7 +250,7 @@ public class UserController {
 	public Integer resetByEmail(String id, String email, String userName, HttpServletRequest request){
 		Integer result = ResponseStatus.ERROR;
 		UserEntity loginUser = UserUtils.getLoginUser(request);
-		if(StringUtils.isNotBlank(id)){
+		if(StringUtils.isNotBlank(id) && ValidateUtils.isEmail(email)){
 			userService.resetPassword(id, "", "2", email);
 			LogUtils.logAdmin("邮件随机重置了员工(" + userName + ")密码", loginUser);
 			result = ResponseStatus.UPDATE_SUCCESS;
