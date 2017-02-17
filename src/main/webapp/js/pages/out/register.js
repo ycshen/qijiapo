@@ -92,6 +92,8 @@ function submit(){
 	}
 	
 	if(isSubmit){
+		$("#btnRegister").html("正在初始化......");
+		$("#btnRegister").removeAttr("onclick");
 		var registerForm = $("#registerForm");
 		registerForm.action = ctx + "/out/register";
 		registerForm.submit();

@@ -83,7 +83,7 @@
       </div>
       <div class="row">
         <div class="col-xs-12">
-         <a  class="btn btn-primary btn-block btn-sm myfont"  onclick="submit();">同意，注册</a>
+         <a  class="btn btn-primary btn-block btn-sm myfont"  onclick="submit();" id="btnRegister">同意，注册</a>
         </div>
         </div>
          <div class="row">

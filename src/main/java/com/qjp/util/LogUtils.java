@@ -30,7 +30,10 @@ public class LogUtils {
 	public static void logAdmin( String logMsg, UserEntity user){
 		LogEntity log = new LogEntity();
 		log.setCompanyId(user.getCompanyId().toString());
-		log.setDepartmentId(user.getDepartmentId().toString());
+		Integer departmentId = user.getDepartmentId();
+		if(departmentId != null){
+			log.setDepartmentId(departmentId.toString());
+		}
 		log.setUserId(user.getId().toString());
 		log.setUserName(user.getUserName());
 		log.setLogType(1);
