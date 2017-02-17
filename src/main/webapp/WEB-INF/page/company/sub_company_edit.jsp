@@ -61,7 +61,6 @@
   <div class="layui-form-item">
     <div class="layui-input-block">
       <button class="layui-btn" type="button"  onclick="editCompany();">立即提交</button>
-      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
       <button type="button" class="layui-btn layui-btn-primary" onclick="cancelEdit();">取消</button>
     </div>
   </div>

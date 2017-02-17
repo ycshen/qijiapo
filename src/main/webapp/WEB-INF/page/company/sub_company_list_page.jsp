@@ -49,7 +49,7 @@
 	function getTr(obj){
 		var tr = "";
 		tr+="<tr>";
-		tr+="<td><input type=\"checkbox\"/></td>";
+		tr+="<td><button type=\"button\" class=\"btn btn-link\" onclick=\"editCompany('" + obj.id + "')\">编辑</button></td>";
 		tr+="<td>" + obj.companyName + "</td>";
 		tr += "<td>" + obj.companyAddress + "</td>";			
 		tr += "<td>" + obj.companyTelephone + "</td>";	
