@@ -12,7 +12,9 @@
    <%@include file="../share/common_css.jsp"%>
   <link rel="stylesheet" href="${ctx}/js/plugins/fullcalendar/fullcalendar.min.css">
   <link rel="stylesheet" href="${ctx}/js/plugins/fullcalendar/fullcalendar.print.css" media="print">
- 
+ <script type="text/javascript">
+	var ctx = "${pageContext.request.contextPath}";
+</script>
 
 
 </head>
@@ -25,12 +27,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        	日程安排
-        <small>管理你的日程</small>
+        	行程安排
+        <small>管理你的行程</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> 企家婆</a></li>
-        <li class="active">日程安排</li>
+        <li class="active">行程安排</li>
       </ol>
     </section>
 
@@ -40,11 +42,20 @@
         <div class="col-md-4">
           <div class="box box-solid">
             <div class="box-header with-border">
-              <h4 class="box-title">你的日程</h4>
-              <a>添加日程</a>
+              <h4 class="box-title">你的行程</h4>
             </div>
             <div class="box-body">
-             
+             	<input type="button" class="btn btn-sm btn-info" value="添加行程" onclick="addMemo();"/>
+            </div>
+             <div class="box-header with-border">
+              <h3 class="box-title">今日行程</h3>
+            </div>
+            <div class="box-body">
+            </div>
+            <div class="box-header with-border">
+              <h3 class="box-title">本周行程</h3>
+            </div>
+            <div class="box-body">
             </div>
             <!-- /.box-body -->
           </div>
@@ -69,7 +80,10 @@
   <!-- /.content-wrapper -->
 <%@include file="../share/qjp_footer.jsp"%>
 <!-- jQuery 2.2.3 -->
-<script src="${ctx}/js/plugins/jQuery/jquery-2.2.3.min.js"></script>
+
+<script type="text/javascript" src="${ctx}/js/jquery.js"></script>
+<script type="text/javascript" src="${ctx}/js/laydate/laydate.js"></script>
+<script type="text/javascript" src="${ctx}/js/layer/layer.js"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="${ctx}/js/bootstrap/js/bootstrap.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -85,6 +99,7 @@
 <!-- fullCalendar 2.2.5 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
 <script src="${ctx}/js/plugins/fullcalendar/fullcalendar.min.js"></script>
+<script src="${ctx}/js/pages/memo/memo.js"></script>
 <!-- Page specific script -->
 <script>
   $(function () {
