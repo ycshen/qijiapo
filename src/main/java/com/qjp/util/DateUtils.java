@@ -971,5 +971,17 @@ public class DateUtils {
 		}
 		return true;
 	}
+	
+	public static Date str2date(String str, String format){
+		Date date = null;
+		try {
+            DateFormat df = new SimpleDateFormat(format);
+             date = df.parse(str);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+		
+		return date;
+	}
 
 }

@@ -1049,7 +1049,7 @@ public class MyBaseApiUtils {
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("memoJson", memoJson);
 			jsonObject.put("secret", secret);
-			HttpUtils.postUrl(url, jsonObject);
+			result = HttpUtils.postUrl(url, jsonObject);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -1094,15 +1094,19 @@ public class MyBaseApiUtils {
 		return result;
 	}
 	
-	public static String getWeekMemo(String userId){
+	public static String getWeekMemo(String startTime, String endTime, String userId){
 		String result = StringUtils.EMPTY;
 		try {	
 			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_getTodayMemo;
 			Map<String,Object> maps = SHA1Utils.getSha1Map();
 			maps.put("userId", userId);			
+			maps.put("startTime", startTime);		
+			maps.put("endTime", endTime);		
 			String secret = SHA1Utils.SHA1(maps);
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("userId", userId);
+			jsonObject.put("startTime", startTime);
+			jsonObject.put("endTime", userId);
 			jsonObject.put("secret", secret);
 			result = HttpUtils.postUrl(url, jsonObject);
 		} catch (Exception e) {
@@ -1112,15 +1116,19 @@ public class MyBaseApiUtils {
 		return result;
 	}
 	
-	public static String getMonthMemo(String userId){
+	public static String getMonthMemo(String startTime, String endTime, String userId){
 		String result = StringUtils.EMPTY;
 		try {	
 			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_getMonthMemo;
 			Map<String,Object> maps = SHA1Utils.getSha1Map();
-			maps.put("userId", userId);			
+			maps.put("userId", userId);		
+			maps.put("startTime", startTime);		
+			maps.put("endTime", endTime);		
 			String secret = SHA1Utils.SHA1(maps);
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("userId", userId);
+			jsonObject.put("startTime", startTime);
+			jsonObject.put("endTime", endTime);
 			jsonObject.put("secret", secret);
 			result = HttpUtils.postUrl(url, jsonObject);
 		} catch (Exception e) {

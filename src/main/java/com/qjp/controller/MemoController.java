@@ -53,11 +53,26 @@ public class MemoController extends BaseController{
 		UserEntity user = UserUtils.getLoginUser(request);
 		List<MemoEntity> todayMemos = memoService.getTodayMemo(user.getId().toString());
 		mav.addObject("todayMemos", todayMemos);
-		/*List<MemoEntity> weekMemos = memoService.getWeekMemo(user.getId().toString());
-		mav.addObject("weekMemos", weekMemos);*/
-		List<MemoEntity> monthMemos = memoService.getMonthMemo(user.getId().toString());
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/getEvents", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public String getEvents(String startTime, String endTime, HttpServletRequest request){
+		String eventsStr  = "";
+		String format = "yyyy-MM";
+		if(StringUtils.isBlank(startTime)){
+			startTime = DateUtils.getCurrentDate(format)  + "-01 00:00:00";
+		}
+		
+		if(StringUtils.isBlank(endTime)){
+			endTime = DateUtils.getDateStr(DateUtils.addMonths(DateUtils.str2date(startTime, "yyyy-MM-dd HH:mm:ss"), 1), "yyyy-MM-dd HH:mm:ss");
+		}
+		
+		UserEntity user = UserUtils.getLoginUser(request);
+		List<MemoEntity> monthMemos = memoService.getMonthMemo(startTime, endTime, user.getId().toString());
 		if(monthMemos != null && monthMemos.size() > 0){
-			String eventsStr  = "";
 			for (MemoEntity memo : monthMemos) {
 				eventsStr += this.getEventsStr(memo) + ",";
 			}
@@ -65,31 +80,25 @@ public class MemoController extends BaseController{
 			if(StringUtils.isNotBlank(eventsStr)){
 				eventsStr = eventsStr.substring(0, eventsStr.length() - 1);
 			}
- 
-			mav.addObject("eventsStr", eventsStr);
 		}
 		
-		return mav;
+		return eventsStr;
 	}
-	
 	private String getEventsStr(MemoEntity memo){
+		String[] colors = {"#f56954", "#0073b7", "#257e4a", "#ff9f89", "#00CED1"};
 		String format ="yyyy-MM-dd HH:mm:ss";
 		String str = "{";
         str +="title: '" + memo.getMemoName() + "',";
         str +=" start: '" + DateUtils.getDateStr(memo.getMemoStartTime(), format) + "',";
         str +=" end: '" + DateUtils.getDateStr(memo.getMemoEndTime(), format) + "',";
         str +=" allDay: false,";
-        Date startDate = memo.getMemoStartTime();
-        String startTime = DateUtils.transDateToString(startDate, "yyyy-MM-dd");
-        String today =DateUtils.getCurrentDate("yyyy-MM-dd");
-        if(today.equals(startTime)){
-            str +=" backgroundColor: \"#f56954\",";
-            str +="borderColor: \"#f56954\" ";
-        }else{
-            str +=" backgroundColor: \"#0073b7\",";
-            str +="borderColor: \"#0073b7\" ";
-        }
+        java.util.Random random=new java.util.Random();// 定义随机类
+        int index = random.nextInt(5);
+        str +=" backgroundColor: \"" + colors[index] + "\",";
+        str +="borderColor: \"" + colors[index] + "\" ";
+        
 	    str +="}";
+	    
 		return str;
 	}
 	
@@ -103,8 +112,8 @@ public class MemoController extends BaseController{
 	
 	@RequestMapping(value = "/saveOrUpdate", method = RequestMethod.POST)
 	@ResponseBody
-	public Integer saveOrUpdate(@ModelAttribute MemoEntity memo, HttpServletRequest request){
-		Integer result = 0;
+	public String saveOrUpdate(@ModelAttribute MemoEntity memo, HttpServletRequest request){
+		String result = "0";
 		try{
 			Long id = memo.getId();
 			UserEntity user = UserUtils.getLoginUser(request);
@@ -114,8 +123,8 @@ public class MemoController extends BaseController{
 				memo.setCreateUser(user.getUserName());
 				memo.setIsDelete(0);
 				memo.setUserId(user.getId());
-				memoService.insertMemo(memo);
-				result = 1;
+				String idStr = memoService.insertMemo(memo);
+				result = 1 + "_" + idStr;
 			}else{
 				/*CompanyEntity oldCompany = companyService.getCompanyById(id);
 				String oldCompanyStr = oldCompany.toLogString();
@@ -127,12 +136,11 @@ public class MemoController extends BaseController{
 				oldCompany.setCompanyTelephone(company.getCompanyTelephone());
 				oldCompany.setUpdateUser(user.getUserName());
 				companyService.updateCompany(oldCompany);*/
-				result = 2;
+				result = 2 + "_" + id;
 			}
 		}catch(Exception e){
 			//暂时不记录监控
 			e.printStackTrace();
-			result = 0;
 		}
 		
 		return result;

@@ -15,9 +15,9 @@ import com.qjp.util.query.ConfigQuery;
  * @author <a href="mailto:shenyuchuan@itiaoling.com">申鱼川</a>
  */
 public interface MemoService {
-	void insertMemo(MemoEntity memo);
+	String insertMemo(MemoEntity memo);
 	List<MemoEntity> getTodayMemo(String userId);
-	List<MemoEntity> getWeekMemo(String userId);
-	List<MemoEntity> getMonthMemo(String userId);
+	List<MemoEntity> getWeekMemo(String startTime, String endTime, String userId);
+	List<MemoEntity> getMonthMemo(String startTime, String endTime, String userId);
 }
 

@@ -69,28 +69,7 @@
             	
             </c:if>
             </div>
-            <<%-- div class="box-header with-border">
-              <h3 class="box-title">本周行程</h3>
-            </div>
-            <div class="box-body">
-            
-            <c:if test="${weekMemos != null && weekMemos.size() > 0}">
-            	<table class="table table-striped">
-					 <tr>
-						 	<td>开始时间</td>
-	            			<td >行程主题</td>
-						 </tr>
-					 <c:forEach items="${weekMemos}" var="memo">
-	            		<tr>
-						 	<td><f:formatDate value="${memo.memoStartTime}" pattern="yyyy-MM-dd HH:mm" /></td>
-	            			<td >${memo.memoName }</td>
-						 </tr>
-	            	</c:forEach>
-				</table>
-            	
-            </c:if>
-            </div> --%>
-            <!-- /.box-body -->
+           
           </div>
         </div>
         <!-- /.col -->
@@ -115,7 +94,6 @@
 <!-- Bootstrap 3.3.6 -->
 <script src="${ctx}/js/bootstrap/js/bootstrap.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
-<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <!-- Slimscroll -->
 <script src="${ctx}/js/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
@@ -123,49 +101,11 @@
 <!-- AdminLTE App -->
 <script src="${ctx}/js/adminlte/dist/js/app.min.js"></script>
 <!-- fullCalendar 2.2.5 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<script src="${ctx }/js/fullcalendar-3.2.0/lib/moment.min.js"></script>
 <script src="${ctx}/js/plugins/fullcalendar/fullcalendar.min.js"></script>
 <script type="text/javascript" src="${ctx}/js/layui/layui.js"></script>
 <script src="${ctx}/js/pages/memo/memo.js"></script>
 <!-- Page specific script -->
-<script>
-  $(function () {
-    $('#calendar').fullCalendar({
-    	 buttonText: {
-   	        today: '今天',
-   	        month: '月视图',
-   	        week: '周视图',
-   	        day: '日视图'
-   	    },
-   	    allDayText: "全天",
-   	    timeFormat: 'H:mm', 
-   	    weekMode: "fixed",
-   	    columnFormat: {
-   	        month: 'dddd',
-   	        week: 'dddd',
-   	        day: 'dddd'
-   	    },
-   	     titleFormat: {
-   	        month: 'yyyy MMMM',
-   	        week: "[yyyy年] MM月d日",
-   	        day: 'yyyy年 MMMM月d日'
-   	    },  
-   	    monthNames: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
-   	    dayNames: ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"],
-   	    header: {
-   	        left: 'prev,next today',
-   	        center: 'title',
-   	        right: 'month,agendaWeek,agendaDay'
-   	    },
-   	   editable: false,
-   	   eventStartEditable: false,
-      events: [
-       ${eventsStr} 
-      ]
-    });
 
-   
-  });
-</script>
 </body>
 </html>

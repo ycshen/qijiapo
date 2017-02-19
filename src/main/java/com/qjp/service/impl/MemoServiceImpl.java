@@ -24,9 +24,28 @@ import com.qjp.util.api.model.ApiCode;
 public class MemoServiceImpl implements MemoService{
 
 	@Override
-	public void insertMemo(MemoEntity memo) {
+	public String insertMemo(MemoEntity memo) {
 		String memoJson = JsonUtils.json2Str(memo);
-		MyBaseApiUtils.insertMemo(memoJson);
+		String idResult = MyBaseApiUtils.insertMemo(memoJson);
+		String id = "";
+		if(StringUtils.isNotBlank(idResult)){
+			JSONObject jsonObject = JSONObject.parseObject(idResult);
+			if(jsonObject != null){
+				Object codeObj = jsonObject.get("code");
+				if(codeObj != null){
+					String code = codeObj.toString();
+					if (ApiCode.OK.toString().equals(code)) {
+						Object dataObj = jsonObject.get("data");
+						if(dataObj != null){
+							id = dataObj.toString();
+						}
+						
+					}
+				}
+			}
+		}
+		
+		return id;
 	}
 
 	@Override
@@ -55,9 +74,9 @@ public class MemoServiceImpl implements MemoService{
 	}
 
 	@Override
-	public List<MemoEntity> getWeekMemo(String userId) {
+	public List<MemoEntity> getWeekMemo(String startTime, String endTime, String userId) {
 		List<MemoEntity> list = null;
-		String loginResult = MyBaseApiUtils.getWeekMemo(userId);
+		String loginResult = MyBaseApiUtils.getWeekMemo(startTime, endTime, userId);
 		if(StringUtils.isNotBlank(loginResult)){
 			JSONObject jsonObject = JSONObject.parseObject(loginResult);
 			if(jsonObject != null){
@@ -80,9 +99,9 @@ public class MemoServiceImpl implements MemoService{
 	}
 
 	@Override
-	public List<MemoEntity> getMonthMemo(String userId) {
+	public List<MemoEntity> getMonthMemo(String startTime, String endTime, String userId) {
 		List<MemoEntity> list = null;
-		String loginResult = MyBaseApiUtils.getMonthMemo(userId);
+		String loginResult = MyBaseApiUtils.getMonthMemo(startTime, endTime, userId);
 		if(StringUtils.isNotBlank(loginResult)){
 			JSONObject jsonObject = JSONObject.parseObject(loginResult);
 			if(jsonObject != null){

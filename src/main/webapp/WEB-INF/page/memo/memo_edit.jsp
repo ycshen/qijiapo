@@ -147,40 +147,37 @@ layui.use(['form', 'layedit', 'laydate'], function(){
         data: memo,
         async: false,
         success: function(data) {
-        	var id = "";
-        	if(data.indexOf("id") > 0){
-        		var idObj = data.split("_")[1];
-        		id = idObj.substring(2);
-        		data = data.split("_")[0];
-        	}
-			  if(data == 1){
-				  layer.alert('新增成功',
-						  {closeBtn: false,
-						  skin: 'layui-layer-molv'
-						  },
-						  function(index){
-							  window.parent.addSuccess(departmentName, id);
-						  }
-			);
-          }else if(data == 2){
-        	  layer.alert('更新成功', 
-        			  {closeBtn: false,
-  		  		skin: 'layui-layer-molv'
-  			  },function(index){
-        		  window.parent.addSuccess();
-        		  
-      		});
-          }else if(data == 4){
-        	  layer.alert("该部门已存在相同的下级部门名称！",
-        			  {closeBtn: false,
-  		  		skin: 'layui-layer-molv'
-  			  }); 
-          }else{
-        	  layer.alert("操作失败！",
-        			  {closeBtn: false,
-  		  		skin: 'layui-layer-molv'
-  			  }); 
-          }
+           if(data.indexOf("_") > 0){
+               var idArr = data.split("_");
+               var result = idArr[0];
+               var id = idArr[1];
+        	   if(result == 1){
+     			  layer.alert('添加行程成功',
+     					  {closeBtn: false,
+     					  skin: 'layui-layer-molv'
+     					  },
+     					  function(index){
+         					  var memoName = "";
+         					  var startTime = "";
+         					  var endTime = "";
+     						  window.parent.addSuccess(memoName, startTime, endTime, id);
+     					  }
+     			);
+               }else if(result == 2){
+             	  layer.alert('更新成功', 
+             			  {closeBtn: false,
+       		  		skin: 'layui-layer-molv'
+       			  },function(index){
+             		 // window.parent.addSuccess();
+             		  
+           		});
+               }
+            }else{
+            	layer.alert("操作失败！",
+          			  {closeBtn: false,
+    		  		skin: 'layui-layer-molv'
+    			  }); 
+            }
         }
     });
     return false;
