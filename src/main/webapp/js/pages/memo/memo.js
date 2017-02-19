@@ -5,7 +5,7 @@ function addMemo(){
 		title: '添加行程',
 		shadeClose: true,
 		shade: 0.8,
-		area: ['550px', '400px'],
+		area: ['600px', '500px'],
 		content: url
 	});
 }

@@ -18,7 +18,7 @@ public interface ConfigService {
 	ConfigQuery getConfigList(ConfigQuery configQuery);
 	void updateConfig(ConfigEntity config);
 	ConfigEntity getConfigById(Integer id);
-	List<ConfigEntity> getConfigListByCode(String code);
+	List<ConfigEntity> getConfigListByCode(String configCode);
 	void deleteConfigById(String id);
 }
 

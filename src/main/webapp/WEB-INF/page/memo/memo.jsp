@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -12,6 +13,7 @@
    <%@include file="../share/common_css.jsp"%>
   <link rel="stylesheet" href="${ctx}/js/plugins/fullcalendar/fullcalendar.min.css">
   <link rel="stylesheet" href="${ctx}/js/plugins/fullcalendar/fullcalendar.print.css" media="print">
+<link rel="stylesheet" href="${ctx}/js/layui/css/layui.css">
  <script type="text/javascript">
 	var ctx = "${pageContext.request.contextPath}";
 </script>
@@ -51,12 +53,43 @@
               <h3 class="box-title">今日行程</h3>
             </div>
             <div class="box-body">
+            <c:if test="${todayMemos != null && todayMemos.size() > 0}">
+            	<table class="table table-striped">
+					 <tr>
+						 	<td>开始时间</td>
+	            			<td >行程主题</td>
+						 </tr>
+					 <c:forEach items="${todayMemos}" var="memo">
+	            		<tr class="danger">
+						 	<td><f:formatDate value="${memo.memoStartTime}" pattern="HH:mm" /></td>
+	            			<td >${memo.memoName }</td>
+						 </tr>
+	            	</c:forEach>
+				</table>
+            	
+            </c:if>
             </div>
-            <div class="box-header with-border">
+            <<%-- div class="box-header with-border">
               <h3 class="box-title">本周行程</h3>
             </div>
             <div class="box-body">
-            </div>
+            
+            <c:if test="${weekMemos != null && weekMemos.size() > 0}">
+            	<table class="table table-striped">
+					 <tr>
+						 	<td>开始时间</td>
+	            			<td >行程主题</td>
+						 </tr>
+					 <c:forEach items="${weekMemos}" var="memo">
+	            		<tr>
+						 	<td><f:formatDate value="${memo.memoStartTime}" pattern="yyyy-MM-dd HH:mm" /></td>
+	            			<td >${memo.memoName }</td>
+						 </tr>
+	            	</c:forEach>
+				</table>
+            	
+            </c:if>
+            </div> --%>
             <!-- /.box-body -->
           </div>
         </div>
@@ -67,15 +100,10 @@
               <!-- THE CALENDAR -->
               <div id="calendar"></div>
             </div>
-            <!-- /.box-body -->
           </div>
-          <!-- /. box -->
         </div>
-        <!-- /.col -->
       </div>
-      <!-- /.row -->
     </section>
-    <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
 <%@include file="../share/qjp_footer.jsp"%>
@@ -94,168 +122,49 @@
 <script src="${ctx}/js/plugins/fastclick/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="${ctx}/js/adminlte/dist/js/app.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="${ctx}/js/adminlte/dist/js/demo.js"></script>
 <!-- fullCalendar 2.2.5 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
 <script src="${ctx}/js/plugins/fullcalendar/fullcalendar.min.js"></script>
+<script type="text/javascript" src="${ctx}/js/layui/layui.js"></script>
 <script src="${ctx}/js/pages/memo/memo.js"></script>
 <!-- Page specific script -->
 <script>
   $(function () {
-
-    /* initialize the external events
-     -----------------------------------------------------------------*/
-    function ini_events(ele) {
-      ele.each(function () {
-
-        // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
-        // it doesn't need to have a start or end
-        var eventObject = {
-          title: $.trim($(this).text()) // use the element's text as the event title
-        };
-
-        // store the Event Object in the DOM element so we can get to it later
-        $(this).data('eventObject', eventObject);
-
-        // make the event draggable using jQuery UI
-        $(this).draggable({
-          zIndex: 1070,
-          revert: true, // will cause the event to go back to its
-          revertDuration: 0  //  original position after the drag
-        });
-
-      });
-    }
-
-    ini_events($('#external-events div.external-event'));
-
-    /* initialize the calendar
-     -----------------------------------------------------------------*/
-    //Date for the calendar events (dummy data)
-    var date = new Date();
-    var d = date.getDate(),
-        m = date.getMonth(),
-        y = date.getFullYear();
     $('#calendar').fullCalendar({
-      header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'month,agendaWeek,agendaDay'
-      },
-      buttonText: {
-        today: 'today',
-        month: 'month',
-        week: 'week',
-        day: 'day'
-      },
-      //Random default events
+    	 buttonText: {
+   	        today: '今天',
+   	        month: '月视图',
+   	        week: '周视图',
+   	        day: '日视图'
+   	    },
+   	    allDayText: "全天",
+   	    timeFormat: 'H:mm', 
+   	    weekMode: "fixed",
+   	    columnFormat: {
+   	        month: 'dddd',
+   	        week: 'dddd',
+   	        day: 'dddd'
+   	    },
+   	     titleFormat: {
+   	        month: 'yyyy MMMM',
+   	        week: "[yyyy年] MM月d日",
+   	        day: 'yyyy年 MMMM月d日'
+   	    },  
+   	    monthNames: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+   	    dayNames: ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"],
+   	    header: {
+   	        left: 'prev,next today',
+   	        center: 'title',
+   	        right: 'month,agendaWeek,agendaDay'
+   	    },
+   	   editable: false,
+   	   eventStartEditable: false,
       events: [
-        {
-          title: 'All Day Event',
-          start: new Date(y, m, 1),
-          backgroundColor: "#f56954", //red
-          borderColor: "#f56954" //red
-        },
-        {
-          title: 'Long Event',
-          start: new Date(y, m, d - 5),
-          end: new Date(y, m, d - 2),
-          backgroundColor: "#f39c12", //yellow
-          borderColor: "#f39c12" //yellow
-        },
-        {
-          title: 'Meeting',
-          start: new Date(y, m, d, 10, 30),
-          allDay: false,
-          backgroundColor: "#0073b7", //Blue
-          borderColor: "#0073b7" //Blue
-        },
-        {
-          title: 'Lunch',
-          start: new Date(y, m, d, 12, 0),
-          end: new Date(y, m, d, 14, 0),
-          allDay: false,
-          backgroundColor: "#00c0ef", //Info (aqua)
-          borderColor: "#00c0ef" //Info (aqua)
-        },
-        {
-          title: 'Birthday Party',
-          start: new Date(y, m, d + 1, 19, 0),
-          end: new Date(y, m, d + 1, 22, 30),
-          allDay: false,
-          backgroundColor: "#00a65a", //Success (green)
-          borderColor: "#00a65a" //Success (green)
-        },
-        {
-          title: 'Click for Google',
-          start: new Date(y, m, 28),
-          end: new Date(y, m, 29),
-          url: 'http://google.com/',
-          backgroundColor: "#3c8dbc", //Primary (light-blue)
-          borderColor: "#3c8dbc" //Primary (light-blue)
-        }
-      ],
-      editable: true,
-      droppable: true, // this allows things to be dropped onto the calendar !!!
-      drop: function (date, allDay) { // this function is called when something is dropped
-
-        // retrieve the dropped element's stored Event Object
-        var originalEventObject = $(this).data('eventObject');
-
-        // we need to copy it, so that multiple events don't have a reference to the same object
-        var copiedEventObject = $.extend({}, originalEventObject);
-
-        // assign it the date that was reported
-        copiedEventObject.start = date;
-        copiedEventObject.allDay = allDay;
-        copiedEventObject.backgroundColor = $(this).css("background-color");
-        copiedEventObject.borderColor = $(this).css("border-color");
-
-        // render the event on the calendar
-        // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
-        $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
-
-        // is the "remove after drop" checkbox checked?
-        if ($('#drop-remove').is(':checked')) {
-          // if so, remove the element from the "Draggable Events" list
-          $(this).remove();
-        }
-
-      }
+       ${eventsStr} 
+      ]
     });
 
-    /* ADDING EVENTS */
-    var currColor = "#3c8dbc"; //Red by default
-    //Color chooser button
-    var colorChooser = $("#color-chooser-btn");
-    $("#color-chooser > li > a").click(function (e) {
-      e.preventDefault();
-      //Save color
-      currColor = $(this).css("color");
-      //Add color effect to button
-      $('#add-new-event').css({"background-color": currColor, "border-color": currColor});
-    });
-    $("#add-new-event").click(function (e) {
-      e.preventDefault();
-      //Get value and make sure it is not null
-      var val = $("#new-event").val();
-      if (val.length == 0) {
-        return;
-      }
-
-      //Create events
-      var event = $("<div />");
-      event.css({"background-color": currColor, "border-color": currColor, "color": "#fff"}).addClass("external-event");
-      event.html(val);
-      $('#external-events').prepend(event);
-
-      //Add draggable funtionality
-      ini_events(event);
-
-      //Remove event from text input
-      $("#new-event").val("");
-    });
+   
   });
 </script>
 </body>

@@ -2,10 +2,15 @@ package com.qjp.service.impl;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSONObject;
+import com.qjp.entity.CompanyEntity;
 import com.qjp.entity.ConfigEntity;
 import com.qjp.service.ConfigService;
+import com.qjp.util.api.MyBaseApiUtils;
+import com.qjp.util.api.model.ApiCode;
 import com.qjp.util.query.ConfigQuery;
 
 /** 
@@ -41,9 +46,28 @@ public class ConfigServiceImpl implements ConfigService{
 	}
 
 	@Override
-	public List<ConfigEntity> getConfigListByCode(String code) {
+	public List<ConfigEntity> getConfigListByCode(String configCode) {
+		List<ConfigEntity> list = null;
+		String loginResult = MyBaseApiUtils.getConfigListByCode(configCode);
+		if(StringUtils.isNotBlank(loginResult)){
+			JSONObject jsonObject = JSONObject.parseObject(loginResult);
+			if(jsonObject != null){
+				Object codeObj = jsonObject.get("code");
+				if(codeObj != null){
+					String code = codeObj.toString();
+					if (ApiCode.OK.toString().equals(code)) {
+						Object dataObj = jsonObject.get("data");
+						if(dataObj != null){
+							String data = dataObj.toString();
+							list = JSONObject.parseArray(data, ConfigEntity.class);
+						}
+						
+					}
+				}
+			}
+		}
 		
-		return null;
+		return list;
 	}
 
 	@Override

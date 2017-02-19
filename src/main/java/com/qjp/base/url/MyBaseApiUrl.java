@@ -166,6 +166,20 @@ public class MyBaseApiUrl {
 	@Value("${mybase.insertMemo}")
 	private String mybase_insertMemo_url;
 	public static String mybase_insertMemo;
+	@Value("${mybase.getTodayMemo}")
+	private String mybase_getTodayMemo_url;
+	public static String mybase_getTodayMemo;
+	@Value("${mybase.getWeekMemo}")
+	private String mybase_getWeekMemo_url;
+	public static String mybase_getWeekMemo;
+	@Value("${mybase.getMonthMemo}")
+	private String mybase_getMonthMemo_url;
+	public static String mybase_getMonthMemo;
+	
+	//config
+	@Value("${mybase.getConfigListByCode}")
+	private String mybase_getConfigListByCode_url;
+	public static String mybase_getConfigListByCode;
 	
 	@PostConstruct
 	public void init() {
@@ -223,6 +237,11 @@ public class MyBaseApiUrl {
 		
 		//memo
 		mybase_insertMemo = this.mybase_insertMemo_url;
+		mybase_getTodayMemo = this.mybase_getTodayMemo_url;
+		mybase_getWeekMemo = this.mybase_getWeekMemo_url;
+		mybase_getMonthMemo = this.mybase_getMonthMemo_url;
+		//config
+		mybase_getConfigListByCode = this.mybase_getConfigListByCode_url;
 	}
 	
 }

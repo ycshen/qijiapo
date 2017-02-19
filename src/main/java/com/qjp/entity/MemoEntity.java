@@ -2,6 +2,10 @@ package com.qjp.entity;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.alibaba.fastjson.annotation.JSONField;
+
 /** 
  * <p>Project: MyBase</p> 
  * <p>Title: UserEntity.java</p> 
@@ -12,9 +16,13 @@ import java.util.Date;
  */
 public class MemoEntity extends BaseEntity{
 	private Long userId;
+	@DateTimeFormat( pattern = "yyy-MM-dd HH:mm:ss" )
+	@JSONField(format="yyy-MM-dd HH:mm:ss")
 	private Date memoStartTime; //备忘开始时间
+	@DateTimeFormat( pattern = "yyy-MM-dd HH:mm:ss" )
+	@JSONField(format="yyy-MM-dd HH:mm:ss")  
 	private Date memoEndTime; //备忘结束时间
-	private Long memoName; //行程名称
+	private String memoName; //行程名称
 	private Long memoTypeId;
 	private String memoDesc;
 	private Integer status; //1-未结束  2-已结束  3-已取消
@@ -38,10 +46,10 @@ public class MemoEntity extends BaseEntity{
 	public void setMemoEndTime(Date memoEndTime) {
 		this.memoEndTime = memoEndTime;
 	}
-	public Long getMemoName() {
+	public String getMemoName() {
 		return memoName;
 	}
-	public void setMemoName(Long memoName) {
+	public void setMemoName(String memoName) {
 		this.memoName = memoName;
 	}
 	public Long getMemoTypeId() {

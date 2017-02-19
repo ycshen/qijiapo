@@ -16,5 +16,8 @@ import com.qjp.util.query.ConfigQuery;
  */
 public interface MemoService {
 	void insertMemo(MemoEntity memo);
+	List<MemoEntity> getTodayMemo(String userId);
+	List<MemoEntity> getWeekMemo(String userId);
+	List<MemoEntity> getMonthMemo(String userId);
 }
 
