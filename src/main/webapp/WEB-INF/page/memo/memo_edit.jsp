@@ -157,9 +157,9 @@ layui.use(['form', 'layedit', 'laydate'], function(){
      					  skin: 'layui-layer-molv'
      					  },
      					  function(index){
-         					  var memoName = "";
-         					  var startTime = "";
-         					  var endTime = "";
+         					  var memoName = $("input[name='memoName']").val();
+         					  var startTime = $("input[name='memoStartTime']").val();;
+         					  var endTime = $("input[name='memoEndTime']").val();;
      						  window.parent.addSuccess(memoName, startTime, endTime, id);
      					  }
      			);

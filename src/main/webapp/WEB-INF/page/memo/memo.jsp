@@ -48,6 +48,7 @@
             </div>
             <div class="box-body">
              	<input type="button" class="btn btn-sm btn-info" value="添加行程" onclick="addMemo();"/>
+             	<!-- <input type="button" class="btn btn-sm btn-info" value="管理行程" onclick="addMemo();"/> -->
             </div>
              <div class="box-header with-border">
               <h3 class="box-title">今日行程</h3>
@@ -86,26 +87,18 @@
   </div>
   <!-- /.content-wrapper -->
 <%@include file="../share/qjp_footer.jsp"%>
-<!-- jQuery 2.2.3 -->
-
 <script type="text/javascript" src="${ctx}/js/jquery.js"></script>
-<script type="text/javascript" src="${ctx}/js/laydate/laydate.js"></script>
 <script type="text/javascript" src="${ctx}/js/layer/layer.js"></script>
-<!-- Bootstrap 3.3.6 -->
 <script src="${ctx}/js/bootstrap/js/bootstrap.min.js"></script>
-<!-- jQuery UI 1.11.4 -->
-<!-- Slimscroll -->
 <script src="${ctx}/js/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-<!-- FastClick -->
 <script src="${ctx}/js/plugins/fastclick/fastclick.js"></script>
-<!-- AdminLTE App -->
 <script src="${ctx}/js/adminlte/dist/js/app.min.js"></script>
-<!-- fullCalendar 2.2.5 -->
 <script src="${ctx }/js/fullcalendar-3.2.0/lib/moment.min.js"></script>
 <script src="${ctx}/js/plugins/fullcalendar/fullcalendar.min.js"></script>
 <script type="text/javascript" src="${ctx}/js/layui/layui.js"></script>
 <script src="${ctx}/js/pages/memo/memo.js"></script>
-<!-- Page specific script -->
+<script type="text/javascript">
 
+</script>
 </body>
 </html>

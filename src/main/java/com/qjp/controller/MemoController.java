@@ -26,10 +26,12 @@ import com.qjp.service.ConfigService;
 import com.qjp.service.MemoService;
 import com.qjp.service.MenuService;
 import com.qjp.util.DateUtils;
+import com.qjp.util.JsonUtils;
 import com.qjp.util.LogUtils;
 import com.qjp.util.UserUtils;
 import com.qjp.util.query.MenuQuery;
 import com.qjp.util.vo.BTreeVO;
+import com.qjp.util.vo.MemoCanlendarVO;
 import com.google.gson.Gson;
 
 /** 
@@ -53,53 +55,81 @@ public class MemoController extends BaseController{
 		UserEntity user = UserUtils.getLoginUser(request);
 		List<MemoEntity> todayMemos = memoService.getTodayMemo(user.getId().toString());
 		mav.addObject("todayMemos", todayMemos);
-		
+		mav.addObject("events", this.getEvents("", "", request));
 		return mav;
 	}
 	
 	@RequestMapping(value = "/getEvents", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	@ResponseBody
-	public String getEvents(String startMonth,  HttpServletRequest request){
+	public String getEvents(String startTime, String endTime, HttpServletRequest request){
 		String eventsStr  = "";
 		String format = "yyyy-MM";
-		String startTime = "";
-		String endTime = "";
-		if(StringUtils.isNotBlank(startMonth)){
-			startMonth = DateUtils.getCurrentDate(format);
-		}
-		
 		if(StringUtils.isBlank(startTime)){
-			startTime = startMonth  + "-01 00:00:00";
+			startTime = DateUtils.getCurrentDate(format)  + "-01 00:00:00";
+		}else{
+			startTime += " 00:00:00";
 		}
 		
 		if(StringUtils.isBlank(endTime)){
 			endTime = DateUtils.getDateStr(DateUtils.addMonths(DateUtils.str2date(startTime, "yyyy-MM-dd HH:mm:ss"), 1), "yyyy-MM-dd HH:mm:ss");
+		}else{
+			endTime += " 24:00:00";
 		}
+		
 		
 		UserEntity user = UserUtils.getLoginUser(request);
 		List<MemoEntity> monthMemos = memoService.getMonthMemo(startTime, endTime, user.getId().toString());
 		if(monthMemos != null && monthMemos.size() > 0){
-			for (MemoEntity memo : monthMemos) {
+			/*for (MemoEntity memo : monthMemos) {
 				eventsStr += this.getEventsStr(memo) + ",";
 			}
 
 			if(StringUtils.isNotBlank(eventsStr)){
 				eventsStr = eventsStr.substring(0, eventsStr.length() - 1);
-			}
+			}*/
+			
+			eventsStr = this.getEventsJsonStr(monthMemos);
 		}
 		
 		return eventsStr;
 	}
+	
+	
+	private String getEventsJsonStr(List<MemoEntity> monthMemos){
+		List<MemoCanlendarVO> mcList = new LinkedList<MemoCanlendarVO>();
+		if(monthMemos != null && monthMemos.size() > 0){
+			String[] colors = {"#f56954", "#0073b7", "#eb9316", "#ff9f89", "#00CED1"};
+			MemoCanlendarVO mc = null;
+			String format ="yyyy-MM-dd HH:mm:ss";
+			for (MemoEntity memo : monthMemos) {
+				mc = new MemoCanlendarVO();
+				java.util.Random random=new java.util.Random();
+				int index = random.nextInt(5);
+				mc.setAllDay(false);
+				mc.setBackgroundColor(colors[index]);
+				mc.setBorderColor(colors[index]);
+				mc.setEnd(DateUtils.getDateStr(memo.getMemoEndTime(), format));
+				mc.setStart(DateUtils.getDateStr(memo.getMemoStartTime(), format));
+				mc.setTitle(memo.getMemoName());
+				mcList.add(mc);
+			}
+		}
+		
+		return JsonUtils.json2Str(mcList);
+	}
+	
 	private String getEventsStr(MemoEntity memo){
 		String[] colors = {"#f56954", "#0073b7", "#257e4a", "#ff9f89", "#00CED1"};
 		String format ="yyyy-MM-dd HH:mm:ss";
 		String str = "{";
-        str +="title: '" + memo.getMemoName() + "',";
-        str +=" start: '" + DateUtils.getDateStr(memo.getMemoStartTime(), format) + "',";
-        str +=" end: '" + DateUtils.getDateStr(memo.getMemoEndTime(), format) + "',";
+        str +="title: \"" + memo.getMemoName() + "\",";
+        str +=" start: \"" + DateUtils.getDateStr(memo.getMemoStartTime(), format) + "\",";
+        str +=" end: \"" + DateUtils.getDateStr(memo.getMemoEndTime(), format) + "\",";
         str +=" allDay: false,";
-        java.util.Random random=new java.util.Random();// 定义随机类
-        int index = random.nextInt(5);
+        // 定义随机类
+
+		java.util.Random random=new java.util.Random();
+		int index = random.nextInt(5);
         str +=" backgroundColor: \"" + colors[index] + "\",";
         str +="borderColor: \"" + colors[index] + "\" ";
         

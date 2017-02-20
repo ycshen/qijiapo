@@ -12,19 +12,22 @@ function addMemo(){
 
 function addSuccess(memoName, startTime, endTime, id){
 	layer.closeAll();
+	var event = [];
+	event.push({
+		title: memoName,
+		start: startTime,
+		end: endTime, 
+		allDay: false,
+        backgroundColor: "#f56954", //Blue
+        borderColor: "#f56954" 
+		
+		
+	});
+	$("#calendar").fullCalendar("addEventSource",event);
 }
 
 $(function () {
-	$.ajax({
-        url: ctx + "/inner/memo/getEvents?startMonth=2017-02",
-        type: "get",
-        success: function(json) { // 获取当前月的数据
-            /*var events = [];
-            events.push(json);
-            callback(events);*/
-      	  alert(json)
-        }
-    });
+	
     $('#calendar').fullCalendar({
     	 buttonText: {
    	        today: '今天',
@@ -54,20 +57,19 @@ $(function () {
    	    },
    	   editable: false,
    	   eventStartEditable: false,
-       events:  function(start,end,timezone, callback) {
-          var date = this.getDate().format('YYYY-MM');
-          $.ajax({
-              url: ctx + "/inner/memo/getEvents?startMonth" + start,
-              type: "get",
-              success: function(json) { // 获取当前月的数据
-                  /*var events = [];
-                  events.push(json);
-                  callback(events);*/
-            	  alert(json)
-              }
-          });
-      }
-    });
+       events: 
+           function(start,end,timezone, callback) {
+    	   var startTime = start.format("YYYY-MM-DD");
+    	   var endTime = end.format("YYYY-MM-DD");
+	          $.ajax({
+	              url: ctx + "/inner/memo/getEvents?startMonth=" + start + "&endTime=" + endTime,
+	              type: "get",
+	              success: function(json) { // 获取当前月的数据
+	            	  callback(json)
+	              }
+	          });
+	      } 
+    	});
 
    
   });
