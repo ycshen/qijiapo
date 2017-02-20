@@ -15,6 +15,16 @@ function addSuccess(memoName, startTime, endTime, id){
 }
 
 $(function () {
+	$.ajax({
+        url: ctx + "/inner/memo/getEvents?startMonth=2017-02",
+        type: "get",
+        success: function(json) { // 获取当前月的数据
+            /*var events = [];
+            events.push(json);
+            callback(events);*/
+      	  alert(json)
+        }
+    });
     $('#calendar').fullCalendar({
     	 buttonText: {
    	        today: '今天',
@@ -44,18 +54,16 @@ $(function () {
    	    },
    	   editable: false,
    	   eventStartEditable: false,
-      events:  function(start,end,timezone, callback) {
+       events:  function(start,end,timezone, callback) {
           var date = this.getDate().format('YYYY-MM');
           $.ajax({
-              url: ctx + '/inner/memo/getEvents?startTime' + start,
-              dataType: 'json',
-              data: {
-                  date: date,
-              },
+              url: ctx + "/inner/memo/getEvents?startMonth" + start,
+              type: "get",
               success: function(json) { // 获取当前月的数据
-                  var events = [];
+                  /*var events = [];
                   events.push(json);
-                  callback(events);
+                  callback(events);*/
+            	  alert(json)
               }
           });
       }
