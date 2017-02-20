@@ -59,11 +59,17 @@ public class MemoController extends BaseController{
 	
 	@RequestMapping(value = "/getEvents", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	@ResponseBody
-	public String getEvents(String startTime, String endTime, HttpServletRequest request){
+	public String getEvents(String startMonth,  HttpServletRequest request){
 		String eventsStr  = "";
 		String format = "yyyy-MM";
+		String startTime = "";
+		String endTime = "";
+		if(StringUtils.isNotBlank(startMonth)){
+			startMonth = DateUtils.getCurrentDate(format);
+		}
+		
 		if(StringUtils.isBlank(startTime)){
-			startTime = DateUtils.getCurrentDate(format)  + "-01 00:00:00";
+			startTime = startMonth  + "-01 00:00:00";
 		}
 		
 		if(StringUtils.isBlank(endTime)){

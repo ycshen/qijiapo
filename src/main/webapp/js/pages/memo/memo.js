@@ -47,7 +47,7 @@ $(function () {
       events:  function(start,end,timezone, callback) {
           var date = this.getDate().format('YYYY-MM');
           $.ajax({
-              url: ctx + '/inner/memo/getEvents?startTime' + start,
+              url: ctx + '/inner/memo/getEvents?startMonth=' + date,
               dataType: 'json',
               data: {
                   date: date,
