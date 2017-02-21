@@ -281,6 +281,11 @@ public class UserServiceImpl implements UserService{
 		
 		return isExist;
 	}
+
+	@Override
+	public void changeCollapse(String userId, String isCollapseMenu) {
+		MyBaseApiUtils.changeCollapse(userId, isCollapseMenu);
+	}
 	
 }
 

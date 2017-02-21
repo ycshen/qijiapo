@@ -14,9 +14,19 @@
     <!-- Header Navbar -->
     <nav class="navbar navbar-static-top" role="navigation">
       <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-        <span class="sr-only">Toggle navigation</span>
-      </a>
+      
+      <c:choose>
+	<c:when test="${loginUser.isCollapseMenu == 1}">
+		 <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button" title="展开菜单" onclick="changeCollapse();">
+	        <span class="sr-only">展开菜单</span>
+	      </a>
+	</c:when>
+	<c:otherwise>
+		<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button" title="折叠菜单" onclick="changeCollapse();">
+	        <span class="sr-only">折叠菜单</span>
+	      </a>
+	</c:otherwise>
+</c:choose>
       <!-- Navbar Right Menu -->
      <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
           <ul class="nav navbar-nav">
@@ -185,6 +195,5 @@
           </li>
         </ul>
       </div>
-   	  
     </nav>
   </header>

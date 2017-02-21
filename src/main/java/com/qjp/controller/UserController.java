@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -189,6 +190,21 @@ public class UserController {
 		}
 		
 		return result;
+	}
+	
+	@RequestMapping(value = "/changeCollapse", method = RequestMethod.GET)
+	@ResponseBody
+	public void changeCollapse(HttpServletRequest request){
+		UserEntity loginUser = UserUtils.getLoginUser(request);
+		userService.changeCollapse(loginUser.getId().toString(), "");
+		if(loginUser.getIsCollapseMenu() == 0){
+			loginUser.setIsCollapseMenu(1);
+		}else{
+			loginUser.setIsCollapseMenu(0);
+		}
+		
+		HttpSession seesion = request.getSession();
+		seesion.setAttribute("loginUser",loginUser);	
 	}
 	
 	@RequestMapping(value = "/leave", method = RequestMethod.GET)

@@ -9,3 +9,15 @@
   <link rel="stylesheet" href="${ctx}/js/adminlte/dist/css/AdminLTE.min.css">
   <link rel="stylesheet" href="${ctx}/js/adminlte/dist/css/skins/skin-black.min.css">
 <link href="${ctx}/js/pagination/pagination.css" rel="stylesheet">
+
+   	  <script type="text/javascript">
+			function changeCollapse(){
+				$.ajax({
+					url: "${ctx}/inner/user/changeCollapse",
+					type: 'get',
+					success: function(){
+						
+						}
+				});
+			}
+   	  </script>

@@ -53,7 +53,16 @@
 
 
 </head>
-<body class="hold-transition skin-black sidebar-mini">
+<c:choose>
+	<c:when test="${loginUser.isCollapseMenu == 1}">
+		<body class="hold-transition skin-black sidebar-mini sidebar-collapse">
+	</c:when>
+	<c:otherwise>
+		<body class="hold-transition skin-black sidebar-mini">
+	</c:otherwise>
+</c:choose>
+
+
 <div class="wrapper">
 
  <%@include file="../share/qjp_header.jsp"%>

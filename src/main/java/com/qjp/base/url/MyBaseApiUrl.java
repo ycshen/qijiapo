@@ -110,6 +110,9 @@ public class MyBaseApiUrl {
 	@Value("${mybase.isExistTelephone}")
 	private String mybase_isExistTelephone_url;
 	public static String mybase_isExistTelephone;
+	@Value("${mybase.changeCollapse}")
+	private String mybase_changeCollapse_url;
+	public static String mybase_changeCollapse;
 	
 	
 	//Company
@@ -217,6 +220,8 @@ public class MyBaseApiUrl {
 		mybase_getUserListByAuthId = this.mybase_getUserListByAuthId_url;
 		mybase_getAuthUserByCidAndAuthId = this.mybase_getAuthUserByCidAndAuthId_url;
 		mybase_register = this.mybase_register_url;
+		mybase_changeCollapse = this.mybase_changeCollapse_url;
+		
 		//position
 		mybase_getSystemPosition = this.mybase_getSystemPosition_url;
 		mybase_getPositionByCompanyId = this.mybase_getPositionByCompanyId_url;
