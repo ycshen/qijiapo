@@ -2,193 +2,199 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
 <c:set var="ctx" value="${pageContext.request.contextPath}"></c:set>
-<meta charset="UTF-8">
-<title>企业信息管理</title>
-<link href="${ctx}/js/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="${ctx}/css/common.css" rel="stylesheet">
-<script type="text/javascript">
+<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>企家婆-专业的企业服务好帮手</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+   <%@include file="../share/common_css.jsp"%>
+<link rel="stylesheet" href="${ctx}/js/plugins/datatables/dataTables.bootstrap.css">
+<link rel="stylesheet" href="${ctx}/js/layui/css/layui.css">
+<link rel="stylesheet" href="${ctx}/js/select2/select2.min.css">
+<script type="text/javascript" src="${ctx}/js/jquery.js"></script>
+<script src="${ctx}/js/bootstrap/js/bootstrap.min.js"></script>
+<script src="${ctx}/js/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="${ctx}/js/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<script src="${ctx}/js/plugins/fastclick/fastclick.js"></script>
+<script src="${ctx}/js/adminlte/dist/js/app.min.js"></script>
+<script type="text/javascript" src="${ctx}/js/layui/layui.js"></script>
+<script src="${ctx}/js/select2/select2.full.min.js"></script>
+<%-- <script type="text/javascript" src="${ctx}/js/layer/layer.js"></script> --%>
+<script type="text/javascript" src="${ctx}/js/pagination/jquery.pagination.js"></script>
+<script type="text/javascript" src="http://zhengjinfan.cn/js/area.js"></script>
+<script src="${ctx}/js/pages/competitor/competitor_list.js"></script>
+<style type="text/css">
+	.mybox{
+		margin-bottom: 0px;
+	}
+	.my-box-body{
+		padding: 0px;
+	}
+	.my-label{
+	    width: 120px;
+    
+    }
+    .mytable tr td{
+    	border: 0px;
+    }
+    .my-input{
+    	width: 150px;
+    }
+    .my-layui-input-inline{
+    	width: 100px;
+    }
+</style>
+ <script type="text/javascript">
 	var ctx = "${pageContext.request.contextPath}";
 </script>
+
+
 </head>
-<body>
+<body class="hold-transition skin-black sidebar-mini">
+<div class="wrapper">
 
-	<div id="main" class="container-fluid">
+ <%@include file="../share/qjp_header.jsp"%>
+  <%@include file="../share/qjp_menu.jsp"%>
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        	竞争对手
+        <small></small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> 企家婆</a></li>
+        <li class="active">竞争对手</li>
+      </ol>
+    </section>
 
-		<jsp:include page="../share/nav_main.jsp">
-			<jsp:param name="nav" value="list_company" />
-		</jsp:include>
-
-		<div id="main_content">
-
-			<div id="main_navbar" class="page-header">
-				<div class="main_navbar_title">
-					<span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>
-					企业信息管理
-				</div>
-			</div>
-
-			<div id="main_body" style="padding: 0.6em;">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						面单申请查询<span class="pull-right"> </span>
-					</div>
-					<div class="panel-body">
-						<div class="form-inline">
-						
-							<table class="table">
-								<tr style="border:0px">
-									<td style="border:0px">
-									<div class="form-group">
-										<label for="provinceSelect">企业会员级别</label> 
-										<select
-											class="form-control" id="levelSelect">
-											<option value="">请选择会员级别</option>
-											<c:if
-												test="${configList != null && configList.size() > 0 }">
-												<c:forEach var="config" items="${configList}">
-													<option
-														<c:if test="${companyQuery.level == config.value}">  selected="selected" </c:if>
-														value="${config.value}">${config.key}</option>
-												</c:forEach>
-		
-											</c:if>
-										</select>
-									</div>
-									</td>
-									<td style="border:0px">
-										<div class="form-group">
-											<label for="hidDistrict">企业名称
-											<input type="text" placeholder="企业名称" id="txtCompanyName" class="form-control" value="${companyQuery.companyName }"/>
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box mybox">
+            <div class="box-body my-box-body">
+            		<form class="layui-form">
+	          		<table class="table mytable">
+	          			<tr>
+	          				<td>
+	          				<label class="layui-form-label my-label">竞争对手名称</label>
+		          				
+						  </td>
+						  <td><input type="text" class="layui-input my-input" id="txtpositionName" placeholder="竞争对手名称"></td>
+	          				<td><label class="layui-form-label my-label">省市区</label></td>
+	          				<td colspan="3">
+									<div class="layui-form-item">
+										
+										<div class="layui-input-inline" style="width: 120px;">
+											<select name="province" lay-filter="province">
+												<option value="">请选择省</option>
+											</select>
 										</div>
-									</td>
-									<td style="border:0px">
-									<button class="btn " onclick="queryCompany('${companyQuery.page}')">查询</button>
-										<button class="btn " onclick="addCompany()">新增企业信息</button>
-									</td>
-								</tr>
-								
-							</table>
+										<div class="layui-input-inline" style="width: 120px;">
+											<select name="city" lay-filter="city">
+												<option value="">请选择市</option>
+											</select>
+										</div>
+										<div class="layui-input-inline" style="width: 120px;">
+											<select name="area" lay-filter="area">
+												<option value="">请选择县/区</option>
+											</select>
+										</div>
+									</div>
+							</div>
+	          				</td>
+	          				
+	          			</tr>
+	          			<tr>
+	          			<td colspan="4">
+				  		<div class="layui-btn-group">
+					  	  <button class="layui-btn layui-btn-primary">
+							<i class="layui-icon">&#x1002;</i>查询
 							
-							
-							
-							
-							
+						  </button>
+						  <button class="layui-btn layui-btn-primary">
+						    <i class="layui-icon">&#xe61f;</i>新增竞争对手
+						  </button>
+						  <button class="layui-btn layui-btn-primary">
+						    <i class="layui-icon">&#xe640;</i>删除
+						  </button>
+						  <button class="layui-btn layui-btn-primary">
+						    <i class="layui-icon">&#xe620;</i>转移
+						  </button>
 						</div>
-					</div>
-					<div class="panel-heading">企业信息列表</div>
-
-					<div class="table-responsive">
-						<table id="syslist" class="table table-bordered table-hover">
-							<thead>
-								<tr>
-									<th>操作</th>
-									<th>企业编号</th>
-									<th>企业名称</th>
-									<th>企业地址</th>
-									<th>企业联系方式</th>
-									<th>会员级别</th>
-									<th>注册时间</th>
-									<th>创建人</th>
-									<th>更新人</th>
-								</tr>
-							</thead>
-							<tbody >
-								<c:forEach items="${companyQuery.items}" var="company">
-									<tr>
-										<td style="display: none;">${company.id}</td>
-										<td>
-											<a href="#" onclick="addSubCompany('${company.id}')">添加子公司</a>&nbsp;&nbsp;
-											<a  href="#" onclick="addDepartment('${company.id}')">添加部门</a>
-										</td>
-										<td>${company.id }</td>
-										<td>${company.companyName }</td>
-										<td>${company.companyAddress}</td>
-										<td>${company.companyTelephone}</td>
-										<td id="company_level_${company.id }">
-											<c:if test="${company.level == 100}">
-												普通会员
-											</c:if>
-											<c:if test="${company.level == 101}">
-												白银会员
-											</c:if>
-											<c:if test="${company.level == 102}">
-												黄金会员
-											</c:if>
-											<c:if test="${company.level == 103}">
-												钻石会员
-											</c:if>
-											<c:if test="${company.level == 104}">
-												终身会员
-											</c:if><c:if test="${company.level == 105}">
-												禁用会员
-											</c:if>
-										</td>
-										<td>
-										<f:formatDate value="${company.createTime}" pattern="yyyy-MM-dd HH:mm:ss" />
-										</td>
-										<td>${company.createUser}</td>
-										<td>${company.updateUser}</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-						<nav class="text-center">
-							<jsp:include page="../share/page.jsp">
-								<jsp:param name="url"
-									value="?conpanyName=${companyQuery.companyName }&level=${companyQuery.level}&page=" />
-								<jsp:param name="count" value="${companyQuery.count }" />
-								<jsp:param name="page" value="${companyQuery.page }" />
-								<jsp:param name="size" value="${companyQuery.size }" />
-							</jsp:include>
-							
-						</nav>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-<script type="text/javascript" src="${ctx}/js/jquery.js"></script>
-<script type="text/javascript" src="${ctx}/js/laydate/laydate.js"></script>
-<script type="text/javascript" src="${ctx}/js/layer/layer.js"></script>
-<script type="text/javascript" src="${ctx}/js/pages/company/company_list.js"></script>
-<!-- <script type="text/javascript">
-	$(function(){
-		var start = {
-				  elem: '#start',
-				  format: 'YYYY-MM-DD hh:mm:ss',
-				  min: '2016-01-01 23:59:59', //设定最小日期为当前日期
-				  max: '2099-06-16 23:59:59', //最大日期
-				  istime: true,
-				  istoday: false,
-				  event: 'focus',
-				  choose: function(datas){
-				     end.min = datas; //开始日选好后，重置结束日的最小日期
-				     end.start = datas //将结束日的初始值设定为开始日
-				  }
-				};
-		var end = {
-		  elem: '#end',
-		  format: 'YYYY-MM-DD hh:mm:ss',
-		  min: '2016-01-01 23:59:59',
-		  max: '2099-06-16 23:59:59',
-		  istime: true,
-		  event: 'focus',
-		  istoday: false,
-		  choose: function(datas){
-		    start.max = datas; //结束日选好后，重置开始日的最大日期
-		  }
-		};
-		laydate(start);
-		laydate(end);
-		});
-		
-</script> -->
+	          			</td>
+	          			</tr>
+	          			
+	          		</table>
+				  
+								</form>
+	          					
+	        </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th><input type="checkbox"></th>
+                  <th>操作</th>
+                  <th>竞争对手名称</th>
+                  <th>竞争对手所有人</th>
+                  <th>所属部门</th>
+                  <th>省份</th>
+                  <th>地址</th>
+                  <th>公司网址</th>
+                  <th>总人数</th>
+                  <th>上年销售额</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td><input type="checkbox"></td>
+                  <td>
+                  	<div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                          <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                          
+                         	 <li><a href="#" onclick="editPosition('${position.id}');">转移</a></li>
+                         	 <li><a href="#" onclick="editPosition('${position.id}');">删除</a></li>
+                         	 <li><a href="#" onclick="editPosition('${position.id}');">编辑</a></li>
+                         	
+                        </ul>
+                      </div>
+                  </td>
+                  <td><a href="#" onclick="viewDetail();" style="color:#009688;">远洋集团</a></td>
+                  <td>张三 </td>
+                  <td>销售二组</td>
+                  <td>四川省</td>
+                  <td> 成都市外光华</td>
+                  <td>www.yuanyang.com</td>
+                  <td>68</td>
+                  <td>9000000</td>
+                </tr>
+                
+                
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          
+        </div>
+         <div class="row">
+	       	 <div class="col-md-12" id="demo7" style="text-align:center;">
+	            	<%@include file="competitor_list_page.jsp" %>
+	       	 </div>
+       	 </div>
+      </div>
+    </section>
+  </div>
+  <!-- /.content-wrapper -->
+<%@include file="../share/qjp_footer.jsp"%>
 </body>
 </html>
-
-
-
