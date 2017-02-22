@@ -183,6 +183,10 @@ public class MyBaseApiUrl {
 	@Value("${mybase.getConfigListByCode}")
 	private String mybase_getConfigListByCode_url;
 	public static String mybase_getConfigListByCode;
+	//location
+	@Value("${mybase.getProCityArea}")
+	private String mybase_getProCityArea_url;
+	public static String mybase_getProCityArea;
 	
 	@PostConstruct
 	public void init() {
@@ -247,6 +251,9 @@ public class MyBaseApiUrl {
 		mybase_getMonthMemo = this.mybase_getMonthMemo_url;
 		//config
 		mybase_getConfigListByCode = this.mybase_getConfigListByCode_url;
+		
+		//location
+		mybase_getProCityArea = this.mybase_getProCityArea_url;
 	}
 	
 }
