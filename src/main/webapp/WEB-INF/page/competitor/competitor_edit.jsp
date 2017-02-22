@@ -10,6 +10,9 @@
 <link href="${ctx}/js/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="${ctx}/css/common.css" rel="stylesheet">
 <link rel="stylesheet" href="${ctx}/js/layui/css/layui.css">
+<%@include file="../share/common_js.jsp"%>
+
+<script type="text/javascript" src="${ctx}/js/pages/competitor/competitor_edit.js"></script>
 <script type="text/javascript">
 	var ctx = "${pageContext.request.contextPath}";
 </script>
@@ -41,7 +44,7 @@ margin: 0px 15px 0px 0px;
 </head>
 <body style="background: #fff;">
 	
-<form class="layui-form" id="myForm">
+<form class="layui-form" id="myForm" onsubmit="return false;">
 <div class="container content_div">
 	<div class="layui-form-item my-layui-form-item my-top">
     <label class="layui-form-label">竞争对手所有人<span style="color:red">*</span></label>
@@ -52,20 +55,19 @@ margin: 0px 15px 0px 0px;
   <div class="layui-form-item my-layui-form-item my-top">
     <label class="layui-form-label">竞争对手名称<span style="color:red">*</span></label>
     <div class="layui-input-block">
-      <input type="text" name="memoName" lay-verify="memoName" autocomplete="off" placeholder="请输入竞争对手名称" class="layui-input" maxlength="10">
+      <input type="text" name="competitorName" lay-verify="competitorName" autocomplete="off" placeholder="请输入竞争对手名称" class="layui-input" maxlength="10">
     </div>
   </div>
  <div class="layui-form-item my-layui-form-item">
     <label class="layui-form-label">所属部门<span style="color:red">*</span></label>
-    <div class="layui-input-block">
-      <input type="radio" name="status" value="1" title="未开始"  checked="">
-      <input type="radio" name="status"  value="2" title="已开始">
-      <input type="radio" name="status"  value="3" title="已取消">
+    <div class="layui-input-inline" style="margin-right: 0px;">
+            <input type="text" name="beyondDeptName" autocomplete="off"  class="layui-input" value="${user.departmentName}" readonly="readonly">
     </div>
+    <button class="layui-btn  layui-btn-primary" onclick="selectDepartment();"><i class="layui-icon">&#xe61f;</i></button>
   </div>
   <div id="divViewer">
   	
-  	<div class="layui-form-item my-layui-form-item">
+  	<div class="layui-form-item my-layui-form-item" style="margin-top:  20px;">
     <label class="layui-form-label"></label>
     <div class="layui-input-block">
       <a href="#" onclick="addMoreInfo();" style="color:#009688">新增更多信息</a>
@@ -150,9 +152,7 @@ margin: 0px 15px 0px 0px;
     </div>
   </div>
 </form>
- <script type="text/javascript" src="${ctx}/js/jquery.js"></script>         
-<script src="${ctx}/js/layui/layui.js" charset="utf-8"></script>
-<script type="text/javascript" src="${ctx}/js/pages/competitor/competitor_edit.js"></script>
+
 <script>
 layui.use(['form', 'layedit', 'laydate'], function(){
   var form = layui.form()
@@ -162,16 +162,16 @@ layui.use(['form', 'layedit', 'laydate'], function(){
   
   //自定义验证规则
   form.verify({
-	  memoName: function(value){
+	  competitorName: function(value){
 	      if(value.length < 2){
-	        return '行程主题的长度不能小于2个字符';
+	        return '竞争对手名称的长度不能小于2个字符';
 	      }
 	
-	      if(value.length > 10){
-	          return '行程主题的长度不能大于10个字符';
+	      if(value.length > 30){
+	          return '竞争对手名称的长度不能大于00个字符';
 	       }
 	    },
-	  memoTypeId: function(value){
+	  /* memoTypeId: function(value){
 			if(value == -1){
 				 return '请选择行程类型';
 				}
@@ -189,14 +189,14 @@ layui.use(['form', 'layedit', 'laydate'], function(){
 		 if(value <startTime){
 			 return '结束时间不能早于开始时间';
 			 }
-	  }
+	  } */
   });
   
   
   
   //监听提交
   form.on('submit(mySubmit)', function(data){
-	var url = ctx + "/inner/memo/saveOrUpdate"
+	var url = ctx + "/inner/competitor/saveOrUpdate"
 	var memo =  $('#myForm').serialize();
     $.ajax({
         cache: true,
@@ -205,7 +205,7 @@ layui.use(['form', 'layedit', 'laydate'], function(){
         data: memo,
         async: false,
         success: function(data) {
-           if(data.indexOf("_") > 0){
+          /*  if(data.indexOf("_") > 0){
                var idArr = data.split("_");
                var result = idArr[0];
                var id = idArr[1];
@@ -235,7 +235,7 @@ layui.use(['form', 'layedit', 'laydate'], function(){
           			  {closeBtn: false,
     		  		skin: 'layui-layer-molv'
     			  }); 
-            }
+            } */
         }
     });
     return false;

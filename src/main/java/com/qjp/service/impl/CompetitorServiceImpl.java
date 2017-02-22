@@ -17,6 +17,7 @@ import com.qjp.util.api.CRMApiUtils;
 import com.qjp.util.api.MyBaseApiUtils;
 import com.qjp.util.api.model.ApiCode;
 import com.qjp.util.query.CompanyQuery;
+import com.qjp.util.query.CompetitorQuery;
 
 /** 
  * <p>Project: qijiapo</p> 
@@ -32,7 +33,40 @@ public class CompetitorServiceImpl implements CompetitorService{
 	@Override
 	public void insertCompetitor(CompetitorEntity competitor) {
 		String jsonStr = JsonUtils.json2Str(competitor);
-		CRMApiUtils.insertCustomer(jsonStr);
+		CRMApiUtils.insertCompetitor(jsonStr);
+	}
+
+	@Override
+	public CompetitorQuery getCompetitorPage(CompetitorQuery competitorQuery) {
+		Long companyId = competitorQuery.getCompanyId();
+		Integer pageSize = competitorQuery.getSize();
+		Integer currentPage = competitorQuery.getPage();
+		String loginResult = CRMApiUtils.getCompetitorPage(companyId.toString(), pageSize.toString(), currentPage.toString());
+		if(StringUtils.isNotBlank(loginResult)){
+			JSONObject jsonObject = JSONObject.parseObject(loginResult);
+			if(jsonObject != null){
+				Object codeObj = jsonObject.get("code");
+				if(codeObj != null){
+					String code = codeObj.toString();
+					if (ApiCode.OK.toString().equals(code)) {
+						Object dataObj = jsonObject.get("data");
+						if(dataObj != null){
+							String data = dataObj.toString();
+							List<CompetitorEntity> list = JSONObject.parseArray(data, CompetitorEntity.class);
+							competitorQuery.setItems(list);
+						}
+						
+						Object countObj = jsonObject.get("count");
+						if(countObj != null){
+							String count = countObj.toString();
+							competitorQuery.setCount(Integer.parseInt(count));
+						}
+					}
+				}
+			}
+		}
+		
+		return competitorQuery;
 	}
 	
 }

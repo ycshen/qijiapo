@@ -1,82 +1,47 @@
 package com.qjp.entity;
+
+
 /**
  * 竞争对手
  * @author Administrator
  *
  */
-public class CompetitorEntity extends BaseEntity{
+public class CompetitorEntity extends CRMBaseEntity{
 	private String competitorName; //竞争对手名称
-	private String beyondUser; //竞争对手所有人
-	private String beyondUserType; //竞争对手类型 1-个人 2-团队or部门 3-公司
-	private String proviceId;
-	private String provinceName;
-	private String cityId;
-	private String cityName;
-	private String areaId;
-	private String areaName;
+	private String beyondDept; //竞争对手所属部门
+	private String beyondDeptName; //竞争对手所属部门
+	private String beyondDeptType; //竞争对手所属部门类型 1-部门 2-公司
 	private String address;
 	private String website; //公司网址
 	private Integer staffNum; //员工数量
 	private String saleMoney; //公司销售额
-	private String remark; //备注
-	private String postcode; //邮编
-	private String facsimile; //传真
 	private String mobile; //电话
-	private String weibo; //微博
 	private String beyondOf; //所属人
+	private String beyondOfName; //所属人名称
 	public String getCompetitorName() {
 		return competitorName;
 	}
 	public void setCompetitorName(String competitorName) {
 		this.competitorName = competitorName;
 	}
-	public String getBeyondUser() {
-		return beyondUser;
+	public String getBeyondDept() {
+		return beyondDept;
 	}
-	public void setBeyondUser(String beyondUser) {
-		this.beyondUser = beyondUser;
+	public void setBeyondDept(String beyondDept) {
+		this.beyondDept = beyondDept;
 	}
-	public String getBeyondUserType() {
-		return beyondUserType;
+	public String getBeyondDeptType() {
+		return beyondDeptType;
 	}
-	public void setBeyondUserType(String beyondUserType) {
-		this.beyondUserType = beyondUserType;
+	
+	public String getBeyondDeptName() {
+		return beyondDeptName;
 	}
-	public String getProviceId() {
-		return proviceId;
+	public void setBeyondDeptName(String beyondDeptName) {
+		this.beyondDeptName = beyondDeptName;
 	}
-	public void setProviceId(String proviceId) {
-		this.proviceId = proviceId;
-	}
-	public String getProvinceName() {
-		return provinceName;
-	}
-	public void setProvinceName(String provinceName) {
-		this.provinceName = provinceName;
-	}
-	public String getCityId() {
-		return cityId;
-	}
-	public void setCityId(String cityId) {
-		this.cityId = cityId;
-	}
-	public String getCityName() {
-		return cityName;
-	}
-	public void setCityName(String cityName) {
-		this.cityName = cityName;
-	}
-	public String getAreaId() {
-		return areaId;
-	}
-	public void setAreaId(String areaId) {
-		this.areaId = areaId;
-	}
-	public String getAreaName() {
-		return areaName;
-	}
-	public void setAreaName(String areaName) {
-		this.areaName = areaName;
+	public void setBeyondDeptType(String beyondDeptType) {
+		this.beyondDeptType = beyondDeptType;
 	}
 	public String getAddress() {
 		return address;
@@ -102,35 +67,12 @@ public class CompetitorEntity extends BaseEntity{
 	public void setSaleMoney(String saleMoney) {
 		this.saleMoney = saleMoney;
 	}
-	public String getRemark() {
-		return remark;
-	}
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
-	public String getPostcode() {
-		return postcode;
-	}
-	public void setPostcode(String postcode) {
-		this.postcode = postcode;
-	}
-	public String getFacsimile() {
-		return facsimile;
-	}
-	public void setFacsimile(String facsimile) {
-		this.facsimile = facsimile;
-	}
+	
 	public String getMobile() {
 		return mobile;
 	}
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
-	}
-	public String getWeibo() {
-		return weibo;
-	}
-	public void setWeibo(String weibo) {
-		this.weibo = weibo;
 	}
 	public String getBeyondOf() {
 		return beyondOf;
@@ -138,4 +80,12 @@ public class CompetitorEntity extends BaseEntity{
 	public void setBeyondOf(String beyondOf) {
 		this.beyondOf = beyondOf;
 	}
+	public String getBeyondOfName() {
+		return beyondOfName;
+	}
+	public void setBeyondOfName(String beyondOfName) {
+		this.beyondOfName = beyondOfName;
+	}
+	
+	
 }

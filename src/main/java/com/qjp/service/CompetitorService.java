@@ -1,8 +1,7 @@
 package com.qjp.service;
 
-import com.qjp.entity.CompanyEntity;
 import com.qjp.entity.CompetitorEntity;
-import com.qjp.util.query.CompanyQuery;
+import com.qjp.util.query.CompetitorQuery;
 
 /** 
  * <p>Project: MyBase</p> 
@@ -14,5 +13,6 @@ import com.qjp.util.query.CompanyQuery;
  */
 public interface CompetitorService {
 	void insertCompetitor(CompetitorEntity competitor);
+	CompetitorQuery getCompetitorPage(CompetitorQuery competitorQuery);
 }
 

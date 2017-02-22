@@ -6,6 +6,11 @@ function addMoreInfo(){
 	$("#divViewer").hide();
 	$("#divOther").show();
 }
+function returnInfo(id, name){
+	alert(id + name);
+	layer.closeAll();
+}
+
 function isBlank(args){
 	var result = false;
 	if(args == "" || args == null || args == undefined){
@@ -71,4 +76,8 @@ function editCompany(){
     });
 	
 }
+
+$(function(){
+	
+});
 

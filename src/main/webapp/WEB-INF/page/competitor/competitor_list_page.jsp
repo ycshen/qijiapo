@@ -1,17 +1,17 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <script type="text/javascript">
- layui.use(['laypage', 'layer'], function(){
+/*  layui.use(['laypage', 'layer'], function(){
 	  var laypage = layui.laypage
 	  ,layer = layui.layer;
 	  
 	  
 	  laypage({
 	    cont: 'demo7'
-	    ,pages: 100
+	    ,pages: '${competitorQuery.count}'
 	    ,skip: true
 	  });
 	  
-	});
+	}); */
 	
 	
 	

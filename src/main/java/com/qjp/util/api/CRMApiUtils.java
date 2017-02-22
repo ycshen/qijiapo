@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.alibaba.fastjson.JSONObject;
 import com.qjp.base.url.CRMApiUrl;
+import com.qjp.base.url.MyBaseApiUrl;
 import com.qjp.util.CommonUtils;
 import com.qjp.util.HttpUtils;
 import com.qjp.util.SHA1Utils;
@@ -64,6 +65,29 @@ public class CRMApiUtils {
 			Map<String,Object> maps = SHA1Utils.getSha1Map();
 			maps.put("competitor", competitor);
 			String secret = SHA1Utils.SHA1(maps);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	
+	public static String getCompetitorPage(String companyId, String pageSize, String currentPage){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getCRMUrl() + CRMApiUrl.crm_getCompetitorPage;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("id", companyId);
+			maps.put("pageSize", pageSize);
+			maps.put("currentPage", currentPage);
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("id", companyId);
+			jsonObject.put("pageSize", pageSize);
+			jsonObject.put("currentPage",currentPage);
 			jsonObject.put("secret", secret);
 			result = HttpUtils.postUrl(url, jsonObject);
 		} catch (Exception e) {

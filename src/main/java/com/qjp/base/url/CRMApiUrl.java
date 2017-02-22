@@ -27,6 +27,9 @@ public class CRMApiUrl {
 	@Value("${crm.insertCompetitor}")
 	private String crm_insertCompetitor_url;
 	public static String crm_insertCompetitor;
+	@Value("${crm.getCompetitorPage}")
+	private String crm_getCompetitorPage_url;
+	public static String crm_getCompetitorPage;
 	@PostConstruct
 	public void init() {
 		crm = this.crm_url;
@@ -35,6 +38,7 @@ public class CRMApiUrl {
 		
 		//competitor
 		crm_insertCompetitor = this.crm_insertCompetitor_url;
+		crm_getCompetitorPage = this.crm_getCompetitorPage_url;
 	}
 	
 }

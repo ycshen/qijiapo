@@ -17,6 +17,7 @@
 <script type="text/javascript" src="${ctx}/js/jquery.js"></script>
 <script src="${ctx}/js/bootstrap/js/bootstrap.min.js"></script>
 <script src="${ctx}/js/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="${ctx}/js/plugins/datatables/dataTables.bootstrap.min.js"></script>
 <script src="${ctx}/js/plugins/slimScroll/jquery.slimscroll.min.js"></script> 
 <script src="${ctx}/js/plugins/fastclick/fastclick.js"></script>
 <script src="${ctx}/js/adminlte/dist/js/app.min.js"></script>
@@ -144,10 +145,10 @@
 	        </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="example1" class="table table-bordered table-striped">
+              <table id="myDataTable" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th><input type="checkbox"></th>
+                  <th><input type="checkbox" name="competitor-list-checkable"></th>
                   <th>操作</th>
                   <th>竞争对手名称</th>
                   <th>竞争对手所有人</th>
@@ -160,31 +161,37 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td><input type="checkbox"></td>
-                  <td>
-                  	<div class="btn-group">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                          <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                          
-                         	 <li><a href="#" onclick="editPosition('${position.id}');">转移</a></li>
-                         	 <li><a href="#" onclick="editPosition('${position.id}');">删除</a></li>
-                         	 <li><a href="#" onclick="editPosition('${position.id}');">编辑</a></li>
-                         	
-                        </ul>
-                      </div>
-                  </td>
-                  <td><a href="#" onclick="viewDetail();" style="color:#009688;">远洋集团</a></td>
-                  <td>张三 </td>
-                  <td>销售二组</td>
-                  <td>四川省</td>
-                  <td> 成都市外光华</td>
-                  <td>www.yuanyang.com</td>
-                  <td>68</td>
-                  <td>9000000</td>
-                </tr>
+                <%-- <c:if test="${competitorQuery.items != null && competitorQuery.items.size() > 0}">
+                	<c:forEach items="${competitorQuery.items }" var="competitor">
+                	
+                		<tr>
+		                  <td><input type="checkbox"></td>
+		                  <td>
+		                  	<div class="btn-group">
+		                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+		                          <span class="caret"></span>
+		                        </button>
+		                        <ul class="dropdown-menu">
+		                          
+		                         	 <li><a href="#" onclick="editPosition('${position.id}');">转移</a></li>
+		                         	 <li><a href="#" onclick="editPosition('${position.id}');">删除</a></li>
+		                         	 <li><a href="#" onclick="editPosition('${position.id}');">编辑</a></li>
+		                         	
+		                        </ul>
+		                      </div>
+		                  </td>
+		                  <td><a href="#" onclick="viewDetail();" style="color:#009688;">${competitor.competitorName }</a></td>
+		                  <td>${competitor.beyondOfName }</td>
+		                  <td>${competitor.beyondDeptName }</td>
+		                  <td>${competitor.provinceName }-${competitor.cityName}-${competitor.areaName }</td>
+		                  <td>${competitor.address }</td>
+		                  <td>${competitor.website }</td>
+		                  <td>${competitor.staffNum }</td>
+		                  <td>${competitor.saleMoney }</td>
+		                </tr>
+                	</c:forEach>
+                </c:if> --%>
+                
                 
                 
                 </tfoot>
