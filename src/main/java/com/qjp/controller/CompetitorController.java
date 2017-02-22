@@ -41,6 +41,7 @@ public class CompetitorController {
 		UserEntity user = UserUtils.getLoginUser(request);
 		competitorQuery.setCompanyId(user.getCompanyId());
 		competitorQuery = competitorService.getCompetitorPage(competitorQuery);
+		competitorQuery.setSize(65);
 		String jsonStr = JsonUtils.json2Str(competitorQuery);
 		
 		return jsonStr;

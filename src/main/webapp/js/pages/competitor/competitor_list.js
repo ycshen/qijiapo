@@ -151,7 +151,7 @@ $(function(){
 });
 
 function initDataTable(){
-	$('#myDataTable').dataTable( {
+	$("#myDataTable").dataTable( {
 		       ajax : {  
 		            type: "GET",  
 		            url: ctx + '/inner/competitor/listAjax',  
@@ -171,7 +171,7 @@ function initDataTable(){
 			                result.recordsFiltered = result.count || 0;  
 			                result.data = result.items || {};  
 			                delete result.count;  
-			                delete result.items;  
+			                delete result.items; 
 			                return result.data;  
 			            }  
 		       	},  
@@ -218,15 +218,19 @@ function initDataTable(){
 	                 { data: 'staffNum' },
 	                 { data: 'saleMoney' }
 	             ],
-	             
+	       "bPaginate": true,
+	       "bFilter": true, 
+	       "sPaginationType": "full_numbers", 
 	       "paging": true,
-	       "lengthChange": false,
+	       "lengthChange": true,
 	       "info": true,
 	       "autoWidth": true,
+	       "bSort": false,
 	       "drawCallback" : function() {  
 	            // 取消全选  
 	            $(":checkbox[name='competitor-list-checkable']").prop('checked', false);  
 	        }, 
+	        "oLanguage": CONSTANT.DATA_TABLES.DEFAULT_OPTION.LANGUAGE
 	   } );
 }
 
@@ -253,7 +257,6 @@ function getArea(data){
 }
 
 var CONSTANT = {  
-        
 	    // datatables常量  
 	    DATA_TABLES : {  
 	        DEFAULT_OPTION : { // DataTables初始化选项  
@@ -265,7 +268,7 @@ var CONSTANT = {
 	                sInfoEmpty : "显示第 0 至 0 项结果，共 0 项",  
 	                sInfoFiltered : "(由 _MAX_ 项结果过滤)",  
 	                sInfoPostFix : "",  
-	                sSearch : "搜索:",  
+	                sSearch : "本页搜索:",  
 	                sUrl : "",  
 	                sEmptyTable : "表中数据为空",  
 	                sLoadingRecords : "载入中...",  
@@ -321,3 +324,20 @@ var CONSTANT = {
 	      
 	  
 	};  
+
+
+Date.prototype.Format = function (fmt) { //author: meizz 
+    var o = {
+        "M+": this.getMonth() + 1, //月份 
+        "d+": this.getDate(), //日 
+        "h+": this.getHours(), //小时 
+        "m+": this.getMinutes(), //分 
+        "s+": this.getSeconds(), //秒 
+        "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+        "S": this.getMilliseconds() //毫秒 
+    };
+    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    for (var k in o)
+    if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    return fmt;
+}

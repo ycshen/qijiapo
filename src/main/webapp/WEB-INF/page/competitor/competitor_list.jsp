@@ -161,36 +161,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <%-- <c:if test="${competitorQuery.items != null && competitorQuery.items.size() > 0}">
-                	<c:forEach items="${competitorQuery.items }" var="competitor">
-                	
-                		<tr>
-		                  <td><input type="checkbox"></td>
-		                  <td>
-		                  	<div class="btn-group">
-		                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-		                          <span class="caret"></span>
-		                        </button>
-		                        <ul class="dropdown-menu">
-		                          
-		                         	 <li><a href="#" onclick="editPosition('${position.id}');">转移</a></li>
-		                         	 <li><a href="#" onclick="editPosition('${position.id}');">删除</a></li>
-		                         	 <li><a href="#" onclick="editPosition('${position.id}');">编辑</a></li>
-		                         	
-		                        </ul>
-		                      </div>
-		                  </td>
-		                  <td><a href="#" onclick="viewDetail();" style="color:#009688;">${competitor.competitorName }</a></td>
-		                  <td>${competitor.beyondOfName }</td>
-		                  <td>${competitor.beyondDeptName }</td>
-		                  <td>${competitor.provinceName }-${competitor.cityName}-${competitor.areaName }</td>
-		                  <td>${competitor.address }</td>
-		                  <td>${competitor.website }</td>
-		                  <td>${competitor.staffNum }</td>
-		                  <td>${competitor.saleMoney }</td>
-		                </tr>
-                	</c:forEach>
-                </c:if> --%>
+               
                 
                 
                 
@@ -201,11 +172,7 @@
           </div>
           
         </div>
-         <div class="row">
-	       	 <div class="col-md-12" id="demo7" style="text-align:center;">
-	            	<%@include file="competitor_list_page.jsp" %>
-	       	 </div>
-       	 </div>
+         
       </div>
     </section>
   </div>
