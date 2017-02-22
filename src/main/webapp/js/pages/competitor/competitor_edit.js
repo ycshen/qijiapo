@@ -1,8 +1,11 @@
 
 function cancelEdit(){
-	layer.closeAll();
+	parent.layer.closeAll();
 }
-
+function addMoreInfo(){
+	$("#divViewer").hide();
+	$("#divOther").show();
+}
 function isBlank(args){
 	var result = false;
 	if(args == "" || args == null || args == undefined){

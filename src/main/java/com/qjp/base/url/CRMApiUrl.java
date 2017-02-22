@@ -23,11 +23,18 @@ public class CRMApiUrl {
 	private String crm_insertCustomer_url;
 	public static String crm_insertCustomer;
 	
+	//competitor
+	@Value("${crm.insertCompetitor}")
+	private String crm_insertCompetitor_url;
+	public static String crm_insertCompetitor;
 	@PostConstruct
 	public void init() {
 		crm = this.crm_url;
 		//customer
 		crm_insertCustomer = this.crm_insertCustomer_url;
+		
+		//competitor
+		crm_insertCompetitor = this.crm_insertCompetitor_url;
 	}
 	
 }

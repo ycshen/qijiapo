@@ -1,17 +1,15 @@
-function addCompany(){
-	var url = ctx + "/inner/company/edit";
+function addCompeotitor(){
+	var url = ctx + "/inner/competitor/forwardEdit";
 	layer.open({
 		type: 2,
-		title: '添加公司信息',
+		title: '新增竞争对手',
 		shadeClose: true,
 		shade: 0.8,
-		area: ['550px', '400px'],
+		area: ['800px', '400px'],
 		content: url
 	});
 }
 
-
-		
 function addSubCompany(id){
 	var url = ctx + "/inner/company/addSub?id=" + id;
 	layer.open({
@@ -75,8 +73,8 @@ function viewDetail(){
 }
 
 $(function(){
-	/*$(".select2").select2();*/
-
+	/*$(".select2").select2();
+*/
 	
 	
 	//初始数据
