@@ -14,17 +14,14 @@
 <link rel="stylesheet" href="${ctx}/js/plugins/datatables/dataTables.bootstrap.css">
 <link rel="stylesheet" href="${ctx}/js/layui/css/layui.css">
 <link rel="stylesheet" href="${ctx}/js/select2/select2.min.css">
-<script type="text/javascript" src="${ctx}/js/jquery.js"></script>
-<script src="${ctx}/js/bootstrap/js/bootstrap.min.js"></script>
+<%@include file="../share/common_js.jsp"%>
 <script src="${ctx}/js/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="${ctx}/js/plugins/datatables/dataTables.bootstrap.min.js"></script>
 <script src="${ctx}/js/plugins/slimScroll/jquery.slimscroll.min.js"></script> 
 <script src="${ctx}/js/plugins/fastclick/fastclick.js"></script>
 <script src="${ctx}/js/adminlte/dist/js/app.min.js"></script>
 <script src="${ctx}/js/select2/select2.full.min.js"></script>
-<script type="text/javascript" src="${ctx}/js/layer/layer.js"></script> 
 <script type="text/javascript" src="http://zhengjinfan.cn/js/area.js"></script> 
-<script type="text/javascript" src="${ctx}/js/layui/layui.js"></script> 
 <script src="${ctx}/js/pages/competitor/competitor_list.js"></script>
 <style type="text/css">
 	.mybox{
@@ -61,7 +58,6 @@
 		<body class="hold-transition skin-black sidebar-mini">
 	</c:otherwise>
 </c:choose>
-
 
 <div class="wrapper">
 
