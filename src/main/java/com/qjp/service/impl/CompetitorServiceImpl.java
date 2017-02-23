@@ -68,6 +68,41 @@ public class CompetitorServiceImpl implements CompetitorService{
 		
 		return competitorQuery;
 	}
+
+	@Override
+	public CompetitorEntity getCompetitorById(String id) {
+		String result = CRMApiUtils.getCompetitorById(id);
+		CompetitorEntity competitor = null;
+		if(StringUtils.isNotBlank(result)){
+			JSONObject jsonObject = JSONObject.parseObject(result);
+			if(jsonObject != null){
+				Object codeObj = jsonObject.get("code");
+				if(codeObj != null){
+					String code = codeObj.toString();
+					if (ApiCode.OK.toString().equals(code)) {
+						Object dataObj = jsonObject.get("data");
+						if(dataObj != null){
+							String data = dataObj.toString();
+							competitor = JSONObject.parseObject(data, CompetitorEntity.class);
+						}
+					}
+				}
+			}
+		}
+		
+		return competitor;
+	}
+
+	@Override
+	public void deleteCompetitorById(String id) {
+		CRMApiUtils.deleteCompetitorById(id);
+	}
+
+	@Override
+	public void batchDeleteCompetitor(List<String> ids) {
+		String idList = JsonUtils.json2Str(ids);
+		CRMApiUtils.batchDeleteCompetitor(idList);
+	}
 	
 }
 

@@ -336,4 +336,11 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     	return isContain;
     }
     
+    public static String splitLocation(String location){
+    	if(StringUtils.isNotBlank(location)){
+    		location = location.split("\\_")[0];
+    	}
+    	
+    	return location;
+    }
 }

@@ -11,7 +11,7 @@
 <link href="${ctx}/css/common.css" rel="stylesheet">
 <link rel="stylesheet" href="${ctx}/js/layui/css/layui.css">
 <%@include file="../share/common_js.jsp"%>
-
+<script src="${ctx}/js/pages/common/province_city_area.js"></script>
 <script type="text/javascript" src="${ctx}/js/pages/competitor/competitor_edit.js"></script>
 <script type="text/javascript">
 	var ctx = "${pageContext.request.contextPath}";
@@ -78,15 +78,21 @@ margin: 0px 15px 0px 0px;
   <div class="layui-form-item my-layui-form-item">
     <label class="layui-form-label">省市区</label>
     <div class="layui-input-block">
-      <select name="memoTypeId" lay-filter="aihao" lay-verify="memoTypeId">
-        <option value="-1"  selected="">请选择行程类型</option>
-        <c:if test="${configList != null && configList.size() > 0}">
-        	<c:forEach items="${configList}" var="config">
-        		<option value="${config.value}">${config.key}</option>
-        	</c:forEach>
-        </c:if>
-        
-      </select>
+      <div class="layui-input-inline" style="width: 120px;">
+			<select name="provinceId" lay-filter="province">
+				<option value="">请选择省</option>
+			</select>
+		</div>
+		<div class="layui-input-inline" style="width: 120px;">
+			<select name="cityId" lay-filter="city">
+				<option value="">请选择市</option>
+			</select>
+		</div>
+		<div class="layui-input-inline" style="width: 120px;">
+			<select name="areaId" lay-filter="area">
+				<option value="">请选择县/区</option>
+			</select>
+		</div>
     </div>
   </div>
    <div class="layui-form-item my-layui-form-item my-top">
@@ -98,7 +104,7 @@ margin: 0px 15px 0px 0px;
    <div class="layui-form-item my-layui-form-item my-top">
     <label class="layui-form-label">邮政编码</label>
     <div class="layui-input-block">
-      <input type="text" name="postcode" autocomplete="off" placeholder="请输入邮政编码" class="layui-input" maxlength="10">
+      <input type="num" name="postcode" autocomplete="off" placeholder="请输入邮政编码" class="layui-input" maxlength="6">
     </div>
   </div>
    <div class="layui-form-item my-layui-form-item my-top">
@@ -150,7 +156,11 @@ margin: 0px 15px 0px 0px;
       <button class="layui-btn" lay-submit="" lay-filter="mySubmit">保存</button>
       <button class="layui-btn layui-btn-primary" style="margin-right:50px;" onclick="cancelEdit();">取消</button>
     </div>
-  </div>
+  </div>  
+  
+  <input type="hidden" value="" id="hidProvinceName" name="provinceName"/>
+  <input type="hidden" value="" id="hidCityName" name="cityName"/>
+  <input type="hidden" value="" id="hidAreaName" name="areaName"/>
 </form>
 
 <script>
@@ -179,12 +189,28 @@ layui.use(['form', 'layedit', 'laydate'], function(){
   //监听提交
   form.on('submit(mySubmit)', function(data){
 	var url = ctx + "/inner/competitor/saveOrUpdate"
-	var memo =  $('#myForm').serialize();
+	var provinceName = $("select[name='provinceId']").find("option:selected").text();
+	if(provinceName != "请选择省"){
+		$("#hidProvinceName").val(provinceName);
+	}
+
+	var cityName = $("select[name='cityId']").find("option:selected").text();
+	if(cityName != "请选择市"){
+		$("#hidCityName").val(cityName);
+	}
+
+	var areaName = $("select[name='areaId']").find("option:selected").text();
+	if(areaName != "请选择县/区"){
+		$("#hidAreaName").val(areaName);
+	}
+
+
+	var competitor =  $('#myForm').serialize();
     $.ajax({
         cache: true,
         type: "POST",
         url: url,
-        data: memo,
+        data: competitor,
         async: false,
         success: function(data) {
           layer.alert('新增成功',
@@ -196,7 +222,7 @@ layui.use(['form', 'layedit', 'laydate'], function(){
 		          parent.layer.closeAll();
 			  });
         }
-    });
+    }); 
     return false;
   });
   

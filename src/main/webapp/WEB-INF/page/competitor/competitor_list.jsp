@@ -21,7 +21,6 @@
 <script src="${ctx}/js/plugins/fastclick/fastclick.js"></script>
 <script src="${ctx}/js/adminlte/dist/js/app.min.js"></script>
 <script src="${ctx}/js/select2/select2.full.min.js"></script>
-<!-- <script type="text/javascript" src="http://zhengjinfan.cn/js/area.js"></script>  -->
 <script src="${ctx}/js/pages/common/province_city_area.js"></script>
 <script src="${ctx}/js/pages/competitor/competitor_list.js"></script>
 <style type="text/css">
@@ -96,17 +95,17 @@
 									<div class="layui-form-item">
 										
 										<div class="layui-input-inline" style="width: 120px;">
-											<select name="province" lay-filter="province">
+											<select name="provinceId" lay-filter="province">
 												<option value="">请选择省</option>
 											</select>
 										</div>
 										<div class="layui-input-inline" style="width: 120px;">
-											<select name="city" lay-filter="city">
+											<select name="cityId" lay-filter="city">
 												<option value="">请选择市</option>
 											</select>
 										</div>
 										<div class="layui-input-inline" style="width: 120px;">
-											<select name="area" lay-filter="area">
+											<select name="areaId" lay-filter="area">
 												<option value="">请选择县/区</option>
 											</select>
 										</div>

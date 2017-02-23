@@ -7,7 +7,6 @@ function addMoreInfo(){
 	$("#divOther").show();
 }
 function returnInfo(id, name){
-	alert(id + name);
 	layer.closeAll();
 }
 
@@ -78,6 +77,6 @@ function editCompany(){
 }
 
 $(function(){
-	
+	initLocation();
 });
 
