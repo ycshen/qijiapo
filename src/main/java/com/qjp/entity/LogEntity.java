@@ -20,6 +20,9 @@ public class LogEntity{
 	private String userName;
 	private String logMsg;
 	private Integer logType;
+	private String casecadeId; //日志级联id
+	private String casecadeIdDesc; //日志级联id描述
+	
 	
 	/**
 	 * 
@@ -121,6 +124,18 @@ public class LogEntity{
 
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+	public String getCasecadeId() {
+		return casecadeId;
+	}
+	public void setCasecadeId(String casecadeId) {
+		this.casecadeId = casecadeId;
+	}
+	public String getCasecadeIdDesc() {
+		return casecadeIdDesc;
+	}
+	public void setCasecadeIdDesc(String casecadeIdDesc) {
+		this.casecadeIdDesc = casecadeIdDesc;
 	}
 }
 

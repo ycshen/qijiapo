@@ -44,6 +44,9 @@ public class MyBaseApiUrl {
 	@Value("${mybase.getAdminLogs}")
 	private String mybase_getAdminLogs_url;	
 	public static String mybase_getAdminLogs;
+	@Value("${mybase.getLogs}")
+	private String mybase_getLogs_url;	
+	public static String mybase_getLogs;
 	
 	//menu
 	
@@ -199,8 +202,6 @@ public class MyBaseApiUrl {
 		mybase_updateCompany = this.mybase_updateCompany_url;
 		mybase_close = this.mybase_close_url;
 		mybase_activate = this.mybase_activate_url;
-		mybase_log = this.mybase_log_url;
-		mybase_getAdminLogs = this.mybase_getAdminLogs_url;
 		//menu
 		mybase_getOuterSystemPage = this.mybase_getOuterSystemPage_url;
 		mybase_getMenus = this.mybase_getMenus_url;
@@ -254,6 +255,11 @@ public class MyBaseApiUrl {
 		
 		//location
 		mybase_getProCityArea = this.mybase_getProCityArea_url;
+		
+		//log
+		mybase_getLogs = this.mybase_getLogs_url;
+		mybase_log = this.mybase_log_url;
+		mybase_getAdminLogs = this.mybase_getAdminLogs_url;
 	}
 	
 }

@@ -16,6 +16,8 @@ public class LogQuery extends Page<LogEntity>{
 	private String userId;
 	private String departmentId;
 	private String companyId;
+	private String casecadeId;
+	private String logType;
 	public String getUserId() {
 		return userId;
 	}
@@ -33,6 +35,18 @@ public class LogQuery extends Page<LogEntity>{
 	}
 	public void setCompanyId(String companyId) {
 		this.companyId = companyId;
+	}
+	public String getCasecadeId() {
+		return casecadeId;
+	}
+	public void setCasecadeId(String casecadeId) {
+		this.casecadeId = casecadeId;
+	}
+	public String getLogType() {
+		return logType;
+	}
+	public void setLogType(String logType) {
+		this.logType = logType;
 	}
 }
 

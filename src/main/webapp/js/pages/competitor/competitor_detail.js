@@ -24,7 +24,7 @@ function deleteById(id, name){
 	layer.confirm("确定要删除竞争对手【" + name + "】相关信息吗？",{closeBtn: false,
   		skin: 'layui-layer-molv'
 	  }, function(){
-		  var url = ctx + "/inner/competitor/deleteById?id=" + id;
+		  var url = ctx + "/inner/competitor/deleteById?id=" + id +"&name=" + name;
 		$.ajax({
 			type: "get",
 			url: url,

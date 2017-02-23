@@ -140,10 +140,26 @@ font-size: 14px !important;
 			    		</tr>
 			    	</table>
 			    </div>
-			    <div class="layui-tab-item">内容2</div>
+			    <div class="layui-tab-item">
+			    	<table class="table table-hover">
+			    		<tr>
+			    			<td>操作时间</td>
+			    			<td>操作人</td>
+			    			<td>动态内容</td>
+			    		</tr>
+			    		<c:if test="${logList != null && logList.size() > 0 }">
+			    			<c:forEach items="${logList}" var="log">
+			    			<tr>
+			    				<td><f:formatDate value="${log.createTime}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+				    			<td>${log.userName }</td>
+				    			<td>${log.logMsg }</td>
+				    		</tr>
+			    			</c:forEach>
+			    		</c:if>
+			    	</table>
+			    </div>
 			    <div class="layui-tab-item">内容3</div>
 			    <div class="layui-tab-item">内容4</div>
-			    <div class="layui-tab-item">内容5</div>
 			  </div>
 			</div> 
         </div>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSONObject;
 import com.qjp.entity.LogEntity;
 import com.qjp.service.LogService;
+import com.qjp.util.JsonUtils;
 import com.qjp.util.api.MyBaseApiUtils;
 import com.qjp.util.api.model.ApiCode;
 import com.qjp.util.query.LogQuery;
@@ -26,11 +27,42 @@ import com.qjp.util.query.LogQuery;
 public class LogServiceImpl implements LogService{
 
 	@Override
-	public LogQuery getLogPage(LogQuery logQuery) {
+	public LogQuery getAdminLogPage(LogQuery logQuery) {
 		String companyId = logQuery.getCompanyId();
 		Integer pageSize = logQuery.getSize();
 		Integer currentPage = logQuery.getPage();
 		String loginResult = MyBaseApiUtils.getAdminLogs(companyId, pageSize.toString(), currentPage.toString());
+		if(StringUtils.isNotBlank(loginResult)){
+			JSONObject jsonObject = JSONObject.parseObject(loginResult);
+			if(jsonObject != null){
+				Object codeObj = jsonObject.get("code");
+				if(codeObj != null){
+					String code = codeObj.toString();
+					if (ApiCode.OK.toString().equals(code)) {
+						Object dataObj = jsonObject.get("data");
+						if(dataObj != null){
+							String data = dataObj.toString();
+							List<LogEntity> list = JSONObject.parseArray(data, LogEntity.class);
+							logQuery.setItems(list);
+						}
+						
+						Object countObj = jsonObject.get("count");
+						if(countObj != null){
+							String count = countObj.toString();
+							logQuery.setCount(Integer.parseInt(count));
+						}
+					}
+				}
+			}
+		}
+		
+		return logQuery;
+	}
+
+	@Override
+	public LogQuery getLogPage(LogQuery logQuery) {
+		String query = JsonUtils.json2Str(logQuery);
+		String loginResult = MyBaseApiUtils.getLogs(query);
 		if(StringUtils.isNotBlank(loginResult)){
 			JSONObject jsonObject = JSONObject.parseObject(loginResult);
 			if(jsonObject != null){

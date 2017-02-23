@@ -31,9 +31,28 @@ import com.qjp.util.query.CompetitorQuery;
 public class CompetitorServiceImpl implements CompetitorService{
 
 	@Override
-	public void insertCompetitor(CompetitorEntity competitor) {
+	public String insertCompetitor(CompetitorEntity competitor) {
 		String jsonStr = JsonUtils.json2Str(competitor);
-		CRMApiUtils.insertCompetitor(jsonStr);
+		String result = CRMApiUtils.insertCompetitor(jsonStr);
+		String id = "";
+		if(StringUtils.isNotBlank(result)){
+			JSONObject jsonObject = JSONObject.parseObject(result);
+			if(jsonObject != null){
+				Object codeObj = jsonObject.get("code");
+				if(codeObj != null){
+					String code = codeObj.toString();
+					if (ApiCode.OK.toString().equals(code)) {
+						Object dataObj = jsonObject.get("data");
+						if(dataObj != null){
+							id = dataObj.toString();
+							
+						}
+					}
+				}
+			}
+		}
+		
+		return id;
 	}
 
 	@Override
@@ -102,6 +121,11 @@ public class CompetitorServiceImpl implements CompetitorService{
 	public void batchDeleteCompetitor(List<String> ids) {
 		String idList = JsonUtils.json2Str(ids);
 		CRMApiUtils.batchDeleteCompetitor(idList);
+	}
+
+	@Override
+	public void updateCompetitor(CompetitorEntity competitor) {
+		
 	}
 	
 }

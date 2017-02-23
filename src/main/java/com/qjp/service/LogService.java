@@ -15,6 +15,7 @@ import com.qjp.util.query.LogQuery;
  * @author <a href="mailto:shenyuchuan@itiaoling.com">申鱼川</a>
  */
 public interface LogService {
+	LogQuery getAdminLogPage(LogQuery logQuery);
 	LogQuery getLogPage(LogQuery logQuery);
 }
 

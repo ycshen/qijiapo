@@ -1,10 +1,5 @@
 package com.qjp.controller;
 
-import java.util.ArrayList;
-
-
-
-
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -18,29 +13,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.ModelAndView;
-
-
-
-
-
-
-
 
 import com.qjp.base.ResponseStatus;
 import com.qjp.entity.CompetitorEntity;
+import com.qjp.entity.LogEntity;
 import com.qjp.entity.UserEntity;
 import com.qjp.service.CompetitorService;
+import com.qjp.service.LogService;
+import com.qjp.service.UserService;
 import com.qjp.util.JsonUtils;
+import com.qjp.util.LogUtils;
 import com.qjp.util.StringUtils;
 import com.qjp.util.UserUtils;
 import com.qjp.util.query.CompetitorQuery;
+import com.qjp.util.query.LogQuery;
 
 @Controller
 @RequestMapping("/inner/competitor")
 public class CompetitorController {
 	@Autowired
 	private CompetitorService competitorService;
+	@Autowired
+	private LogService logService;
+	@Autowired
+	private UserService userService;
 	@RequestMapping(value = "/list", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	public ModelAndView list(@ModelAttribute CompetitorQuery competitorQuery, HttpServletRequest request){
 		ModelAndView mav = new ModelAndView("/competitor/competitor_list");
@@ -81,20 +77,60 @@ public class CompetitorController {
 		mav.addObject("user", user);
 		CompetitorEntity competitor = competitorService.getCompetitorById(id);
 		mav.addObject("competitor", competitor);
+		LogQuery logQuery = new LogQuery();
+		logQuery.setCasecadeId(id);
+		logQuery.setLogType("2");
+		logQuery.setSize(30);
+		logQuery.setCompanyId(user.getCompanyId().toString());
+		logQuery = logService.getLogPage(logQuery);
+		List<LogEntity> logList = logQuery.getItems();
+		mav.addObject("logList", logList);
 		
 		return mav;
 	}
 	
 	@RequestMapping(value = "/deleteById", method = RequestMethod.GET)
 	@ResponseBody
-	public Integer deleteById(String id, HttpServletRequest request){
+	public Integer deleteById(String id, String name,HttpServletRequest request){
 		Integer result = ResponseStatus.INIT;
 		if(StringUtils.isNotBlank(id)){
 			competitorService.deleteCompetitorById(id);
+			UserEntity user = UserUtils.getLoginUser(request);
+			LogUtils.logCRMCompetitor("删除了竞争对手(" + name + ")", id, user);
 			result = ResponseStatus.UPDATE_SUCCESS;
 		}
 		
 		return result;
+	}
+	
+	@RequestMapping(value = "/transferCompetitor", method = RequestMethod.GET)
+	@ResponseBody
+	public Integer transferCompetitor(String userId, String competitorId, String transferType, HttpServletRequest request){
+		Integer result = ResponseStatus.INIT;
+		if(StringUtils.isNotBlank(userId)){
+			UserEntity transferToUser = userService.getUserById(userId);
+			UserEntity loginUser = UserUtils.getLoginUser(request);
+			if("1".equals(transferType)){
+				this.transferCompetitor(competitorId, transferToUser, loginUser);
+				result = ResponseStatus.UPDATE_SUCCESS;
+			}else if("2".equals(transferType)){
+				String[] idArr = competitorId.split("\\,");
+				for (String id : idArr) {
+					this.transferCompetitor(id, transferToUser, loginUser);
+				}
+			}
+			
+		}
+		
+		return result;
+	}
+	
+	private void transferCompetitor(String competitorId, UserEntity transferToUser, UserEntity loginUser){
+		CompetitorEntity oldCompetitor = competitorService.getCompetitorById(competitorId);
+		oldCompetitor.setBeyondOf(transferToUser.getId().toString());
+		oldCompetitor.setBeyondOfName(transferToUser.getUserName());
+		oldCompetitor.setUpdateTime(new Date());
+		oldCompetitor.setUpdateUser(loginUser.getUserName());
 	}
 	
 	@RequestMapping(value = "/batchDeleteById", method = RequestMethod.GET)
@@ -128,7 +164,8 @@ public class CompetitorController {
 			competitor.setBeyondOfName(user.getUserName());
 			competitor.setCreateTime(new Date());
 			competitor.setCreateUser(user.getUserName());
-			competitorService.insertCompetitor(competitor);
+			String returnId = competitorService.insertCompetitor(competitor);
+			LogUtils.logCRMCompetitor("添加了竞争对手(" + competitor.getCompetitorName() + ")", returnId, user);
 		}else{
 			
 		}

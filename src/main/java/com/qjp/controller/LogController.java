@@ -50,7 +50,7 @@ public class LogController extends BaseController{
 		String result = StringUtils.EMPTY;
 		UserEntity user = UserUtils.getLoginUser(request);
 		logQuery.setCompanyId(user.getCompanyId().toString());
-		logQuery = logService.getLogPage(logQuery);
+		logQuery = logService.getAdminLogPage(logQuery);
 		List<LogEntity> list = logQuery.getItems();
 		if(list != null && list.size() > 0){
 			result = new Gson().toJson(list);
@@ -64,7 +64,7 @@ public class LogController extends BaseController{
 		ModelAndView mav = new ModelAndView("/log/log_list");
 		UserEntity user = UserUtils.getLoginUser(request);
 		logQuery.setCompanyId(user.getCompanyId().toString());
-		logQuery = logService.getLogPage(logQuery);
+		logQuery = logService.getAdminLogPage(logQuery);
 		mav.addObject("logQuery", logQuery);
 		
 		return mav;

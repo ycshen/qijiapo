@@ -14,10 +14,11 @@ import com.qjp.util.query.CompetitorQuery;
  * @author <a href="mailto:shenyuchuan@itiaoling.com">申鱼川</a>
  */
 public interface CompetitorService {
-	void insertCompetitor(CompetitorEntity competitor);
+	String insertCompetitor(CompetitorEntity competitor);
 	CompetitorQuery getCompetitorPage(CompetitorQuery competitorQuery);
 	CompetitorEntity getCompetitorById(String id);
 	void deleteCompetitorById(String id);
 	void batchDeleteCompetitor(List<String> ids);
+	void updateCompetitor(CompetitorEntity competitor);
 }
 

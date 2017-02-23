@@ -7,8 +7,8 @@ import java.util.Map;
 public class Page<T> {
 	private Integer page = 1;// 页码，默认是第一页
 	private Integer size = 10;// 每页显示的记录数，默认是15
-	private Integer count;// 总记录数
-	private Integer pageCount;// 总页数
+	private Integer count=0;// 总记录数
+	private Integer pageCount=0;// 总页数
 	private List<T> items;// 对应的当前页记录
 	private Boolean isPage = true;
 	private Map<String, Object> params = new HashMap<>();// 其他的参数我们把它分装成一个Map对象
