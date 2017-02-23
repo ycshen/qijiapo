@@ -18,6 +18,7 @@
 <body>
 <form class="layui-form" method="post" id="myForm">
 	<input type="hidden" value="${competitorId}" id="hidCompetitorId"/>
+	是否将竞争对手【dsyc】转移给其他负责人？转移成功之后，该操作将无法恢复。
   <div class="layui-form-item">
     <label class="layui-form-label" style="width:100px;">新负责人：</label>
     <div class="layui-input-block">
