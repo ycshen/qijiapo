@@ -76,7 +76,7 @@ function viewDetail(id, competitorName){
 }
 
 function transfer(id, competitorName){
-	var url = ctx + "/inner/user/selectAllUser?id=" + id;
+	var url = ctx + "/inner/user/selectAllUser?id=" + id + "&name=" + competitorName;
 	var title = "转移竞争对手【" + competitorName   +"】";
 	layer.open({
 		type: 2,
