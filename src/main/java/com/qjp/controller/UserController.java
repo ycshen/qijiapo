@@ -290,5 +290,16 @@ public class UserController {
 		
 		return result;
 	}
+	
+	@RequestMapping(value = "/selectAllUser", method = RequestMethod.GET)
+	public ModelAndView selectAllUser(HttpServletRequest request){
+		ModelAndView mav = new ModelAndView("/user/user_allcompany_select");
+		UserEntity loginUser = UserUtils.getLoginUser(request);
+		List<UserEntity> userList = userService.getUserListByCompanyId(loginUser.getCompanyId().toString());
+		mav.addObject("userList", userList);
+		
+		return mav;
+	}
+	
 }
 

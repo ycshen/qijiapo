@@ -286,6 +286,30 @@ public class UserServiceImpl implements UserService{
 	public void changeCollapse(String userId, String isCollapseMenu) {
 		MyBaseApiUtils.changeCollapse(userId, isCollapseMenu);
 	}
+
+	@Override
+	public List<UserEntity> getUserListByCompanyId(String id) {
+		List<UserEntity> list = null;
+		String result = MyBaseApiUtils.getUserListByCompanyId(id);
+		if(StringUtils.isNotBlank(result)){
+			JSONObject jsonObject = JSONObject.parseObject(result);
+			if(jsonObject != null){
+				Object codeObj = jsonObject.get("code");
+				if(codeObj != null){
+					String code = codeObj.toString();
+					if (ApiCode.OK.toString().equals(code)) {
+						Object dataObj = jsonObject.get("data");
+						if(dataObj != null){
+							String data = dataObj.toString();
+							list = JSONObject.parseArray(data, UserEntity.class);
+						}
+					}
+				}
+			}
+		}
+		
+		return list;
+	}
 	
 }
 

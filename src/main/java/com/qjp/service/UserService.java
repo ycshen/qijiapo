@@ -40,5 +40,6 @@ public interface UserService {
 	List<UserAuthVO> getAuthUserByCidAndAuthId(String companyId, String authId, String isAuth);
 	Integer isExistTelephone(String telephone);
 	void changeCollapse(String userId, String isCollapseMenu);
+	List<UserEntity> getUserListByCompanyId(String id);
 }
 

@@ -112,13 +112,14 @@ public class CompetitorController {
 			UserEntity loginUser = UserUtils.getLoginUser(request);
 			if("1".equals(transferType)){
 				this.transferCompetitor(competitorId, transferToUser, loginUser);
-				result = ResponseStatus.UPDATE_SUCCESS;
 			}else if("2".equals(transferType)){
 				String[] idArr = competitorId.split("\\,");
 				for (String id : idArr) {
 					this.transferCompetitor(id, transferToUser, loginUser);
 				}
 			}
+			
+			result = ResponseStatus.UPDATE_SUCCESS;
 			
 		}
 		
@@ -128,9 +129,11 @@ public class CompetitorController {
 	private void transferCompetitor(String competitorId, UserEntity transferToUser, UserEntity loginUser){
 		CompetitorEntity oldCompetitor = competitorService.getCompetitorById(competitorId);
 		oldCompetitor.setBeyondOf(transferToUser.getId().toString());
-		oldCompetitor.setBeyondOfName(transferToUser.getUserName());
+		String transferUserName = transferToUser.getUserName();
+		oldCompetitor.setBeyondOfName(transferUserName);
 		oldCompetitor.setUpdateTime(new Date());
 		oldCompetitor.setUpdateUser(loginUser.getUserName());
+		LogUtils.logCRMCompetitor("转移竞争对手(" + oldCompetitor.getCompetitorName() + ")到" + transferUserName, competitorId, loginUser);
 	}
 	
 	@RequestMapping(value = "/batchDeleteById", method = RequestMethod.GET)

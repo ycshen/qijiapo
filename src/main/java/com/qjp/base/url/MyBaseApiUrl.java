@@ -125,6 +125,9 @@ public class MyBaseApiUrl {
 	@Value("${mybase.getCompanyById}")
 	private String mybase_getCompanyById_url;
 	public static String mybase_getCompanyById;
+	@Value("${mybase.getUserListByCompanyId}")
+	private String mybase_getUserListByCompanyId_url;
+	public static String mybase_getUserListByCompanyId;
 	
 	//Position
 	@Value("${mybase.getSystemPosition}")
@@ -226,7 +229,7 @@ public class MyBaseApiUrl {
 		mybase_getAuthUserByCidAndAuthId = this.mybase_getAuthUserByCidAndAuthId_url;
 		mybase_register = this.mybase_register_url;
 		mybase_changeCollapse = this.mybase_changeCollapse_url;
-		
+		mybase_getUserListByCompanyId = this.mybase_getUserListByCompanyId_url;
 		//position
 		mybase_getSystemPosition = this.mybase_getSystemPosition_url;
 		mybase_getPositionByCompanyId = this.mybase_getPositionByCompanyId_url;

@@ -75,6 +75,19 @@ function viewDetail(id, competitorName){
 	}); 
 }
 
+function transfer(id, competitorName){
+	var url = ctx + "/inner/user/selectAllUser?id=" + id;
+	var title = "转移竞争对手【" + competitorName   +"】";
+	layer.open({
+		type: 2,
+		title: title,
+		shadeClose: true,
+		shade: 0.8,
+		area: ['500px', '400px'],
+		content: url
+	}); 
+}
+
 $(function(){
 	/*$(".select2").select2();
 */
@@ -122,7 +135,7 @@ function initDataTable(){
 	                    	 operResult +=  "</button>";
 	                    	 operResult += " <ul class=\"dropdown-menu\">";
 		                          
-	                    	 operResult += 	" <li><a href=\"#\" onclick=\"editPosition('${position.id}');\">转移</a></li>";
+	                    	 operResult += 	" <li><a href=\"#\" onclick=\"transfer('" + competitor.id + "', '" + competitor.competitorName + "');\">转移</a></li>";
 	                    	 operResult += 	" <li><a href=\"#\" onclick=\"deleteById('" + competitor.id + "', '" + competitor.competitorName + "');\">删除</a></li>";
 	                    	 operResult += 	" <li><a href=\"#\" onclick=\"editPosition('${position.id}');\">编辑</a></li>";
 		                         	
@@ -289,6 +302,31 @@ function deleteById(id, name){
 	})
 }
 
+function deleteById(id, name){
+	layer.confirm("确定要删除竞争对手【" + name + "】相关信息吗？",{closeBtn: false,
+  		skin: 'layui-layer-molv'
+	  }, function(){
+		  var url = ctx + "/inner/competitor/deleteById?id=" + id +"&name=" + name;
+		$.ajax({
+			type: "get",
+			url: url,
+			success: function(result){
+				if(result == 2){
+					layer.alert("删除竞争对手成功",{closeBtn: false,
+				  		skin: 'layui-layer-molv'
+					  }, function(){
+						  refreshTable();
+						  layer.closeAll();
+					  });
+				}else{
+					layer.alert("删除竞争对手失败",{closeBtn: false,
+				  		skin: 'layui-layer-molv'
+					  });
+				}
+			}
+		});
+	})
+}
 Date.prototype.Format = function (fmt) { //author: meizz 
     var o = {
         "M+": this.getMonth() + 1, //月份 
