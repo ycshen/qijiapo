@@ -92,49 +92,49 @@ margin: 0px 15px 0px 0px;
    <div class="layui-form-item my-layui-form-item my-top">
     <label class="layui-form-label">地址</label>
     <div class="layui-input-block">
-      <input type="text" name="memoName" lay-verify="memoName" autocomplete="off" placeholder="请输入地址" class="layui-input" maxlength="10">
+      <input type="text" name="address" lay-verify="address" autocomplete="off" placeholder="请输入地址" class="layui-input" maxlength="50">
     </div>
   </div>
    <div class="layui-form-item my-layui-form-item my-top">
     <label class="layui-form-label">邮政编码</label>
     <div class="layui-input-block">
-      <input type="text" name="memoName" lay-verify="memoName" autocomplete="off" placeholder="请输入邮政编码" class="layui-input" maxlength="10">
+      <input type="text" name="postcode" autocomplete="off" placeholder="请输入邮政编码" class="layui-input" maxlength="10">
     </div>
   </div>
    <div class="layui-form-item my-layui-form-item my-top">
     <label class="layui-form-label">电话</label>
     <div class="layui-input-block">
-      <input type="text" name="memoName" lay-verify="memoName" autocomplete="off" placeholder="请输入电话" class="layui-input" maxlength="10">
+      <input type="text" name="mobile"  autocomplete="off" placeholder="请输入电话" class="layui-input" maxlength="10">
     </div>
   </div>
    <div class="layui-form-item my-layui-form-item my-top">
     <label class="layui-form-label">传真</label>
     <div class="layui-input-block">
-      <input type="text" name="memoName" lay-verify="memoName" autocomplete="off" placeholder="请输入传真" class="layui-input" maxlength="10">
+      <input type="text" name="facsimile" autocomplete="off" placeholder="请输入传真" class="layui-input" maxlength="10">
     </div>
   </div>
    <div class="layui-form-item my-layui-form-item my-top">
     <label class="layui-form-label">公司网址</label>
     <div class="layui-input-block">
-      <input type="text" name="memoName" lay-verify="memoName" autocomplete="off" placeholder="请输入公司网址" class="layui-input" maxlength="10">
+      <input type="text" name="website"  autocomplete="off" placeholder="请输入公司网址" class="layui-input" maxlength="10">
     </div>
   </div>
    <div class="layui-form-item my-layui-form-item my-top">
     <label class="layui-form-label">微博</label>
     <div class="layui-input-block">
-      <input type="text" name="memoName" lay-verify="memoName" autocomplete="off" placeholder="请输入微博" class="layui-input" maxlength="10">
+      <input type="text" name="weibo" autocomplete="off" placeholder="请输入微博" class="layui-input" maxlength="10">
     </div>
   </div>
    <div class="layui-form-item my-layui-form-item my-top">
     <label class="layui-form-label">总人数</label>
     <div class="layui-input-block">
-      <input type="text" name="memoName" lay-verify="memoName" autocomplete="off" placeholder="请输入总人数" class="layui-input" maxlength="10">
+      <input type="text" name="staffNum"  autocomplete="off" placeholder="请输入总人数" class="layui-input" maxlength="10">
     </div>
   </div>
    <div class="layui-form-item my-layui-form-item my-top">
     <label class="layui-form-label">上年销售额</label>
     <div class="layui-input-block">
-      <input type="text" name="memoName" lay-verify="memoName" autocomplete="off" placeholder="请输入上年销售额" class="layui-input" maxlength="10">
+      <input type="num" name="saleMoney"  autocomplete="off" placeholder="请输入上年销售额" class="layui-input">
     </div>
   </div>
   <div class="layui-form-item my-layui-form-item layui-form-text">
@@ -171,25 +171,7 @@ layui.use(['form', 'layedit', 'laydate'], function(){
 	          return '竞争对手名称的长度不能大于00个字符';
 	       }
 	    },
-	  /* memoTypeId: function(value){
-			if(value == -1){
-				 return '请选择行程类型';
-				}
-	  },
-	  memoStartTime: function(value){
-		if(value == '' || value == null || value == undefined){
-			return '请选择开始时间';
-		}
-	  },
-	  memoEndTime: function(value){
-		  if(value == '' || value == null || value == undefined){
-				return '请选择结束时间';
-			}
-		 var startTime = document.getElementById("txtStartTime").value;
-		 if(value <startTime){
-			 return '结束时间不能早于开始时间';
-			 }
-	  } */
+	  
   });
   
   
@@ -205,37 +187,14 @@ layui.use(['form', 'layedit', 'laydate'], function(){
         data: memo,
         async: false,
         success: function(data) {
-          /*  if(data.indexOf("_") > 0){
-               var idArr = data.split("_");
-               var result = idArr[0];
-               var id = idArr[1];
-        	   if(result == 1){
-     			  layer.alert('添加行程成功',
-     					  {closeBtn: false,
-     					  skin: 'layui-layer-molv'
-     					  },
-     					  function(index){
-         					  var memoName = $("input[name='memoName']").val();
-         					  var startTime = $("input[name='memoStartTime']").val();;
-         					  var endTime = $("input[name='memoEndTime']").val();;
-     						  window.parent.addSuccess(memoName, startTime, endTime, id);
-     					  }
-     			);
-               }else if(result == 2){
-             	  layer.alert('更新成功', 
-             			  {closeBtn: false,
-       		  		skin: 'layui-layer-molv'
-       			  },function(index){
-             		 // window.parent.addSuccess();
-             		  
-           		});
-               }
-            }else{
-            	layer.alert("操作失败！",
-          			  {closeBtn: false,
-    		  		skin: 'layui-layer-molv'
-    			  }); 
-            } */
+          layer.alert('新增成功',
+			  {closeBtn: false,
+			  skin: 'layui-layer-molv'
+			  },
+			  function(index){
+		          parent.refreshTable();
+		          parent.layer.closeAll();
+			  });
         }
     });
     return false;

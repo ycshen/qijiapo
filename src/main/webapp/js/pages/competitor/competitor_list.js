@@ -62,14 +62,17 @@ function addDepartment(id){
 	});
 }
 
-function viewDetail(){
-	var index = layer.open({
-		  type: 2,
-		  content: 'http://www.baidu.com',
-		  area: ['320px', '195px'],
-		  maxmin: true
-		});
-	layer.full(index);
+function viewDetail(id, competitorName){
+	var url = ctx + "/inner/department/add?id=" + id;
+	var title = "竞争对手【" + competitorName   +"】";
+	layer.open({
+		type: 2,
+		title: title,
+		shadeClose: true,
+		shade: 0.8,
+		area: ['80%', '80%'],
+		content: url
+	}); 
 }
 
 $(function(){
@@ -77,7 +80,8 @@ $(function(){
 */
 	
 	initDataTable();
-	//初始数据
+	initLocation();
+	/*//初始数据
 	var areaData = Area;
 
 	var $form;
@@ -147,7 +151,7 @@ $(function(){
 		form.on('select(area)', function(data) {
 			//console.log(data);
 		});
-	}
+	}*/
 });
 
 function initDataTable(){
@@ -235,7 +239,7 @@ function initDataTable(){
 }
 
 function renderCompetitorName(id, name){
-	var str = "<a href=\"#\" onclick=\"viewDetail('" + id + "');\" style=\"color:#009688;\">" + name + "</a>";
+	var str = "<a href=\"#\" onclick=\"viewDetail('" + id + "', '" + name + "');\" style=\"color:#009688;\">" + name + "</a>";
 	return str;
 }
 
@@ -324,6 +328,12 @@ var CONSTANT = {
 	      
 	  
 	};  
+
+function refreshTable(){
+	var table = $('#myDataTable').DataTable();  
+	table.ajax.reload().draw(); 
+}
+
 
 
 Date.prototype.Format = function (fmt) { //author: meizz 

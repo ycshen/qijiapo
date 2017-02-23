@@ -21,7 +21,8 @@
 <script src="${ctx}/js/plugins/fastclick/fastclick.js"></script>
 <script src="${ctx}/js/adminlte/dist/js/app.min.js"></script>
 <script src="${ctx}/js/select2/select2.full.min.js"></script>
-<script type="text/javascript" src="http://zhengjinfan.cn/js/area.js"></script> 
+<!-- <script type="text/javascript" src="http://zhengjinfan.cn/js/area.js"></script>  -->
+<script src="${ctx}/js/pages/common/province_city_area.js"></script>
 <script src="${ctx}/js/pages/competitor/competitor_list.js"></script>
 <style type="text/css">
 	.mybox{
