@@ -26,7 +26,7 @@ function transferCompetitor(competitorId){
 				return;
 			}
 
-			var url = ctx + "/inner/competitor/cascadeDepartment?transferType=1&userId=" + userId + "&competitorId="+ competitorId;
+			var url = ctx + "/inner/competitor/transferCompetitor?transferType=1&userId=" + userId + "&competitorId="+ competitorId;
 			$.ajax({
 		        cache: true,
 		        type: "get",
@@ -37,6 +37,7 @@ function transferCompetitor(competitorId){
 		        	  var position = $("#btnPositionName").html();
 		        	  layer.alert('转移竞争对手成功',{closeBtn: false, skin: 'layui-layer-molv'}, function(index){
 		        		  window.parent.refreshTable();
+		        		  window.parent.layer.closeAll();
 		        		  
 		      		});
 		          }else{

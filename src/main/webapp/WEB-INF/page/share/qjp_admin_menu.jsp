@@ -38,7 +38,7 @@
        	<li class="active"><a href="${ctx}/inner/admin/departmentUserList"><i class="fa fa-group"></i> 部门与员工</a></li>
         <li class="active"><a href="${ctx}/inner/position/listInit"><i class="fa fa-circle-o"></i> 职位管理</a></li>
         <li class="active"><a href="${ctx}/inner/auth/list"><i class="fa fa-unlock-alt"></i> <span>权限管理</span></a></li>
-        <li class="active"><a href="${ctx}/inner/memo/memo"><i class="fa fa-cog"></i> <span>菜单自定义</span></a></li>
+        <li class="active"><a href="${ctx}/inner/admin/menudefined/list"><i class="fa fa-cog"></i> <span>菜单自定义</span></a></li>
         <li class="active"><a href="${ctx}/inner/log/logs"><i class="fa fa-file-text"></i> <span>管理日志</span></a></li>
         <li class="active"><a href="${ctx}/inner/memo/memo"><i class="fa fa-bullhorn"></i> <span>公告管理</span></a></li>
         <li class="active"><a href="${ctx}/inner/memo/memo"><i class="fa fa-weibo"></i> <span>话题管理</span></a></li>
