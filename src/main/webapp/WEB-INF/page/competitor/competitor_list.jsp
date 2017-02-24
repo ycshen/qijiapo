@@ -7,6 +7,7 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}"></c:set>
 <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="shortcut icon" href="${pageContext.request.contextPath }/system.ico" >
   <title>企家婆-专业的企业服务好帮手</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -62,7 +63,9 @@
 <div class="wrapper">
 
  <%@include file="../share/qjp_header.jsp"%>
-  <%@include file="../share/qjp_menu.jsp"%>
+ 	
+<%@include file="../share/qjp_menu.jsp"%>
+
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">

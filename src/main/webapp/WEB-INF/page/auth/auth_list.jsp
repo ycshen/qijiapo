@@ -22,8 +22,10 @@
 <body class="hold-transition skin-black sidebar-mini">
 <div class="wrapper">
 	<%@include file="../share/qjp_header.jsp"%>
- 	<%@include file="../share/qjp_admin_menu.jsp"%>
-  
+ 	<%-- <%@include file="../share/qjp_admin_menu.jsp"%> --%>
+<jsp:include page="../share/qjp_admin_menu.jsp">
+	<jsp:param name="nav" value="auth_list" />
+</jsp:include>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
