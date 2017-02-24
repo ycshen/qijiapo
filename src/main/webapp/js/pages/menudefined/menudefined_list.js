@@ -11,6 +11,10 @@ function addPosition(){
 	});
 }
 
+function defineByRole(){
+	window.location.href = ctx + "/inner/admin/menudefined/defineByRole"
+}
+
 function queryPosition(){
 	var positionName = $("#txtpositionName").val();
 	var url = ctx + "/inner/position/page";

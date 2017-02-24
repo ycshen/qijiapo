@@ -18,9 +18,11 @@ import com.qjp.base.ResponseStatus;
 import com.qjp.entity.CompanyEntity;
 import com.qjp.entity.PositionEntity;
 import com.qjp.entity.UserEntity;
+import com.qjp.service.AuthorityService;
 import com.qjp.service.PositionService;
 import com.qjp.util.LogUtils;
 import com.qjp.util.UserUtils;
+import com.qjp.util.query.AuthorityVOQuery;
 import com.qjp.util.query.PositionQuery;
 
 /** 
@@ -35,9 +37,22 @@ import com.qjp.util.query.PositionQuery;
 @RequestMapping("/inner/admin/menudefined")
 public class MenuDefinedController extends BaseController{
 
+	@Autowired
+	private AuthorityService authService;
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView editPosition(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView("/menudefined/menudefined_list");
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/defineByRole", method = RequestMethod.GET)
+	public ModelAndView define(@ModelAttribute AuthorityVOQuery authQuery,HttpServletRequest request){
+		ModelAndView mav = new ModelAndView("/menudefined/menudefined_role_list");
+		UserEntity user = UserUtils.getLoginUser(request);
+		authQuery.setCompanyId(user.getCompanyId().toString());
+		authQuery = authService.getAuthorityList(authQuery);
+		mav.addObject("authQuery", authQuery);
 		
 		return mav;
 	}
