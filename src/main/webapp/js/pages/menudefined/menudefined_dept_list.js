@@ -19,6 +19,7 @@ function isBlank(args){
 
 $(function(){
 	initTree();
+	initMenuTree();
 })
 
 var tid = "";
@@ -37,10 +38,25 @@ function getRoot() {
 } 
 
         
-var nodeId = "";
-var zTreeObj;
+var zTreeObj_dept;
+var zTreeObj_menu;
 // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
-var setting = {
+var setting_menu = {
+        
+        data: {
+            simpleData: {
+                enable: true
+            }
+        },
+        callback:{
+        	onClick: returnInfo,
+        },
+        check: {
+        	chkStyle: "checkbox",
+        	enable: true
+        }
+    };
+var setting_dept = {
         
         data: {
             simpleData: {
@@ -52,18 +68,29 @@ var setting = {
         }
     };
 // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
-var nodeId = "";
 function initTree() {
    $.ajax({
 	   type : 'get',
 	   url : ctx + "/inner/admin/deptree",
 	   success: function(zNodes){
-		   zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
-		   zTreeObj.expandAll(true); 
+		   zTreeObj_dept = $.fn.zTree.init($("#treeDemo"), setting_dept, zNodes);
+		   zTreeObj_dept.expandAll(true); 
 		   
 	   }
    })         
 }
+
+function initMenuTree() {
+	   $.ajax({
+		   type : 'get',
+		   url : ctx + "/inner/menu/menuTree",
+		   success: function(zNodes){
+			   zTreeObj_menu = $.fn.zTree.init($("#menuTree"), setting_menu, zNodes);
+			   zTreeObj_menu.expandAll(true); 
+			   
+		   }
+	   })         
+	}
  
 function returnInfo(event, treeId, treeNode){
 	var nodeIdStr = treeNode.id;

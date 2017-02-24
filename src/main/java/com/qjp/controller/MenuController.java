@@ -281,5 +281,13 @@ public class MenuController extends BaseController{
 		
 		return isExist;
 	}
+	
+	@RequestMapping(value = "/menuTree", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public String menuTree(HttpServletRequest request){
+		String tree = menuService.getAllOutterMenu();
+		
+		return tree;
+	}
 }
 

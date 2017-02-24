@@ -74,13 +74,17 @@
        		</div>
        </div>
         <div class="col-xs-9">
-        <div class="box-header">
+        	<div class="box-header">
        			菜单
+       		</div>
+       		<div class="box-header">开发一组菜单权限定义
+       			<button class="btn btn-info " >提交菜单权限</button>
+       			<button class="btn  " >恢复</button>
        		</div>
           <div class="box">
             <!-- /.box-header -->
             <div class="box-body">
-              
+              <ul id="menuTree" class="ztree"></ul> 
             
             </div>
            

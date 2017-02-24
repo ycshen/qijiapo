@@ -83,5 +83,29 @@ public class MenuServiceImpl implements MenuService{
 	public MenuEntity getMenuByNameAndSystemId(String menuName, String systemId) {
 		return null;
 	}
+
+	@Override
+	public String getAllOutterMenu() {
+		String result = MyBaseApiUtils.getAllOutterMenu();
+		String data = "";
+		List<MenuEntity> list = null;
+		if(StringUtils.isNotBlank(result)){
+			JSONObject jsonObject = JSONObject.parseObject(result);
+			if(jsonObject != null){
+				Object codeObj = jsonObject.get("code");
+				if(codeObj != null){
+					String code = codeObj.toString();
+					if (ApiCode.OK.toString().equals(code)) {
+						Object dataObj = jsonObject.get("data");
+						if(dataObj != null){
+							data = dataObj.toString();
+						}
+					}
+				}
+			}
+		}
+		
+		return data;
+	}
 }
 

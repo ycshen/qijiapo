@@ -1215,5 +1215,21 @@ public class MyBaseApiUtils {
 		return result;
 	}
 	
+	
+	public static String getAllOutterMenu(){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_getAllOutterMenu;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }
 
