@@ -197,6 +197,10 @@ public class MyBaseApiUrl {
 	private String mybase_getProCityArea_url;
 	public static String mybase_getProCityArea;
 	
+	//menuDefined
+	@Value("${mybase.insertMenuDefined}")
+	private String mybase_insertMenuDefined_url;
+	public static String mybase_insertMenuDefined;
 	@PostConstruct
 	public void init() {
 		mybase_login = this.mybase_login_url;
@@ -267,6 +271,9 @@ public class MyBaseApiUrl {
 		mybase_getLogs = this.mybase_getLogs_url;
 		mybase_log = this.mybase_log_url;
 		mybase_getAdminLogs = this.mybase_getAdminLogs_url;
+		
+		//menuDefined
+		mybase_insertMenuDefined = this.mybase_insertMenuDefined_url;
 	}
 	
 }

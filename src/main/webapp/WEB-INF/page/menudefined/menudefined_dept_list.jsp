@@ -50,7 +50,7 @@
       <div class="row">
       	<div class="col-xs-12" style="margin-bottom:10px;">
 	      <div class="layui-btn-group">
-		  	  <button class="layui-btn layui-btn-primary">
+		  	  <button class="layui-btn layui-btn-primary" onclick="returnMenuDefined();">
 				<i class="layui-icon">&#x1002;</i>返回菜单自定义
 				
 			  </button>
@@ -78,8 +78,8 @@
        			菜单
        		</div>
        		<div class="box-header">开发一组菜单权限定义
-       			<button class="btn btn-info " >提交菜单权限</button>
-       			<button class="btn  " >恢复</button>
+       			<button class="btn btn-info " onclick="submitMD();">提交菜单权限</button>
+       			<button class="btn" >重置</button>
        		</div>
           <div class="box">
             <!-- /.box-header -->

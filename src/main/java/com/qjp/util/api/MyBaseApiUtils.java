@@ -1231,5 +1231,25 @@ public class MyBaseApiUtils {
 		
 		return result;
 	}
+	
+	 
+	public static String insertMenuDefined(String mdJson){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_insertMenuDefined;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("mdJson", mdJson);
+			
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("mdJson", mdJson);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }
 

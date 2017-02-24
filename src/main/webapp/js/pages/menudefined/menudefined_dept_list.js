@@ -104,6 +104,42 @@ function cancleType(){
 	layer.closeAll();
 }
 
+function returnMenuDefined(){
+	window.location.href = ctx + "/inner/admin/menudefined/list";
+}
+
+function submitMD(){
+
+    var treeObj = $.fn.zTree.getZTreeObj("menuTree"); 
+    var nodes = treeObj.getCheckedNodes(true);
+    var idStr = "";
+    for(var i=0; i < nodes.length;i++){
+    	idStr+= nodes[i].id + ",";
+    }
+    
+    if(isNotBlank(idStr)){
+    	idStr = idStr.substring(0, idStr.length - 1);
+    	
+    }
+    //无节点时需要提示
+    var url = ctx + "/inner/admin/menudefined/saveForDept?idStr=" + idStr
+    $.ajax({
+    	type: "get",
+    	url: url,
+    	success: function(result){
+    		if(result == 2){
+				layer.alert("设置菜单权限成功",{closeBtn: false,
+			  		skin: 'layui-layer-molv'
+				  });
+			}else{
+				layer.alert("设置菜单权限失败",{closeBtn: false,
+			  		skin: 'layui-layer-molv'
+				  });
+			}
+    	}
+    });
+    
+}
 
  
 
