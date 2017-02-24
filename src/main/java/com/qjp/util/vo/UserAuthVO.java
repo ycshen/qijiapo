@@ -26,6 +26,14 @@ public class UserAuthVO extends BaseEntity{
 	private String positionName;
 	private String email;
 	private Integer authUserId;
+	private Integer menuDefinedType;
+	
+	public Integer getMenuDefinedType() {
+		return menuDefinedType;
+	}
+	public void setMenuDefinedType(Integer menuDefinedType) {
+		this.menuDefinedType = menuDefinedType;
+	}
 	public Long getCompanyId() {
 		return companyId;
 	}

@@ -46,21 +46,21 @@
 		
       <div class="row">
       <div class="col-xs-12" style="margin-bottom:10px;">
-      <div class="layui-btn-group">
-	  	  <button class="layui-btn layui-btn-primary">
-			<i class="layui-icon">&#x1002;</i>返回菜单自定义
-			
-		  </button>
-		  <button class="layui-btn layui-btn-primary" onclick="addCompeotitor();">
-		    <i class="layui-icon">&#xe620;</i>按用户定义
-		  </button>
-		  <button class="layui-btn layui-btn-primary">
-		    <i class="layui-icon">&#xe620;</i>按职位定义
-		  </button>
-		  <button class="layui-btn layui-btn-primary">
-		    <i class="layui-icon">&#xe620;</i>按部门定义
-		  </button>
-		</div>
+	      <div class="layui-btn-group">
+		  	  <button class="layui-btn layui-btn-primary">
+				<i class="layui-icon">&#x1002;</i>返回菜单自定义
+				
+			  </button>
+			  <button class="layui-btn layui-btn-primary" onclick="addCompeotitor();">
+			    <i class="layui-icon">&#xe620;</i>按用户定义
+			  </button>
+			  <button class="layui-btn layui-btn-primary">
+			    <i class="layui-icon">&#xe620;</i>按职位定义
+			  </button>
+			  <button class="layui-btn layui-btn-primary">
+			    <i class="layui-icon">&#xe620;</i>按部门定义
+			  </button>
+			</div>
       </div>
         <div class="col-xs-5">
           <div class="box">
@@ -71,7 +71,7 @@
         <div class="box-body">
           	<form class="form-inline" role="form">
 			  <div class="form-group">
-			    <input type="text" class="form-control" id="txtAuthName" placeholder="权限名称">
+			    <input type="text" class="form-control" id="txtAuthName" placeholder="角色(权限)名称">
 			  </div>
 			  
 			  <button type="button" class="btn btn-default">查询</button>

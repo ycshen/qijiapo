@@ -1,29 +1,22 @@
 package com.qjp.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.Gson;
-import com.qjp.base.ResponseStatus;
-import com.qjp.entity.CompanyEntity;
-import com.qjp.entity.PositionEntity;
 import com.qjp.entity.UserEntity;
 import com.qjp.service.AuthorityService;
 import com.qjp.service.PositionService;
-import com.qjp.util.LogUtils;
+import com.qjp.service.UserService;
 import com.qjp.util.UserUtils;
 import com.qjp.util.query.AuthorityVOQuery;
 import com.qjp.util.query.PositionQuery;
+import com.qjp.util.query.UserQuery;
 
 /** 
  * <p>Project: MyBase</p> 
@@ -39,15 +32,19 @@ public class MenuDefinedController extends BaseController{
 
 	@Autowired
 	private AuthorityService authService;
+	@Autowired
+	private UserService userService;
+	@Autowired
+	private PositionService positionService;
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView editPosition(HttpServletRequest request){
+	public ModelAndView list(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView("/menudefined/menudefined_list");
 		
 		return mav;
 	}
 	
 	@RequestMapping(value = "/defineByRole", method = RequestMethod.GET)
-	public ModelAndView define(@ModelAttribute AuthorityVOQuery authQuery,HttpServletRequest request){
+	public ModelAndView defineByRole(@ModelAttribute AuthorityVOQuery authQuery,HttpServletRequest request){
 		ModelAndView mav = new ModelAndView("/menudefined/menudefined_role_list");
 		UserEntity user = UserUtils.getLoginUser(request);
 		authQuery.setCompanyId(user.getCompanyId().toString());
@@ -57,5 +54,36 @@ public class MenuDefinedController extends BaseController{
 		return mav;
 	}
 	
+	@RequestMapping(value = "/defineByPosition", method = RequestMethod.GET)
+	public ModelAndView defineByPosition(@ModelAttribute PositionQuery positionQuery,HttpServletRequest request){
+		ModelAndView mav = new ModelAndView("/menudefined/menudefined_position_list");
+		UserEntity user = UserUtils.getLoginUser(request);
+		Long companyId = user.getCompanyId();
+		positionQuery.setCompanyId(companyId);
+		positionQuery = positionService.getPositionPage(positionQuery);
+		
+		return mav;
+	}
+	@RequestMapping(value = "/defineByDept", method = RequestMethod.GET)
+	public ModelAndView defineByDept(@ModelAttribute AuthorityVOQuery authQuery,HttpServletRequest request){
+		ModelAndView mav = new ModelAndView("/menudefined/menudefined_dept_list");
+		UserEntity loginUser = UserUtils.getAdminLoginUser(request);
+		mav.addObject("loginUser", loginUser); 
+		
+		return mav;
+	}
+	@RequestMapping(value = "/defineByUser", method = RequestMethod.GET)
+	public ModelAndView defineByUser(@ModelAttribute UserQuery userQuery,HttpServletRequest request){
+		ModelAndView mav = new ModelAndView("/menudefined/menudefined_user_list");
+		UserEntity loginUser = UserUtils.getAdminLoginUser(request);
+		mav.addObject("loginUser", loginUser); 
+		userQuery.setPage(1);
+		userQuery.setSize(10);
+		userQuery.setCompanyId(loginUser.getCompanyId().toString());
+		userQuery = userService.getUserList(userQuery);
+		mav.addObject("userQuery", userQuery);
+		
+		return mav;
+	}
 }
 

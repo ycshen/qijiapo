@@ -15,6 +15,18 @@ function defineByRole(){
 	window.location.href = ctx + "/inner/admin/menudefined/defineByRole"
 }
 
+function defineByUser(){
+	window.location.href = ctx + "/inner/admin/menudefined/defineByUser"
+}
+
+function defineByDept(){
+	window.location.href = ctx + "/inner/admin/menudefined/defineByDept"
+}
+
+function defineByPosition(){
+	window.location.href = ctx + "/inner/admin/menudefined/defineByPosition"
+}
+
 function queryPosition(){
 	var positionName = $("#txtpositionName").val();
 	var url = ctx + "/inner/position/page";

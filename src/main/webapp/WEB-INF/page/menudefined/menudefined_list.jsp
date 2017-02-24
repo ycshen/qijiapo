@@ -77,14 +77,14 @@
 	              <img src="${ctx}/img/menudefined/user.png" width="100" height="100" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
 	              <h4>按用户定义</h4>
 	              <span class="text-muted">
-					<button class="btn btn-info " onclick="defineByRole();">去定义</button>
+					<button class="btn btn-info " onclick="defineByUser();">去定义</button>
 					</span>
 	            </div>
 	            <div class="col-6 col-sm-3 placeholder">
 	              <img src="${ctx}/img/menudefined/manager.png" width="100" height="100" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
 	              <h4>按职位定义</h4>
 	              <span class="text-muted">
-	              	<button class="btn btn-info " onclick="queryDepartment('${departmentQuery.page}')">去定义</button>
+	              	<button class="btn btn-info " onclick="defineByPosition();">去定义</button>
 	              	
 	              </span>
 	            </div>
@@ -92,7 +92,7 @@
 	              <img src="${ctx}/img/menudefined/user_group_01.png" width="100" height="100" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
 	              <h4>按部门定义</h4>
 	              <span class="text-muted">
-					<button class="btn btn-info " onclick="queryDepartment('${departmentQuery.page}')">去定义</button>
+					<button class="btn btn-info " onclick="defineByDept();">去定义</button>
 	              	
 	              </span>
 	            </div>
