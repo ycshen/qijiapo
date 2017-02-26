@@ -60,12 +60,15 @@ public class CompetitorController {
 		return jsonStr;
 	}
 	@RequestMapping(value = "/forwardEdit", method = RequestMethod.GET)
-	public ModelAndView forwardEdit(@ModelAttribute CompetitorQuery competitorQuery, HttpServletRequest request){
+	public ModelAndView forwardEdit(String id, HttpServletRequest request){
 		ModelAndView mav = new ModelAndView("/competitor/competitor_edit");
 		UserEntity user = UserUtils.getLoginUser(request);
-		/*companyQuery.setCompanyId(user.getCompanyId());
-		companyQuery = companyService.getCompanyList(companyQuery);
-		mav.addObject("companyQuery", companyQuery);*/
+		CompetitorEntity competitor = null;
+		if(StringUtils.isNotBlank(id)){
+			competitor = competitorService.getCompetitorById(id);
+		}
+		
+		mav.addObject("competitor", competitor);
 		mav.addObject("user", user);
 		return mav;
 	}
@@ -171,6 +174,7 @@ public class CompetitorController {
 			LogUtils.logCRMCompetitor("添加了竞争对手(" + competitor.getCompetitorName() + ")", returnId, user);
 		}else{
 			
+			LogUtils.logCRMCompetitor("修改了竞争对手(" + competitor.getCompetitorName() + ")", id.toString(), user);
 		}
 		mav.addObject("user", user);
 		return mav;

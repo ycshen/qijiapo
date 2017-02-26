@@ -10,6 +10,19 @@ function addCompeotitor(){
 	});
 }
 
+
+function editCompetitor(id){
+	var url = ctx + "/inner/competitor/forwardEdit?id=" + id;
+	layer.open({
+		type: 2,
+		title: '编辑竞争对手',
+		shadeClose: true,
+		shade: 0.8,
+		area: ['800px', '400px'],
+		content: url
+	});
+}
+
 function addSubCompany(id){
 	var url = ctx + "/inner/company/addSub?id=" + id;
 	layer.open({
@@ -94,7 +107,45 @@ $(function(){
 	
 	initDataTable();
 	initLocation();
+	initAllCheckEvt();
 });
+
+
+function initAllCheckEvt(){
+	$("#chkAll").change(function(){
+		if($("#chkAll").is(':checked')) {
+		    $("input:checkbox").each(function () {     
+	            $(this).prop('checked', true);//  
+	  
+	        });  
+		   
+		}else{
+		    $("input:checkbox").removeAttr("checked");  
+		}
+	});
+	
+	 $("input:checkbox").change(function(){
+		 var idValue = $(this).attr("id");
+		if(idValue != "chkAll"){
+			if($("#chkAll").is(':checked')){
+				var chkArray = $("input:checkbox");
+				var isCheckedAll = true;
+				var size = chkArray.length;
+				for(var i=0;i < size;i++ ){
+					var isChkAll = chkArray[i].id;
+					if( isChkAll  != "chkAll" && chkArray[i].checked){
+						isCheckedAll = false;
+						break;
+					}
+				}
+				
+				if(!isCheckedAll){
+					$("#chkAll").removeAttr("checked");  
+				}
+			}
+		}
+	 })
+}
 
 function initDataTable(){
 	$("#myDataTable").dataTable( {
@@ -137,7 +188,7 @@ function initDataTable(){
 		                          
 	                    	 operResult += 	" <li><a href=\"#\" onclick=\"transfer('" + competitor.id + "', '" + competitor.competitorName + "');\">转移</a></li>";
 	                    	 operResult += 	" <li><a href=\"#\" onclick=\"deleteById('" + competitor.id + "', '" + competitor.competitorName + "');\">删除</a></li>";
-	                    	 operResult += 	" <li><a href=\"#\" onclick=\"editPosition('${position.id}');\">编辑</a></li>";
+	                    	 operResult += 	" <li><a href=\"#\" onclick=\"editCompetitor('" + competitor.id + "');\">编辑</a></li>";
 		                         	
 	                    	 operResult += " </ul>";
 	                    	 operResult += " </div>";
@@ -165,6 +216,7 @@ function initDataTable(){
 	                 { data: 'saleMoney' }
 	             ],
 	       "bPaginate": true,
+	       "serverSide": true, 
 	       "bFilter": true, 
 	       "sPaginationType": "full_numbers", 
 	       "paging": true,
@@ -172,10 +224,6 @@ function initDataTable(){
 	       "info": true,
 	       "autoWidth": true,
 	       "bSort": false,
-	       "drawCallback" : function() {  
-	            // 取消全选  
-	            $(":checkbox[name='competitor-list-checkable']").prop('checked', false);  
-	        }, 
 	        "oLanguage": CONSTANT.DATA_TABLES.DEFAULT_OPTION.LANGUAGE
 	   } );
 }
@@ -252,7 +300,7 @@ var CONSTANT = {
 	                data : "id",  
 	                render : function(data, type, row, meta) {  
 	                    var content = '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">';  
-	                    content += '    <input type="checkbox" class="group-checkable" value="' + data + '" />';  
+	                    content += '    <input type="checkbox" class="group-checkable"  value="' + data + '" />';  
 	                    content += '    <span></span>';  
 	                    content += '</label>';  
 	                    return content;  

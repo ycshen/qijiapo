@@ -19,7 +19,7 @@ function isBlank(args){
 
 $(function(){
 	initTree();
-	initMenuTree();
+	//initMenuTree();
 })
 
 var tid = "";
@@ -48,9 +48,6 @@ var setting_menu = {
                 enable: true
             }
         },
-        callback:{
-        	onClick: returnInfo,
-        },
         check: {
         	chkStyle: "checkbox",
         	enable: true
@@ -64,7 +61,7 @@ var setting_dept = {
             }
         },
         callback:{
-        	onClick: returnInfo,
+        	onClick: returnDeptInfo,
         }
     };
 // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
@@ -80,10 +77,10 @@ function initTree() {
    })         
 }
 
-function initMenuTree() {
+function initMenuTree(departmentId) {
 	   $.ajax({
 		   type : 'get',
-		   url : ctx + "/inner/menu/menuTree",
+		   url : ctx + "/inner/menu/menuTree?definedType=3&casecadeId=" + departmentId,
 		   success: function(zNodes){
 			   zTreeObj_menu = $.fn.zTree.init($("#menuTree"), setting_menu, zNodes);
 			   zTreeObj_menu.expandAll(true); 
@@ -92,12 +89,16 @@ function initMenuTree() {
 	   })         
 	}
  
-function returnInfo(event, treeId, treeNode){
+function returnDeptInfo(event, treeId, treeNode){
 	var nodeIdStr = treeNode.id;
-	var id = nodeIdStr.split("_")[0];
 	var departmentName = treeNode.name;
-	
-	parent.returnInfo(id, departmentName);
+	var departmentId = nodeIdStr.split("_")[0];
+	$("#spanTips").html("<span style=\"color:#009688 \">" + departmentName + "</span>菜单权限定义");
+	$("#divMenuOper").show();
+	$("#hidDepartmentId").val(departmentId);
+	$("#hidDepartmentName").val(departmentName);
+	$("#divMenuTips").hide();
+	initMenuTree(departmentId);
 }
 
 function cancleType(){
@@ -108,36 +109,74 @@ function returnMenuDefined(){
 	window.location.href = ctx + "/inner/admin/menudefined/list";
 }
 
-function submitMD(){
+function definedByUser(){
+	window.location.href = ctx + "/inner/admin/menudefined/defineByUser";
+}
 
-    var treeObj = $.fn.zTree.getZTreeObj("menuTree"); 
-    var nodes = treeObj.getCheckedNodes(true);
-    var idStr = "";
-    for(var i=0; i < nodes.length;i++){
-    	idStr+= nodes[i].id + ",";
-    }
+function definedByRole(){
+	window.location.href = ctx + "/inner/admin/menudefined/defineByRole";
+}
+
+function definedByPosition(){
+	window.location.href = ctx + "/inner/admin/menudefined/defineByPosition";
+}
+
+function resetMenu(){
+	var departmentId = $("#hidDepartmentId").val();
+	if(isBlank(departmentId)){
+		layer.alert("请选择需要重置权限的部门",{closeBtn: false,
+	  		skin: 'layui-layer-molv'
+		  });
+		return;
+	}
+
+	initMenuTree(departmentId);
+	
+}
+function submitMD(){
+	var departmentId = $("#hidDepartmentId").val();
+	if(isBlank(departmentId)){
+		layer.alert("请选择需要菜单定义的部门",{closeBtn: false,
+	  		skin: 'layui-layer-molv'
+		  });
+		return;
+	}
+
+	var departmentIName = $("#hidDepartmentName").val();
+	layer.confirm(departmentIName + "旗下的所有部门以及部门对应的员工即将获得授权菜单的权限，确定要授权" + departmentIName + "的菜单权限吗？该操作不可逆！",{closeBtn: false,
+  		skin: 'layui-layer-molv'
+	  }, function(){
+		  var treeObj = $.fn.zTree.getZTreeObj("menuTree"); 
+		    var nodes = treeObj.getCheckedNodes(true);
+		    var idStr = "";
+		    for(var i=0; i < nodes.length;i++){
+		    	idStr+= nodes[i].id + ",";
+		    }
+		    
+		    if(isNotBlank(idStr)){
+		    	idStr = idStr.substring(0, idStr.length - 1);
+		    	
+		    }
+		    
+		    //无节点时需要提示
+		    var url = ctx + "/inner/admin/menudefined/saveForDept?defineType=3&idStr=" + idStr + "&casecadeId=" + departmentId
+		    $.ajax({
+		    	type: "get",
+		    	url: url,
+		    	success: function(result){
+		    		if(result == 2){
+						layer.alert("设置菜单权限成功",{closeBtn: false,
+					  		skin: 'layui-layer-molv'
+						  });
+					}else{
+						layer.alert("设置菜单权限失败",{closeBtn: false,
+					  		skin: 'layui-layer-molv'
+						  });
+					}
+		    	}
+		    });
+	})
     
-    if(isNotBlank(idStr)){
-    	idStr = idStr.substring(0, idStr.length - 1);
-    	
-    }
-    //无节点时需要提示
-    var url = ctx + "/inner/admin/menudefined/saveForDept?idStr=" + idStr
-    $.ajax({
-    	type: "get",
-    	url: url,
-    	success: function(result){
-    		if(result == 2){
-				layer.alert("设置菜单权限成功",{closeBtn: false,
-			  		skin: 'layui-layer-molv'
-				  });
-			}else{
-				layer.alert("设置菜单权限失败",{closeBtn: false,
-			  		skin: 'layui-layer-molv'
-				  });
-			}
-    	}
-    });
     
 }
 

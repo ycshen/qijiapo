@@ -22,6 +22,6 @@ public interface MenuService {
 	void deleteMenuById(String id);
 	MenuEntity getMenuByNameAndType(String menuName, String menuType);
 	MenuEntity getMenuByNameAndSystemId(String menuName, String systemId);
-	String getAllOutterMenu();
+	String getAllOutterMenu(String definedType, String casecadeId);
 }
 

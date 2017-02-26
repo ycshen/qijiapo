@@ -95,6 +95,7 @@
                   <th>邮箱</th>
                   <th>所属部门</th>
                   <th>职务</th>
+                  <th>菜单授权类型</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -158,6 +159,21 @@
 		                			</c:if>
 		                		</td>
 		                		<td id="tdPosition${user.id}">${user.positionName }</td>
+		                		<td id="tdMenuDefine${user.id}">
+		                			<c:if test="${user.menuDefinedType == 1}">
+		                				<span class="label label-success">用户优先</span>
+		                			</c:if>
+		                			<c:if test="${user.menuDefinedType == 2}">
+		                				<span class="label label-success">职位优先</span>
+		                			</c:if>
+		                			<c:if test="${user.menuDefinedType == 3}">
+		                				<span class="label label-success">部门优先</span>
+		                			</c:if>
+		                			<c:if test="${user.menuDefinedType == 4}">
+		                				<span class="label label-success">角色优先</span>
+		                			</c:if>
+		                		
+		                		</td>
 	                		</tr>
                 		</c:forEach>
                 	</c:if>

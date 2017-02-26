@@ -66,6 +66,21 @@
 		})
 
 	}
+
+	function getAuthLevel(menuDefinedType){
+		var authStr = "";
+		if(menuDefinedType == 1){
+			authStr = "<span class=\"label label-success\">用户优先</span>";
+		}else if(menuDefinedType == 2){
+			authStr = "<span class=\"label label-success\">职位优先</span>";
+		}else if(menuDefinedType == 3){
+			authStr = "<span class=\"label label-success\">部门优先</span>";
+		}else if(menuDefinedType == 4){
+			authStr = "<span class=\"label label-success\">角色优先</span>";
+		}
+
+		return authStr;
+	}
 	
 	function getTr(obj){
 		var tr = "";
@@ -100,7 +115,8 @@
 			positionName = obj.positionName;
 		}
 		tr += "<td id=\"tdPosition"+obj.id+"\">"  + positionName + "</td>";
-		
+		var menuDefineStr = getAuthLevel(obj.menuDefinedType);
+		tr += "<td id=\"tdMenuDefine"+obj.id+"\">"  + menuDefineStr + "</td>";
 		tr+="</tr>";
 
 		return tr;

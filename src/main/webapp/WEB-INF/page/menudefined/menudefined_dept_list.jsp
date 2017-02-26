@@ -28,7 +28,7 @@
 <div class="wrapper">
 	<%@include file="../share/qjp_header.jsp"%>
  <jsp:include page="../share/qjp_admin_menu.jsp">
-	<jsp:param name="nav" value="deptuser_list" />
+	<jsp:param name="nav" value="menudefined_list" />
 </jsp:include>
   
   <div class="content-wrapper">
@@ -54,13 +54,13 @@
 				<i class="layui-icon">&#x1002;</i>返回菜单自定义
 				
 			  </button>
-			  <button class="layui-btn layui-btn-primary" onclick="addCompeotitor();">
+			  <button class="layui-btn layui-btn-primary" onclick="definedByUser();">
 			    <i class="layui-icon">&#xe620;</i>按用户定义
 			  </button>
-			  <button class="layui-btn layui-btn-primary">
+			  <button class="layui-btn layui-btn-primary" onclick="definedByPosition();">
 			    <i class="layui-icon">&#xe620;</i>按职位定义
 			  </button>
-			  <button class="layui-btn layui-btn-primary">
+			  <button class="layui-btn layui-btn-primary" onclick="definedByRole();">
 			    <i class="layui-icon">&#xe620;</i>按角色定义
 			  </button>
 			</div>
@@ -77,9 +77,13 @@
         	<div class="box-header">
        			菜单
        		</div>
-       		<div class="box-header">开发一组菜单权限定义
+       		<div class="box-header" id="divMenuTips">
+       			<span style="color:red;">请在左侧选择需要授权的部门</span>
+       		</div>
+       		<div class="box-header" id="divMenuOper" style="display:none;">
+       			<span id="spanTips"></span>
        			<button class="btn btn-info " onclick="submitMD();">提交菜单权限</button>
-       			<button class="btn" >重置</button>
+       			<button class="btn" onclick="resetMenu();">重置</button>
        		</div>
           <div class="box">
             <!-- /.box-header -->
@@ -95,7 +99,8 @@
 
     </section>
   </div>
-
+	<input type="hidden" id="hidDepartmentId"/>
+	<input type="hidden" id="hidDepartmentName"/>
   <%@include file="../share/qjp_footer.jsp"%>
 </div>
 

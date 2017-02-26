@@ -147,7 +147,7 @@
               <table id="myDataTable" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th><input type="checkbox" name="competitor-list-checkable"></th>
+                  <th><input type="checkbox" name="competitor-list-checkable" id="chkAll"></th>
                   <th>操作</th>
                   <th>竞争对手名称</th>
                   <th>竞争对手所有人</th>

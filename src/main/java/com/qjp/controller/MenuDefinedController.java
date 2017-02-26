@@ -98,9 +98,9 @@ public class MenuDefinedController extends BaseController{
 	
 	@RequestMapping(value = "/saveForDept", method = RequestMethod.GET)
 	@ResponseBody
-	public Integer save(String idStr, HttpServletRequest request){
+	public Integer saveForDept(String idStr, String casecadeId, Integer defineType, HttpServletRequest request){
 		Integer result = ResponseStatus.INIT;
-		if(StringUtils.isNotBlank(idStr)){
+		if(StringUtils.isNotBlank(casecadeId)){
 			UserEntity loginUser = UserUtils.getAdminLoginUser(request);
 			String[] menuIdArr = idStr.split("\\,");
 			MenuDefinedEntity menuDefined = null;
@@ -109,8 +109,8 @@ public class MenuDefinedController extends BaseController{
 				menuDefined = new MenuDefinedEntity();
 				menuDefined.setCompanyId(loginUser.getCompanyId().toString());
 				menuDefined.setCreateUser(loginUser.getUserName());
-				menuDefined.setDefinedCasecaseId("135");
-				menuDefined.setDefinedType(3);
+				menuDefined.setDefinedCasecaseId(casecadeId);
+				menuDefined.setDefinedType(defineType);
 				menuDefined.setIsDelete(0);
 				menuDefined.setMenuId(menuId);
 				mdList.add(menuDefined);

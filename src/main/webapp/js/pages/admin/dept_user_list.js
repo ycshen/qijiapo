@@ -503,6 +503,8 @@ function enableUser(id, userName){
 	
 }
 
+
+
 function switchOper(status, id, userName){
 	var operHtml = "";
 	if(status == 103){

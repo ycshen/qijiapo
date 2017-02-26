@@ -1216,14 +1216,18 @@ public class MyBaseApiUtils {
 	}
 	
 	
-	public static String getAllOutterMenu(){
+	public static String getAllOutterMenu(String definedType, String casecadeId){
 		String result = StringUtils.EMPTY;
 		try {	
 			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_getAllOutterMenu;
 			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("definedType", definedType);
+			maps.put("casecadeId", casecadeId);
 			String secret = SHA1Utils.SHA1(maps);
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("secret", secret);
+			jsonObject.put("definedType", definedType);
+			jsonObject.put("casecadeId", casecadeId);
 			result = HttpUtils.postUrl(url, jsonObject);
 		} catch (Exception e) {
 			e.printStackTrace();
