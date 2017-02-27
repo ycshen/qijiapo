@@ -74,6 +74,29 @@ public class CRMApiUtils {
 	}
 	
 	
+	/**
+	 * 更新竞争对手
+	 * @param competitor 竞争对手
+	 * @return
+	 */
+	public static String updateCompetitor(String competitor){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getCRMUrl() + CRMApiUrl.crm_updateCompetitor;	
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("competitor", competitor);
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("competitor", competitor);
+			String secret = SHA1Utils.SHA1(maps);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
 	public static String getCompetitorPage(String companyId, String pageSize, String currentPage){
 		String result = StringUtils.EMPTY;
 		try {	

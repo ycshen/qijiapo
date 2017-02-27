@@ -39,6 +39,9 @@ public class CRMApiUrl {
 	@Value("${crm.deleteCompetitorById}")
 	private String crm_deleteCompetitorById_url;
 	public static String crm_deleteCompetitorById;
+	@Value("${crm.updateCompetitor}")
+	private String crm_updateCompetitor_url;
+	public static String crm_updateCompetitor;
 	
 	@PostConstruct
 	public void init() {
@@ -52,6 +55,7 @@ public class CRMApiUrl {
 		crm_getCompetitorById = this.crm_getCompetitorById_url;
 		crm_batchDeleteCompetitor = this.crm_batchDeleteCompetitor_url;
 		crm_deleteCompetitorById = this.crm_deleteCompetitorById_url;
+		crm_updateCompetitor = this.crm_updateCompetitor_url;
 	}
 	
 }

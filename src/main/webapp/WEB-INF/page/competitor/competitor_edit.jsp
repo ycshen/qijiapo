@@ -254,7 +254,7 @@ layui.use(['form', 'layedit', 'laydate'], function(){
         data: competitor,
         async: false,
         success: function(data) {
-          layer.alert('新增成功',
+          layer.alert('保存成功',
 			  {closeBtn: false,
 			  skin: 'layui-layer-molv'
 			  },

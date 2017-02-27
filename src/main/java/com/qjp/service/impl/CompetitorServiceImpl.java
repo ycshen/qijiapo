@@ -125,7 +125,8 @@ public class CompetitorServiceImpl implements CompetitorService{
 
 	@Override
 	public void updateCompetitor(CompetitorEntity competitor) {
-		
+		String jsonStr = JsonUtils.json2Str(competitor);
+		CRMApiUtils.updateCompetitor(jsonStr);
 	}
 	
 }

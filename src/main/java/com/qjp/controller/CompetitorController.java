@@ -173,7 +173,9 @@ public class CompetitorController {
 			String returnId = competitorService.insertCompetitor(competitor);
 			LogUtils.logCRMCompetitor("添加了竞争对手(" + competitor.getCompetitorName() + ")", returnId, user);
 		}else{
-			
+			competitor.setUpdateTime(new Date());
+			competitor.setUpdateUser(user.getUserName());
+			competitorService.updateCompetitor(competitor);
 			LogUtils.logCRMCompetitor("修改了竞争对手(" + competitor.getCompetitorName() + ")", id.toString(), user);
 		}
 		mav.addObject("user", user);
