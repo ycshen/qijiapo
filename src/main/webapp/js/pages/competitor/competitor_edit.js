@@ -8,6 +8,11 @@ function addMoreInfo(){
 }
 function returnInfo(id, name){
 	layer.closeAll();
+	$("#txtBeyondDeptName").removeAttr("disabled");//要变成Enable，JQuery只能这么写  
+	$("#txtBeyondDeptName").val(name);
+	$("#txtBeyondDeptName").attr("disabled","disabled");//再改成disabled  
+	$("#hidBeyondDeptId").val(id);
+	$("#hidBeyondDeptName").val(name);
 }
 
 function isBlank(args){

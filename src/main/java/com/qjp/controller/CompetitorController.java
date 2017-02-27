@@ -106,6 +106,23 @@ public class CompetitorController {
 		return result;
 	}
 	
+	@RequestMapping(value = "/batchDelete", method = RequestMethod.GET)
+	@ResponseBody
+	public Integer batchDelete(String idArr, HttpServletRequest request){
+		Integer result = ResponseStatus.INIT;
+		if(StringUtils.isNotBlank(idArr)){
+			competitorService.batchDelete(idArr);
+			UserEntity user = UserUtils.getLoginUser(request);
+			String[] idList = idArr.split("\\,");
+			for (String id : idList) {
+				LogUtils.logCRMCompetitor("删除了竞争对手", id, user);
+			}
+			result = ResponseStatus.UPDATE_SUCCESS;
+		}
+		
+		return result;
+	}
+	
 	@RequestMapping(value = "/transferCompetitor", method = RequestMethod.GET)
 	@ResponseBody
 	public Integer transferCompetitor(String userId, String competitorId, String transferType, HttpServletRequest request){

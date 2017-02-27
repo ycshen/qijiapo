@@ -127,11 +127,11 @@
 						  <button class="layui-btn layui-btn-primary" onclick="addCompeotitor();">
 						    <i class="layui-icon">&#xe61f;</i>新增竞争对手
 						  </button>
-						  <button class="layui-btn layui-btn-primary">
-						    <i class="layui-icon">&#xe640;</i>删除
+						  <button class="layui-btn layui-btn-primary" onclick="batchDelete();">
+						    <i class="layui-icon">&#xe640;</i>批量删除
 						  </button>
-						  <button class="layui-btn layui-btn-primary">
-						    <i class="layui-icon">&#xe620;</i>转移
+						  <button class="layui-btn layui-btn-primary" onclick="batchTransfer();">
+						    <i class="layui-icon">&#xe620;</i>批量转移
 						  </button>
 						</div>
 	          			</td>

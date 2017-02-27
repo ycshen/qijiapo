@@ -128,6 +128,18 @@ public class CompetitorServiceImpl implements CompetitorService{
 		String jsonStr = JsonUtils.json2Str(competitor);
 		CRMApiUtils.updateCompetitor(jsonStr);
 	}
+
+	@Override
+	public void batchDelete(String idArr) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void batchTransfer(String idArr) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
 

@@ -46,6 +46,9 @@ margin: 0px 15px 0px 0px;
 	
 <form class="layui-form" id="myForm" onsubmit="return false;">
 <input type="hidden" id="hidCompetitorId" name="id" value="${competitor.id}"/>
+<input type="hidden" id="hidBeyondDeptId" name="beyondDept" value="${competitor.beyondDeptId}"/>
+<input type="hidden" id="hidBeyondDeptName" name="beyondDeptName" value="${competitor.beyondDeptName}"/>
+
 <div class="container content_div">
 	<div class="layui-form-item my-layui-form-item my-top">
     <label class="layui-form-label">竞争对手所有人<span style="color:red">*</span></label>
@@ -64,10 +67,10 @@ margin: 0px 15px 0px 0px;
     <div class="layui-input-inline" style="margin-right: 0px;">
     	<c:choose>
       		<c:when test="${competitor != null && competitor.id != '' }">
-      			 <input type="text" name="beyondDeptName" autocomplete="off"  class="layui-input" value="${competitor.beyondDeptName}" readonly="readonly">
+      			 <input type="text" id="txtBeyondDeptName" autocomplete="off"  class="layui-input" value="${competitor.beyondDeptName}" disabled="disabled">
       		</c:when>
       		<c:otherwise>
-      			 <input type="text" name="beyondDeptName" autocomplete="off"  class="layui-input" value="${user.departmentName}" readonly="readonly">
+      			 <input type="text"  id="txtBeyondDeptName" autocomplete="off"  class="layui-input" value="${user.departmentName}" disabled="disabled">
       		</c:otherwise>
       	</c:choose>
            

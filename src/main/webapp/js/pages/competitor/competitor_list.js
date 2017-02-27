@@ -124,7 +124,7 @@ function initAllCheckEvt(){
 		}
 	});
 	
-	 $("input:checkbox").change(function(){
+	 $("input[type='checkbox']").on("change", function(){
 		 var idValue = $(this).attr("id");
 		if(idValue != "chkAll"){
 			if($("#chkAll").is(':checked')){
@@ -217,6 +217,7 @@ function initDataTable(){
 	             ],
 	       "bPaginate": true,
 	       "serverSide": true, 
+           "searching" : true,
 	       "bFilter": true, 
 	       "sPaginationType": "full_numbers", 
 	       "paging": true,
@@ -226,6 +227,62 @@ function initDataTable(){
 	       "bSort": false,
 	        "oLanguage": CONSTANT.DATA_TABLES.DEFAULT_OPTION.LANGUAGE
 	   } );
+}
+
+function getCheckedBox(){
+	var chkArr = $("input:checkbox");
+	var chkedStr = "";
+	$.each(chkArr, function(index, obj){
+		var attrId = $(obj).attr("id");
+		if(attrId != "chkAll"){
+			if($(obj).is(':checked')){
+				chkedStr += $(obj).val() + ",";
+			}
+		}
+	});
+	
+	if(isNotBlank(chkedStr)){
+		chkedStr = chkedStr.substring(0, chkedStr.length - 1);
+	}
+	
+	return chkedStr;
+}
+
+function batchDelete(){
+	String deleteIdArr = getCheckedBox();
+	if(isNotBlank(deleteIdArr)){
+		layer.confirm("确定要批量删除竞争对手相关信息吗？",{closeBtn: false,
+	  		skin: 'layui-layer-molv'
+		  }, function(){
+			  var url = ctx + "/inner/competitor/deleteById?id=" + id +"&name=" + name;
+			$.ajax({
+				type: "get",
+				url: url,
+				success: function(result){
+					if(result == 2){
+						layer.alert("删除竞争对手成功",{closeBtn: false,
+					  		skin: 'layui-layer-molv'
+						  }, function(){
+							  refreshTable();
+							  layer.closeAll();
+						  });
+					}else{
+						layer.alert("删除竞争对手失败",{closeBtn: false,
+					  		skin: 'layui-layer-molv'
+						  });
+					}
+				}
+			});
+		})
+	}else{
+		layer.alert("请选择需要批量删除的竞争对手",{closeBtn: false,
+	  		skin: 'layui-layer-molv'
+		  });
+	}
+}
+
+function batchTransfer(){
+	getCheckedBox();
 }
 
 function renderCompetitorName(id, name){
@@ -299,10 +356,8 @@ var CONSTANT = {
 	                bSortable : false,  
 	                data : "id",  
 	                render : function(data, type, row, meta) {  
-	                    var content = '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">';  
-	                    content += '    <input type="checkbox" class="group-checkable"  value="' + data + '" />';  
-	                    content += '    <span></span>';  
-	                    content += '</label>';  
+	                    var content = '<input type="checkbox"  value="' + data + '" />';  
+	                   
 	                    return content;  
 	                }  
 	            }  

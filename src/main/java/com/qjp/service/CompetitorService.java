@@ -20,5 +20,7 @@ public interface CompetitorService {
 	void deleteCompetitorById(String id);
 	void batchDeleteCompetitor(List<String> ids);
 	void updateCompetitor(CompetitorEntity competitor);
+	void batchDelete(String idArr);
+	void batchTransfer(String idArr);
 }
 
