@@ -70,21 +70,27 @@ font-size: 14px !important;
 			    <li class="layui-this">资料</li>
 			    <li>动态</li>
 			    <li>销售机会</li>
-			    <li>文档</li>
+			   <!--  <li>文档</li> -->
 			  </ul>
 			  <div class="layui-tab-content">
 			    <div class="layui-tab-item layui-show">
-			    	<table class="table my-table">
-			    		<tr>
+			    	<table class="table my-table" id="detailTable">
+			    		<!-- <tr>
 			    			<td class="title-td" colspan="4">
 								<div class="layui-btn-group">
-								  <button class="layui-btn layui-btn-primary">
+								  <button class="layui-btn layui-btn-primary" id="btnEdit" onclick="fixCompetitor();">
 								    <i class="layui-icon">&#xe642;</i>编辑资料
+								  </button>
+								  <button  onclick="saveCompetitor();" class="layui-btn" id="btnSave" style="display:none;">
+									    <i class="layui-icon">&#xe620;</i>保存资料
+								  </button>
+								   <button  onclick="cancelCompetitor();" class="layui-btn layui-btn-primary"  id="btnCancel"  style="display:none;">
+									    <i class="layui-icon">&#xe620;</i>取消编辑
 								  </button>
 								</div>
 							</td>
 			    			
-			    		</tr>
+			    		</tr> -->
 			    		<tr>
 			    			<td class="title-td">竞争对手名称:</td>
 			    			<td>${competitor.competitorName}</td>
@@ -139,6 +145,8 @@ font-size: 14px !important;
 			    			
 			    		</tr>
 			    	</table>
+			    	
+			    	
 			    </div>
 			    <div class="layui-tab-item">
 			    	<table class="table table-hover">
@@ -159,7 +167,7 @@ font-size: 14px !important;
 			    	</table>
 			    </div>
 			    <div class="layui-tab-item">内容3</div>
-			    <div class="layui-tab-item">内容4</div>
+			    <!-- <div class="layui-tab-item">内容4</div> -->
 			  </div>
 			</div> 
         </div>
@@ -171,7 +179,7 @@ font-size: 14px !important;
 								  <legend>操作</legend>
 								  <div class="layui-field-box">
 								<div class="layui-btn-group">
-									  <button class="layui-btn layui-btn-primary">
+									  <button class="layui-btn layui-btn-primary" onclick="transfer('${competitor.id}', '${competitor.competitorName}');">
 									    <i class="layui-icon">&#xe620;</i>转移给他人
 									  </button>
 									  <button class="layui-btn layui-btn-primary" onclick="deleteById('${competitor.id}','${competitor.competitorName}');">
@@ -219,7 +227,7 @@ font-size: 14px !important;
 							</td>
 			    			
 			    		</tr>
-			    		<tr>
+			    		<%-- <tr>
 			    			<td class="title-td-left" colspan="1">
 								<fieldset class="layui-elem-field">
 								  <legend>文档</legend>
@@ -228,7 +236,7 @@ font-size: 14px !important;
 								</fieldset>
 							</td>
 			    			
-			    		</tr>
+			    		</tr> --%>
 			    	</table>
         </div>
     </div>
