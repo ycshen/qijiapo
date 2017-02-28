@@ -147,100 +147,7 @@ function initAllCheckEvt(){
 	 })
 }
 
-function initDataTable(){
-	$("#myDataTable").dataTable( {
-	       ajax : {  
-	            type: "GET",  
-	            url: ctx + '/inner/competitor/listAjax',  
-	            // 传入已封装的参数  
-	            data: function(data){  
-	                data.page = data.start / data.length + 1;  
-	                data.size = data.length;  
-	                // 右上角搜索  
-	                delete data.columns;  
-	            },  
-		            dataType: "json",  
-		            dataSrc : function(result) {  
-		                // 后台不实现过滤功能，每次查询均视作全部结果  
-		                result.recordsTotal = result.count;  
-		                result.recordsFiltered = result.count || 0;  
-		                result.data = result.items || {};  
-		                delete result.count;  
-		                delete result.items; 
-		                return result.data;  
-		            }  
-	       	},  
-	       	"columns": [
-	             CONSTANT.DATA_TABLES.COLUMN.CHECKBOX, 
-	             {  
-	                 data : 'operate',  
-	                 bSortable : false,  
-	                 visible : true,  
-	                 render : function(data, type, competitor) {  
-	                       
-	                	 var operResult = "<div class=\"btn-group\">";
-	                	 operResult += "<button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\">";
-	                	 operResult +=  "<span class=\"caret\"></span>";
-	                	 operResult +=  "</button>";
-	                	 operResult += " <ul class=\"dropdown-menu\">";
-	                          
-	                	 operResult += 	" <li><a href=\"#\" onclick=\"transfer('" + competitor.id + "', '" + competitor.competitorName + "');\">转移</a></li>";
-	                	 operResult += 	" <li><a href=\"#\" onclick=\"deleteById('" + competitor.id + "', '" + competitor.competitorName + "');\">删除</a></li>";
-	                	 operResult += 	" <li><a href=\"#\" onclick=\"editCompetitor('" + competitor.id + "');\">编辑</a></li>";
-	                         	
-	                	 operResult += " </ul>";
-	                	 operResult += " </div>";
-	                     
-	                     return operResult;  
-	                 }   
-	             },
-	             { data: 'competitorName',
-	            	render: function(data, type, competitor){
-	            		return renderCompetitorName(competitor.id, competitor.competitorName);
-	            	}
-	             },
-	             { data: 'beyondOfName' },
-	             { data: 'beyondDeptName' },
-	             {   
-	                 bSortable : false,
-	                 className : "text-center",  
-	                 render : function(data, type, row, meta) {  
-	                     return getArea(row);  
-	                 }
-	             },
-	             { data: 'address' },
-	             { data: 'website' },
-	             { data: 'staffNum' },
-	             { data: 'saleMoney' }
-	         ],
-	       "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示  
-	       "bPaginate": true,
-	       "serverSide": true, 
-           "searching" : true,
-	       "bFilter": true, 
-	       "sPaginationType": "full_numbers", 
-	       "paging": true,
-	       "lengthChange": true,
-	       "info": true,
-	       "autoWidth": true,
-	       "bSort": false,
-	        "oLanguage": CONSTANT.DATA_TABLES.DEFAULT_OPTION.LANGUAGE
-	   } );
-}
-var pageParam = {
-		getQueryCondition: function(data) {
-		var param = {};
-		/*param.srvName = $("#name-search").val();
-		param.code = $("#code-search").val();
-		param.url = $("#url-search").val();*/
 
-		//组装分页参数
-		param.page = data.start;
-		param.size = data.length;
-		param.draw = data.draw;
-		return param;
-		},
-};
 
 function getCheckedBox(){
 	var chkArr = $("input:checkbox");
@@ -407,8 +314,8 @@ var CONSTANT = {
 	  
 	};  
 function refreshTable(){
-	var table = $('#myDataTable').DataTable();  
-	table.ajax.reload().draw(); 
+	var table = $('#myDataTable').dataTable();  
+	table.fnDraw(false);
 }
 
 function deleteById(id, name){
@@ -462,6 +369,176 @@ function deleteById(id, name){
 		});
 	})
 }
+
+function queryCompeotitor(){
+	$("#myDataTable").dataTable().fnDestroy(); 
+	var competitorName = $("#txtCompetitorName").val();
+	$("#myDataTable").dataTable( {
+	       ajax : {  
+	            type: "GET",  
+	            url: ctx + '/inner/competitor/listAjax',  
+	            // 传入已封装的参数  
+	            data: function(data){ 
+	            	data.competitorName = competitorName;
+	                data.page = data.start / data.length + 1;  
+	                data.size = data.length;  
+	                // 右上角搜索  
+	                delete data.columns;  
+	            },  
+		            dataType: "json",  
+		            dataSrc : function(result) {  
+		                // 后台不实现过滤功能，每次查询均视作全部结果  
+		                result.recordsTotal = result.count;  
+		                result.recordsFiltered = result.count || 0;  
+		                result.data = result.items || {};  
+		                delete result.count;  
+		                delete result.items; 
+		                return result.data;  
+		            }  
+	       	},  
+	       	"columns": [
+	             CONSTANT.DATA_TABLES.COLUMN.CHECKBOX, 
+	             {  
+	                 data : 'operate',  
+	                 bSortable : false,  
+	                 visible : true,  
+	                 render : function(data, type, competitor) {  
+	                       
+	                	 var operResult = "<div class=\"btn-group\">";
+	                	 operResult += "<button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\">";
+	                	 operResult +=  "<span class=\"caret\"></span>";
+	                	 operResult +=  "</button>";
+	                	 operResult += " <ul class=\"dropdown-menu\">";
+	                          
+	                	 operResult += 	" <li><a href=\"#\" onclick=\"transfer('" + competitor.id + "', '" + competitor.competitorName + "');\">转移</a></li>";
+	                	 operResult += 	" <li><a href=\"#\" onclick=\"deleteById('" + competitor.id + "', '" + competitor.competitorName + "');\">删除</a></li>";
+	                	 operResult += 	" <li><a href=\"#\" onclick=\"editCompetitor('" + competitor.id + "');\">编辑</a></li>";
+	                         	
+	                	 operResult += " </ul>";
+	                	 operResult += " </div>";
+	                     
+	                     return operResult;  
+	                 }   
+	             },
+	             { data: 'competitorName',
+	            	render: function(data, type, competitor){
+	            		return renderCompetitorName(competitor.id, competitor.competitorName);
+	            	}
+	             },
+	             { data: 'beyondOfName' },
+	             { data: 'beyondDeptName' },
+	             {   
+	                 bSortable : false,
+	                 className : "text-center",  
+	                 render : function(data, type, row, meta) {  
+	                     return getArea(row);  
+	                 }
+	             },
+	             { data: 'address' },
+	             { data: 'website' },
+	             { data: 'staffNum' },
+	             { data: 'saleMoney' }
+	         ],
+	       "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示  
+	       "bPaginate": true,
+	       "serverSide": true, 
+        "searching" : true,
+	       "bFilter": true, 
+	       "sPaginationType": "full_numbers", 
+	       "paging": true,
+	       "lengthChange": true,
+	       "info": true,
+	       "autoWidth": true,
+	       "bSort": false,
+	       "oLanguage": CONSTANT.DATA_TABLES.DEFAULT_OPTION.LANGUAGE
+	      
+	   } );
+	
+}
+
+
+function initDataTable(){
+	$("#myDataTable").dataTable( {
+	       ajax : {  
+	            type: "GET",  
+	            url: ctx + '/inner/competitor/listAjax',  
+	            // 传入已封装的参数  
+	            data: function(data){ 
+	                data.page = data.start / data.length + 1;  
+	                data.size = data.length;  
+	                // 右上角搜索  
+	                delete data.columns;  
+	            },  
+		            dataType: "json",  
+		            dataSrc : function(result) {  
+		                // 后台不实现过滤功能，每次查询均视作全部结果  
+		                result.recordsTotal = result.count;  
+		                result.recordsFiltered = result.count || 0;  
+		                result.data = result.items || {};  
+		                delete result.count;  
+		                delete result.items; 
+		                return result.data;  
+		            }  
+	       	},  
+	       	"columns": [
+	             CONSTANT.DATA_TABLES.COLUMN.CHECKBOX, 
+	             {  
+	                 data : 'operate',  
+	                 bSortable : false,  
+	                 visible : true,  
+	                 render : function(data, type, competitor) {  
+	                       
+	                	 var operResult = "<div class=\"btn-group\">";
+	                	 operResult += "<button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\">";
+	                	 operResult +=  "<span class=\"caret\"></span>";
+	                	 operResult +=  "</button>";
+	                	 operResult += " <ul class=\"dropdown-menu\">";
+	                          
+	                	 operResult += 	" <li><a href=\"#\" onclick=\"transfer('" + competitor.id + "', '" + competitor.competitorName + "');\">转移</a></li>";
+	                	 operResult += 	" <li><a href=\"#\" onclick=\"deleteById('" + competitor.id + "', '" + competitor.competitorName + "');\">删除</a></li>";
+	                	 operResult += 	" <li><a href=\"#\" onclick=\"editCompetitor('" + competitor.id + "');\">编辑</a></li>";
+	                         	
+	                	 operResult += " </ul>";
+	                	 operResult += " </div>";
+	                     
+	                     return operResult;  
+	                 }   
+	             },
+	             { data: 'competitorName',
+	            	render: function(data, type, competitor){
+	            		return renderCompetitorName(competitor.id, competitor.competitorName);
+	            	}
+	             },
+	             { data: 'beyondOfName' },
+	             { data: 'beyondDeptName' },
+	             {   
+	                 bSortable : false,
+	                 className : "text-center",  
+	                 render : function(data, type, row, meta) {  
+	                     return getArea(row);  
+	                 }
+	             },
+	             { data: 'address' },
+	             { data: 'website' },
+	             { data: 'staffNum' },
+	             { data: 'saleMoney' }
+	         ],
+	       "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示  
+	       "bPaginate": true,
+	       "serverSide": true, 
+           "searching" : true,
+	       "bFilter": true, 
+	       "sPaginationType": "full_numbers", 
+	       "paging": true,
+	       "lengthChange": true,
+	       "info": true,
+	       "autoWidth": true,
+	       "bSort": false,
+	       "oLanguage": CONSTANT.DATA_TABLES.DEFAULT_OPTION.LANGUAGE
+	      
+	   } );
+}
+
 Date.prototype.Format = function (fmt) { //author: meizz 
     var o = {
         "M+": this.getMonth() + 1, //月份 

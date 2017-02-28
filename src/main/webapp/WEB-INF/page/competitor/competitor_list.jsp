@@ -92,7 +92,7 @@
 	          				<label class="layui-form-label my-label">竞争对手名称</label>
 		          				
 						  </td>
-						  <td><input type="text" class="layui-input my-input" id="txtpositionName" placeholder="竞争对手名称"></td>
+						  <td><input type="text" class="layui-input my-input" id="txtCompetitorName" placeholder="竞争对手名称"></td>
 	          				<td><label class="layui-form-label my-label">省市区</label></td>
 	          				<td colspan="3">
 									<div class="layui-form-item">
@@ -120,7 +120,7 @@
 	          			<tr>
 	          			<td colspan="4">
 				  		<div class="layui-btn-group">
-					  	  <button class="layui-btn layui-btn-primary">
+					  	  <button class="layui-btn layui-btn-primary" onclick="queryCompeotitor();">
 							<i class="layui-icon">&#x1002;</i>查询
 							
 						  </button>
