@@ -1,4 +1,8 @@
 package com.qjp.entity;
+
+import java.util.List;
+
+
 /** 
  * <p>Project: MyBase</p> 
  * <p>Title: UserEntity.java</p> 
@@ -26,7 +30,9 @@ public class UserEntity extends BaseEntity{
 	private Integer isCollapseMenu;
 
 	private Integer menuDefinedType;
-	
+
+	List<AuthorityEntity> authList;
+	List<RoleEntity> roleList; 
 	public Integer getMenuDefinedType() {
 		return menuDefinedType;
 	}
@@ -116,6 +122,18 @@ public class UserEntity extends BaseEntity{
 	}
 	public void setIsCollapseMenu(Integer isCollapseMenu) {
 		this.isCollapseMenu = isCollapseMenu;
+	}
+	public List<AuthorityEntity> getAuthList() {
+		return authList;
+	}
+	public void setAuthList(List<AuthorityEntity> authList) {
+		this.authList = authList;
+	}
+	public List<RoleEntity> getRoleList() {
+		return roleList;
+	}
+	public void setRoleList(List<RoleEntity> roleList) {
+		this.roleList = roleList;
 	}
 }
 

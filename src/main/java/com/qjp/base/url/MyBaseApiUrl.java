@@ -204,6 +204,23 @@ public class MyBaseApiUrl {
 	@Value("${mybase.insertMenuDefined}")
 	private String mybase_insertMenuDefined_url;
 	public static String mybase_insertMenuDefined;
+	
+	//role
+	@Value("${mybase.getRolePage}")
+	private String mybase_getRolePage_url;
+	public static String mybase_getRolePage;
+	@Value("${mybase.getRoleById}")
+	private String mybase_getRoleById_url;
+	public static String mybase_getRoleById;
+	@Value("${mybase.cancelRole}")
+	private String mybase_cancelRole_url;
+	public static String mybase_cancelRole;
+	@Value("${mybase.insertRole}")
+	private String mybase_insertRole_url;
+	public static String mybase_insertRole;
+	@Value("${mybase.batchRole}")
+	private String mybase_batchRole_url;
+	public static String mybase_batchRole;
 	@PostConstruct
 	public void init() {
 		mybase_login = this.mybase_login_url;
@@ -258,6 +275,7 @@ public class MyBaseApiUrl {
 		mybase_cancelAuth = this.mybase_cancelAuth_url;
 		mybase_insertAuth = this.mybase_insertAuth_url;
 		mybase_batchAuth = this.mybase_batchAuth_url;
+		
 		mybase_isExistTelephone = this.mybase_isExistTelephone_url;
 		
 		//memo
@@ -278,6 +296,13 @@ public class MyBaseApiUrl {
 		
 		//menuDefined
 		mybase_insertMenuDefined = this.mybase_insertMenuDefined_url;
+		
+		//role
+		mybase_getRolePage = this.mybase_getRolePage_url;
+		mybase_getRoleById = this.mybase_getRoleById_url;
+		mybase_cancelRole = this.mybase_cancelRole_url;
+		mybase_insertRole = this.mybase_insertRole_url;
+		mybase_batchRole = this.mybase_batchRole_url;
 	}
 	
 }

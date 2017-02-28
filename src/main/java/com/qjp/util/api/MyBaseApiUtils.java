@@ -1278,5 +1278,28 @@ public class MyBaseApiUtils {
 		
 		return result;
 	}
+	
+	/**
+	 * 获取角色列表
+	 * @param query
+	 * @return
+	 */
+	public static String getAuthPage(String query){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_getRolePage;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("query", query);
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("query",query);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }
 
