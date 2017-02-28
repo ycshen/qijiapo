@@ -261,7 +261,7 @@ var CONSTANT = {
 	                sInfoPostFix : "",  
 	                sSearch : "本页搜索:",  
 	                sUrl : "",  
-	                sEmptyTable : "表中数据为空",  
+	                sEmptyTable : "抱歉，没有查询到数据",  
 	                sLoadingRecords : "载入中...",  
 	                sInfoThousands : ",",  
 	                oPaginate : {  
@@ -442,7 +442,7 @@ function queryCompeotitor(){
 	       "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示  
 	       "bPaginate": true,
 	       "serverSide": true, 
-        "searching" : true,
+           "searching" : true,
 	       "bFilter": true, 
 	       "sPaginationType": "full_numbers", 
 	       "paging": true,
@@ -526,7 +526,7 @@ function initDataTable(){
 	       "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示  
 	       "bPaginate": true,
 	       "serverSide": true, 
-           "searching" : true,
+           "searching" : false,
 	       "bFilter": true, 
 	       "sPaginationType": "full_numbers", 
 	       "paging": true,
