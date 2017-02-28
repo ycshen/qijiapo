@@ -52,6 +52,13 @@ public class CompetitorController {
 	@ResponseBody
 	public String listAjax(@ModelAttribute CompetitorQuery competitorQuery, HttpServletRequest request){
 		UserEntity user = UserUtils.getLoginUser(request);
+		String provinceId = competitorQuery.getProvinceId();
+		competitorQuery.setProvinceId(StringUtils.splitLocation(provinceId));
+		String cityId = competitorQuery.getCityId();
+		competitorQuery.setCityId(StringUtils.splitLocation(cityId));
+		String areaId = competitorQuery.getAreaId();
+		competitorQuery.setAreaId(StringUtils.splitLocation(areaId));
+		
 		competitorQuery.setCompanyId(user.getCompanyId());
 		competitorQuery = competitorService.getCompetitorPage(competitorQuery);
 		competitorQuery.setSize(65);

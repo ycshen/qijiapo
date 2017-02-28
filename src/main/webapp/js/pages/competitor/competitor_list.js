@@ -373,12 +373,18 @@ function deleteById(id, name){
 function queryCompeotitor(){
 	$("#myDataTable").dataTable().fnDestroy(); 
 	var competitorName = $("#txtCompetitorName").val();
+	var provinceId = $("select[name='provinceId']").find("option:selected").val();
+	var cityId = $("select[name='cityId']").find("option:selected").val();
+	var areaId = $("select[name='areaId']").find("option:selected").val();
 	$("#myDataTable").dataTable( {
 	       ajax : {  
 	            type: "GET",  
 	            url: ctx + '/inner/competitor/listAjax',  
 	            // 传入已封装的参数  
 	            data: function(data){ 
+	            	data.provinceId = provinceId;
+	            	data.cityId = cityId;
+	            	data.areaId = areaId;
 	            	data.competitorName = competitorName;
 	                data.page = data.start / data.length + 1;  
 	                data.size = data.length;  

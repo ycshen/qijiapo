@@ -97,22 +97,16 @@ public class CRMApiUtils {
 		return result;
 	}
 	
-	public static String getCompetitorPage(String competitorName, String companyId, String pageSize, String currentPage){
+	public static String getCompetitorPage(String query){
 		String result = StringUtils.EMPTY;
 		try {	
 			String url = getCRMUrl() + CRMApiUrl.crm_getCompetitorPage;
 			Map<String,Object> maps = SHA1Utils.getSha1Map();
-			maps.put("id", companyId);
-			maps.put("pageSize", pageSize);
-			maps.put("currentPage", currentPage);
-			maps.put("competitorName", competitorName);
+			maps.put("query", query);
 			String secret = SHA1Utils.SHA1(maps);
 			JSONObject jsonObject = new JSONObject();
-			jsonObject.put("id", companyId);
-			jsonObject.put("pageSize", pageSize);
-			jsonObject.put("currentPage",currentPage);
+			jsonObject.put("query", query);
 			jsonObject.put("secret", secret);
-			jsonObject.put("competitorName", competitorName);
 			result = HttpUtils.postUrl(url, jsonObject);
 		} catch (Exception e) {
 			e.printStackTrace();

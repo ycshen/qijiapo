@@ -57,11 +57,8 @@ public class CompetitorServiceImpl implements CompetitorService{
 
 	@Override
 	public CompetitorQuery getCompetitorPage(CompetitorQuery competitorQuery) {
-		Long companyId = competitorQuery.getCompanyId();
-		Integer pageSize = competitorQuery.getSize();
-		Integer currentPage = competitorQuery.getPage();
-		String competitorName = competitorQuery.getCompetitorName();
-		String loginResult = CRMApiUtils.getCompetitorPage(competitorName, companyId.toString(), pageSize.toString(), currentPage.toString());
+		String json = JsonUtils.json2Str(competitorQuery);
+		String loginResult = CRMApiUtils.getCompetitorPage(json);
 		if(StringUtils.isNotBlank(loginResult)){
 			JSONObject jsonObject = JSONObject.parseObject(loginResult);
 			if(jsonObject != null){
