@@ -249,25 +249,25 @@ function getCheckedBox(){
 }
 
 function batchDelete(){
-	String deleteIdArr = getCheckedBox();
+	var deleteIdArr = getCheckedBox();
 	if(isNotBlank(deleteIdArr)){
 		layer.confirm("确定要批量删除竞争对手相关信息吗？",{closeBtn: false,
 	  		skin: 'layui-layer-molv'
 		  }, function(){
-			  var url = ctx + "/inner/competitor/deleteById?id=" + id +"&name=" + name;
+			  var url = ctx + "/inner/competitor/batchDeleteById?ids=" + deleteIdArr;
 			$.ajax({
 				type: "get",
 				url: url,
 				success: function(result){
 					if(result == 2){
-						layer.alert("删除竞争对手成功",{closeBtn: false,
+						layer.alert("批量删除竞争对手成功",{closeBtn: false,
 					  		skin: 'layui-layer-molv'
 						  }, function(){
 							  refreshTable();
 							  layer.closeAll();
 						  });
 					}else{
-						layer.alert("删除竞争对手失败",{closeBtn: false,
+						layer.alert("批量删除竞争对手失败",{closeBtn: false,
 					  		skin: 'layui-layer-molv'
 						  });
 					}

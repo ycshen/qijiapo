@@ -131,13 +131,12 @@ public class CompetitorServiceImpl implements CompetitorService{
 
 	@Override
 	public void batchDelete(String idArr) {
-		// TODO Auto-generated method stub
-		
+		System.out.println(idArr);
 	}
 
 	@Override
 	public void batchTransfer(String idArr) {
-		// TODO Auto-generated method stub
+		System.out.println(idArr);
 		
 	}
 	
