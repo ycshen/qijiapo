@@ -48,21 +48,16 @@
 						              <i class="fa fa-angle-left pull-right"></i>
 						            </span>
 						          </a>
-						          
+						        <ul class="treeview-menu">
+		        	 			 <c:forEach var="submenu" items="${menuList}">
+		        	 			 	<c:if test="${submenu.menuType == 7 && submenu.parentMenuId == menu.id}">
+		        	 			 		 <li><a href="${ctx}${submenu.menuUrl}"><i class="fa fa-circle-o"></i>${submenu.menuName}</a></li>
+		        	 			 	</c:if>
+		        	 			 </c:forEach>
+						           
+						    </ul>  
 		        	 		</c:if>
-		        	 		<%-- <ul class="treeview-menu">
-						            <li><a href="${ctx}/inner/competitor/list"><i class="fa fa-circle-o"></i>客户</a></li>
-						            <li><a href="${ctx}/inner/competitor/list"><i class="fa fa-circle-o"></i>销售机会</a></li>
-						            <li><a href="${ctx}/inner/competitor/list"><i class="fa fa-circle-o"></i>联系人</a></li>
-						            <li><a href="${ctx}/inner/competitor/list"><i class="fa fa-circle-o"></i>合同</a></li>
-						            <li><a href="${ctx}/inner/competitor/list"><i class="fa fa-circle-o"></i>市场活动</a></li>
-						            <li><a href="${ctx}/inner/competitor/list"><i class="fa fa-circle-o"></i>销售线索</a></li>
-						            <li><a href="${ctx}/inner/competitor/list"  class="active"><i class="fa fa-circle-o"></i>竞争对手</a></li>
-						            <li><a href="${ctx}/inner/competitor/list"><i class="fa fa-circle-o"></i>产品</a></li>
-						            <li><a href="${ctx}/inner/competitor/list"><i class="fa fa-circle-o"></i>目标</a></li>
-						            <li><a href="${ctx}/inner/competitor/list"><i class="fa fa-circle-o"></i>回款</a></li>
-						            <li><a href="${ctx}/inner/competitor/list"><i class="fa fa-circle-o"></i>活动记录</a></li>
-						          </ul> --%>
+		        	 		
 						  </li>
 	        	 	</c:otherwise>
 	        	 </c:choose>
