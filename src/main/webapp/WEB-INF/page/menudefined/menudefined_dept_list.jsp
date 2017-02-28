@@ -61,7 +61,7 @@
 			    <i class="layui-icon">&#xe620;</i>按职位定义
 			  </button>
 			  <button class="layui-btn layui-btn-primary" onclick="definedByRole();">
-			    <i class="layui-icon">&#xe620;</i>按角色定义
+			    <i class="layui-icon">&#xe620;</i>按权限定义
 			  </button>
 			</div>
       </div>

@@ -36,7 +36,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-  		菜单自定义->按角色定义
+  		菜单自定义->按权限定义
         <small></small>
       </h1>
       <ol class="breadcrumb">
@@ -69,13 +69,13 @@
         <div class="col-xs-5">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">角色（权限）列表</h3>
+              <h3 class="box-title">权限（权限）列表</h3>
             </div>
             <div class="box">
         <!-- <div class="box-body">
           	<form class="form-inline" role="form">
 			  <div class="form-group">
-			    <input type="text" class="form-control" id="txtAuthName" placeholder="角色(权限)名称">
+			    <input type="text" class="form-control" id="txtAuthName" placeholder="权限(权限)名称">
 			  </div>
 			  
 			  <button type="button" class="btn btn-default">查询</button>
@@ -89,7 +89,7 @@
                 <thead>
                 <tr class="info">
                		 <th>序号</th>
-	                  <th>角色（权限）名称</th>
+	                  <th>权限（权限）名称</th>
                 </tr>
                 </thead>
                 <tbody>

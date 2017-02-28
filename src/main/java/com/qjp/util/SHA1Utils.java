@@ -52,6 +52,8 @@ public class SHA1Utils {
 			throw new DigestException("签名错误！");
 		}
 	}
+	
+	
 	/**
 	 * 获取参数的字典排序
 	 * @param maps 参数key-value map集合

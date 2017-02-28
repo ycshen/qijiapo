@@ -71,7 +71,10 @@
       </div>
             <!-- /.box-header -->
             <div class="box-body">
-			<h5>说明：1.点击权限可以对权限进行查看以及授权</h5>
+			<h5>说明：</h5>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.权限控制菜单显示;<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.点击权限可以对权限进行查看以及授权;
+			
               <table id="syslist" class="table table-bordered table-hover">
                 <thead>
                 <tr class="info">

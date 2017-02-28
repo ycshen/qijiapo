@@ -63,10 +63,10 @@
           <div class="box">
           	<div class="box-body">
           		<h5>说明：</h5>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.企家婆平台默认为按照角色定义用户使用菜单;<p/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.菜单定以后显示优先级：个人>职位>部门>角色，即当一个用户的菜单同时按照个人、职位、部门、角色定义时，用户使用系统显示个人定义的菜单，如果按照部门、角色定义，那么显示按照部门定义的菜单，依次类推;<p/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.如果同时有两种定义规则，需要使用优先级小的规则，请到部门与员工里编辑规则即可，比如按照个人、角色定义时，用户需要使用角色定义的菜单，则去部门与员工的用户信息里改变定义规则即可;<p/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.角色维护对应<a href="${ctx}/inner/auth/list"">权限管理</a>，职位维护对应<a href="${ctx}/inner/position/listInit">职位管理</a>，部门维护对应<a href="${ctx}/inner/admin/departmentUserList">部门与员工</a>，用户维护对应<a href="${ctx}/inner/admin/departmentUserList">部门与员工</a>.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.企家婆平台默认为按照权限定义用户使用菜单;<p/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.菜单定以后显示优先级：个人>职位>部门>权限，即当一个用户的菜单同时按照个人、职位、部门、权限定义时，用户使用系统显示个人定义的菜单，如果按照部门、权限定义，那么显示按照部门定义的菜单，依次类推;<p/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.如果同时有两种定义规则，需要使用优先级小的规则，请到部门与员工里编辑规则即可，比如按照个人、权限定义时，用户需要使用权限定义的菜单，则去部门与员工的用户信息里改变定义规则即可;<p/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.权限维护对应<a href="${ctx}/inner/auth/list"">权限管理</a>，职位维护对应<a href="${ctx}/inner/position/listInit">职位管理</a>，部门维护对应<a href="${ctx}/inner/admin/departmentUserList">部门与员工</a>，用户维护对应<a href="${ctx}/inner/admin/departmentUserList">部门与员工</a>.
 
 		        </div>
             <!-- /.box-header -->
@@ -98,7 +98,7 @@
 	            </div>
 	            <div class="col-6 col-sm-3 placeholder">
 	              <img src="${ctx}/img/menudefined/user_group.png" width="100" height="100" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-	              <h4>按角色定义</h4>
+	              <h4>按权限定义</h4>
 	              <div class="text-muted">
 					<button class="btn btn-info " onclick="defineByRole();">去定义</button>
 				  </div>
