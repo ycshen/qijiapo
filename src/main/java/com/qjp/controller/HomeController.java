@@ -2,8 +2,6 @@ package com.qjp.controller;
 
 import java.net.URLEncoder;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -11,14 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.LockedAccountException;
-import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.session.Session;
-import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.qjp.entity.MenuEntity;
-import com.qjp.entity.ResultEnum;
 import com.qjp.entity.UserEntity;
-import com.qjp.model.ResultModel;
 import com.qjp.service.MenuService;
 import com.qjp.service.UserService;
 
@@ -82,9 +70,11 @@ public class HomeController {
 						definedCasecaseId = loginUser.getDepartmentId().toString();
 						break;
 					case 4:
-						//definedCasecaseId = loginUser.get.toString();
+						//待开发
+						definedCasecaseId = "1";
 						break;
 					default:
+						definedCasecaseId = "1";
 						//默认按照角色
 						break;
 				}
