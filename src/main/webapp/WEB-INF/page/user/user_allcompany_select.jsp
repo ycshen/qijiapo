@@ -18,7 +18,19 @@
 	<div class="container">
 			<div class="box">
 		        <div class="box-body">
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;是否将竞争对手【${name}】转移给其他负责人？转移成功之后，该操作将无法恢复。
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;是否将竞争对手
+				
+				<c:choose>
+					<c:when test="${name == null || name == ''}">
+						批量
+						<input type="hidden" id="hidTransferType" value="2"/>
+					</c:when>
+					<c:otherwise>
+						【${name}】
+						<input type="hidden" id="hidTransferType" value="1"/>
+					</c:otherwise>
+				</c:choose>
+				转移给其他负责人？转移成功之后，该操作将无法恢复。
 		        </div>
 		      </div>
 			

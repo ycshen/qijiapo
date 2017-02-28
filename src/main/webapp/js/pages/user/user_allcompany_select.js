@@ -25,8 +25,9 @@ function transferCompetitor(competitorId){
 				layer.alert("请选择新负责人",{closeBtn: false, skin: 'layui-layer-molv'});
 				return;
 			}
-
-			var url = ctx + "/inner/competitor/transferCompetitor?transferType=1&userId=" + userId + "&competitorId="+ competitorId;
+			
+			var transferType = $("#hidTransferType").val();
+			var url = ctx + "/inner/competitor/transferCompetitor?transferType=" + transferType + "&userId=" + userId + "&competitorId="+ competitorId;
 			$.ajax({
 		        cache: true,
 		        type: "get",

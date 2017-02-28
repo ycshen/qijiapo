@@ -282,7 +282,27 @@ function batchDelete(){
 }
 
 function batchTransfer(){
-	getCheckedBox();
+	var idArr = getCheckedBox();
+	if(isNotBlank(idArr)){
+		layer.confirm("确定要批量转移竞争对手相关信息吗？",{closeBtn: false,
+	  		skin: 'layui-layer-molv'
+		  }, function(){
+			  var url = ctx + "/inner/user/selectAllUser?id=" + idArr;
+				var title = "批量转移竞争对手";
+				layer.open({
+					type: 2,
+					title: title,
+					shadeClose: true,
+					shade: 0.8,
+					area: ['500px', '400px'],
+					content: url
+				}); 
+		})
+	}else{
+		layer.alert("请选择需要批量转移的竞争对手",{closeBtn: false,
+	  		skin: 'layui-layer-molv'
+		  });
+	}
 }
 
 function renderCompetitorName(id, name){
