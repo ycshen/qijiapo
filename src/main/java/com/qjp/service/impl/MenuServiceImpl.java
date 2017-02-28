@@ -107,5 +107,30 @@ public class MenuServiceImpl implements MenuService{
 		
 		return data;
 	}
+
+	@Override
+	public List<MenuEntity> getLoginMenus(String definedType, String companyId,
+			String definedCasecaseId) {
+		String result = MyBaseApiUtils.getLoginMenus(definedType, companyId, definedCasecaseId);
+		List<MenuEntity> list = null;
+		if(StringUtils.isNotBlank(result)){
+			JSONObject jsonObject = JSONObject.parseObject(result);
+			if(jsonObject != null){
+				Object codeObj = jsonObject.get("code");
+				if(codeObj != null){
+					String code = codeObj.toString();
+					if (ApiCode.OK.toString().equals(code)) {
+						Object dataObj = jsonObject.get("data");
+						if(dataObj != null){
+							String data = dataObj.toString();
+							list = JSONObject.parseArray(data, MenuEntity.class);
+						}
+					}
+				}
+			}
+		}
+		
+		return list;
+	}
 }
 

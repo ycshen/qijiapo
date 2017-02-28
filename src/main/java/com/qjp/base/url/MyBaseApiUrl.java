@@ -59,6 +59,9 @@ public class MyBaseApiUrl {
 	@Value("${mybase.getAllOutterMenu}")
 	private String mybase_getAllOutterMenu_url;
 	public static String mybase_getAllOutterMenu;
+	@Value("${mybase.getLoginMenus}")
+	private String mybase_getLoginMenus_url;
+	public static String mybase_getLoginMenus;
 	
 	
 	//department
@@ -218,6 +221,7 @@ public class MyBaseApiUrl {
 		mybase_getCompanyById = this.mybase_getCompanyById_url;
 		mybase_getCompanyStaffTreeById = this.mybase_getCompanyStaffTreeById_url;
 		mybase_getAllOutterMenu = this.mybase_getAllOutterMenu_url;
+		mybase_getLoginMenus = this.mybase_getLoginMenus_url;
 		//department
 		mybase_getDepByCompanyId = this.mybase_getDepByCompanyId_url;
 		mybase_isExistDepartment = this.mybase_isExistDepartment_url;

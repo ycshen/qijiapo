@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -22,7 +23,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -61,8 +61,35 @@ public class HomeController {
 			if(loginUser != null){
 				HttpSession seesion = request.getSession();
 				seesion.setAttribute("loginUser",loginUser);
-				Long userId = loginUser.getId();
-				List<MenuEntity> list = menuService.getMenuList(userId.toString());
+				Integer menuDefineType = loginUser.getMenuDefinedType();
+				if(menuDefineType == null){
+					menuDefineType = 4;
+				}
+				
+				String definedType = menuDefineType.toString();
+				String companyId = loginUser.getCompanyId().toString();
+				List<MenuEntity> list = null;
+				String definedCasecaseId = StringUtils.EMPTY;
+				//menuDefineType  1-员工  2-职位  3-部门  4-角色
+				switch (menuDefineType) {
+					case 1:
+						definedCasecaseId = loginUser.getId().toString();
+						break;
+					case 2:
+						definedCasecaseId = loginUser.getPositionId().toString();					
+						break;
+					case 3:
+						definedCasecaseId = loginUser.getDepartmentId().toString();
+						break;
+					case 4:
+						//definedCasecaseId = loginUser.get.toString();
+						break;
+					default:
+						//默认按照角色
+						break;
+				}
+
+				list = menuService.getLoginMenus(definedType, companyId, definedCasecaseId);
 				seesion.setAttribute("menuList",list);
 			}else{
 				mv.addObject("msg", "用户名或者密码有误");

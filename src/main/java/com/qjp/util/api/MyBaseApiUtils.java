@@ -290,6 +290,29 @@ public class MyBaseApiUtils {
 		return result;
 	}
 	
+	public static String getLoginMenus(String definedType,
+			String companyId, String definedCasecaseId){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_getLoginMenus;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("definedType", definedType);	
+			maps.put("companyId", companyId);	
+			maps.put("definedCasecaseId", definedCasecaseId);			
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("definedType", definedType);
+			jsonObject.put("companyId", companyId);
+			jsonObject.put("definedCasecaseId", definedCasecaseId);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
 	/**
 	 * 根据公司id获取公司信息
 	 * @param id
