@@ -86,6 +86,24 @@ public class MyBaseApiUtils {
 		return result;
 	}
 	
+	public static String getRolePage(String query){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_getRolePage;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("query", query);
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("query",query);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
 	/**
 	 * 获取子公司信息列表
 	 * @param companyId
@@ -354,6 +372,25 @@ public class MyBaseApiUtils {
 		return result;
 	}
 	
+	
+	public static String getRoleById(String id){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_getRoleById;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("id", id);			
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("id", id);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
 	/**
 	 * 获取授权用户通过公司id和授权id
 	 * @param companyId
@@ -374,6 +411,28 @@ public class MyBaseApiUtils {
 			jsonObject.put("companyId", companyId);
 			jsonObject.put("authId", authId);
 			jsonObject.put("isAuth", isAuth);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public static String getRoleUserByCidAndRoleId(String companyId, String roleId, String isRole){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_getRoleUserByCidAndRoleId;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("companyId", companyId);			
+			maps.put("roleId", roleId);		
+			maps.put("isRole", isRole);		
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("companyId", companyId);
+			jsonObject.put("roleId", roleId);
+			jsonObject.put("isRole", isRole);
 			jsonObject.put("secret", secret);
 			result = HttpUtils.postUrl(url, jsonObject);
 		} catch (Exception e) {
@@ -505,6 +564,30 @@ public class MyBaseApiUtils {
 		return result;
 	}
 	
+	public static String getUserListByRoleId(String roleId, String companyId, String pageSize, String currentPage){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_getUserListByAuthId;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("roleId", roleId);
+			maps.put("companyId", companyId);
+			maps.put("pageSize", pageSize);
+			maps.put("currentPage", currentPage);
+			
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("roleId", roleId);
+			jsonObject.put("companyId", companyId);
+			jsonObject.put("pageSize", pageSize);
+			jsonObject.put("currentPage", currentPage);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 	
 	/**
 	 * 获取子公司信息列表
@@ -1057,6 +1140,25 @@ public class MyBaseApiUtils {
 		return result;
 	}
 	
+	public static String cancelRoles(String roleUserJson){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_cancelRole;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("roleUserJson", roleUserJson);
+			
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("roleUserJson", roleUserJson);
+			jsonObject.put("secret", secret);
+			HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
 	public static String batchAuth(String companyId, String authId, String authUserIdArray, String notAuthUserIdArray){
 		String result = StringUtils.EMPTY;
 		try {	
@@ -1075,6 +1177,31 @@ public class MyBaseApiUtils {
 			jsonObject.put("notAuthUserIdArray", notAuthUserIdArray);
 			jsonObject.put("secret", secret);
 			HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public static String batchRole(String companyId, String roleId, String roleUserIdArray, String notRoleUserIdArray){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_batchRole;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("companyId", companyId);
+			maps.put("roleId", roleId);
+			maps.put("roleUserIdArray", roleUserIdArray);
+			maps.put("notRoleUserIdArray", notRoleUserIdArray);
+			
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("companyId", companyId);
+			jsonObject.put("roleId", roleId);
+			jsonObject.put("roleUserIdArray", roleUserIdArray);
+			jsonObject.put("notRoleUserIdArray", notRoleUserIdArray);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -53,7 +53,9 @@
         <li <c:if test="${param.nav=='position_list'}"> class="active"</c:if>>
         	<a href="<c:url value="/inner/position/listInit"/>"><i class="fa fa-circle-o"></i> 职位管理</a></li>
         <li <c:if test="${param.nav=='auth_list'}"> class="active"</c:if>>
-        	<a href="<c:url value="/inner/auth/list"/>"><i class="fa fa-unlock-alt"></i> <span>权限管理</span></a></li>
+        	<a href="<c:url value="/inner/auth/list"/>"><i class="fa fa-unlock-alt"></i> <span>权限管理</span></a></li> 
+        <li <c:if test="${param.nav=='role_list'}"> class="active"</c:if>>
+        	<a href="<c:url value="/inner/role/list"/>"><i class="fa fa-unlock-alt"></i> <span>角色管理</span></a></li>
         <li <c:if test="${param.nav=='menudefined_list'}"> class="active"</c:if>>
         	<a href="<c:url value="/inner/admin/menudefined/list"/>"><i class="fa fa-cog"></i> <span>菜单自定义</span></a></li>
         <li <c:if test="${param.nav=='log_list'}"> class="active"</c:if>>

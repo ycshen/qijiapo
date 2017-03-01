@@ -122,7 +122,12 @@ public class MyBaseApiUrl {
 	@Value("${mybase.changeCollapse}")
 	private String mybase_changeCollapse_url;
 	public static String mybase_changeCollapse;
-	
+	@Value("${mybase.getUserListByRoleId}")
+	private String mybase_getUserListByRoleId_url;
+	public static String mybase_getUserListByRoleId;
+	@Value("${mybase.getRoleUserByCidAndRoleId}")
+	private String mybase_getRoleUserByCidAndRoleId_url;
+	public static String mybase_getRoleUserByCidAndRoleId;
 	
 	//Company
 	@Value("${mybase.getCompanyStaffTreeById}")
@@ -259,6 +264,8 @@ public class MyBaseApiUrl {
 		mybase_register = this.mybase_register_url;
 		mybase_changeCollapse = this.mybase_changeCollapse_url;
 		mybase_getUserListByCompanyId = this.mybase_getUserListByCompanyId_url;
+		mybase_getUserListByRoleId = this.mybase_getUserListByRoleId_url;
+		mybase_getRoleUserByCidAndRoleId = this.mybase_getRoleUserByCidAndRoleId_url;
 		//position
 		mybase_getSystemPosition = this.mybase_getSystemPosition_url;
 		mybase_getPositionByCompanyId = this.mybase_getPositionByCompanyId_url;

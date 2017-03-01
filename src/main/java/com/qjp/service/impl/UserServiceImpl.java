@@ -13,7 +13,9 @@ import com.qjp.util.api.MyBaseApiUtils;
 import com.qjp.util.api.model.ApiCode;
 import com.qjp.util.query.UserAuthQuery;
 import com.qjp.util.query.UserQuery;
+import com.qjp.util.query.UserRoleQuery;
 import com.qjp.util.vo.UserAuthVO;
+import com.qjp.util.vo.UserRoleVO;
 
 /** 
  * <p>Project: MyBase</p> 
@@ -302,6 +304,65 @@ public class UserServiceImpl implements UserService{
 						if(dataObj != null){
 							String data = dataObj.toString();
 							list = JSONObject.parseArray(data, UserEntity.class);
+						}
+					}
+				}
+			}
+		}
+		
+		return list;
+	}
+
+	@Override
+	public UserRoleQuery getUserListByRoleId(UserRoleQuery userRoleQuery) {
+		String roleId = userRoleQuery.getRoleId();
+		String pageSize = userRoleQuery.getSize().toString();
+		String currentPage = userRoleQuery.getPage().toString();
+		String companyId = userRoleQuery.getCompanyId();
+		String result = MyBaseApiUtils.getUserListByRoleId(roleId, companyId, pageSize, currentPage);
+		if(StringUtils.isNotBlank(result)){
+			JSONObject jsonObject = JSONObject.parseObject(result);
+			if(jsonObject != null){
+				Object codeObj = jsonObject.get("code");
+				if(codeObj != null){
+					String code = codeObj.toString();
+					if (ApiCode.OK.toString().equals(code)) {
+						Object dataObj = jsonObject.get("data");
+						if(dataObj != null){
+							String data = dataObj.toString();
+							List<UserRoleVO> list = JSONObject.parseArray(data, UserRoleVO.class);
+							userRoleQuery.setItems(list);
+						}
+						
+						Object countObj = jsonObject.get("count");
+						if(countObj != null){
+							String count = countObj.toString();
+							userRoleQuery.setCount(Integer.parseInt(count));
+						}
+					}
+				}
+			}
+		}
+		
+		return userRoleQuery;
+	}
+
+	@Override
+	public List<UserRoleVO> getRoleUserByCidAndRoleId(String companyId,
+			String roleId, String isRole) {
+		List<UserRoleVO> list = null;
+		String result = MyBaseApiUtils.getRoleUserByCidAndRoleId(companyId, roleId, isRole.toString());
+		if(StringUtils.isNotBlank(result)){
+			JSONObject jsonObject = JSONObject.parseObject(result);
+			if(jsonObject != null){
+				Object codeObj = jsonObject.get("code");
+				if(codeObj != null){
+					String code = codeObj.toString();
+					if (ApiCode.OK.toString().equals(code)) {
+						Object dataObj = jsonObject.get("data");
+						if(dataObj != null){
+							String data = dataObj.toString();
+							list = JSONObject.parseArray(data, UserRoleVO.class);
 						}
 					}
 				}

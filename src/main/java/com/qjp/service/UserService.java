@@ -5,7 +5,9 @@ import java.util.List;
 import com.qjp.entity.UserEntity;
 import com.qjp.util.query.UserAuthQuery;
 import com.qjp.util.query.UserQuery;
+import com.qjp.util.query.UserRoleQuery;
 import com.qjp.util.vo.UserAuthVO;
+import com.qjp.util.vo.UserRoleVO;
 
 /** 
  * <p>Project: MyBase</p> 
@@ -30,6 +32,7 @@ public interface UserService {
 	void enableUser(String id, String updateUser);
 	void resetPassword(String id, String password, String resetType, String email);
 	UserAuthQuery getUserListByAuthId(UserAuthQuery userAuthQuery);
+	UserRoleQuery getUserListByRoleId(UserRoleQuery userRoleQuery);
 	/**
 	 * 
 	 * @param companyId
@@ -41,5 +44,6 @@ public interface UserService {
 	Integer isExistTelephone(String telephone);
 	void changeCollapse(String userId, String isCollapseMenu);
 	List<UserEntity> getUserListByCompanyId(String id);
+	List<UserRoleVO> getRoleUserByCidAndRoleId(String companyId, String roleId, String isRole);
 }
 
