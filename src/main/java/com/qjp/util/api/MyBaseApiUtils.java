@@ -567,7 +567,7 @@ public class MyBaseApiUtils {
 	public static String getUserListByRoleId(String roleId, String companyId, String pageSize, String currentPage){
 		String result = StringUtils.EMPTY;
 		try {	
-			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_getUserListByAuthId;
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_getUserListByRoleId;
 			Map<String,Object> maps = SHA1Utils.getSha1Map();
 			maps.put("roleId", roleId);
 			maps.put("companyId", companyId);
