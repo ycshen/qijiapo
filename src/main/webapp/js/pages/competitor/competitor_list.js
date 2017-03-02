@@ -431,8 +431,8 @@ function queryCompeotitor(){
 	            		return renderCompetitorName(competitor.id, competitor.competitorName);
 	            	}
 	             },
-	             { data: 'beyondOfName' },
-	             { data: 'beyondDeptName' },
+	             { data: 'userName' },
+	             { data: 'departmentName' },
 	             {   
 	                 bSortable : false,
 	                 className : "text-center",  
@@ -515,8 +515,8 @@ function initDataTable(){
 	            		return renderCompetitorName(competitor.id, competitor.competitorName);
 	            	}
 	             },
-	             { data: 'beyondOfName' },
-	             { data: 'beyondDeptName' },
+	             { data: 'userName' },
+	             { data: 'departmentName' },
 	             {   
 	                 bSortable : false,
 	                 className : "text-center",  

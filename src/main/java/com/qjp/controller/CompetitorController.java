@@ -133,9 +133,9 @@ public class CompetitorController {
 	
 	private void transferCompetitor(String competitorId, UserEntity transferToUser, UserEntity loginUser){
 		CompetitorEntity oldCompetitor = competitorService.getCompetitorById(competitorId);
-		oldCompetitor.setBeyondOf(transferToUser.getId().toString());
+		oldCompetitor.setUserId(transferToUser.getId().toString());
 		String transferUserName = transferToUser.getUserName();
-		oldCompetitor.setBeyondOfName(transferUserName);
+		oldCompetitor.setUserName(transferUserName);
 		oldCompetitor.setUpdateTime(new Date());
 		oldCompetitor.setUpdateUser(loginUser.getUserName());
 		LogUtils.logCRMCompetitor("转移竞争对手(" + oldCompetitor.getCompetitorName() + ")到" + transferUserName, competitorId, loginUser);
@@ -171,9 +171,8 @@ public class CompetitorController {
 		competitor.setAreaId(StringUtils.splitLocation(areaId));
 		Long id = competitor.getId();
 		if(id == null){
-			competitor.setBeyondDeptType("1");
-			competitor.setBeyondOf(user.getId().toString());
-			competitor.setBeyondOfName(user.getUserName());
+			competitor.setUserId(user.getId().toString());
+			competitor.setUserName(user.getUserName());
 			competitor.setCreateTime(new Date());
 			competitor.setCreateUser(user.getUserName());
 			String returnId = competitorService.insertCompetitor(competitor);

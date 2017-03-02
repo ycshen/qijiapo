@@ -95,13 +95,13 @@ font-size: 14px !important;
 			    			<td class="title-td">竞争对手名称:</td>
 			    			<td>${competitor.competitorName}</td>
 			    			<td class="title-td">竞争对手所属人:</td>
-			    			<td>${competitor.beyondOfName}</td>
+			    			<td>${competitor.userName}</td>
 			    			
 			    		</tr>
 			    		
 			    		<tr>
 			    			<td class="title-td">竞争对手所属部门:</td>
-			    			<td>${competitor.beyondDeptName}</td>
+			    			<td>${competitor.departmentName}</td>
 			    			<td class="title-td">省市区:</td>
 			    			<td>${competitor.provinceName}-${competitor.cityName}-${competitor.areaName}</td>
 			    			
@@ -199,7 +199,7 @@ font-size: 14px !important;
 								  	 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							              <!-- The user image in the navbar-->
 							              <img src="/qijiapo/js/adminlte/dist/img/user2-160x160.jpg" class="user-image" style="width: 35px;height:35px;" alt="User Image">
-							              <span class="hidden-xs">${competitor.beyondOfName}</span>
+							              <span class="hidden-xs">${competitor.userName}</span>
 							            </a>
 								  	
 									</div>
