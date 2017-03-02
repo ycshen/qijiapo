@@ -114,6 +114,23 @@ public class CRMApiUtils {
 		
 		return result;
 	}
+
+	public static String getAttnPage(String query){
+		String result = StringUtils.EMPTY;
+		try{
+			String url = getCRMUrl() + CRMApiUrl.crm_getAttnPage;
+			Map<String, Object> maps = SHA1Utils.getSha1Map();
+			maps.put("query",query);
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject object = new JSONObject();
+			object.put("query",query);
+			object.put("secret",secret);
+			result = HttpUtils.postUrl(url,object);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
 	
 	public static String getCompetitorById(String id){
