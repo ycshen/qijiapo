@@ -133,11 +133,11 @@ public class PositionServiceImpl implements PositionService{
 
 	@Override
 	public PositionQuery getPositionPage(PositionQuery positionQuery) {
-		Long companyId = positionQuery.getCompanyId();
+		String companyId = positionQuery.getCompanyId();
 		Integer pageSize = positionQuery.getSize();
 		Integer currentPage = positionQuery.getPage();
 		String positionName = positionQuery.getPostionName();
-		String loginResult = MyBaseApiUtils.getPositionPage(positionName, companyId.toString(), pageSize.toString(), currentPage.toString());
+		String loginResult = MyBaseApiUtils.getPositionPage(positionName, companyId, pageSize.toString(), currentPage.toString());
 		if(StringUtils.isNotBlank(loginResult)){
 			JSONObject jsonObject = JSONObject.parseObject(loginResult);
 			if(jsonObject != null){

@@ -40,9 +40,6 @@ public class CompetitorController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	public ModelAndView list(@ModelAttribute CompetitorQuery competitorQuery, HttpServletRequest request){
 		ModelAndView mav = new ModelAndView("/competitor/competitor_list");
-		UserEntity user = UserUtils.getLoginUser(request);
-		competitorQuery.setCompanyId(user.getCompanyId());
-		competitorQuery = competitorService.getCompetitorPage(competitorQuery);
 		mav.addObject("competitorQuery", competitorQuery);
 		return mav;
 	}
@@ -51,15 +48,13 @@ public class CompetitorController {
 	@RequestMapping(value = "/listAjax", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public String listAjax(@ModelAttribute CompetitorQuery competitorQuery, HttpServletRequest request){
-		UserEntity user = UserUtils.getLoginUser(request);
+		competitorQuery.init(request);
 		String provinceId = competitorQuery.getProvinceId();
 		competitorQuery.setProvinceId(StringUtils.splitLocation(provinceId));
 		String cityId = competitorQuery.getCityId();
 		competitorQuery.setCityId(StringUtils.splitLocation(cityId));
 		String areaId = competitorQuery.getAreaId();
 		competitorQuery.setAreaId(StringUtils.splitLocation(areaId));
-		
-		competitorQuery.setCompanyId(user.getCompanyId());
 		competitorQuery = competitorService.getCompetitorPage(competitorQuery);
 		competitorQuery.setSize(65);
 		String jsonStr = JsonUtils.json2Str(competitorQuery);

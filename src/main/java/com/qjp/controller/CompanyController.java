@@ -48,7 +48,7 @@ public class CompanyController extends BaseController{
 	public String subList(@ModelAttribute CompanyQuery companyQuery, HttpServletRequest request){
 		String result = StringUtils.EMPTY;
 		UserEntity user = UserUtils.getLoginUser(request);
-		companyQuery.setCompanyId(user.getCompanyId());
+		companyQuery.setCompanyId(user.getCompanyId().toString());
 		companyQuery = companyService.getCompanyList(companyQuery);
 		List<CompanyEntity> list = companyQuery.getItems();
 		if(list != null && list.size() > 0){
@@ -62,7 +62,7 @@ public class CompanyController extends BaseController{
 	public ModelAndView list(@ModelAttribute CompanyQuery companyQuery, HttpServletRequest request){
 		ModelAndView mav = new ModelAndView("/company/sub_company_list");
 		UserEntity user = UserUtils.getLoginUser(request);
-		companyQuery.setCompanyId(user.getCompanyId());
+		companyQuery.setCompanyId(user.getCompanyId().toString());
 		companyQuery = companyService.getCompanyList(companyQuery);
 		mav.addObject("companyQuery", companyQuery);
 		return mav;

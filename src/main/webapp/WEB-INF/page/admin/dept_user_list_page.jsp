@@ -76,7 +76,7 @@
 		}else if(menuDefinedType == 3){
 			authStr = "<span class=\"label label-success\">部门优先</span>";
 		}else if(menuDefinedType == 4){
-			authStr = "<span class=\"label label-success\">角色优先</span>";
+			authStr = "<span class=\"label label-success\">权限优先</span>";
 		}
 
 		return authStr;

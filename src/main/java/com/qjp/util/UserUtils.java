@@ -78,6 +78,18 @@ public class UserUtils {
 		return roleEnum;
 	}
 	
+	public static String getRoleType(HttpServletRequest request){
+		String roleType = "3";
+		UserEntity loginUser = (UserEntity) request.getSession().getAttribute("loginUser");
+		List<RoleEntity> roleList = loginUser.getRoleList();
+		if(roleList != null && roleList.size() > 0){
+			RoleEnum roleEnum = getHighestRole(roleList);
+			roleType = roleEnum.getRoleId().toString();
+		}
+
+		return roleType;
+	}
+	
 	
 	
 }

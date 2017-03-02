@@ -34,10 +34,10 @@ public class CompanyServiceImpl implements CompanyService{
 	@Override
 	public CompanyQuery getCompanyList(CompanyQuery companyQuery) {
 		String companyName = companyQuery.getCompanyName();
-		Long companyId = companyQuery.getCompanyId();
+		String companyId = companyQuery.getCompanyId();
 		Integer pageSize = companyQuery.getSize();
 		Integer currentPage = companyQuery.getPage();
-		String loginResult = MyBaseApiUtils.getSubCompanyPage(companyName, companyId.toString(), pageSize.toString(), currentPage.toString());
+		String loginResult = MyBaseApiUtils.getSubCompanyPage(companyName, companyId, pageSize.toString(), currentPage.toString());
 		if(StringUtils.isNotBlank(loginResult)){
 			JSONObject jsonObject = JSONObject.parseObject(loginResult);
 			if(jsonObject != null){

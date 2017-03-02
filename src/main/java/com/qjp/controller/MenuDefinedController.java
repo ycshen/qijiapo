@@ -69,7 +69,7 @@ public class MenuDefinedController extends BaseController{
 		ModelAndView mav = new ModelAndView("/menudefined/menudefined_position_list");
 		UserEntity user = UserUtils.getLoginUser(request);
 		Long companyId = user.getCompanyId();
-		positionQuery.setCompanyId(companyId);
+		positionQuery.setCompanyId(companyId.toString());
 		positionQuery = positionService.getPositionPage(positionQuery);
 		
 		return mav;

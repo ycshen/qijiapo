@@ -115,7 +115,7 @@ public class PositionController extends BaseController{
 		ModelAndView mav = new ModelAndView("/position/position_page_list");
 		UserEntity user = UserUtils.getLoginUser(request);
 		Long companyId = user.getCompanyId();
-		positionQuery.setCompanyId(companyId);
+		positionQuery.setCompanyId(companyId.toString());
 		positionQuery = positionService.getPositionPage(positionQuery);
 		
 		return mav;
@@ -126,7 +126,7 @@ public class PositionController extends BaseController{
 	public String getPostionPage(@ModelAttribute PositionQuery positionQuery, HttpServletRequest request){
 		UserEntity user = UserUtils.getLoginUser(request);
 		Long companyId = user.getCompanyId();
-		positionQuery.setCompanyId(companyId);
+		positionQuery.setCompanyId(companyId.toString());
 		positionQuery = positionService.getPositionPage(positionQuery);
 		String result = new Gson().toJson(positionQuery);
 		

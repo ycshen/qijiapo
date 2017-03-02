@@ -14,7 +14,6 @@ import com.qjp.model.pageutil.Page;
 public class CompanyQuery extends Page<CompanyEntity>{
 	private String level;
 	private String companyName;
-	private Long companyId;
 	public String getLevel() {
 		return level;
 	}
@@ -31,12 +30,6 @@ public class CompanyQuery extends Page<CompanyEntity>{
 		this.companyName = companyName;
 	}
 
-	public Long getCompanyId() {
-		return companyId;
-	}
-
-	public void setCompanyId(Long companyId) {
-		this.companyId = companyId;
-	}
+	
 }
 

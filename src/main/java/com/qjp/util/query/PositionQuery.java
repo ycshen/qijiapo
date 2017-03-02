@@ -12,7 +12,6 @@ import com.qjp.model.pageutil.Page;
  * @author <a href="mailto:shenyuchuan@itiaoling.com">申鱼川</a>
  */
 public class PositionQuery extends Page<PositionEntity>{
-	private Long companyId;
 	private Integer positionType; // 1.用户自定义 2.系统定义
 	private String postionName;
 	public Integer getPositionType() {
@@ -27,12 +26,7 @@ public class PositionQuery extends Page<PositionEntity>{
 	public void setPostionName(String postionName) {
 		this.postionName = postionName;
 	}
-	public Long getCompanyId() {
-		return companyId;
-	}
-	public void setCompanyId(Long companyId) {
-		this.companyId = companyId;
-	}
+	
 	
 }
 

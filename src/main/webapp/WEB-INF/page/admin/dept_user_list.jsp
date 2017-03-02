@@ -170,7 +170,7 @@
 		                				<span class="label label-success">部门优先</span>
 		                			</c:if>
 		                			<c:if test="${user.menuDefinedType == 4}">
-		                				<span class="label label-success">角色优先</span>
+		                				<span class="label label-success">权限优先</span>
 		                			</c:if>
 		                		
 		                		</td>
