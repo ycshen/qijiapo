@@ -162,7 +162,7 @@ public class CompetitorController {
 	@RequestMapping(value = "/saveOrUpdate", method = RequestMethod.POST)
 	public ModelAndView saveOrUpdate(@ModelAttribute CompetitorEntity competitor, HttpServletRequest request){
 		ModelAndView mav = new ModelAndView("/competitor/competitor_edit");
-		UserEntity user = UserUtils.getLoginUser(request);
+		competitor.init(request); //初始化公司、部门、用户信息
 		String provinceId = competitor.getProvinceId();
 		competitor.setProvinceId(StringUtils.splitLocation(provinceId));
 		String cityId = competitor.getCityId();
@@ -170,20 +170,15 @@ public class CompetitorController {
 		String areaId = competitor.getAreaId();
 		competitor.setAreaId(StringUtils.splitLocation(areaId));
 		Long id = competitor.getId();
+		UserEntity user = UserUtils.getLoginUser(request);
 		if(id == null){
-			competitor.setUserId(user.getId().toString());
-			competitor.setUserName(user.getUserName());
-			competitor.setCreateTime(new Date());
-			competitor.setCreateUser(user.getUserName());
 			String returnId = competitorService.insertCompetitor(competitor);
 			LogUtils.logCRMCompetitor("添加了竞争对手(" + competitor.getCompetitorName() + ")", returnId, user);
 		}else{
-			competitor.setUpdateTime(new Date());
-			competitor.setUpdateUser(user.getUserName());
 			competitorService.updateCompetitor(competitor);
 			LogUtils.logCRMCompetitor("修改了竞争对手(" + competitor.getCompetitorName() + ")", id.toString(), user);
 		}
-		mav.addObject("user", user);
+
 		return mav;
 	}
 	

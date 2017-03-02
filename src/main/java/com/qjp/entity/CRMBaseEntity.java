@@ -3,7 +3,12 @@ package com.qjp.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.qjp.util.UserUtils;
 
 /**
  * @Author shenyuchuan
@@ -189,6 +194,49 @@ public class CRMBaseEntity implements Serializable {
 		this.userName = userName;
 	}
 	
+	public void init(HttpServletRequest request){
+		UserEntity loginUser = UserUtils.getLoginUser(request);
+		if(StringUtils.isBlank(this.getUserId())){
+			this.setUserId(loginUser.getId().toString());
+		}
+		
+		if(StringUtils.isBlank(this.getUserName())){
+			this.setUserName(loginUser.getUserName());
+		}
+		
+		if(StringUtils.isBlank(this.getDepartmentId())){
+			this.setDepartmentId(loginUser.getDepartmentId().toString());
+		}
+		
+		if(StringUtils.isBlank(this.getDepartmentName())){
+			this.setDepartmentName(loginUser.getDepartmentName());
+		}
+		
+		if(StringUtils.isBlank(this.getCompanyId())){
+			this.setCompanyId(loginUser.getCompanyId().toString());
+		}
+		
+		if(StringUtils.isBlank(this.getCompanyName())){
+			this.setCompanyName(loginUser.getCompanyName());
+		}
+		
+		if(StringUtils.isBlank(this.getCreateUser())){
+			this.setCreateUser(loginUser.getUserName());
+		}
+		
+		if(this.getCreateTime() == null){
+			this.setCreateTime(new Date());
+		}
+		
+		if(this.getUpdateTime() == null){
+			this.setUpdateTime(new Date());
+		}
+		
+		if(StringUtils.isBlank(this.getUpdateUser())){
+			this.setUpdateUser(loginUser.getUserName());
+		}
+		
+	}
 	
 
 }
