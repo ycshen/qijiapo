@@ -14,7 +14,6 @@ import com.qjp.util.vo.RoleVO;
  */
 public class RoleVOQuery extends Page<RoleVO>{
 	private String roleName;
-	private String companyId;
 
 	public String getRoleName() {
 		return roleName;
@@ -24,12 +23,5 @@ public class RoleVOQuery extends Page<RoleVO>{
 		this.roleName = roleName;
 	}
 
-	public String getCompanyId() {
-		return companyId;
-	}
-
-	public void setCompanyId(String companyId) {
-		this.companyId = companyId;
-	}
 }
 
