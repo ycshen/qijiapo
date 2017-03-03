@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.qjp.base.ResponseStatus;
+import com.qjp.base.RoleEnum;
 import com.qjp.entity.CompetitorEntity;
 import com.qjp.entity.LogEntity;
 import com.qjp.entity.UserEntity;
 import com.qjp.service.CompetitorService;
+import com.qjp.service.DepartmentService;
 import com.qjp.service.LogService;
 import com.qjp.service.UserService;
 import com.qjp.util.JsonUtils;
@@ -33,6 +35,8 @@ import com.qjp.util.query.LogQuery;
 public class CompetitorController {
 	@Autowired
 	private CompetitorService competitorService;
+	@Autowired
+	private DepartmentService departmentService;
 	@Autowired
 	private LogService logService;
 	@Autowired
@@ -55,8 +59,13 @@ public class CompetitorController {
 		competitorQuery.setCityId(StringUtils.splitLocation(cityId));
 		String areaId = competitorQuery.getAreaId();
 		competitorQuery.setAreaId(StringUtils.splitLocation(areaId));
+		String roleType = competitorQuery.getRoleType();
+		if(RoleEnum.DEP.getRoleId().toString().equals(roleType)){
+			String idList = departmentService.getSubDepList(competitorQuery.getDepartmentId(), competitorQuery.getCompanyId());
+			competitorQuery.setDepartmentId(idList);
+		}
+		
 		competitorQuery = competitorService.getCompetitorPage(competitorQuery);
-		competitorQuery.setSize(65);
 		String jsonStr = JsonUtils.json2Str(competitorQuery);
 		
 		return jsonStr;

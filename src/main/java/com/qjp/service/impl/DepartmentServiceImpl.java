@@ -175,5 +175,28 @@ public class DepartmentServiceImpl implements DepartmentService{
 	public void deleteDepartmentById(String id, String companyId) {
 		MyBaseApiUtils.deleteDepartmentById(id, companyId);
 	}
+
+	@Override
+	public String getSubDepList(String departmentId, String companyId) {
+		String result = MyBaseApiUtils.getSubDepIdList(companyId, departmentId);
+		String data = StringUtils.EMPTY;
+		if(StringUtils.isNotBlank(result)){
+			JSONObject jsonObject = JSONObject.parseObject(result);
+			if(jsonObject != null){
+				Object codeObj = jsonObject.get("code");
+				if(codeObj != null){
+					String code = codeObj.toString();
+					if (ApiCode.OK.toString().equals(code)) {
+						Object dataObj = jsonObject.get("data");
+						if(dataObj != null){
+							data = dataObj.toString();
+						}
+					}
+				}
+			}
+		}
+		
+		return data;
+	}
 }
 
