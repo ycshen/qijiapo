@@ -285,7 +285,8 @@ public class MenuController extends BaseController{
 	@RequestMapping(value = "/menuTree", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public String menuTree(String definedType, String casecadeId, HttpServletRequest request){
-		String tree = menuService.getAllOutterMenu(definedType, casecadeId);
+		UserEntity user = UserUtils.getLoginUser(request);
+		String tree = menuService.getAllOutterMenu(definedType, casecadeId, user.getCompanyId().toString());
 		
 		return tree;
 	}

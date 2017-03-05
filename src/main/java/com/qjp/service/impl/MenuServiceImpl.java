@@ -85,8 +85,8 @@ public class MenuServiceImpl implements MenuService{
 	}
 
 	@Override
-	public String getAllOutterMenu(String definedType, String casecadeId) {
-		String result = MyBaseApiUtils.getAllOutterMenu(definedType, casecadeId);
+	public String getAllOutterMenu(String definedType, String casecadeId, String companyId) {
+		String result = MyBaseApiUtils.getAllOutterMenu(definedType, casecadeId, companyId);
 		String data = "";
 		List<MenuEntity> list = null;
 		if(StringUtils.isNotBlank(result)){
