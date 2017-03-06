@@ -79,7 +79,6 @@
             <li><a href="${ctx}/inner/competitor/list"><i class="fa fa-circle-o"></i>合同</a></li>
             <li><a href="${ctx}/inner/competitor/list"><i class="fa fa-circle-o"></i>市场活动</a></li>
             <li><a href="${ctx}/inner/competitor/list"><i class="fa fa-circle-o"></i>销售线索</a></li>
-            <li><a href="${ctx}/inner/competitor/list"><i class="fa fa-circle-o"></i>产品</a></li>
             <li><a href="${ctx}/inner/competitor/list"><i class="fa fa-circle-o"></i>目标</a></li>
             <li><a href="${ctx}/inner/competitor/list"><i class="fa fa-circle-o"></i>回款</a></li>
             <li><a href="${ctx}/inner/competitor/list"><i class="fa fa-circle-o"></i>活动记录</a></li>

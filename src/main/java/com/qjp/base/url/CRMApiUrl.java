@@ -42,10 +42,31 @@ public class CRMApiUrl {
 	@Value("${crm.updateCompetitor}")
 	private String crm_updateCompetitor_url;
 	public static String crm_updateCompetitor;
+	
+	//attn
 	@Value("${crm.getAttnPage}")
 	private String crm_attnPage_url;
 	public static String crm_getAttnPage;
 	
+	//Product
+	@Value("${crm.insertProduct}")
+	private String crm_insertProduct_url;
+	public static String crm_insertProduct;
+	@Value("${crm.getProductPage}")
+	private String crm_getProductPage_url;
+	public static String crm_getProductPage;
+	@Value("${crm.getProductById}")
+	private String crm_getProductById_url;
+	public static String crm_getProductById;
+	@Value("${crm.batchDeleteProduct}")
+	private String crm_batchDeleteProduct_url;
+	public static String crm_batchDeleteProduct;
+	@Value("${crm.deleteProductById}")
+	private String crm_deleteProductById_url;
+	public static String crm_deleteProductById;
+	@Value("${crm.updateProduct}")
+	private String crm_updateProduct_url;
+	public static String crm_updateProduct;
 	@PostConstruct
 	public void init() {
 		crm = this.crm_url;
@@ -59,7 +80,17 @@ public class CRMApiUrl {
 		crm_batchDeleteCompetitor = this.crm_batchDeleteCompetitor_url;
 		crm_deleteCompetitorById = this.crm_deleteCompetitorById_url;
 		crm_updateCompetitor = this.crm_updateCompetitor_url;
+		
+		//attn
 		crm_getAttnPage = this.crm_attnPage_url;
+		
+		//Product
+		crm_insertProduct = this.crm_insertProduct_url;
+		crm_getProductPage = this.crm_getProductPage_url;
+		crm_getProductById = this.crm_getProductById_url;
+		crm_batchDeleteProduct = this.crm_batchDeleteProduct_url;
+		crm_deleteProductById = this.crm_deleteProductById_url;
+		crm_updateProduct = this.crm_updateProduct_url;
 	}
 	
 }

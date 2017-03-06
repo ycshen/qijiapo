@@ -196,5 +196,132 @@ public class CRMApiUtils {
 		
 		return result;
 	}
+	
+	
+	//Product product
+	public static String insertProduct(String product){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getCRMUrl() + CRMApiUrl.crm_insertProduct;	
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("product", product);
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("product", product);
+			String secret = SHA1Utils.SHA1(maps);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	
+	/**
+	 * 更新产品
+	 * @param Product 产品
+	 * @return
+	 */
+	public static String updateProduct(String product){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getCRMUrl() + CRMApiUrl.crm_updateProduct;	
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("product", product);
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("product", product);
+			String secret = SHA1Utils.SHA1(maps);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public static String getProductPage(String query){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getCRMUrl() + CRMApiUrl.crm_getProductPage;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("query", query);
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("query", query);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}	
+	
+	public static String getProductById(String id){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getCRMUrl() + CRMApiUrl.crm_getProductById;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("id", id);
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("secret", secret);
+			jsonObject.put("id", id);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 批量删除产品
+	 * @param idList
+	 * @return
+	 */
+	public static String batchDeleteProduct(String idList){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getCRMUrl() + CRMApiUrl.crm_batchDeleteProduct;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("idList", idList);
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("secret", secret);
+			jsonObject.put("idList", idList);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 根据id删除产品
+	 * @param id
+	 * @return
+	 */
+	public static String deleteProductById(String id){
+		String result = StringUtils.EMPTY;
+		try {	
+			String url = getCRMUrl() + CRMApiUrl.crm_deleteProductById;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("id", id);
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("secret", secret);
+			jsonObject.put("id", id);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
 }
 

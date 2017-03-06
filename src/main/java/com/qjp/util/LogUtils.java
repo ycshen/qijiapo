@@ -51,6 +51,30 @@ public class LogUtils {
 	}
 	
 	/**
+	 * 记录CRM产品动态日志
+	 * @param logMsg 日志内容
+	 * @param competitorId 产品id
+	 * @param user 登录人信息
+	 */
+	public static void logCRMProduct(String logMsg, String productId, UserEntity user){
+		LogEntity log = new LogEntity();
+		log.setCompanyId(user.getCompanyId().toString());
+		Integer departmentId = user.getDepartmentId();
+		if(departmentId != null){
+			log.setDepartmentId(departmentId.toString());
+		}
+		log.setUserId(user.getId().toString());
+		log.setUserName(user.getUserName());
+		log.setLogType(2);
+		log.setLogMsg(logMsg);
+		log.setCasecadeId(productId);
+		log.setCasecadeIdDesc("CRM-产品ID");
+		log.setCreateUser(user.getUserName());
+		String logJson = new Gson().toJson(log);
+		MyBaseApiUtils.log(logJson);
+	}
+	
+	/**
 	 * 记录管理员操作日志
 	 * @param log 日志内容
 	 */
