@@ -115,6 +115,28 @@ public class CRMApiUtils {
 		return result;
 	}
 
+	/**
+	 * 新增联系人
+	 * @param attn 竞争对手
+	 * @return
+	 */
+	public static String insertAttn(String attn){
+		String result = StringUtils.EMPTY;
+		try {
+			String url = getCRMUrl() + CRMApiUrl.crm_insertAttn;
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("competitor", attn);
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("competitor", attn);
+			String secret = SHA1Utils.SHA1(maps);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
 	public static String getAttnPage(String query){
 		String result = StringUtils.EMPTY;
 		try{
@@ -150,7 +172,24 @@ public class CRMApiUtils {
 		
 		return result;
 	}
-	
+
+	public static String getAttnById(String id){
+		String result = StringUtils.EMPTY;
+		try {
+			String url = getCRMUrl() + CRMApiUrl.crm_getAttnById;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("id",id);
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("secret",secret);
+			jsonObject.put("id",id);
+			result = HttpUtils.postUrl(url,jsonObject);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 	/**
 	 * 批量删除竞争对手
 	 * @param idList
@@ -220,7 +259,7 @@ public class CRMApiUtils {
 	
 	/**
 	 * 更新产品
-	 * @param Product 产品
+	 * @param product 产品
 	 * @return
 	 */
 	public static String updateProduct(String product){
@@ -322,6 +361,59 @@ public class CRMApiUtils {
 		
 		return result;
 	}
-	
+
+	public static String deleteAttnById(String id) {
+		String result = StringUtils.EMPTY;
+		try {
+			String url = getCRMUrl() + CRMApiUrl.crm_deleteAttnById;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("id", id);
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("secret", secret);
+			jsonObject.put("id", id);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+	public static String batchDeleteAttn(String idList) {
+		String result = StringUtils.EMPTY;
+		try {
+			String url = getCRMUrl() + CRMApiUrl.crm_batchDeleteAttn;
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("idList", idList);
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("secret", secret);
+			jsonObject.put("idList", idList);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+	public static String updateAttn(String attn) {
+		String result = StringUtils.EMPTY;
+		try {
+			String url = getCRMUrl() + CRMApiUrl.crm_updateAttn;
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("competitor", attn);
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("competitor", attn);
+			String secret = SHA1Utils.SHA1(maps);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
 }
 

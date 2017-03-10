@@ -44,9 +44,24 @@ public class CRMApiUrl {
 	public static String crm_updateCompetitor;
 	
 	//attn
+	@Value("${crm.insertAttn}")
+	private String crm_insertAttn_url;
+	public static String crm_insertAttn;
 	@Value("${crm.getAttnPage}")
 	private String crm_attnPage_url;
 	public static String crm_getAttnPage;
+	@Value("${crm.getAttnById}")
+	private String crm_getAttnById_url;
+	public static String crm_getAttnById;
+	@Value("${crm.deleteAttnById}")
+	private String crm_deleteAttnById_url;
+	public static String crm_deleteAttnById;
+	@Value("${crm.batchDeleteAttn}")
+	private String crm_batchDeleteAttn_url;
+	public static String crm_batchDeleteAttn;
+	@Value("${crm.updateAttn}")
+	private String crm_updateAttn_url;
+	public static String crm_updateAttn;
 	
 	//Product
 	@Value("${crm.insertProduct}")
@@ -82,7 +97,12 @@ public class CRMApiUrl {
 		crm_updateCompetitor = this.crm_updateCompetitor_url;
 		
 		//attn
+		crm_insertAttn = this.crm_insertAttn_url;
 		crm_getAttnPage = this.crm_attnPage_url;
+		crm_getAttnById = this.crm_getAttnById_url;
+		crm_deleteAttnById = this.crm_deleteAttnById_url;
+		crm_batchDeleteAttn = this.crm_batchDeleteAttn_url;
+		crm_updateAttn = this.crm_updateAttn_url;
 		
 		//Product
 		crm_insertProduct = this.crm_insertProduct_url;

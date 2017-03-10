@@ -49,6 +49,30 @@ public class LogUtils {
 		String logJson = new Gson().toJson(log);
 		MyBaseApiUtils.log(logJson);
 	}
+
+	/**
+	 * 记录CRM联系人动态日志
+	 * @param logMsg 日志内容
+	 * @param competitorId 竞争对手id
+	 * @param user 登录人信息
+	 */
+	public static void logCRMAttn(String logMsg, String attnId, UserEntity user){
+		LogEntity log = new LogEntity();
+		log.setCompanyId(user.getCompanyId().toString());
+		Integer departmentId = user.getDepartmentId();
+		if(departmentId != null){
+			log.setDepartmentId(departmentId.toString());
+		}
+		log.setUserId(user.getId().toString());
+		log.setUserName(user.getUserName());
+		log.setLogType(2);
+		log.setLogMsg(logMsg);
+		log.setCasecadeId(attnId);
+		log.setCasecadeIdDesc("CRM-竞争对手ID");
+		log.setCreateUser(user.getUserName());
+		String logJson = new Gson().toJson(log);
+		MyBaseApiUtils.log(logJson);
+	}
 	
 	/**
 	 * 记录CRM产品动态日志

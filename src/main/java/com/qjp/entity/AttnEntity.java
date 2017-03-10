@@ -9,7 +9,7 @@ public class AttnEntity  extends CRMBaseEntity{
     private String attnType;//联系人类型
 //    private String attnOwner;//联系人所有人
 //    private String companyName;//公司名称
-    private String name;//名称
+    private String attnName;//名称
     private String duty;//职务
     private String phoneNum;//电话号
     private String mobilePhoneNum;//手机号
@@ -27,12 +27,12 @@ public class AttnEntity  extends CRMBaseEntity{
         this.attnType = attnType;
     }
 
-    public String getName() {
-        return name;
+    public String getAttnName() {
+        return attnName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAttnName(String attnName) {
+        this.attnName = attnName;
     }
 
     public String getDuty() {
