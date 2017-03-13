@@ -24,7 +24,7 @@ function refreshTable(){
 }
 function transfer(id, competitorName){
 	var url = ctx + "/inner/user/selectAllUser?id=" + id + "&name=" + competitorName;
-	var title = "转移竞争对手【" + competitorName   +"】";
+	var title = "转移产品【" + competitorName   +"】";
 	layer.open({
 		type: 2,
 		title: title,
@@ -55,23 +55,23 @@ function cancelCompetitor(){
 	$("#btnSave").hide();
 }
 function deleteById(id, name){
-	layer.confirm("确定要删除竞争对手【" + name + "】相关信息吗？",{closeBtn: false,
+	layer.confirm("确定要删除产品【" + name + "】相关信息吗？",{closeBtn: false,
   		skin: 'layui-layer-molv'
 	  }, function(){
-		  var url = ctx + "/inner/competitor/deleteById?id=" + id +"&name=" + name;
+		  var url = ctx + "/inner/product/deleteById?id=" + id +"&name=" + name;
 		$.ajax({
 			type: "get",
 			url: url,
 			success: function(result){
 				if(result == 2){
-					layer.alert("删除竞争对手成功",{closeBtn: false,
+					layer.alert("删除产品成功",{closeBtn: false,
 				  		skin: 'layui-layer-molv'
 					  }, function(){
 						  parent.refreshTable();
 						  parent.layer.closeAll();
 					  });
 				}else{
-					layer.alert("删除竞争对手失败",{closeBtn: false,
+					layer.alert("删除产品失败",{closeBtn: false,
 				  		skin: 'layui-layer-molv'
 					  });
 				}

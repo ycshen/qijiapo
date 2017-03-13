@@ -75,73 +75,48 @@ font-size: 14px !important;
 			  <div class="layui-tab-content">
 			    <div class="layui-tab-item layui-show">
 			    	<table class="table my-table" id="detailTable">
-			    		<!-- <tr>
-			    			<td class="title-td" colspan="4">
-								<div class="layui-btn-group">
-								  <button class="layui-btn layui-btn-primary" id="btnEdit" onclick="fixCompetitor();">
-								    <i class="layui-icon">&#xe642;</i>编辑资料
-								  </button>
-								  <button  onclick="saveCompetitor();" class="layui-btn" id="btnSave" style="display:none;">
-									    <i class="layui-icon">&#xe620;</i>保存资料
-								  </button>
-								   <button  onclick="cancelCompetitor();" class="layui-btn layui-btn-primary"  id="btnCancel"  style="display:none;">
-									    <i class="layui-icon">&#xe620;</i>取消编辑
-								  </button>
-								</div>
-							</td>
-			    			
-			    		</tr> -->
+			    		
 			    		<tr>
-			    			<td class="title-td">竞争对手名称:</td>
+			    			<td class="title-td">产品名称:</td>
 			    			<td>${product.productName}</td>
-			    			<td class="title-td">竞争对手所属人:</td>
-			    			<td>${product.userName}</td>
+			    			<td class="title-td">产品所属人:</td>
+			    			<td>${product.companyName}</td>
 			    			
 			    		</tr>
 			    		
 			    		<tr>
-			    			<td class="title-td">竞争对手所属部门:</td>
-			    			<td>${product.departmentName}</td>
-			    			<td class="title-td">省市区:</td>
-			    			<td>${product.provinceName}-${product.cityName}-${product.areaName}</td>
+			    			<td class="title-td">标准价格(元):</td>
+			    			<td>${product.price}</td>
+			    			<td class="title-td">销售单位:</td>
+			    			<td>${product.saleUnit}</td>
 			    			
 			    		</tr>
 			    		<tr>
-			    			<td class="title-td">地址:</td>
-			    			<td colspan="3">${product.address}</td>
+			    			<td class="title-td">启用状态:</td>
+			    			<td>
+			    				<c:choose>
+			    					<c:when test="${product.status == 1}">
+			    						启用
+			    					</c:when>
+			    					<c:otherwise>
+			    						停用
+			    					</c:otherwise>
+			    				</c:choose>
+			    			</td>
+			    			<td class="title-td">创建人:</td>
+			    			<td>${product.userName}</td>
 			    			
 			    		</tr>
 			    		<tr>
-			    			<td class="title-td">邮政编码:</td>
-			    			<td>${product.postcode}</td>
-			    			<td class="title-td">电话:</td>
-			    			<td>${product.mobile}</td>
-			    			
-			    		</tr>
-			    		<tr>
-			    			<td class="title-td">传真:</td>
-			    			<td>${product.facsimile}</td>
-			    			<td class="title-td">公司网址:</td>
-			    			<td>${product.website}</td>
-			    			
-			    		</tr>
-			    		<tr>
-			    			<td class="title-td">微博:</td>
-			    			<td>${product.weibo}</td>
-			    			<td class="title-td">总人数:</td>
-			    			<td>${product.staffNum}</td>
-			    			
-			    		</tr>
-			    		<tr>
-			    			<td class="title-td">上年销售额:</td>
-			    			<td>${product.saleMoney}</td>
-			    			<td class="title-td">添加时间:</td>
+			    			<td class="title-td">创建时间:</td>
 			    			<td><f:formatDate value="${product.createTime}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+			    			<td class="title-td">最近修改时间:</td>
+			    			<td><f:formatDate value="${product.updateTime}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
 			    			
 			    		</tr>
 			    		<tr>
-			    			<td class="title-td">备注:</td>
-			    			<td colspan="3">${product.remark}</td>
+			    			<td class="title-td">产品描述:</td>
+			    			<td colspan="3">${product.productDesc}</td>
 			    			
 			    		</tr>
 			    	</table>
@@ -179,9 +154,7 @@ font-size: 14px !important;
 								  <legend>操作</legend>
 								  <div class="layui-field-box">
 								<div class="layui-btn-group">
-									  <button class="layui-btn layui-btn-primary" onclick="transfer('${product.id}', '${product.productName}');">
-									    <i class="layui-icon">&#xe620;</i>转移给他人
-									  </button>
+									 
 									  <button class="layui-btn layui-btn-primary" onclick="deleteById('${product.id}','${product.productName}');">
 									    <i class="layui-icon">&#xe640;</i>删除
 									  </button>
@@ -191,52 +164,7 @@ font-size: 14px !important;
 							</td>
 			    			
 			    		</tr>
-			    		<tr>
-			    			<td class="title-td-left" colspan="1">
-								<fieldset class="layui-elem-field">
-								  <legend>竞争对手负责人</legend>
-								  <div class="layui-field-box">
-								  	 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							              <!-- The user image in the navbar-->
-							              <img src="/qijiapo/js/adminlte/dist/img/user2-160x160.jpg" class="user-image" style="width: 35px;height:35px;" alt="User Image">
-							              <span class="hidden-xs">${product.userName}</span>
-							            </a>
-								  	
-									</div>
-								</fieldset>
-							</td>
-			    			
-			    		</tr>
-			    		<tr>
-			    			<td class="title-td-left" colspan="1">
-								<fieldset class="layui-elem-field">
-								  <legend>负责员工</legend>
-								  <div class="layui-field-box">
-								</div>
-								</fieldset>
-							</td>
-			    			
-			    		</tr>
-			    		<tr>
-			    			<td class="title-td-left" colspan="1">
-								<fieldset class="layui-elem-field">
-								  <legend>相关员工</legend>
-								  <div class="layui-field-box">
-								</div>
-								</fieldset>
-							</td>
-			    			
-			    		</tr>
-			    		<%-- <tr>
-			    			<td class="title-td-left" colspan="1">
-								<fieldset class="layui-elem-field">
-								  <legend>文档</legend>
-								  <div class="layui-field-box">
-								</div>
-								</fieldset>
-							</td>
-			    			
-			    		</tr> --%>
+			    		
 			    	</table>
         </div>
     </div>

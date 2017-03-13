@@ -410,9 +410,12 @@ function queryProduct(){
 	   	            	}
 	   	             },
 	   	             { data: 'price' },
-	   	             { data: 'status' },
-	   	             
-	   	             { data: 'imgPath' },
+	   	             { data: 'status',
+		   	            	render: function(data, type, product){
+		   	            		return getStatus(product.status);
+		   	            	}
+		   	         },
+	   	             /*{ data: 'imgPath' },*/
 	   	             { data: 'createTime' }
 	   	         ],
 	       "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示  
@@ -430,6 +433,17 @@ function queryProduct(){
 	      
 	   } );
 	
+}
+
+function getStatus(status){
+	var statusStr = "";
+	if(status == 1){
+		statusStr = "<span class=\"label label-success\">启用</span>";
+	}else if(status == 0){
+		statusStr = "<span class=\"label label-success\">停用</span>";
+	}
+
+	return statusStr;
 }
 
 
@@ -485,9 +499,13 @@ function initDataTable(){
 	            	}
 	             },
 	             { data: 'price' },
-	             { data: 'status' },
+	             { data: 'status',
+	   	            	render: function(data, type, product){
+	   	            		return getStatus(product.status);
+	   	            	}
+	   	         },
 	             
-	             { data: 'imgPath' },
+	             /*{ data: 'imgPath' },*/
 	             { data: 'createTime' }
 	         ],
 	       "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示  

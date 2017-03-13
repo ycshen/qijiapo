@@ -131,9 +131,9 @@
                   <th><input type="checkbox" name="product-list-checkable" id="chkAll"></th>
                   <th>操作</th>
                   <th>产品名称</th>
-                  <th>销售价格</th>
+                  <th>标准价格(元)</th>
                   <th>启用状态</th>
-                  <th>产品图片</th>
+                  <!-- <th>产品图片</th> -->
                   <th>创建日期</th>
                 </tr>
                 </thead>
