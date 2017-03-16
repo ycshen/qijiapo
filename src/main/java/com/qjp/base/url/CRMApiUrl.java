@@ -82,6 +82,27 @@ public class CRMApiUrl {
 	@Value("${crm.updateProduct}")
 	private String crm_updateProduct_url;
 	public static String crm_updateProduct;
+	
+	//SalesOpportunity
+	@Value("${crm.insertSalesOpportunity}")
+	private String crm_insertSalesOpportunity_url;
+	public static String crm_insertSalesOpportunity;
+	@Value("${crm.getSalesOpportunityPage}")
+	private String crm_getSalesOpportunityPage_url;
+	public static String crm_getSalesOpportunityPage;
+	@Value("${crm.getProductById}")
+	private String crm_getSalesOpportunityById_url;
+	public static String crm_getSalesOpportunityById;
+	@Value("${crm.batchDeleteSalesOpportunity}")
+	private String crm_batchDeleteSalesOpportunity_url;
+	public static String crm_batchDeleteSalesOpportunity;
+	@Value("${crm.deleteSalesOpportunityById}")
+	private String crm_deleteSalesOpportunityById_url;
+	public static String crm_deleteSalesOpportunityById;
+	@Value("${crm.updateSalesOpportunity}")
+	private String crm_updateSalesOpportunity_url;
+	public static String crm_updateSalesOpportunity;
+		
 	@PostConstruct
 	public void init() {
 		crm = this.crm_url;
@@ -111,6 +132,14 @@ public class CRMApiUrl {
 		crm_batchDeleteProduct = this.crm_batchDeleteProduct_url;
 		crm_deleteProductById = this.crm_deleteProductById_url;
 		crm_updateProduct = this.crm_updateProduct_url;
+		
+		//SalesOpportunity
+		crm_insertSalesOpportunity = this.crm_insertSalesOpportunity_url;
+		crm_getSalesOpportunityPage = this.crm_getSalesOpportunityPage_url;
+		crm_getSalesOpportunityById = this.crm_getSalesOpportunityById_url;
+		crm_batchDeleteSalesOpportunity = this.crm_batchDeleteSalesOpportunity_url;
+		crm_deleteSalesOpportunityById = this.crm_deleteSalesOpportunityById_url;
+		crm_updateSalesOpportunity = this.crm_updateSalesOpportunity_url;
 	}
 	
 }
