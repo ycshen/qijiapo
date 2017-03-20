@@ -25,7 +25,7 @@
 <script type="text/javascript" src="${ctx}/js/layer/layer.js"></script> 
 <script type="text/javascript" src="http://zhengjinfan.cn/js/area.js"></script> 
 <script type="text/javascript" src="${ctx}/js/layui/layui.js"></script> 
-<script src="${ctx}/js/pages/competitor/competitor_list.js"></script>
+<script src="${ctx}/js/pages/attn/attn_list.js"></script>
 <style type="text/css">
 	.mybox{
 		margin-bottom: 0px;
@@ -71,12 +71,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        	竞争对手
+        	联系人
         <small></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> 企家婆</a></li>
-        <li class="active">竞争对手</li>
+        <li class="active">联系人</li>
       </ol>
     </section>
 
@@ -90,10 +90,10 @@
 	          		<table class="table mytable">
 	          			<tr>
 	          				<td>
-	          				<label class="layui-form-label my-label">竞争对手名称</label>
+	          				<label class="layui-form-label my-label">联系人名称</label>
 		          				
 						  </td>
-						  <td><input type="text" class="layui-input my-input" id="txtpositionName" placeholder="竞争对手名称"></td>
+						  <td><input type="text" class="layui-input my-input" id="txtpositionName" placeholder="联系人名称"></td>
 	          				<td><label class="layui-form-label my-label">省市区</label></td>
 	          				<td colspan="3">
 									<div class="layui-form-item">
@@ -125,8 +125,8 @@
 							<i class="layui-icon">&#x1002;</i>查询
 							
 						  </button>
-						  <button class="layui-btn layui-btn-primary" onclick="addCompeotitor();">
-						    <i class="layui-icon">&#xe61f;</i>新增竞争对手
+						  <button class="layui-btn layui-btn-primary" onclick="addAttn();">
+						    <i class="layui-icon">&#xe61f;</i>新增联系人
 						  </button>
 						  <button class="layui-btn layui-btn-primary">
 						    <i class="layui-icon">&#xe640;</i>删除
@@ -148,10 +148,10 @@
               <table id="myDataTable" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th><input type="checkbox" name="competitor-list-checkable"></th>
+                  <th><input type="checkbox" name="attn-list-checkable"></th>
                   <th>操作</th>
-                  <th>竞争对手名称</th>
-                  <th>竞争对手所有人</th>
+                  <th>联系人名称</th>
+                  <th>联系人所有人</th>
                   <th>所属部门</th>
                   <th>省份</th>
                   <th>地址</th>

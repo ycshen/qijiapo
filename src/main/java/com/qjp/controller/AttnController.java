@@ -61,6 +61,7 @@ public class AttnController {
      * @return
      */
     @RequestMapping(value = "/listAjax", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @ResponseBody
     public String listAjax(@ModelAttribute AttnQuery attnQuery,HttpServletRequest request){
         attnQuery.init(request);
         String provinceId = attnQuery.getProvinceId();
@@ -115,7 +116,7 @@ public class AttnController {
         if(StringUtils.isNotBlank(id)){
             attnService.deleteAttnById(id);
             UserEntity user = UserUtils.getLoginUser(request);
-            LogUtils.logCRMAttn("删除了竞争对手(" + name + ")", id, user);
+            LogUtils.logCRMAttn("删除了联系人(" + name + ")", id, user);
             result = ResponseStatus.UPDATE_SUCCESS;
         }
 
@@ -131,7 +132,7 @@ public class AttnController {
             attnService.batchDeleteAttn(idList);
             UserEntity user = UserUtils.getLoginUser(request);
             for (String id : idList) {
-                LogUtils.logCRMAttn("删除了竞争对手", id, user);
+                LogUtils.logCRMAttn("删除了联系人", id, user);
             }
             result = ResponseStatus.UPDATE_SUCCESS;
         }
@@ -145,9 +146,10 @@ public class AttnController {
      * @param request
      * @return
      */
-    @RequestMapping(value = "/saveOrUpdate", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/saveOrUpdate", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    @ResponseBody
     public ModelAndView saveOrUpdate(@ModelAttribute AttnEntity entity,HttpServletRequest request){
-        ModelAndView mav = new ModelAndView("/entity/entity_edit");
+        ModelAndView mav = new ModelAndView("/attn/attn_edit");
         entity.init(request); //初始化公司、部门、用户信息
         String provinceId = entity.getProvinceId();
         entity.setProvinceId(StringUtils.splitLocation(provinceId));
@@ -159,10 +161,10 @@ public class AttnController {
         UserEntity user = UserUtils.getLoginUser(request);
         if(id == null){
             String returnId = attnService.insertAttn(entity);
-            LogUtils.logCRMAttn("添加了竞争对手(" + entity.getAttnName() + ")", returnId, user);
+            LogUtils.logCRMAttn("添加了联系人(" + entity.getAttnName() + ")", returnId, user);
         }else{
             attnService.updateAttn(entity);
-            LogUtils.logCRMAttn("修改了竞争对手(" + entity.getAttnName() + ")", id.toString(), user);
+            LogUtils.logCRMAttn("修改了联系人(" + entity.getAttnName() + ")", id.toString(), user);
         }
 
         return mav;
