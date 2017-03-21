@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="${ctx}/js/layui/css/layui.css">
     <%@include file="../share/common_js.jsp" %>
     <script src="${ctx}/js/pages/common/province_city_area.js"></script>
-    <script type="text/javascript" src="${ctx}/js/pages/competitor/competitor_detail.js"></script>
+    <script type="text/javascript" src="${ctx}/js/pages/attn/attn_detail.js"></script>
     <script type="text/javascript">
         var ctx = "${pageContext.request.contextPath}";
     </script>
@@ -99,55 +99,55 @@
                             </tr> -->
                             <tr>
                                 <td class="title-td">联系人名称:</td>
-                                <td>${competitor.competitorName}</td>
+                                <td>${attn.attnName}</td>
                                 <td class="title-td">联系人所属人:</td>
-                                <td>${competitor.userName}</td>
+                                <td>${attn.userName}</td>
 
                             </tr>
 
                             <tr>
                                 <td class="title-td">联系人所属部门:</td>
-                                <td>${competitor.departmentName}</td>
+                                <td>${attn.departmentName}</td>
                                 <td class="title-td">省市区:</td>
-                                <td>${competitor.provinceName}-${competitor.cityName}-${competitor.areaName}</td>
+                                <td>${attn.provinceName}-${attn.cityName}-${attn.areaName}</td>
 
                             </tr>
                             <tr>
                                 <td class="title-td">地址:</td>
-                                <td colspan="3">${competitor.address}</td>
+                                <td colspan="3">${attn.address}</td>
 
                             </tr>
                             <tr>
                                 <td class="title-td">邮政编码:</td>
-                                <td>${competitor.postcode}</td>
+                                <td>${attn.postcode}</td>
                                 <td class="title-td">电话:</td>
-                                <td>${competitor.mobile}</td>
+                                <td>${attn.phoneNum}</td>
 
                             </tr>
                             <tr>
                                 <td class="title-td">传真:</td>
-                                <td>${competitor.facsimile}</td>
-                                <td class="title-td">公司网址:</td>
-                                <td>${competitor.website}</td>
+                                <td>${attn.facsimile}</td>
+                                <td class="title-td">手机:</td>
+                                <td>${attn.mobilePhoneNum}</td>
 
                             </tr>
                             <tr>
                                 <td class="title-td">微博:</td>
-                                <td>${competitor.weibo}</td>
-                                <td class="title-td">总人数:</td>
-                                <td>${competitor.staffNum}</td>
+                                <td>${attn.weibo}</td>
+                                <td class="title-td">职务:</td>
+                                <td>${attn.duty}</td>
 
                             </tr>
                             <tr>
-                                <td class="title-td">上年销售额:</td>
-                                <td>${competitor.saleMoney}</td>
+                                <td class="title-td">性别:</td>
+                                <td>${attn.gender}</td>
                                 <td class="title-td">添加时间:</td>
-                                <td><f:formatDate value="${competitor.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                                <td><f:formatDate value="${attn.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 
                             </tr>
                             <tr>
                                 <td class="title-td">备注:</td>
-                                <td colspan="3">${competitor.remark}</td>
+                                <td colspan="3">${attn.remark}</td>
 
                             </tr>
                         </table>
@@ -186,11 +186,11 @@
                             <div class="layui-field-box">
                                 <div class="layui-btn-group">
                                     <button class="layui-btn layui-btn-primary"
-                                            onclick="transfer('${competitor.id}', '${competitor.competitorName}');">
+                                            onclick="transfer('${attn.id}', '${attn.attnName}');">
                                         <i class="layui-icon">&#xe620;</i>转移给他人
                                     </button>
                                     <button class="layui-btn layui-btn-primary"
-                                            onclick="deleteById('${competitor.id}','${competitor.competitorName}');">
+                                            onclick="deleteById('${attn.id}','${attn.attnName}');">
                                         <i class="layui-icon">&#xe640;</i>删除
                                     </button>
                                 </div>
@@ -208,7 +208,7 @@
                                     <!-- The user image in the navbar-->
                                     <img src="/qijiapo/js/adminlte/dist/img/user2-160x160.jpg" class="user-image"
                                          style="width: 35px;height:35px;" alt="User Image">
-                                    <span class="hidden-xs">${competitor.userName}</span>
+                                    <span class="hidden-xs">${attn.userName}</span>
                                 </a>
 
                             </div>

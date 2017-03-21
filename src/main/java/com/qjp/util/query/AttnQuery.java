@@ -10,6 +10,7 @@ public class AttnQuery extends Page<AttnEntity> {
     private String provinceId;
     private String cityId;
     private String areaId;
+	private String attnName;
 	public String getProvinceId() {
 		return provinceId;
 	}
@@ -29,5 +30,11 @@ public class AttnQuery extends Page<AttnEntity> {
 		this.areaId = areaId;
 	}
 
-    
+	public String getAttnName() {
+		return attnName;
+	}
+
+	public void setAttnName(String attnName) {
+		this.attnName = attnName;
+	}
 }

@@ -302,6 +302,17 @@ public class UserController {
 		
 		return mav;
 	}
+	@RequestMapping(value = "/selectAllUserAttn", method = RequestMethod.GET)
+	public ModelAndView selectAllUserAttn(String id, String name, HttpServletRequest request){
+		ModelAndView mav = new ModelAndView("/user/user_allcompany_attn_select");
+		UserEntity loginUser = UserUtils.getLoginUser(request);
+		List<UserEntity> userList = userService.getUserListByCompanyId(loginUser.getCompanyId().toString());
+		mav.addObject("userList", userList);
+		mav.addObject("id", id);
+		mav.addObject("name", name);
+
+		return mav;
+	}
 	
 }
 
