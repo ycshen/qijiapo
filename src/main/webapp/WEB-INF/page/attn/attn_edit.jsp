@@ -86,26 +86,26 @@
             <button class="layui-btn  layui-btn-primary" onclick="selectDepartment();"><i class="layui-icon">
                 &#xe61f;</i></button>
         </div>
-        <div id="divViewer">
+        <%--<div id="divViewer">--%>
 
-            <div class="layui-form-item my-layui-form-item" style="margin-top:  20px;">
-                <label class="layui-form-label"></label>
-                <div class="layui-input-block">
-                    <a href="#" onclick="addMoreInfo();" style="color:#009688">
+        <%--<div class="layui-form-item my-layui-form-item" style="margin-top:  20px;">--%>
+        <%--<label class="layui-form-label"></label>--%>
+        <%--<div class="layui-input-block">--%>
+        <%--<a href="#" onclick="addMoreInfo();" style="color:#009688">--%>
 
-                        <c:choose>
-                            <c:when test="${attn != null && attn.id != '' }">
-                                编辑更多信息
-                            </c:when>
-                            <c:otherwise>
-                                新增更多信息
-                            </c:otherwise>
-                        </c:choose>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div id="divOther" style="display: none;">
+        <%--<c:choose>--%>
+        <%--<c:when test="${attn != null && attn.id != '' }">--%>
+        <%--编辑更多信息--%>
+        <%--</c:when>--%>
+        <%--<c:otherwise>--%>
+        <%--新增更多信息--%>
+        <%--</c:otherwise>--%>
+        <%--</c:choose>--%>
+        <%--</a>--%>
+        <%--</div>--%>
+        <%--</div>--%>
+        <%--</div>--%>
+        <div id="divOther" style="display: block;">
             <div class="layui-form-item my-layui-form-item">
                 <label class="layui-form-label">省市区</label>
                 <div class="layui-input-block">
@@ -165,59 +165,68 @@
             <div class="layui-form-item my-layui-form-item my-top">
                 <label class="layui-form-label">电话</label>
                 <div class="layui-input-block">
-                    <input type="text" name="phoneNum" autocomplete="off" value="${attn.phoneNum}" placeholder="请输入电话"
+                    <input type="text" name="phoneNum" autocomplete="off" value="${attn.phoneNum}" placeholder="请输入电话号码"
                            class="layui-input" maxlength="11">
                 </div>
             </div>
             <div class="layui-form-item my-layui-form-item my-top">
                 <label class="layui-form-label">手机</label>
                 <div class="layui-input-block">
-                    <input type="text" name="mobilePhoneNum" autocomplete="off" value="${attn.mobilePhoneNum}" placeholder="请输入电话"
+                    <input type="text" name="mobilePhoneNum" autocomplete="off" value="${attn.mobilePhoneNum}"
+                           placeholder="请输入手机号码"
                            class="layui-input" maxlength="11">
                 </div>
             </div>
             <div class="layui-form-item my-layui-form-item my-top">
                 <label class="layui-form-label">职务</label>
                 <div class="layui-input-block">
-                    <input type="text" name="duty" autocomplete="off" value="${attn.duty}" placeholder="请输入传真"
+                    <input type="text" name="duty" autocomplete="off" value="${attn.duty}" placeholder="请输入职务信息"
                            class="layui-input" maxlength="10">
                 </div>
             </div>
             <div class="layui-form-item my-layui-form-item my-top">
                 <label class="layui-form-label">邮箱</label>
                 <div class="layui-input-block">
-                    <input type="text" name="email" autocomplete="off" value="${attn.email}" placeholder="请输入公司网址"
+                    <input type="text" name="email" autocomplete="off" value="${attn.email}" placeholder="请输入联系人邮箱"
                            class="layui-input" maxlength="40">
                 </div>
             </div>
             <div class="layui-form-item my-layui-form-item my-top">
                 <label class="layui-form-label">传真</label>
                 <div class="layui-input-block">
-                    <input type="text" name="facsimile" autocomplete="off" value="${attn.facsimile}" placeholder="请输入公司网址"
-                           class="layui-input" >
+                    <input type="text" name="facsimile" autocomplete="off" value="${attn.facsimile}"
+                           placeholder="请输入联系人传真"
+                           class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item my-layui-form-item my-top">
                 <label class="layui-form-label">微博</label>
                 <div class="layui-input-block">
                     <input type="text" name="weibo" autocomplete="off" value="${attn.weibo}" placeholder="请输入微博"
-                           class="layui-input" >
-                </div>
-            </div>
-            <div class="layui-form-item my-layui-form-item my-top">
-                <label class="layui-form-label">性别</label>
-                <div class="layui-input-block">
-                    <input type="text" name="gender" autocomplete="off" value="${attn.gender}" placeholder="请输入总人数"
-                           class="layui-input" maxlength="10">
+                           class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item my-layui-form-item my-top">
                 <label class="layui-form-label">生日</label>
                 <div class="layui-input-block">
-                    <input type="num" name="birthDay" autocomplete="off" value="${attn.birthDay}"
-                           placeholder="请输入上年销售额" class="layui-input">
+                    <input type="text" name="birthDay" id="txtStartTime" lay-verify="memoStartTime"
+                           placeholder="请选择联系人生日" autocomplete="off" class="layui-input"
+                           onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD'})">
+                    <%--<input type="num" name="birthDay" autocomplete="off" value="${attn.birthDay}"--%>
+                    <%--placeholder="请选择联系人生日" class="layui-input">--%>
                 </div>
             </div>
+            <div class="layui-form-item my-layui-form-item my-top">
+                <label class="layui-form-label">性别</label>
+                <%--<input class="layui-input-block">--%>
+                <%--<input type="text" name="gender" autocomplete="off" value="${attn.gender}" placeholder="请输入总人数"--%>
+                <%--class="layui-input" maxlength="10">--%>
+                    <label><input name="gender" type="radio" value="男" checked="checked" title="男"/></label>
+                    <label><input name="gender" type="radio" value="女" title="女"/></label>
+                </div>
+
+            </div>
+
             <div class="layui-form-item my-layui-form-item layui-form-text">
                 <label class="layui-form-label">备注</label>
                 <div class="layui-input-block">

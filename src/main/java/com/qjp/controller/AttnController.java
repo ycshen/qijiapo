@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -71,7 +72,6 @@ public class AttnController {
         String areaId = attnQuery.getAreaId();
         attnQuery.setAreaId(StringUtils.splitLocation(areaId));
         attnQuery = attnService.getAttnPage(attnQuery);
-        attnQuery.setSize(65);
         String jsonStr = JsonUtils.json2Str(attnQuery);
 
         return jsonStr;
@@ -139,7 +139,39 @@ public class AttnController {
 
         return result;
     }
+    @RequestMapping(value = "/transferAttn", method = RequestMethod.GET)
+    @ResponseBody
+    public Integer transferAttn(String userId, String attnId, String transferType, HttpServletRequest request){
+        Integer result = ResponseStatus.INIT;
+        if(StringUtils.isNotBlank(userId)){
+            UserEntity transferToUser = userService.getUserById(userId);
+            UserEntity loginUser = UserUtils.getLoginUser(request);
+            if("1".equals(transferType)){
+                this.transferAttn(attnId, transferToUser, loginUser);
+            }else if("2".equals(transferType)){
+                String[] idArr = attnId.split("\\,");
+                for (String id : idArr) {
+                    this.transferAttn(id, transferToUser, loginUser);
+                }
+            }
 
+            result = ResponseStatus.UPDATE_SUCCESS;
+
+        }
+
+        return result;
+    }
+
+    private void transferAttn(String attnId, UserEntity transferToUser, UserEntity loginUser){
+        AttnEntity oldAttn = attnService.getAttnById(attnId);
+        oldAttn.setUserId(transferToUser.getId().toString());
+        String transferUserName = transferToUser.getUserName();
+        oldAttn.setUserName(transferUserName);
+        oldAttn.setUpdateTime(new Date());
+        oldAttn.setUpdateUser(loginUser.getUserName());
+        LogUtils.logCRMAttn("转移竞争对手(" + oldAttn.getAttnName() + ")到" + transferUserName, attnId, loginUser);
+    }
+    
     /**
      *
      * @param entity
