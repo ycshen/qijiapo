@@ -147,6 +147,7 @@ public class CompetitorController {
 		oldCompetitor.setUserName(transferUserName);
 		oldCompetitor.setUpdateTime(new Date());
 		oldCompetitor.setUpdateUser(loginUser.getUserName());
+		competitorService.updateCompetitor(oldCompetitor);
 		LogUtils.logCRMCompetitor("转移竞争对手(" + oldCompetitor.getCompetitorName() + ")到" + transferUserName, competitorId, loginUser);
 	}
 	

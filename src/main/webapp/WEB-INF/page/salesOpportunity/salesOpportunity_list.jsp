@@ -70,12 +70,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        	产品
+        	销售机会
         <small></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> 企家婆</a></li>
-        <li class="active">产品</li>
+        <li class="active">销售机会</li>
       </ol>
     </section>
 
@@ -89,10 +89,10 @@
 	          		<table class="table mytable">
 	          			<tr>
 	          				<td style="width:100px;">
-	          				<label class="layui-form-label my-label">产品名称</label>
+	          				<label class="layui-form-label my-label">销售机会名称</label>
 		          				
 						  </td>
-						  <td><input type="text" class="layui-input my-input" id="txtProductName" placeholder="产品名称"></td>
+						  <td><input type="text" class="layui-input my-input" id="txtProductName" placeholder="销售机会名称"></td>
 	          				
 	          				<td colspan="4">
 									
@@ -107,8 +107,8 @@
 							<i class="layui-icon">&#x1002;</i>查询
 							
 						  </button>
-						  <button class="layui-btn layui-btn-primary" onclick="addProduct();">
-						    <i class="layui-icon">&#xe61f;</i>新增产品
+						  <button class="layui-btn layui-btn-primary" onclick="addSalesOpportunity();">
+						    <i class="layui-icon">&#xe61f;</i>新增销售机会
 						  </button>
 						  <button class="layui-btn layui-btn-primary" onclick="batchDelete();">
 						    <i class="layui-icon">&#xe640;</i>批量删除
@@ -130,10 +130,14 @@
                 <tr>
                   <th><input type="checkbox" name="salesopportunity-list-checkable" id="chkAll"></th>
                   <th>操作</th>
-                  <th>产品名称</th>
-                  <th>标准价格(元)</th>
-                  <th>启用状态</th>
-                  <!-- <th>产品图片</th> -->
+                  <th>机会名称</th>
+                  <th>销售机会所有人</th>
+                  <th>客户名称</th>
+                  <th>机会类型</th>
+                  <th>销售金额</th>
+                  <th>结单日期</th>
+                  <th>销售阶段</th>
+                  <th>赢率</th>
                   <th>创建日期</th>
                 </tr>
                 </thead>

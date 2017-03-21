@@ -90,7 +90,7 @@ public class CRMApiUrl {
 	@Value("${crm.getSalesOpportunityPage}")
 	private String crm_getSalesOpportunityPage_url;
 	public static String crm_getSalesOpportunityPage;
-	@Value("${crm.getProductById}")
+	@Value("${crm.getSalesOpportunityById}")
 	private String crm_getSalesOpportunityById_url;
 	public static String crm_getSalesOpportunityById;
 	@Value("${crm.batchDeleteSalesOpportunity}")

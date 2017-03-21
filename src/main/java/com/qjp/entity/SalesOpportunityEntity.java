@@ -8,6 +8,7 @@ import java.util.Date;
  *
  */
 public class SalesOpportunityEntity extends CRMBaseEntity{
+	private String salesOpportunityName; //机会名称
 	private String customerId; //客户ID
 	private String customerName; //客户名称
 	private Integer oppotunityType; //机会类型
@@ -22,6 +23,14 @@ public class SalesOpportunityEntity extends CRMBaseEntity{
 	private Integer failOrderReason; //输单原因
 	private String failDesc; //输单描述
 	private String productId; //产品
+	private Integer oppoSource; //机会来源
+	
+	public String getSalesOpportunityName() {
+		return salesOpportunityName;
+	}
+	public void setSalesOpportunityName(String salesOpportunityName) {
+		this.salesOpportunityName = salesOpportunityName;
+	}
 	public String getCustomerId() {
 		return customerId;
 	}
@@ -106,4 +115,11 @@ public class SalesOpportunityEntity extends CRMBaseEntity{
 	public void setProductId(String productId) {
 		this.productId = productId;
 	}
+	public Integer getOppoSource() {
+		return oppoSource;
+	}
+	public void setOppoSource(Integer oppoSource) {
+		this.oppoSource = oppoSource;
+	}
+	
 }

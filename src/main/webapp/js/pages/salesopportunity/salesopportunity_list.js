@@ -1,8 +1,8 @@
-function addProduct(){
-	var url = ctx + "/inner/salesopportunity/forwardEdit";
+function addSalesOpportunity(){
+	var url = ctx + "/inner/salesOpportunity/forwardEdit";
 	layer.open({
 		type: 2,
-		title: '新增产品',
+		title: '新增销售机会',
 		shadeClose: true,
 		shade: 0.8,
 		area: ['800px', '400px'],
@@ -11,11 +11,11 @@ function addProduct(){
 }
 
 
-function editProduct(id){
-	var url = ctx + "/inner/salesopportunity/forwardEdit?id=" + id;
+function editSalesOpportunity(id){
+	var url = ctx + "/inner/salesOpportunity/forwardEdit?id=" + id;
 	layer.open({
 		type: 2,
-		title: '编辑产品',
+		title: '编辑销售机会',
 		shadeClose: true,
 		shade: 0.8,
 		area: ['800px', '400px'],
@@ -60,9 +60,9 @@ function addDepartment(id){
 	});
 }
 
-function viewDetail(id, salesopportunityName){
-	var url = ctx + "/inner/salesopportunity/detail?id=" + id;
-	var title = "产品【" + salesopportunityName   +"】";
+function viewDetail(id, salesOpportunityName){
+	var url = ctx + "/inner/salesOpportunity/detail?id=" + id;
+	var title = "销售机会【" + salesOpportunityName   +"】";
 	layer.open({
 		type: 2,
 		title: title,
@@ -73,9 +73,9 @@ function viewDetail(id, salesopportunityName){
 	}); 
 }
 
-function transfer(id, salesopportunityName){
-	var url = ctx + "/inner/user/selectAllUser?id=" + id + "&name=" + salesopportunityName;
-	var title = "转移产品【" + salesopportunityName   +"】";
+function transfer(id, salesOpportunityName){
+	var url = ctx + "/inner/user/selectAllUser?id=" + id + "&name=" + salesOpportunityName;
+	var title = "转移销售机会【" + salesOpportunityName   +"】";
 	layer.open({
 		type: 2,
 		title: title,
@@ -156,23 +156,23 @@ function getCheckedBox(){
 function batchDelete(){
 	var deleteIdArr = getCheckedBox();
 	if(isNotBlank(deleteIdArr)){
-		layer.confirm("确定要批量删除产品相关信息吗？",{closeBtn: false,
+		layer.confirm("确定要批量删除销售机会相关信息吗？",{closeBtn: false,
 	  		skin: 'layui-layer-molv'
 		  }, function(){
-			  var url = ctx + "/inner/salesopportunity/batchDeleteById?ids=" + deleteIdArr;
+			  var url = ctx + "/inner/salesOpportunity/batchDeleteById?ids=" + deleteIdArr;
 			$.ajax({
 				type: "get",
 				url: url,
 				success: function(result){
 					if(result == 2){
-						layer.alert("批量删除产品成功",{closeBtn: false,
+						layer.alert("批量删除销售机会成功",{closeBtn: false,
 					  		skin: 'layui-layer-molv'
 						  }, function(){
 							  refreshTable();
 							  layer.closeAll();
 						  });
 					}else{
-						layer.alert("批量删除产品失败",{closeBtn: false,
+						layer.alert("批量删除销售机会失败",{closeBtn: false,
 					  		skin: 'layui-layer-molv'
 						  });
 					}
@@ -180,7 +180,7 @@ function batchDelete(){
 			});
 		})
 	}else{
-		layer.alert("请选择需要批量删除的产品",{closeBtn: false,
+		layer.alert("请选择需要批量删除的销售机会",{closeBtn: false,
 	  		skin: 'layui-layer-molv'
 		  });
 	}
@@ -189,11 +189,11 @@ function batchDelete(){
 function batchTransfer(){
 	var idArr = getCheckedBox();
 	if(isNotBlank(idArr)){
-		layer.confirm("确定要批量转移产品相关信息吗？",{closeBtn: false,
+		layer.confirm("确定要批量转移销售机会相关信息吗？",{closeBtn: false,
 	  		skin: 'layui-layer-molv'
 		  }, function(){
 			  var url = ctx + "/inner/user/selectAllUser?id=" + idArr;
-				var title = "批量转移产品";
+				var title = "批量转移销售机会";
 				layer.open({
 					type: 2,
 					title: title,
@@ -204,13 +204,13 @@ function batchTransfer(){
 				}); 
 		})
 	}else{
-		layer.alert("请选择需要批量转移的产品",{closeBtn: false,
+		layer.alert("请选择需要批量转移的销售机会",{closeBtn: false,
 	  		skin: 'layui-layer-molv'
 		  });
 	}
 }
 
-function renderProductName(id, name){
+function renderSalesOpportunityName(id, name){
 	var str = "<a href=\"#\" onclick=\"viewDetail('" + id + "', '" + name + "');\" style=\"color:#009688;\">" + name + "</a>";
 	return str;
 }
@@ -304,23 +304,23 @@ function refreshTable(){
 }
 
 function deleteById(id, name){
-	layer.confirm("确定要删除产品【" + name + "】相关信息吗？",{closeBtn: false,
+	layer.confirm("确定要删除销售机会【" + name + "】相关信息吗？",{closeBtn: false,
   		skin: 'layui-layer-molv'
 	  }, function(){
-		  var url = ctx + "/inner/salesopportunity/deleteById?id=" + id +"&name=" + name;
+		  var url = ctx + "/inner/salesOpportunity/deleteById?id=" + id +"&name=" + name;
 		$.ajax({
 			type: "get",
 			url: url,
 			success: function(result){
 				if(result == 2){
-					layer.alert("删除产品成功",{closeBtn: false,
+					layer.alert("删除销售机会成功",{closeBtn: false,
 				  		skin: 'layui-layer-molv'
 					  }, function(){
 						  refreshTable();
 						  layer.closeAll();
 					  });
 				}else{
-					layer.alert("删除产品失败",{closeBtn: false,
+					layer.alert("删除销售机会失败",{closeBtn: false,
 				  		skin: 'layui-layer-molv'
 					  });
 				}
@@ -330,23 +330,23 @@ function deleteById(id, name){
 }
 
 function deleteById(id, name){
-	layer.confirm("确定要删除产品【" + name + "】相关信息吗？",{closeBtn: false,
+	layer.confirm("确定要删除销售机会【" + name + "】相关信息吗？",{closeBtn: false,
   		skin: 'layui-layer-molv'
 	  }, function(){
-		  var url = ctx + "/inner/salesopportunity/deleteById?id=" + id +"&name=" + name;
+		  var url = ctx + "/inner/salesOpportunity/deleteById?id=" + id +"&name=" + name;
 		$.ajax({
 			type: "get",
 			url: url,
 			success: function(result){
 				if(result == 2){
-					layer.alert("删除产品成功",{closeBtn: false,
+					layer.alert("删除销售机会成功",{closeBtn: false,
 				  		skin: 'layui-layer-molv'
 					  }, function(){
 						  refreshTable();
 						  layer.closeAll();
 					  });
 				}else{
-					layer.alert("删除产品失败",{closeBtn: false,
+					layer.alert("删除销售机会失败",{closeBtn: false,
 				  		skin: 'layui-layer-molv'
 					  });
 				}
@@ -355,16 +355,16 @@ function deleteById(id, name){
 	})
 }
 
-function queryProduct(){
+function querySalesOpportunity(){
 	$("#myDataTable").dataTable().fnDestroy(); 
-	var salesopportunityName = $("#txtProductName").val();
+	var salesOpportunityName = $("#txtSalesOpportunityName").val();
 	$("#myDataTable").dataTable( {
 	       ajax : {  
 	            type: "GET",  
-	            url: ctx + '/inner/salesopportunity/listAjax',  
+	            url: ctx + '/inner/salesOpportunity/listAjax',  
 	            // 传入已封装的参数  
 	            data: function(data){ 
-	            	data.salesopportunityName = salesopportunityName;
+	            	data.salesOpportunityName = salesOpportunityName;
 	                data.page = data.start / data.length + 1;  
 	                data.size = data.length;  
 	                // 右上角搜索  
@@ -387,7 +387,7 @@ function queryProduct(){
 	   	                 data : 'operate',  
 	   	                 bSortable : false,  
 	   	                 visible : true,  
-	   	                 render : function(data, type, salesopportunity) {  
+	   	                 render : function(data, type, salesOpportunity) {  
 	   	                       
 	   	                	 var operResult = "<div class=\"btn-group\">";
 	   	                	 operResult += "<button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\">";
@@ -395,8 +395,8 @@ function queryProduct(){
 	   	                	 operResult +=  "</button>";
 	   	                	 operResult += " <ul class=\"dropdown-menu\">";
 	   	                          
-	   	                	 operResult += 	" <li><a href=\"#\" onclick=\"deleteById('" + salesopportunity.id + "', '" + salesopportunity.salesopportunityName + "');\">删除</a></li>";
-	   	                	 operResult += 	" <li><a href=\"#\" onclick=\"editProduct('" + salesopportunity.id + "');\">编辑</a></li>";
+	   	                	 operResult += 	" <li><a href=\"#\" onclick=\"deleteById('" + salesOpportunity.id + "', '" + salesOpportunity.salesOpportunityName + "');\">删除</a></li>";
+	   	                	 operResult += 	" <li><a href=\"#\" onclick=\"editSalesOpportunity('" + salesOpportunity.id + "');\">编辑</a></li>";
 	   	                         	
 	   	                	 operResult += " </ul>";
 	   	                	 operResult += " </div>";
@@ -404,15 +404,15 @@ function queryProduct(){
 	   	                     return operResult;  
 	   	                 }   
 	   	             },
-	   	             { data: 'salesopportunityName',
-	   	            	render: function(data, type, salesopportunity){
-	   	            		return renderProductName(salesopportunity.id, salesopportunity.salesopportunityName);
+	   	             { data: 'salesOpportunityName',
+	   	            	render: function(data, type, salesOpportunity){
+	   	            		return renderSalesOpportunityName(salesOpportunity.id, salesOpportunity.salesOpportunityName);
 	   	            	}
 	   	             },
 	   	             { data: 'price' },
 	   	             { data: 'status',
-		   	            	render: function(data, type, salesopportunity){
-		   	            		return getStatus(salesopportunity.status);
+		   	            	render: function(data, type, salesOpportunity){
+		   	            		return getStatus(salesOpportunity.status);
 		   	            	}
 		   	         },
 	   	             /*{ data: 'imgPath' },*/
@@ -451,7 +451,7 @@ function initDataTable(){
 	$("#myDataTable").dataTable( {
 	       ajax : {  
 	            type: "GET",  
-	            url: ctx + '/inner/salesopportunity/listAjax',  
+	            url: ctx + '/inner/salesOpportunity/listAjax',  
 	            // 传入已封装的参数  
 	            data: function(data){ 
 	                data.page = data.start / data.length + 1;  
@@ -476,7 +476,7 @@ function initDataTable(){
 	                 data : 'operate',  
 	                 bSortable : false,  
 	                 visible : true,  
-	                 render : function(data, type, salesopportunity) {  
+	                 render : function(data, type, salesOpportunity) {  
 	                       
 	                	 var operResult = "<div class=\"btn-group\">";
 	                	 operResult += "<button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\">";
@@ -484,8 +484,8 @@ function initDataTable(){
 	                	 operResult +=  "</button>";
 	                	 operResult += " <ul class=\"dropdown-menu\">";
 	                          
-	                	 operResult += 	" <li><a href=\"#\" onclick=\"deleteById('" + salesopportunity.id + "', '" + salesopportunity.salesopportunityName + "');\">删除</a></li>";
-	                	 operResult += 	" <li><a href=\"#\" onclick=\"editProduct('" + salesopportunity.id + "');\">编辑</a></li>";
+	                	 operResult += 	" <li><a href=\"#\" onclick=\"deleteById('" + salesOpportunity.id + "', '" + salesOpportunity.salesOpportunityName + "');\">删除</a></li>";
+	                	 operResult += 	" <li><a href=\"#\" onclick=\"editSalesOpportunity('" + salesOpportunity.id + "');\">编辑</a></li>";
 	                         	
 	                	 operResult += " </ul>";
 	                	 operResult += " </div>";
@@ -493,19 +493,18 @@ function initDataTable(){
 	                     return operResult;  
 	                 }   
 	             },
-	             { data: 'salesopportunityName',
-	            	render: function(data, type, salesopportunity){
-	            		return renderProductName(salesopportunity.id, salesopportunity.salesopportunityName);
+	             { data: 'salesOpportunityName',
+	            	render: function(data, type, salesOpportunity){
+	            		return renderSalesOpportunityName(salesOpportunity.id, salesOpportunity.salesOpportunityName);
 	            	}
 	             },
-	             { data: 'price' },
-	             { data: 'status',
-	   	            	render: function(data, type, salesopportunity){
-	   	            		return getStatus(salesopportunity.status);
-	   	            	}
-	   	         },
-	             
-	             /*{ data: 'imgPath' },*/
+	             { data: 'companyName' },
+	             { data: 'customerName' },
+	             { data: 'oppotunityType' },
+	             { data: 'saleMoney'},
+	             { data: 'endOppoTime' },
+	             { data: 'endOppoTime' },
+	             { data: 'endOppoTime' },
 	             { data: 'createTime' }
 	         ],
 	       "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示  

@@ -5,7 +5,7 @@
 <head>
 <c:set var="ctx" value="${pageContext.request.contextPath}"></c:set>
 <meta charset="UTF-8">
-<title>产品管理</title>
+<title>销售机会管理</title>
 
 <link href="${ctx}/js/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="${ctx}/css/common.css" rel="stylesheet">
@@ -45,40 +45,50 @@ margin: 0px 15px 0px 0px;
 <body style="background: #fff;">
 	
 <form class="layui-form" id="myForm" onsubmit="return false;">
-<input type="hidden" id="hidProductId" name="id" value="${salesopportunity.id}"/>
-<input type="hidden" id="hidBeyondDeptId" name="departmentId" value="${salesopportunity.departmentId}"/>
-<input type="hidden" id="hidBeyondDeptName" name="departmentName" value="${salesopportunity.departmentName}"/>
+<input type="hidden" id="hidProductId" name="id" value="${salesOpportunity.id}"/>
+<input type="hidden" id="hidBeyondDeptId" name="departmentId" value="${salesOpportunity.departmentId}"/>
+<input type="hidden" id="hidBeyondDeptName" name="departmentName" value="${salesOpportunity.departmentName}"/>
 
 <div class="container content_div">
 	<div class="layui-form-item my-layui-form-item my-top">
-    <label class="layui-form-label">产品所有人<span style="color:red">*</span></label>
+    <label class="layui-form-label">销售机会所有人<span style="color:red">*</span></label>
     <div class="layui-input-block">
       <input type="text" autocomplete="off" value="${user.companyName}" class="layui-input" style="border:0px;" disabled="disabled">
     </div>
   </div>
   <div class="layui-form-item my-layui-form-item my-top">
-    <label class="layui-form-label">产品名称<span style="color:red">*</span></label>
+    <label class="layui-form-label">销售机会名称<span style="color:red">*</span></label>
     <div class="layui-input-block">
-      <input type="text" name="salesopportunityName" lay-verify="salesopportunityName" autocomplete="off" placeholder="请输入产品名称" class="layui-input" maxlength="10" value="${salesopportunity.salesopportunityName}">
+      <input type="text" name="salesOpportunityName" lay-verify="salesOpportunityName" autocomplete="off" placeholder="请输入销售机会名称" class="layui-input" maxlength="10" value="${salesOpportunity.salesOpportunityName}">
     </div>
   </div>
+  
   <div class="layui-form-item my-layui-form-item">
-    <label class="layui-form-label">启用状态</label>
-    <div class="layui-input-block">
-      <input type="radio" name="status" value="1" title="启用"  checked="">
-      <input type="radio" name="status"  value="2" title="停用">
+    <label class="layui-form-label">客户名称<span style="color:red">*</span></label>
+    <div class="layui-input-inline" style="margin-right: 0px;">
+    	<input placeholder="请选择客户名称" type="text" id="txtCustomerName" autocomplete="off" name="customerName"  class="layui-input" value="${salesOpportunity.customerName}" disabled="disabled">
+           
     </div>
+    <button class="layui-btn  layui-btn-primary" onclick="selectDepartment();"><i class="layui-icon">&#xe61f;</i></button>
   </div>
  <div class="layui-form-item my-layui-form-item my-top">
     <label class="layui-form-label">销售价格（元）<span style="color:red">*</span></label>
     <div class="layui-input-block">
-      <input type="num" name="price"  autocomplete="off" value="${salesopportunity.price}"  placeholder="请输入销售价格" class="layui-input">
+      <input type="num" name="saleMoney"  autocomplete="off" value="${salesOpportunity.saleMoney}"  placeholder="请输入销售价格" class="layui-input">
     </div>
   </div>
   <div class="layui-form-item my-layui-form-item layui-form-text">
-    <label class="layui-form-label">产品描述</label>
+    <label class="layui-form-label">销售阶段</label>
     <div class="layui-input-block">
-      <textarea placeholder="请输入产品描述" class="layui-textarea" name="salesopportunityDesc"> ${salesopportunity.salesopportunityDesc} </textarea>
+      <select name="saleStage" lay-verify="required" lay-search="">
+          <option value="">搜索或者选择销售阶段</option>
+          <option value="1">初步接洽</option>
+          <option value="2">需求确定</option>
+          <option value="3">方案/报价</option>
+          <option value="4">谈判审核</option>
+          <option value="5">赢单</option>
+          <option value="5">输单</option>
+        </select>
     </div>
   </div>
   <div id="divViewer">
@@ -89,7 +99,7 @@ margin: 0px 15px 0px 0px;
       <a href="#" onclick="addMoreInfo();" style="color:#009688">
       	
       	<c:choose>
-      		<c:when test="${salesopportunity != null && salesopportunity.id != '' }">
+      		<c:when test="${salesOpportunity != null && salesOpportunity.id != '' }">
       		编辑更多信息
       		</c:when>
       		<c:otherwise>
@@ -103,23 +113,53 @@ margin: 0px 15px 0px 0px;
   <div id="divOther" style="display: none;">
 
    <div class="layui-form-item my-layui-form-item my-top">
-    <label class="layui-form-label">邮政编码</label>
+    <label class="layui-form-label">结单日期</label>
     <div class="layui-input-block">
-      <input type="num" name="postcode" autocomplete="off"   value="${salesopportunity.postcode}"  placeholder="请输入邮政编码" class="layui-input" maxlength="6">
+      <input type="num" name="postcode" autocomplete="off"   value="${salesOpportunity.postcode}"  placeholder="请输入邮政编码" class="layui-input" maxlength="6">
     </div>
   </div>
   
    <div class="layui-form-item my-layui-form-item my-top">
-    <label class="layui-form-label">传真</label>
+    <label class="layui-form-label">所属部门</label>
+    <div class="layui-input-inline" style="margin-right: 0px;">
+    	<input placeholder="请选择客户名称" type="text" id="txtCustomerName" autocomplete="off" name="customerName"  class="layui-input" value="${salesOpportunity.customerName}" disabled="disabled">
+           
+    </div>
+    <button class="layui-btn  layui-btn-primary" onclick="selectDepartment();"><i class="layui-icon">&#xe61f;</i></button>
+  </div>
+   <div class="layui-form-item my-layui-form-item my-top">
+    <label class="layui-form-label">市场活动</label>
     <div class="layui-input-block">
-      <input type="text" name="facsimile" autocomplete="off"  value="${salesopportunity.facsimile}"  placeholder="请输入传真" class="layui-input" maxlength="10">
+      <input type="text" name="facsimile" autocomplete="off"  value="${salesOpportunity.facsimile}"  placeholder="请输入传真" class="layui-input" maxlength="10">
     </div>
   </div>
-   
+  <div class="layui-form-item my-layui-form-item my-top">
+    <label class="layui-form-label">机会类型</label>
+    <div class="layui-input-block">
+      <select name="oppoSource"  lay-search="">
+          <option value="">搜索或者选择机会类型</option>
+          <option value="1">新客户机会</option>
+          <option value="2">老客户机会</option>
+        </select>
+    </div>
+  </div>
+  <div class="layui-form-item my-layui-form-item my-top">
+    <label class="layui-form-label">机会来源</label>
+    <div class="layui-input-block">
+     <select name="oppoSource" lay-search="">
+          <option value="">搜索或者选择机会来源</option>
+          <option value="1">客户介绍</option>
+          <option value="2">广告</option>
+          <option value="3">研讨会</option>
+          <option value="4">搜索引擎</option>
+          <option value="5">其他</option>
+        </select>
+    </div>
+  </div>
   <div class="layui-form-item my-layui-form-item layui-form-text">
     <label class="layui-form-label">备注</label>
     <div class="layui-input-block">
-      <textarea placeholder="请输入备注" class="layui-textarea" name="remark"> ${salesopportunity.remark} </textarea>
+      <textarea placeholder="请输入备注" class="layui-textarea" name="remark"> ${salesOpportunity.remark} </textarea>
     </div>
   </div>
 </div>
@@ -131,9 +171,6 @@ margin: 0px 15px 0px 0px;
     </div>
   </div>  
   
-  <input type="hidden" value="" id="hidProvinceName" name="provinceName"/>
-  <input type="hidden" value="" id="hidCityName" name="cityName"/>
-  <input type="hidden" value="" id="hidAreaName" name="areaName"/>
 </form>
 
 <script>
@@ -145,13 +182,13 @@ layui.use(['form', 'layedit', 'laydate'], function(){
   
   //自定义验证规则
   form.verify({
-	  salesopportunityName: function(value){
+	  salesOpportunityName: function(value){
 	      if(value.length < 2){
-	        return '产品名称的长度不能小于2个字符';
+	        return '销售机会名称的长度不能小于2个字符';
 	      }
 	
 	      if(value.length > 30){
-	          return '产品名称的长度不能大于00个字符';
+	          return '销售机会名称的长度不能大于00个字符';
 	       }
 	    },
 	  
@@ -161,15 +198,15 @@ layui.use(['form', 'layedit', 'laydate'], function(){
   
   //监听提交
   form.on('submit(mySubmit)', function(data){
-	var url = ctx + "/inner/salesopportunity/saveOrUpdate"
+	var url = ctx + "/inner/salesOpportunity/saveOrUpdate"
 	
 
-	var salesopportunity =  $('#myForm').serialize();
+	var salesOpportunity =  $('#myForm').serialize();
     $.ajax({
         cache: true,
         type: "POST",
         url: url,
-        data: salesopportunity,
+        data: salesOpportunity,
         async: false,
         success: function(data) {
           layer.alert('保存成功',

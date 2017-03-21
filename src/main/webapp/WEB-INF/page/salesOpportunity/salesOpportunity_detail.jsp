@@ -69,54 +69,86 @@ font-size: 14px !important;
 			  <ul class="layui-tab-title">
 			    <li class="layui-this">资料</li>
 			    <li>动态</li>
-			    <li>销售机会</li>
-			   <!--  <li>文档</li> -->
+			   <li>产品</li>
 			  </ul>
 			  <div class="layui-tab-content">
 			    <div class="layui-tab-item layui-show">
 			    	<table class="table my-table" id="detailTable">
 			    		
 			    		<tr>
-			    			<td class="title-td">产品名称:</td>
-			    			<td>${salesopportunity.salesopportunityName}</td>
-			    			<td class="title-td">产品所属人:</td>
-			    			<td>${salesopportunity.companyName}</td>
-			    			
-			    		</tr>
-			    		
-			    		<tr>
-			    			<td class="title-td">标准价格(元):</td>
-			    			<td>${salesopportunity.price}</td>
-			    			<td class="title-td">销售单位:</td>
-			    			<td>${salesopportunity.saleUnit}</td>
+			    			<td class="title-td">销售机会名称:</td>
+			    			<td>${salesOpportunity.salesOpportunityName}</td>
+			    			<td class="title-td">销售机会所属人:</td>
+			    			<td>${salesOpportunity.companyName}</td>
 			    			
 			    		</tr>
 			    		<tr>
-			    			<td class="title-td">启用状态:</td>
+			    			<td class="title-td">销售金额:</td>
+			    			<td>${salesOpportunity.saleMoney}</td>
+			    			<td class="title-td">销售阶段:</td>
+			    			<td>${salesOpportunity.saleStage}</td>
+			    			
+			    		</tr>
+			    		<tr>
+			    			<td class="title-td">客户名称:</td>
+			    			<td>${salesOpportunity.customerName}</td>
+			    			<td class="title-td">机会类型:</td>
 			    			<td>
-			    				<c:choose>
-			    					<c:when test="${salesopportunity.status == 1}">
-			    						启用
+			    			<c:choose>
+			    					<c:when test="${salesOpportunity.oppotunityType == 1}">
+			    						新客户机会
 			    					</c:when>
 			    					<c:otherwise>
-			    						停用
+			    						老客户机会
+			    					</c:otherwise>
+			    				</c:choose>
+			    			</td>
+			    			
+			    		</tr>
+			    		<tr>
+			    			<td class="title-td">盈率:</td>
+			    			<td>
+			    				${salesOpportunity.winRate}%
+			    			</td>
+			    			<td class="title-td">结单日期:</td>
+			    			<td><f:formatDate value="${salesOpportunity.endOppoTime}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+			    			
+			    		</tr>
+			    		<tr>
+			    			<td class="title-td">机会来源:</td>
+			    			<td>
+			    				<c:choose>
+			    					<c:when test="${salesOpportunity.oppoSource == 1}">
+			    						客户介绍
+			    					</c:when>
+			    					<c:when test="${salesOpportunity.oppoSource == 2}">
+			    						广告
+			    					</c:when>
+			    					<c:when test="${salesOpportunity.oppoSource == 3}">
+			    						研讨会
+			    					</c:when>
+			    					<c:when test="${salesOpportunity.oppoSource == 4}">
+			    						搜素引擎
+			    					</c:when>
+			    					<c:otherwise>
+			    						其他
 			    					</c:otherwise>
 			    				</c:choose>
 			    			</td>
 			    			<td class="title-td">创建人:</td>
-			    			<td>${salesopportunity.userName}</td>
+			    			<td>${salesOpportunity.userName}</td>
 			    			
 			    		</tr>
 			    		<tr>
 			    			<td class="title-td">创建时间:</td>
-			    			<td><f:formatDate value="${salesopportunity.createTime}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+			    			<td><f:formatDate value="${salesOpportunity.createTime}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
 			    			<td class="title-td">最近修改时间:</td>
-			    			<td><f:formatDate value="${salesopportunity.updateTime}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+			    			<td><f:formatDate value="${salesOpportunity.updateTime}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
 			    			
 			    		</tr>
 			    		<tr>
-			    			<td class="title-td">产品描述:</td>
-			    			<td colspan="3">${salesopportunity.salesopportunityDesc}</td>
+			    			<td class="title-td">备注:</td>
+			    			<td colspan="3">${salesOpportunity.remark}</td>
 			    			
 			    		</tr>
 			    	</table>
@@ -141,8 +173,8 @@ font-size: 14px !important;
 			    		</c:if>
 			    	</table>
 			    </div>
-			    <div class="layui-tab-item">内容3</div>
-			    <!-- <div class="layui-tab-item">内容4</div> -->
+			    
+			    <div class="layui-tab-item">产品</div> 
 			  </div>
 			</div> 
         </div>
@@ -155,7 +187,7 @@ font-size: 14px !important;
 								  <div class="layui-field-box">
 								<div class="layui-btn-group">
 									 
-									  <button class="layui-btn layui-btn-primary" onclick="deleteById('${salesopportunity.id}','${salesopportunity.salesopportunityName}');">
+									  <button class="layui-btn layui-btn-primary" onclick="deleteById('${salesOpportunity.id}','${salesOpportunity.salesOpportunityName}');">
 									    <i class="layui-icon">&#xe640;</i>删除
 									  </button>
 									</div>
