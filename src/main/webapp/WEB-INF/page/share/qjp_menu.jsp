@@ -73,9 +73,6 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="${ctx}/inner/competitor/list"><i class="fa fa-circle-o"></i>客户</a></li>
-            <li><a href="${ctx}/inner/competitor/list"><i class="fa fa-circle-o"></i>销售机会</a></li>
-            <li><a href="${ctx}/inner/competitor/list"><i class="fa fa-circle-o"></i>联系人</a></li>
             <li><a href="${ctx}/inner/competitor/list"><i class="fa fa-circle-o"></i>合同</a></li>
             <li><a href="${ctx}/inner/competitor/list"><i class="fa fa-circle-o"></i>市场活动</a></li>
             <li><a href="${ctx}/inner/competitor/list"><i class="fa fa-circle-o"></i>销售线索</a></li>

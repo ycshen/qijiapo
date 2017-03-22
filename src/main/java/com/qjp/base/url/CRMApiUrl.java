@@ -18,10 +18,6 @@ public class CRMApiUrl {
 	@Value("${qijiapoCrm}")
 	private String crm_url;
 	public static String crm;
-	//customer
-	@Value("${crm.insertCustomer}")
-	private String crm_insertCustomer_url;
-	public static String crm_insertCustomer;
 	
 	//competitor
 	@Value("${crm.insertCompetitor}")
@@ -102,7 +98,25 @@ public class CRMApiUrl {
 	@Value("${crm.updateSalesOpportunity}")
 	private String crm_updateSalesOpportunity_url;
 	public static String crm_updateSalesOpportunity;
-		
+	//Customer
+	@Value("${crm.insertCustomer}")
+	private String crm_insertCustomer_url;
+	public static String crm_insertCustomer;
+	@Value("${crm.getCustomerPage}")
+	private String crm_getCustomerPage_url;
+	public static String crm_getCustomerPage;
+	@Value("${crm.getCustomerById}")
+	private String crm_getCustomerById_url;
+	public static String crm_getCustomerById;
+	@Value("${crm.batchDeleteCustomer}")
+	private String crm_batchDeleteCustomer_url;
+	public static String crm_batchDeleteCustomer;
+	@Value("${crm.deleteCustomerById}")
+	private String crm_deleteCustomerById_url;
+	public static String crm_deleteCustomerById;
+	@Value("${crm.updateCustomer}")
+	private String crm_updateCustomer_url;
+	public static String crm_updateCustomer;
 	@PostConstruct
 	public void init() {
 		crm = this.crm_url;
@@ -140,6 +154,14 @@ public class CRMApiUrl {
 		crm_batchDeleteSalesOpportunity = this.crm_batchDeleteSalesOpportunity_url;
 		crm_deleteSalesOpportunityById = this.crm_deleteSalesOpportunityById_url;
 		crm_updateSalesOpportunity = this.crm_updateSalesOpportunity_url;
+		
+		//Customer
+		crm_insertCustomer = this.crm_insertCustomer_url;
+		crm_getCustomerPage = this.crm_getCustomerPage_url;
+		crm_getCustomerById = this.crm_getCustomerById_url;
+		crm_batchDeleteCustomer = this.crm_batchDeleteCustomer_url;
+		crm_deleteCustomerById = this.crm_deleteCustomerById_url;
+		crm_updateCustomer = this.crm_updateCustomer_url;
 	}
 	
 }
