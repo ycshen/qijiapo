@@ -3,6 +3,7 @@ package com.qjp.base;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
 
 import com.alibaba.fastjson.JSONObject;
 import com.qjp.base.url.CRMApiUrl;
@@ -14,15 +15,15 @@ public class Test {
 	public static String getCRMUrl(){
 		return "";
 	}
-	//SalesOpportunity
-	public static String insertSalesOpportunity(String salesOpportunity){
+	//Customer
+	public static String insertCustomer(String customer){
 		String result = StringUtils.EMPTY;
 		try {	
-			String url = getCRMUrl() + CRMApiUrl.crm_insertSalesOpportunity;	
+			String url = getCRMUrl() + CRMApiUrl.crm_insertCustomer;	
 			JSONObject jsonObject = new JSONObject();
-			jsonObject.put("salesOpportunity", salesOpportunity);
+			jsonObject.put("customer", customer);
 			Map<String,Object> maps = SHA1Utils.getSha1Map();
-			maps.put("salesOpportunity", salesOpportunity);
+			maps.put("customer", customer);
 			String secret = SHA1Utils.SHA1(maps);
 			jsonObject.put("secret", secret);
 			result = HttpUtils.postUrl(url, jsonObject);
@@ -35,18 +36,18 @@ public class Test {
 	
 	
 	/**
-	 * 更新产品
-	 * @param salesOpportunity 产品
+	 * 更新客户
+	 * @param customer 客户
 	 * @return
 	 */
-	public static String updateSalesOpportunity(String salesOpportunity){
+	public static String updateCustomer(String customer){
 		String result = StringUtils.EMPTY;
 		try {	
-			String url = getCRMUrl() + CRMApiUrl.crm_updateSalesOpportunity;	
+			String url = getCRMUrl() + CRMApiUrl.crm_updateCustomer;	
 			JSONObject jsonObject = new JSONObject();
-			jsonObject.put("salesOpportunity", salesOpportunity);
+			jsonObject.put("customer", customer);
 			Map<String,Object> maps = SHA1Utils.getSha1Map();
-			maps.put("salesOpportunity", salesOpportunity);
+			maps.put("customer", customer);
 			String secret = SHA1Utils.SHA1(maps);
 			jsonObject.put("secret", secret);
 			result = HttpUtils.postUrl(url, jsonObject);
@@ -57,10 +58,10 @@ public class Test {
 		return result;
 	}
 	
-	public static String getSalesOpportunityPage(String query){
+	public static String getCustomerPage(String query){
 		String result = StringUtils.EMPTY;
 		try {	
-			String url = getCRMUrl() + CRMApiUrl.crm_getSalesOpportunityPage;
+			String url = getCRMUrl() + CRMApiUrl.crm_getCustomerPage;
 			Map<String,Object> maps = SHA1Utils.getSha1Map();
 			maps.put("query", query);
 			String secret = SHA1Utils.SHA1(maps);
@@ -75,10 +76,10 @@ public class Test {
 		return result;
 	}	
 	
-	public static String getSalesOpportunityById(String id){
+	public static String getCustomerById(String id){
 		String result = StringUtils.EMPTY;
 		try {	
-			String url = getCRMUrl() + CRMApiUrl.crm_getSalesOpportunityById;
+			String url = getCRMUrl() + CRMApiUrl.crm_getCustomerById;
 			Map<String,Object> maps = SHA1Utils.getSha1Map();
 			maps.put("id", id);
 			String secret = SHA1Utils.SHA1(maps);
@@ -94,14 +95,14 @@ public class Test {
 	}
 	
 	/**
-	 * 批量删除产品
+	 * 批量删除客户
 	 * @param idList
 	 * @return
 	 */
-	public static String batchDeleteSalesOpportunity(String idList){
+	public static String batchDeleteCustomer(String idList){
 		String result = StringUtils.EMPTY;
 		try {	
-			String url = getCRMUrl() + CRMApiUrl.crm_batchDeleteSalesOpportunity;
+			String url = getCRMUrl() + CRMApiUrl.crm_batchDeleteCustomer;
 			Map<String,Object> maps = SHA1Utils.getSha1Map();
 			maps.put("idList", idList);
 			String secret = SHA1Utils.SHA1(maps);
@@ -117,14 +118,14 @@ public class Test {
 	}
 	
 	/**
-	 * 根据id删除产品
+	 * 根据id删除客户
 	 * @param id
 	 * @return
 	 */
-	public static String deleteSalesOpportunityById(String id){
+	public static String deleteCustomerById(String id){
 		String result = StringUtils.EMPTY;
 		try {	
-			String url = getCRMUrl() + CRMApiUrl.crm_deleteSalesOpportunityById;
+			String url = getCRMUrl() + CRMApiUrl.crm_deleteCustomerById;
 			Map<String,Object> maps = SHA1Utils.getSha1Map();
 			maps.put("id", id);
 			String secret = SHA1Utils.SHA1(maps);
@@ -138,4 +139,6 @@ public class Test {
 		
 		return result;
 	}
+	
+	
 }
