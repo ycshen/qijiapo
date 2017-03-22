@@ -119,7 +119,7 @@ function addRole(roleId){
 	var roleList = $("#hidRoleStr").val();
 	var notRoleList = $("#hidNotRoleStr").val();
 	var url = ctx + "/inner/role/addRole?roleStr=" + roleList + "&notRoleStr=" + notRoleList + "&roleId=" + roleId;
-	$.ajax({
+    $.ajax({
 		type: "get",
 		url: url,
 		success: function(result){
