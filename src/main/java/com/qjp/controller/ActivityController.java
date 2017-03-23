@@ -102,7 +102,7 @@ public class ActivityController {
         if(StringUtils.isNotBlank(id)){
             activityService.deleteActivityById(id);
             UserEntity user = UserUtils.getLoginUser(request);
-            LogUtils.logCRMActivity("删除了产品(" + name + ")", id, user);
+            LogUtils.logCRMActivity("删除了市场活动(" + name + ")", id, user);
             result = ResponseStatus.UPDATE_SUCCESS;
         }
 
@@ -139,7 +139,7 @@ public class ActivityController {
         oldActivity.setUserName(transferUserName);
         oldActivity.setUpdateTime(new Date());
         oldActivity.setUpdateUser(loginUser.getUserName());
-        LogUtils.logCRMActivity("转移产品(" + oldActivity.getActivityName() + ")到" + transferUserName, activityId, loginUser);
+        LogUtils.logCRMActivity("转移市场活动(" + oldActivity.getActivityName() + ")到" + transferUserName, activityId, loginUser);
     }
 
     @RequestMapping(value = "/batchDeleteById", method = RequestMethod.GET)
@@ -152,7 +152,7 @@ public class ActivityController {
             activityService.batchDeleteActivity(idList);
             UserEntity user = UserUtils.getLoginUser(request);
             for (String id : idList) {
-                LogUtils.logCRMActivity("删除了产品", id, user);
+                LogUtils.logCRMActivity("删除了市场活动", id, user);
             }
             result = ResponseStatus.UPDATE_SUCCESS;
         }
@@ -164,20 +164,20 @@ public class ActivityController {
     public ModelAndView saveOrUpdate(@ModelAttribute ActivityEntity activity, HttpServletRequest request){
         ModelAndView mav = new ModelAndView("/activity/activity_edit");
         activity.init(request); //初始化公司、部门、用户信息
-        String provinceId = activity.getProvinceId();
-        activity.setProvinceId(StringUtils.splitLocation(provinceId));
-        String cityId = activity.getCityId();
-        activity.setCityId(StringUtils.splitLocation(cityId));
-        String areaId = activity.getAreaId();
-        activity.setAreaId(StringUtils.splitLocation(areaId));
+//        String provinceId = activity.getProvinceId();
+//        activity.setProvinceId(StringUtils.splitLocation(provinceId));
+//        String cityId = activity.getCityId();
+//        activity.setCityId(StringUtils.splitLocation(cityId));
+//        String areaId = activity.getAreaId();
+//        activity.setAreaId(StringUtils.splitLocation(areaId));
         Long id = activity.getId();
         UserEntity user = UserUtils.getLoginUser(request);
         if(id == null){
             String returnId = activityService.insertActivity(activity);
-            LogUtils.logCRMActivity("添加了产品(" + activity.getActivityName() + ")", returnId, user);
+            LogUtils.logCRMActivity("添加了市场活动(" + activity.getActivityName() + ")", returnId, user);
         }else{
             activityService.updateActivity(activity);
-            LogUtils.logCRMActivity("修改了产品(" + activity.getActivityName() + ")", id.toString(), user);
+            LogUtils.logCRMActivity("修改了市场活动(" + activity.getActivityName() + ")", id.toString(), user);
         }
 
         return mav;

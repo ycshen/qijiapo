@@ -127,8 +127,8 @@ layui.use(['form', 'layedit', 'laydate'], function(){
 		  if(value == '' || value == null || value == undefined){
 				return '请选择结束时间';
 			}
-		 var startTime = document.getElementById("txtStartTime").value;
-		 if(value <startTime){
+		 var activityStartTime = document.getElementById("txtStartTime").value;
+		 if(value <activityStartTime){
 			 return '结束时间不能早于开始时间';
 			 }
 	  }
@@ -158,9 +158,9 @@ layui.use(['form', 'layedit', 'laydate'], function(){
      					  },
      					  function(index){
          					  var memoName = $("input[name='memoName']").val();
-         					  var startTime = $("input[name='memoStartTime']").val();;
+         					  var activityStartTime = $("input[name='memoStartTime']").val();;
          					  var endTime = $("input[name='memoEndTime']").val();;
-     						  window.parent.addSuccess(memoName, startTime, endTime, id);
+     						  window.parent.addSuccess(memoName, activityStartTime, endTime, id);
      					  }
      			);
                }else if(result == 2){

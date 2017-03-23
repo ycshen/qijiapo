@@ -78,7 +78,27 @@ public class CRMApiUrl {
 	@Value("${crm.updateProduct}")
 	private String crm_updateProduct_url;
 	public static String crm_updateProduct;
-	
+
+	//activity
+	@Value("${crm.insertActivity}")
+	private String crm_insertActivity_url;
+	public static String crm_insertActivity;
+	@Value("${crm.getActivityPage}")
+	private String crm_getActivityPage_url;
+	public static String crm_getActivityPage;
+	@Value("${crm.getActivityById}")
+	private String crm_getActivityById_url;
+	public static String crm_getActivityById;
+	@Value("${crm.batchDeleteActivity}")
+	private String crm_batchDeleteActivity_url;
+	public static String crm_batchDeleteActivity;
+	@Value("${crm.deleteActivityById}")
+	private String crm_deleteActivityById_url;
+	public static String crm_deleteActivityById;
+	@Value("${crm.updateProduct}")
+	private String crm_updateActivity_url;
+	public static String crm_updateActivity;
+
 	//SalesOpportunity
 	@Value("${crm.insertSalesOpportunity}")
 	private String crm_insertSalesOpportunity_url;
@@ -122,7 +142,7 @@ public class CRMApiUrl {
 		crm = this.crm_url;
 		//customer
 		crm_insertCustomer = this.crm_insertCustomer_url;
-		
+
 		//competitor
 		crm_insertCompetitor = this.crm_insertCompetitor_url;
 		crm_getCompetitorPage = this.crm_getCompetitorPage_url;
@@ -130,7 +150,7 @@ public class CRMApiUrl {
 		crm_batchDeleteCompetitor = this.crm_batchDeleteCompetitor_url;
 		crm_deleteCompetitorById = this.crm_deleteCompetitorById_url;
 		crm_updateCompetitor = this.crm_updateCompetitor_url;
-		
+
 		//attn
 		crm_insertAttn = this.crm_insertAttn_url;
 		crm_getAttnPage = this.crm_attnPage_url;
@@ -138,7 +158,7 @@ public class CRMApiUrl {
 		crm_deleteAttnById = this.crm_deleteAttnById_url;
 		crm_batchDeleteAttn = this.crm_batchDeleteAttn_url;
 		crm_updateAttn = this.crm_updateAttn_url;
-		
+
 		//Product
 		crm_insertProduct = this.crm_insertProduct_url;
 		crm_getProductPage = this.crm_getProductPage_url;
@@ -146,7 +166,7 @@ public class CRMApiUrl {
 		crm_batchDeleteProduct = this.crm_batchDeleteProduct_url;
 		crm_deleteProductById = this.crm_deleteProductById_url;
 		crm_updateProduct = this.crm_updateProduct_url;
-		
+
 		//SalesOpportunity
 		crm_insertSalesOpportunity = this.crm_insertSalesOpportunity_url;
 		crm_getSalesOpportunityPage = this.crm_getSalesOpportunityPage_url;
@@ -154,7 +174,7 @@ public class CRMApiUrl {
 		crm_batchDeleteSalesOpportunity = this.crm_batchDeleteSalesOpportunity_url;
 		crm_deleteSalesOpportunityById = this.crm_deleteSalesOpportunityById_url;
 		crm_updateSalesOpportunity = this.crm_updateSalesOpportunity_url;
-		
+
 		//Customer
 		crm_insertCustomer = this.crm_insertCustomer_url;
 		crm_getCustomerPage = this.crm_getCustomerPage_url;
@@ -162,6 +182,13 @@ public class CRMApiUrl {
 		crm_batchDeleteCustomer = this.crm_batchDeleteCustomer_url;
 		crm_deleteCustomerById = this.crm_deleteCustomerById_url;
 		crm_updateCustomer = this.crm_updateCustomer_url;
+		//activity
+		crm_insertActivity = this.crm_insertActivity_url;
+		crm_getActivityPage = this.crm_getActivityPage_url;
+		crm_getActivityById = this.crm_getActivityById_url;
+		crm_batchDeleteActivity = this.crm_batchDeleteActivity_url;
+		crm_deleteActivityById = this.crm_deleteActivityById_url;
+		crm_updateActivity = this.crm_updateActivity_url;
 	}
 	
 }

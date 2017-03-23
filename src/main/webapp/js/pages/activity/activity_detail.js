@@ -22,9 +22,9 @@ function refreshTable(){
 	  window.parent.refreshTable();
 	  window.parent.layer.closeAll();
 }
-function transfer(id, attnName){
-	var url = ctx + "/inner/user/selectAllUser?id=" + id + "&name=" + attnName;
-	var title = "转移联系人【" + attnName   +"】";
+function transfer(id, activityName){
+	var url = ctx + "/inner/user/selectAllUser?id=" + id + "&name=" + activityName;
+	var title = "转移市场活动【" + activityName   +"】";
 	layer.open({
 		type: 2,
 		title: title,
@@ -55,23 +55,23 @@ function cancelAttn(){
 	$("#btnSave").hide();
 }
 function deleteById(id, name){
-	layer.confirm("确定要删除联系人【" + name + "】相关信息吗？",{closeBtn: false,
+	layer.confirm("确定要删除市场活动【" + name + "】相关信息吗？",{closeBtn: false,
   		skin: 'layui-layer-molv'
 	  }, function(){
-		  var url = ctx + "/inner/attn/deleteById?id=" + id +"&name=" + name;
+		  var url = ctx + "/inner/activity/deleteById?id=" + id +"&name=" + name;
 		$.ajax({
 			type: "get",
 			url: url,
 			success: function(result){
 				if(result == 2){
-					layer.alert("删除联系人成功",{closeBtn: false,
+					layer.alert("删除市场活动成功",{closeBtn: false,
 				  		skin: 'layui-layer-molv'
 					  }, function(){
 						  parent.refreshTable();
 						  parent.layer.closeAll();
 					  });
 				}else{
-					layer.alert("删除联系人失败",{closeBtn: false,
+					layer.alert("删除市场活动失败",{closeBtn: false,
 				  		skin: 'layui-layer-molv'
 					  });
 				}
