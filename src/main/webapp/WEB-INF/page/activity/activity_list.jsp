@@ -101,27 +101,27 @@
                                         </td>
                                         <td><input type="text" class="layui-input my-input" id="txtActivityName"
                                                    placeholder="市场活动名称"></td>
-                                        <td><label class="layui-form-label my-label">省市区</label></td>
-                                        <td colspan="3">
-                                            <div class="layui-form-item">
+                                        <%--<td><label class="layui-form-label my-label">省市区</label></td>--%>
+                                        <%--<td colspan="3">--%>
+                                            <%--<div class="layui-form-item">--%>
 
-                                                <div class="layui-input-inline" style="width: 120px;">
-                                                    <select name="provinceId" lay-filter="province">
-                                                        <option value="">请选择省</option>
-                                                    </select>
-                                                </div>
-                                                <div class="layui-input-inline" style="width: 120px;">
-                                                    <select name="cityId" lay-filter="city">
-                                                        <option value="">请选择市</option>
-                                                    </select>
-                                                </div>
-                                                <div class="layui-input-inline" style="width: 120px;">
-                                                    <select name="areaId" lay-filter="area">
-                                                        <option value="">请选择县/区</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </td>
+                                                <%--<div class="layui-input-inline" style="width: 120px;">--%>
+                                                    <%--<select name="provinceId" lay-filter="province">--%>
+                                                        <%--<option value="">请选择省</option>--%>
+                                                    <%--</select>--%>
+                                                <%--</div>--%>
+                                                <%--<div class="layui-input-inline" style="width: 120px;">--%>
+                                                    <%--<select name="cityId" lay-filter="city">--%>
+                                                        <%--<option value="">请选择市</option>--%>
+                                                    <%--</select>--%>
+                                                <%--</div>--%>
+                                                <%--<div class="layui-input-inline" style="width: 120px;">--%>
+                                                    <%--<select name="areaId" lay-filter="area">--%>
+                                                        <%--<option value="">请选择县/区</option>--%>
+                                                    <%--</select>--%>
+                                                <%--</div>--%>
+                                            <%--</div>--%>
+                                        <%--</td>--%>
 
                                     </tr>
                                     <tr>
@@ -156,14 +156,16 @@
                                 <tr>
                                     <th><input type="checkbox" name="activity-list-checkable"></th>
                                     <th>操作</th>
-                                    <th>市场活动名称</th>
+                                    <th>活动名称</th>
                                     <th>市场活动所有人</th>
-                                    <th>所属部门</th>
-                                    <th>性别</th>
-                                    <th>地址</th>
-                                    <th>电话</th>
-                                    <th>手机</th>
-                                    <th>职务</th>
+                                    <th>活动类型</th>
+                                    <th>活动状态</th>
+                                    <th>开始日期</th>
+                                    <th>结束日期</th>
+                                    <th>邀请人数</th>
+                                    <th>实际人数</th>
+                                    <th>创建日期</th>
+                                    <th>业务类型</th>
                                 </tr>
                                 </thead>
                                 <tbody>

@@ -383,18 +383,18 @@ function deleteById(id, name) {
 function queryActivity() {
     $("#myDataTable").dataTable().fnDestroy();
     var activityName = $("#txtActivityName").val();
-    var provinceId = $("select[name='provinceId']").find("option:selected").val();
-    var cityId = $("select[name='cityId']").find("option:selected").val();
-    var areaId = $("select[name='areaId']").find("option:selected").val();
+    // var provinceId = $("select[name='provinceId']").find("option:selected").val();
+    // var cityId = $("select[name='cityId']").find("option:selected").val();
+    // var areaId = $("select[name='areaId']").find("option:selected").val();
     $("#myDataTable").dataTable({
         ajax: {
             type: "GET",
             url: ctx + '/inner/activity/listAjax',
             // 传入已封装的参数
             data: function (data) {
-                data.provinceId = provinceId;
-                data.cityId = cityId;
-                data.areaId = areaId;
+                // data.provinceId = provinceId;
+                // data.cityId = cityId;
+                // data.areaId = areaId;
                 data.activityName = activityName;
                 data.page = data.start / data.length + 1;
                 data.size = data.length;
@@ -443,12 +443,14 @@ function queryActivity() {
                 }
             },
             {data: 'userName'},
-            {data: 'departmentName'},
-            {data: 'gender'},
-            {data: 'address'},
-            {data: 'phoneNum'},
-            {data: 'mobilePhoneNum'},
-            {data: 'duty'}
+            {data: 'activityType'},
+            {data: 'activityState'},
+            {data: 'activityStartTime'},
+            {data: 'activityEndTime'},
+            {data: 'invitationPopulation'},
+            {data: 'realNum'},
+            {data: 'createTime'},
+            {data: 'businessType'}
         ],
         "bProcessing": true, //DataTables载入数据时，是否显示‘进度’提示
         "bPaginate": true,
@@ -522,12 +524,26 @@ function initDataTable() {
                 }
             },
             {data: 'userName'},
-            {data: 'departmentName'},
-            {data: 'gender'},
-            {data: 'address'},
-            {data: 'phoneNum'},
-            {data: 'mobilePhoneNum'},
-            {data: 'duty'}
+            {data: 'activityType',
+                render: function (data, type, activity) {
+                    return getActivityType(activity.activityType)
+                }
+            },
+            {data: 'activityState',
+                render: function (data, type, activity) {
+                    return getActivityState(activity.activityState)
+                }
+            },
+            {data: 'activityStartTime'},
+            {data: 'activityEndTime'},
+            {data: 'invitationPopulation'},
+            {data: 'realNum'},
+            {data: 'createTime'},
+            {data: 'businessType',
+                render: function (data, type, activity) {
+                    return getActivityBusinessType(activity.businessType)
+                }
+            }
         ],
         "bProcessing": true, //DataTables载入数据时，是否显示‘进度’提示
         "bPaginate": true,
@@ -545,7 +561,50 @@ function initDataTable() {
     });
 }
 
-Date.prototype.Format = function (fmt) { //author: meizz 
+function getActivityType(activityType){
+    var typeStr = "";
+    if(activityType == 1){
+        typeStr = "广告";
+    }else if(activityType == 2){
+        typeStr = "研讨会/会议";
+    }else if(activityType == 3){
+        typeStr = "电子邮件";
+    }else if(activityType == 4){
+        typeStr = "电话营销";
+    }else if(activityType == 5){
+        typeStr = "公共关系";
+    }else if(activityType == 6){
+        typeStr = "合作伙伴";
+    }else if(activityType == 7){
+        typeStr = "其它";
+    }
+
+    return typeStr;
+}
+
+function getActivityState(activityState){
+    var stateStr = "";
+    if(activityState == 1){
+        stateStr = "已计划";
+    }else if(activityState == 2){
+        stateStr = "进行中";
+    }else if(activityState == 3){
+        stateStr = "已结束";
+    }else if(activityState == 4){
+        stateStr = "中止";
+    }
+
+    return stateStr;
+}
+function getActivityBusinessType(businessType){
+    var businessTypeStr = "";
+    if(businessType == 0){
+        businessTypeStr = "默认业务类型";
+    }
+
+    return businessTypeStr;
+}
+Date.prototype.Format = function (fmt) { //author: meizz
     var o = {
         "M+": this.getMonth() + 1, //月份 
         "d+": this.getDate(), //日 

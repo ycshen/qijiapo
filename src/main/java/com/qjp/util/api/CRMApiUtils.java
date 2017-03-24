@@ -698,9 +698,9 @@ public class CRMApiUtils {
         try {
             String url = getCRMUrl() + CRMApiUrl.crm_getActivityPage;
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("activity", objStr);
+            jsonObject.put("query", objStr);
             Map<String, Object> maps = SHA1Utils.getSha1Map();
-            maps.put("activity", objStr);
+            maps.put("query", objStr);
             String secret = SHA1Utils.SHA1(maps);
             jsonObject.put("secret", secret);
             result = HttpUtils.postUrl(url, jsonObject);

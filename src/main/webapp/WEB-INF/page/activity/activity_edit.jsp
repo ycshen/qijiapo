@@ -154,7 +154,7 @@
                         <option value="2">研讨会/会议</option>
                         <option value="3">电子邮件</option>
                         <option value="4">电话营销</option>
-                        <option value="5">公共关系</option>
+                        <option value="5">公共关系</option> 　
                         <option value="6">合作伙伴</option>
                         <option value="7">其它</option>
                     </select>

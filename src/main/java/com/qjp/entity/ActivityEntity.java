@@ -4,44 +4,36 @@ package com.qjp.entity;
  * Created by fengyue on 2017/3/21.
  */
 public class ActivityEntity extends CRMBaseEntity {
-    private int activityType;//活动类型
-    private int activityState;//活动状态
+    private Integer activityType;//活动类型
+    private Integer activityState;//活动状态
 //    @DateTimeFormat(pattern = "YYYY-MM-DD")
     private String activityStartTime;//开始时间
     private String activityEndTime;//结束时间
-    private int invitationPopulation;//邀请人数
-    private int realNum;//实际人数
-    private int businessType;//业务类型
+    private Integer invitationPopulation;//邀请人数
+    private Integer realNum;//实际人数
+    private Integer businessType;//业务类型
     private String activityNote;//活动说明
-    private double activityCost;//活动成本
-    private double expectedIncome;//预计收入
-    private String recordTime;//活动最新记录时间
-    private int expectedNum;//预计响应
-    private double realActivityCost;//实际成本
-    private double realIncome;//实际收入
+    private Double activityCost;//活动成本
+    private Double expectedIncome;//预计收入
+    private Double recordTime;//活动最新记录时间
+    private Integer expectedNum;//预计响应
+    private Double realActivityCost;//实际成本
+    private Double realIncome;//实际收入
     private String activityName;
 
-    public String getActivityName() {
-        return activityName;
-    }
-
-    public void setActivityName(String activityName) {
-        this.activityName = activityName;
-    }
-
-    public int getActivityType() {
+    public Integer getActivityType() {
         return activityType;
     }
 
-    public void setActivityType(int activityType) {
+    public void setActivityType(Integer activityType) {
         this.activityType = activityType;
     }
 
-    public int getActivityState() {
+    public Integer getActivityState() {
         return activityState;
     }
 
-    public void setActivityState(int activityState) {
+    public void setActivityState(Integer activityState) {
         this.activityState = activityState;
     }
 
@@ -61,35 +53,27 @@ public class ActivityEntity extends CRMBaseEntity {
         this.activityEndTime = activityEndTime;
     }
 
-    public String getRecordTime() {
-        return recordTime;
-    }
-
-    public void setRecordTime(String recordTime) {
-        this.recordTime = recordTime;
-    }
-
-    public int getInvitationPopulation() {
+    public Integer getInvitationPopulation() {
         return invitationPopulation;
     }
 
-    public void setInvitationPopulation(int invitationPopulation) {
+    public void setInvitationPopulation(Integer invitationPopulation) {
         this.invitationPopulation = invitationPopulation;
     }
 
-    public int getRealNum() {
+    public Integer getRealNum() {
         return realNum;
     }
 
-    public void setRealNum(int realNum) {
+    public void setRealNum(Integer realNum) {
         this.realNum = realNum;
     }
 
-    public int getBusinessType() {
+    public Integer getBusinessType() {
         return businessType;
     }
 
-    public void setBusinessType(int businessType) {
+    public void setBusinessType(Integer businessType) {
         this.businessType = businessType;
     }
 
@@ -101,44 +85,59 @@ public class ActivityEntity extends CRMBaseEntity {
         this.activityNote = activityNote;
     }
 
-    public double getActivityCost() {
+    public Double getActivityCost() {
         return activityCost;
     }
 
-    public void setActivityCost(double activityCost) {
+    public void setActivityCost(Double activityCost) {
         this.activityCost = activityCost;
     }
 
-    public double getExpectedIncome() {
+    public Double getExpectedIncome() {
         return expectedIncome;
     }
 
-    public void setExpectedIncome(double expectedIncome) {
+    public void setExpectedIncome(Double expectedIncome) {
         this.expectedIncome = expectedIncome;
     }
 
+    public Double getRecordTime() {
+        return recordTime;
+    }
 
-    public int getExpectedNum() {
+    public void setRecordTime(Double recordTime) {
+        this.recordTime = recordTime;
+    }
+
+    public Integer getExpectedNum() {
         return expectedNum;
     }
 
-    public void setExpectedNum(int expectedNum) {
+    public void setExpectedNum(Integer expectedNum) {
         this.expectedNum = expectedNum;
     }
 
-    public double getRealActivityCost() {
+    public Double getRealActivityCost() {
         return realActivityCost;
     }
 
-    public void setRealActivityCost(double realActivityCost) {
+    public void setRealActivityCost(Double realActivityCost) {
         this.realActivityCost = realActivityCost;
     }
 
-    public double getRealIncome() {
+    public Double getRealIncome() {
         return realIncome;
     }
 
-    public void setRealIncome(double realIncome) {
+    public void setRealIncome(Double realIncome) {
         this.realIncome = realIncome;
+    }
+
+    public String getActivityName() {
+        return activityName;
+    }
+
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
     }
 }
