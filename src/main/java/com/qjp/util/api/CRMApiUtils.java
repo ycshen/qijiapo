@@ -763,5 +763,23 @@ public class CRMApiUtils {
 
         return result;
     }
+
+    public static String getActivityById(String id) {
+        String result = StringUtils.EMPTY;
+        try {
+            String url = getCRMUrl() + CRMApiUrl.crm_getActivityById;
+            Map<String, Object> maps = SHA1Utils.getSha1Map();
+            maps.put("id", id);
+            String secret = SHA1Utils.SHA1(maps);
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("secret", secret);
+            jsonObject.put("id", id);
+            result = HttpUtils.postUrl(url, jsonObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
 }
 

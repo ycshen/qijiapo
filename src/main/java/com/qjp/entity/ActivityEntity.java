@@ -1,21 +1,27 @@
 package com.qjp.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
+
 /**
  * Created by fengyue on 2017/3/21.
  */
 public class ActivityEntity extends CRMBaseEntity {
     private Integer activityType;//活动类型
     private Integer activityState;//活动状态
-//    @DateTimeFormat(pattern = "YYYY-MM-DD")
-    private String activityStartTime;//开始时间
-    private String activityEndTime;//结束时间
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date activityStartTime;//开始时间
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date activityEndTime;//结束时间
     private Integer invitationPopulation;//邀请人数
     private Integer realNum;//实际人数
     private Integer businessType;//业务类型
     private String activityNote;//活动说明
     private Double activityCost;//活动成本
     private Double expectedIncome;//预计收入
-    private Double recordTime;//活动最新记录时间
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date recordTime;//活动最新记录时间
     private Integer expectedNum;//预计响应
     private Double realActivityCost;//实际成本
     private Double realIncome;//实际收入
@@ -37,21 +43,6 @@ public class ActivityEntity extends CRMBaseEntity {
         this.activityState = activityState;
     }
 
-    public String getActivityStartTime() {
-        return activityStartTime;
-    }
-
-    public void setActivityStartTime(String activityStartTime) {
-        this.activityStartTime = activityStartTime;
-    }
-
-    public String getActivityEndTime() {
-        return activityEndTime;
-    }
-
-    public void setActivityEndTime(String activityEndTime) {
-        this.activityEndTime = activityEndTime;
-    }
 
     public Integer getInvitationPopulation() {
         return invitationPopulation;
@@ -101,11 +92,27 @@ public class ActivityEntity extends CRMBaseEntity {
         this.expectedIncome = expectedIncome;
     }
 
-    public Double getRecordTime() {
+    public Date getActivityStartTime() {
+        return activityStartTime;
+    }
+
+    public void setActivityStartTime(Date activityStartTime) {
+        this.activityStartTime = activityStartTime;
+    }
+
+    public Date getActivityEndTime() {
+        return activityEndTime;
+    }
+
+    public void setActivityEndTime(Date activityEndTime) {
+        this.activityEndTime = activityEndTime;
+    }
+
+    public Date getRecordTime() {
         return recordTime;
     }
 
-    public void setRecordTime(Double recordTime) {
+    public void setRecordTime(Date recordTime) {
         this.recordTime = recordTime;
     }
 

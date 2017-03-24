@@ -108,41 +108,85 @@
                             <tr>
                                 <td class="title-td">市场活动所属部门:</td>
                                 <td>${activity.departmentName}</td>
-                                <td class="title-td">省市区:</td>
-                                <td>${activity.provinceName}-${activity.cityName}-${activity.areaName}</td>
+                                <td class="title-td">业务类型:</td>
+                                <td>默认业务类型</td>
 
                             </tr>
                             <tr>
-                                <td class="title-td">地址:</td>
-                                <td colspan="3">${activity.address}</td>
+                                <td class="title-td">开始日期:</td>
+                                <td><f:formatDate value="${activity.activityStartTime}" pattern="yyyy-MM-dd" /></td>
+                                <td class="title-td">结束日期:</td>
+                                <td><f:formatDate value="${activity.activityEndTime}" pattern="yyyy-MM-dd" /></td>
+                            </tr>
+                            <tr>
+                                <td class="title-td">活动类型:</td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${activity.activityType == 1}">
+                                            广告
+                                        </c:when>
+                                        <c:when test="${activity.activityType == 2}">
+                                            研讨会/会议
+                                        </c:when>
+                                        <c:when test="${activity.activityType == 3}">
+                                            电子邮件
+                                        </c:when>
+                                        <c:when test="${activity.activityType == 4}">
+                                            电话营销
+                                        </c:when>
+                                        <c:when test="${activity.activityType == 5}">
+                                            公共关系
+                                        </c:when>
+                                        <c:when test="${activity.activityType == 6}">
+                                            合作伙伴
+                                        </c:when>
+                                        <c:otherwise>
+                                            其他
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
+                                <td class="title-td">活动状态:</td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${activity.activityType == 1}">
+                                            已计划
+                                        </c:when>
+                                        <c:when test="${activity.activityType == 2}">
+                                            进行中
+                                        </c:when>
+                                        <c:when test="${activity.activityType == 3}">
+                                            已结束
+                                        </c:when>
+                                        <c:when test="${activity.activityType == 4}">
+                                            中止
+                                        </c:when>
+                                    </c:choose>
+                                </td>
 
                             </tr>
                             <tr>
-                                <td class="title-td">邮政编码:</td>
-                                <td>${activity.postcode}</td>
-                                <td class="title-td">电话:</td>
-                                <td>${activity.phoneNum}</td>
+                                <td class="title-td">活动成本:</td>
+                                <td>${activity.activityCost}</td>
+                                <td class="title-td">实际成本:</td>
+                                <td>${activity.realActivityCost}</td>
+                            </tr>
+                            <tr>
+                                <td class="title-td">预期收入:</td>
+                                <td>${activity.expectedIncome}</td>
+                                <td class="title-td">邀请人数:</td>
+                                <td>${activity.invitationPopulation}</td>
 
                             </tr>
                             <tr>
-                                <td class="title-td">传真:</td>
-                                <td>${activity.facsimile}</td>
-                                <td class="title-td">手机:</td>
-                                <td>${activity.mobilePhoneNum}</td>
+                                <td class="title-td">预期响应:</td>
+                                <td>${activity.expectedNum}</td>
+                                <td class="title-td">实际人数:</td>
+                                <td>${activity.realNum}"</td>
 
                             </tr>
                             <tr>
-                                <td class="title-td">微博:</td>
-                                <td>${activity.weibo}</td>
-                                <td class="title-td">职务:</td>
-                                <td>${activity.duty}</td>
-
-                            </tr>
-                            <tr>
-                                <td class="title-td">性别:</td>
-                                <td>${activity.gender}</td>
-                                <td class="title-td">添加时间:</td>
-                                <td><f:formatDate value="${activity.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                                <td class="title-td">活动说明:</td>
+                                <td colspan="3">${activity.activityNote}</td>
 
                             </tr>
                             <tr>

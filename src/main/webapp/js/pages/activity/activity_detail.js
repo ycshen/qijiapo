@@ -35,7 +35,7 @@ function transfer(id, activityName){
 	}); 
 }
 
-function fixAttn(){
+function fixActivity(){
 	$("#btnEdit").hide();
 	$("#btnCancel").show();
 	$("#btnSave").show();
@@ -43,13 +43,13 @@ function fixAttn(){
 	$("#detailTable").hide();
 }
 
-function saveAttn(){
+function saveActivity(){
 	/*$("#btnEdit").hide();
 	$("#btnCancel").show();
 	$("#btnSave").show();*/
 }
 
-function cancelAttn(){
+function cancelActivity(){
 	$("#btnEdit").show();
 	$("#btnCancel").hide();
 	$("#btnSave").hide();
@@ -78,4 +78,47 @@ function deleteById(id, name){
 			}
 		});
 	})
+}
+function getActivityType(activityType){
+    var typeStr = "";
+    if(activityType == 1){
+        typeStr = "广告";
+    }else if(activityType == 2){
+        typeStr = "研讨会/会议";
+    }else if(activityType == 3){
+        typeStr = "电子邮件";
+    }else if(activityType == 4){
+        typeStr = "电话营销";
+    }else if(activityType == 5){
+        typeStr = "公共关系";
+    }else if(activityType == 6){
+        typeStr = "合作伙伴";
+    }else if(activityType == 7){
+        typeStr = "其它";
+    }
+
+    return typeStr;
+}
+
+function getActivityState(activityState){
+    var stateStr = "";
+    if(activityState == 1){
+        stateStr = "已计划";
+    }else if(activityState == 2){
+        stateStr = "进行中";
+    }else if(activityState == 3){
+        stateStr = "已结束";
+    }else if(activityState == 4){
+        stateStr = "中止";
+    }
+
+    return stateStr;
+}
+function getActivityBusinessType(businessType){
+    var businessTypeStr = "";
+    if(businessType == 0){
+        businessTypeStr = "默认业务类型";
+    }
+
+    return businessTypeStr;
 }

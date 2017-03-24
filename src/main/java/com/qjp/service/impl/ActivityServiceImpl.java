@@ -75,7 +75,7 @@ public class ActivityServiceImpl implements ActivityService {
     @Override
     public ActivityEntity getActivityById(String id) {
         ActivityEntity activityEntity = null;
-        String result = CRMApiUtils.getActivityPage(id);
+        String result = CRMApiUtils.getActivityById(id);
         if (StringUtils.isNotBlank(result)){
             JSONObject jsonObject = JSONObject.parseObject(result);
             if (jsonObject != null){

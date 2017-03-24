@@ -57,10 +57,12 @@
     <div class="container content_div">
         <div class="layui-form-item my-layui-form-item my-top">
             <label class="layui-form-label">业务类型<span style="color:red">*</span></label>
+
             <div class="layui-input-block">
-                <input type="text" name="activityType" autocomplete="off" value="默认业务类型" class="layui-input"
-                       style="border:0px;"
-                       disabled="disabled">
+                <input type="hidden" name="activityType" autocomplete="off" value="0" class="layui-input"
+
+                       disabled="disabled" >默认业务类型
+                    <%--<input type="hidden" name="activityType" value="0" class="layui-input" style="border:0px;" disabled="disabled">默认业务类型--%>
             </div>
         </div>
         <div class="layui-form-item my-layui-form-item my-top">
