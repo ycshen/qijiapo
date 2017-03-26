@@ -20,7 +20,6 @@ public class CustomerEntity extends CRMBaseEntity{
 	private String website; //公司网址
 	private Integer totalStaff; //总人数
 	private String saleMoney;  //销售额
-	private Integer isDelete; //是否删除
 	public String getCustomerName() {
 		return customerName;
 	}
@@ -75,11 +74,6 @@ public class CustomerEntity extends CRMBaseEntity{
 	public void setSaleMoney(String saleMoney) {
 		this.saleMoney = saleMoney;
 	}
-	public Integer getIsDelete() {
-		return isDelete;
-	}
-	public void setIsDelete(Integer isDelete) {
-		this.isDelete = isDelete;
-	}
+	
 }
 

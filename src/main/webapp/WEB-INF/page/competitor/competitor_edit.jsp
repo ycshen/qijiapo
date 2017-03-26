@@ -37,7 +37,7 @@ margin: 0px 15px 0px 0px;
 	margin-top: 10px;
 }
 .content_div{
-	height: 300px;
+	height: 500px;
 	overflow-y:auto;
 }
 </style>

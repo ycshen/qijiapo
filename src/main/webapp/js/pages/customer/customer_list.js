@@ -3,9 +3,9 @@ function addCustomer(){
 	layer.open({
 		type: 2,
 		title: '新增客户',
-		shadeClose: true,
+		shadeClose: false,
 		shade: 0.8,
-		area: ['800px', '400px'],
+		area: ['800px', '600px'],
 		content: url
 	});
 }
@@ -16,9 +16,9 @@ function editCustomer(id){
 	layer.open({
 		type: 2,
 		title: '编辑客户',
-		shadeClose: true,
+		shadeClose: false,
 		shade: 0.8,
-		area: ['800px', '400px'],
+		area: ['800px', '600px'],
 		content: url
 	});
 }
@@ -28,7 +28,7 @@ function addSubCompany(id){
 	layer.open({
 		type: 2,
 		title: '添加子公司信息',
-		shadeClose: true,
+		shadeClose: false,
 		shade: 0.8,
 		area: ['550px', '400px'],
 		content: url
@@ -53,7 +53,7 @@ function addDepartment(id){
 	layer.open({
 		type: 2,
 		title: '添加部门信息',
-		shadeClose: true,
+		shadeClose: false,
 		shade: 0.8,
 		area: ['550px', '400px'],
 		content: url
@@ -79,7 +79,7 @@ function transfer(id, customerName){
 	layer.open({
 		type: 2,
 		title: title,
-		shadeClose: true,
+		shadeClose: false,
 		shade: 0.8,
 		area: ['500px', '400px'],
 		content: url
@@ -498,13 +498,16 @@ function initDataTable(){
 	            		return renderCustomerName(customer.id, customer.customerName);
 	            	}
 	             },
-	             { data: 'companyName' },
-	             { data: 'customerName' },
-	             { data: 'oppotunityType' },
-	             { data: 'saleMoney'},
-	             { data: 'endOppoTime' },
-	             { data: 'endOppoTime' },
-	             { data: 'endOppoTime' },
+	             { data: 'level',
+		            	render: function(data, type, customer){
+		            		return renderLevel(customer.level);
+		            	}
+		             },
+	             { data: 'totalStaff' },
+	             { data: 'provinceName' },
+	             { data: 'cityName'},
+	             { data: 'areaName' },
+	             { data: 'mobile' },
 	             { data: 'createTime' }
 	         ],
 	       "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示  
@@ -523,6 +526,15 @@ function initDataTable(){
 	   } );
 }
 
+function renderLevel(level){
+	if(level == 1){
+		return "A(重点客户)";
+	}else if(level == 2){
+		return "B(普通客户)";
+	}else{
+		return "C(非优先级客户)";
+	}
+}
 Date.prototype.Format = function (fmt) { //author: meizz 
     var o = {
         "M+": this.getMonth() + 1, //月份 

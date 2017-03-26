@@ -76,67 +76,117 @@ font-size: 14px !important;
 			    	<table class="table my-table" id="detailTable">
 			    		
 			    		<tr>
-			    			<td class="title-td">销售机会名称:</td>
-			    			<td>${customer.customerName}</td>
-			    			<td class="title-td">销售机会所属人:</td>
-			    			<td>${customer.companyName}</td>
-			    			
-			    		</tr>
-			    		<tr>
-			    			<td class="title-td">销售金额:</td>
-			    			<td>${customer.saleMoney}</td>
-			    			<td class="title-td">销售阶段:</td>
-			    			<td>${customer.saleStage}</td>
-			    			
-			    		</tr>
-			    		<tr>
 			    			<td class="title-td">客户名称:</td>
 			    			<td>${customer.customerName}</td>
-			    			<td class="title-td">机会类型:</td>
+			    			<td class="title-td">客户所属人:</td>
+			    			<td>${customer.departmentName}</td>
+			    			
+			    		</tr>
+			    		<tr>
+			    			<td class="title-td">备注:</td>
+			    			<td colspan="3">${customer.remark}</td>
+			    			
+			    		</tr>
+			    		<tr>
+			    			<td class="title-td">客户级别:</td>
 			    			<td>
-			    			<c:choose>
-			    					<c:when test="${customer.oppotunityType == 1}">
-			    						新客户机会
+			    				
+			    				<c:choose>
+			    					<c:when test="${customer.level == 1}">
+			    						A(重点客户)
+			    					</c:when>
+			    					<c:when test="${customer.level == 2}">
+			    						B(普通用户)
 			    					</c:when>
 			    					<c:otherwise>
-			    						老客户机会
+			    						C(非优先客户)
 			    					</c:otherwise>
 			    				</c:choose>
 			    			</td>
+			    			<td class="title-td">电话号码:</td>
+			    			<td>${customer.mobile}</td>
 			    			
 			    		</tr>
 			    		<tr>
-			    			<td class="title-td">盈率:</td>
-			    			<td>
-			    				${customer.winRate}%
-			    			</td>
-			    			<td class="title-td">结单日期:</td>
-			    			<td><f:formatDate value="${customer.endOppoTime}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
-			    			
-			    		</tr>
-			    		<tr>
-			    			<td class="title-td">机会来源:</td>
+			    			<td class="title-td">行业:</td>
 			    			<td>
 			    				<c:choose>
-			    					<c:when test="${customer.oppoSource == 1}">
-			    						客户介绍
+			    					<c:when test="${customer.industry == 1}">
+			    						金融
 			    					</c:when>
-			    					<c:when test="${customer.oppoSource == 2}">
-			    						广告
+			    					<c:when test="${customer.industry == 2}">
+			    						电信
 			    					</c:when>
-			    					<c:when test="${customer.oppoSource == 3}">
-			    						研讨会
+			    					<c:when test="${customer.industry == 3}">
+			    						教育
 			    					</c:when>
-			    					<c:when test="${customer.oppoSource == 4}">
-			    						搜素引擎
+			    					<c:when test="${customer.industry == 4}">
+			    						高科技
+			    					</c:when>
+			    					<c:when test="${customer.industry == 5}">
+			    						政府
+			    					</c:when>
+			    					<c:when test="${customer.industry == 6}">
+			    						制造业
+			    					</c:when>
+			    					<c:when test="${customer.industry == 7}">
+			    						服务
+			    					</c:when>
+			    					<c:when test="${customer.industry == 8}">
+			    						能源
+			    					</c:when>
+			    					<c:when test="${customer.industry == 9}">
+			    						零售
+			    					</c:when>
+			    					<c:when test="${customer.industry == 10}">
+			    						媒体
+			    					</c:when>
+			    					<c:when test="${customer.industry == 11}">
+			    						制造业
+			    					</c:when>
+			    					<c:when test="${customer.industry == 12}">
+			    						娱乐
+			    					</c:when>
+			    					<c:when test="${customer.industry == 13}">
+			    						咨询
+			    					</c:when>
+			    					<c:when test="${customer.industry == 14}">
+			    						非盈利事业
+			    					</c:when>
+			    					<c:when test="${customer.industry == 15}">
+			    						公共事业
 			    					</c:when>
 			    					<c:otherwise>
 			    						其他
 			    					</c:otherwise>
 			    				</c:choose>
+			    				<option value="1"></option>
+          
 			    			</td>
-			    			<td class="title-td">创建人:</td>
-			    			<td>${customer.userName}</td>
+			    			<td class="title-td">总人数:</td>
+			    			<td>${customer.totalStaff}</td>
+			    			
+			    		</tr>
+			    		<tr>
+			    			<td class="title-td">省市区:</td>
+			    			<td>
+			    				${customer.provinceName}${customer.cityName}${customer.areaName}
+			    			</td>
+			    			<td class="title-td">详细地址:</td>
+			    			<td>
+			    				${customer.address}
+			    			</td>
+			    			
+			    		</tr>
+			    		<tr>
+			    			
+			    			<td class="title-td">公司网址:</td>
+			    			<td>
+			    				${customer.website}
+			    			</td>
+			    			<td class="title-td">销售额:</td>
+			    			
+			    			<td>${customer.saleMoney}</td>
 			    			
 			    		</tr>
 			    		<tr>
@@ -146,11 +196,7 @@ font-size: 14px !important;
 			    			<td><f:formatDate value="${customer.updateTime}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
 			    			
 			    		</tr>
-			    		<tr>
-			    			<td class="title-td">备注:</td>
-			    			<td colspan="3">${customer.remark}</td>
-			    			
-			    		</tr>
+			    		
 			    	</table>
 			    	
 			    	
@@ -189,6 +235,9 @@ font-size: 14px !important;
 									 
 									  <button class="layui-btn layui-btn-primary" onclick="deleteById('${customer.id}','${customer.customerName}');">
 									    <i class="layui-icon">&#xe640;</i>删除
+									  </button>
+									   <button class="layui-btn layui-btn-primary" onclick="deleteById('${customer.id}','${customer.customerName}');">
+									    <i class="layui-icon">&#xe640;</i>添加产品
 									  </button>
 									</div>
 								  </div>
