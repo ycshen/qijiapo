@@ -749,7 +749,7 @@ public class CRMApiUtils {
     public static String updateActivity(String activity) {
         String result = StringUtils.EMPTY;
         try {
-            String url = getCRMUrl() + CRMApiUrl.crm_updateProduct;
+            String url = getCRMUrl() + CRMApiUrl.crm_updateActivity;
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("activity", activity);
             Map<String, Object> maps = SHA1Utils.getSha1Map();
@@ -774,6 +774,115 @@ public class CRMApiUtils {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("secret", secret);
             jsonObject.put("id", id);
+            result = HttpUtils.postUrl(url, jsonObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public static String insertContract(String jsonStr) {
+        String result = StringUtils.EMPTY;
+        try {
+            String url = getCRMUrl() + CRMApiUrl.crm_insertContract;
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("contract", jsonStr);
+            Map<String, Object> maps = SHA1Utils.getSha1Map();
+            maps.put("contract", jsonStr);
+            String secret = SHA1Utils.SHA1(maps);
+            jsonObject.put("secret", secret);
+            result = HttpUtils.postUrl(url, jsonObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public static String getContractPage(String json) {
+        String result = StringUtils.EMPTY;
+        try {
+            String url = getCRMUrl() + CRMApiUrl.crm_getContractPage;
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("query", json);
+            Map<String, Object> maps = SHA1Utils.getSha1Map();
+            maps.put("query", json);
+            String secret = SHA1Utils.SHA1(maps);
+            jsonObject.put("secret", secret);
+            result = HttpUtils.postUrl(url, jsonObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public static String getContractById(String id) {
+        String result = StringUtils.EMPTY;
+        try {
+            String url = getCRMUrl() + CRMApiUrl.crm_deleteContractById;
+            Map<String, Object> maps = SHA1Utils.getSha1Map();
+            maps.put("id", id);
+            String secret = SHA1Utils.SHA1(maps);
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("secret", secret);
+            jsonObject.put("id", id);
+            result = HttpUtils.postUrl(url, jsonObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+
+    }
+
+    public static String deleteContractById(String id) {
+        String result = StringUtils.EMPTY;
+        try {
+            String url = getCRMUrl() + CRMApiUrl.crm_deleteContractById;
+            Map<String, Object> maps = SHA1Utils.getSha1Map();
+            maps.put("id", id);
+            String secret = SHA1Utils.SHA1(maps);
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("secret", secret);
+            jsonObject.put("id", id);
+            result = HttpUtils.postUrl(url, jsonObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+
+    }
+
+    public static String batchDeleteContract(String idList) {
+        String result = StringUtils.EMPTY;
+        try {
+            String url = getCRMUrl() + CRMApiUrl.crm_batchDeleteContract;
+            Map<String, Object> maps = SHA1Utils.getSha1Map();
+            maps.put("idList", idList);
+            String secret = SHA1Utils.SHA1(maps);
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("secret", secret);
+            jsonObject.put("idList", idList);
+            result = HttpUtils.postUrl(url, jsonObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public static String updateContract(String jsonStr) {
+        String result = StringUtils.EMPTY;
+        try {
+            String url = getCRMUrl() + CRMApiUrl.crm_updateContract;
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("contract", jsonStr);
+            Map<String, Object> maps = SHA1Utils.getSha1Map();
+            maps.put("contract", jsonStr);
+            String secret = SHA1Utils.SHA1(maps);
+            jsonObject.put("secret", secret);
             result = HttpUtils.postUrl(url, jsonObject);
         } catch (Exception e) {
             e.printStackTrace();

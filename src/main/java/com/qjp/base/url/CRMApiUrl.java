@@ -95,7 +95,7 @@ public class CRMApiUrl {
 	@Value("${crm.deleteActivityById}")
 	private String crm_deleteActivityById_url;
 	public static String crm_deleteActivityById;
-	@Value("${crm.updateProduct}")
+	@Value("${crm.updateActivity}")
 	private String crm_updateActivity_url;
 	public static String crm_updateActivity;
 
@@ -137,6 +137,27 @@ public class CRMApiUrl {
 	@Value("${crm.updateCustomer}")
 	private String crm_updateCustomer_url;
 	public static String crm_updateCustomer;
+
+	//contract
+	@Value("${crm.insertContract}")
+	private String crm_insertContract_url;
+	public static String crm_insertContract;
+	@Value("${crm.getContractPage}")
+	private String crm_getContractPage_url;
+	public static String crm_getContractPage;
+	@Value("${crm.getContractById}")
+	private String crm_getContractById_url;
+	public static String crm_getContractById;
+	@Value("${crm.batchDeleteContract}")
+	private String crm_batchDeleteContract_url;
+	public static String crm_batchDeleteContract;
+	@Value("${crm.deleteContractById}")
+	private String crm_deleteContractById_url;
+	public static String crm_deleteContractById;
+	@Value("${crm.updateProduct}")
+	private String crm_updateContract_url;
+	public static String crm_updateContract;
+
 	@PostConstruct
 	public void init() {
 		crm = this.crm_url;
@@ -189,6 +210,14 @@ public class CRMApiUrl {
 		crm_batchDeleteActivity = this.crm_batchDeleteActivity_url;
 		crm_deleteActivityById = this.crm_deleteActivityById_url;
 		crm_updateActivity = this.crm_updateActivity_url;
+
+		//contract
+		crm_insertContract = this.crm_insertContract_url;
+		crm_getContractPage = this.crm_getContractPage_url;
+		crm_getContractById = this.crm_getContractById_url;
+		crm_batchDeleteContract = this.crm_batchDeleteContract_url;
+		crm_deleteContractById = this.crm_deleteContractById_url;
+		crm_updateContract = this.crm_updateContract_url;
 	}
 	
 }

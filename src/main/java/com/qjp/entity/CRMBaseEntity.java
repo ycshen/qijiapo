@@ -6,9 +6,9 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.qjp.util.UserUtils;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * @Author shenyuchuan
@@ -28,7 +28,7 @@ public class CRMBaseEntity implements Serializable {
 	/**
 	 * 创建时间
 	 */
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") 
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date createTime;
 	/**
 	 * 更新人账号
