@@ -1,4 +1,8 @@
 function showAuthMenu(authId, authName){
+	var index = layer.load(0, {
+		  shade: [0.5,'#b8c7ce']
+		});
+	
 	$("#spanTips").html("<span style=\"color:#009688 \">" + authName + "</span>菜单权限定义");
 	$("#divMenuOper").show();
 	$("#hidAuthId").val(authId);
@@ -69,6 +73,9 @@ function submitMD(){
 	layer.confirm(authIName + "旗下的所有员工即将获得授权菜单的权限，确定要授权" + authIName + "的菜单权限吗？该操作不可逆！",{closeBtn: false,
   		skin: 'layui-layer-molv'
 	  }, function(){
+		  var index = layer.load(0, {
+			  shade: [0.5,'#b8c7ce']
+			});
 		  var treeObj = $.fn.zTree.getZTreeObj("menuTree"); 
 		    var nodes = treeObj.getCheckedNodes(true);
 		    var idStr = "";
@@ -96,6 +103,8 @@ function submitMD(){
 					  		skin: 'layui-layer-molv'
 						  });
 					}
+		    		
+		    		layer.closeAll('loading');
 		    	}
 		    });
 	})
@@ -109,7 +118,7 @@ function initMenuTree(authId) {
 		   success: function(zNodes){
 			   zTreeObj_menu = $.fn.zTree.init($("#menuTree"), setting_menu, zNodes);
 			   zTreeObj_menu.expandAll(true); 
-			   
+			  layer.closeAll('loading');
 		   }
 	   })         
 	}

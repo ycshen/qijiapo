@@ -69,7 +69,12 @@ font-size: 14px !important;
 			  <ul class="layui-tab-title">
 			    <li class="layui-this">资料</li>
 			    <li>动态</li>
-			   <li>产品</li>
+			   <li>销售机会</li>
+			   <li>销售线索</li>
+			   <li>合同</li>
+			   <li>回款</li>
+			   <li>市场活动</li>
+			   <li>相关产品</li>
 			  </ul>
 			  <div class="layui-tab-content">
 			    <div class="layui-tab-item layui-show">
@@ -220,6 +225,11 @@ font-size: 14px !important;
 			    	</table>
 			    </div>
 			    
+			    <div class="layui-tab-item">销售机会</div>
+			    <div class="layui-tab-item">销售线索</div>
+			    <div class="layui-tab-item">合同</div>
+			    <div class="layui-tab-item">回款</div>
+			    <div class="layui-tab-item">市场活动</div> 
 			    <div class="layui-tab-item">产品</div> 
 			  </div>
 			</div> 
