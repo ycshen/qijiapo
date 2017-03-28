@@ -17,13 +17,27 @@ public class LogUtils {
 	
 	/**
 	 * 记录日志
-	 * @param logType logType 0-功能日志 1-管理日志  2-crm竞争对手动态日志
+	 * @param logType logType 0-功能日志 1-管理日志  2-crm竞争对手动态日志 3-客户日志 4-合同日志 5-销售机会日志 6-销售线索日志 7-回款日志
 	 * @param log 日志内容
 	 * @param casecadeId 关联id
 	 * @param casecadeIdDesc 关联id描述
 	 */
 	public static void log(Integer logType, String log, String casecadeId, String casecadeIdDesc, UserEntity user){
-		
+		LogEntity logEntity = new LogEntity();
+		logEntity.setCompanyId(user.getCompanyId().toString());
+		Integer departmentId = user.getDepartmentId();
+		if(departmentId != null){
+			logEntity.setDepartmentId(departmentId.toString());
+		}
+		logEntity.setUserId(user.getId().toString());
+		logEntity.setUserName(user.getUserName());
+		logEntity.setLogType(logType);
+		logEntity.setLogMsg(log);
+		logEntity.setCasecadeId(casecadeId);
+		logEntity.setCasecadeIdDesc(casecadeIdDesc);
+		logEntity.setCreateUser(user.getUserName());
+		String logJson = new Gson().toJson(logEntity);
+		MyBaseApiUtils.log(logJson);
 	}
 	
 	/**

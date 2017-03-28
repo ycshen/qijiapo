@@ -46,8 +46,6 @@ margin: 0px 15px 0px 0px;
 	
 <form class="layui-form" id="myForm" onsubmit="return false;">
 <input type="hidden" id="hidProductId" name="id" value="${customer.id}"/>
-<input type="hidden" id="hidBeyondDeptId" name="departmentId" value="${customer.departmentId}"/>
-<input type="hidden" id="hidBeyondDeptName" name="departmentName" value="${customer.departmentName}"/>
 
 <div class="container content_div">
 	
@@ -56,6 +54,40 @@ margin: 0px 15px 0px 0px;
     <div class="layui-input-block">
       <input type="text" name="customerName" lay-verify="customerName" autocomplete="off" placeholder="请输入客户名称" class="layui-input" maxlength="10" value="${customer.customerName}">
     </div>
+  </div>
+  <div class="layui-form-item my-layui-form-item my-top">
+    <label class="layui-form-label">客户级别<span style="color:red">*</span></label>
+    <div class="layui-input-block">
+ 		<select name="level"  lay-search="" lay-verify="level">
+          <option value="">搜索或者选择客户级别</option>
+          <option value="1" <c:if test='${customer.level == 1}'>selected="selected"</c:if> >A(重点客户)</option>
+          <option value="2" <c:if test='${customer.level == 2}'>selected="selected"</c:if>>B(普通用户)</option>
+          <option value="3" <c:if test='${customer.level == 3}'>selected="selected"</c:if>>C(非优先客户)</option>
+          
+        </select>    </div>
+  </div>
+  <div class="layui-form-item my-layui-form-item my-top">
+    <label class="layui-form-label">电话<span style="color:red">*</span></label>
+    <div class="layui-input-block">
+      <input type="text" name="mobile" lay-verify="mobile" autocomplete="off" placeholder="请输入电话" class="layui-input"  value="${customer.mobile}">
+    </div>
+  </div>
+  <div class="layui-form-item my-layui-form-item">
+    <label class="layui-form-label">所属部门<span style="color:red">*</span></label>
+    <div class="layui-input-inline" style="margin-right: 0px;">
+    	<c:choose>
+    		<c:when test="${customer == null || customer.id == null || customer.id == '' }">
+    			<input placeholder="请选择所属部门" type="text" id="txtDepartmentName" autocomplete="off" name="departmentName"  class="layui-input" value="全公司" disabled="disabled">
+       			<input type="hidden" value="-${user.companyId}" id="hidDeptId" name="departmentId"/>   
+    		</c:when>
+    		<c:otherwise>
+    			<input placeholder="请选择所属部门" type="text" id="txtDepartmentName" autocomplete="off" name="departmentName"  class="layui-input" value="${customer.departmentName}" disabled="disabled">
+       			<input type="hidden" value="${customer.departmentId}" id="hidDeptId" name="departmentId"/>   
+    		</c:otherwise>
+    	</c:choose>
+    	
+    </div>
+    <button class="layui-btn  layui-btn-primary" onclick="selectDepartment();"><i class="layui-icon">&#xe61f;</i></button>
   </div>
   <div class="layui-form-item my-layui-form-item">
     <label class="layui-form-label">省市区</label>
@@ -100,54 +132,21 @@ margin: 0px 15px 0px 0px;
     </div>
   </div>
   <div class="layui-form-item my-layui-form-item my-top">
-    <label class="layui-form-label">详细地址<span style="color:red">*</span></label>
+    <label class="layui-form-label">详细地址</label>
     <div class="layui-input-block">
       <input type="text" name="address" lay-verify="address" autocomplete="off" placeholder="请输入详细地址" class="layui-input"  value="${customer.address}">
     </div>
   </div>
-  <div class="layui-form-item my-layui-form-item my-top">
-    <label class="layui-form-label">电话<span style="color:red">*</span></label>
-    <div class="layui-input-block">
-      <input type="text" name="mobile" lay-verify="mobile" autocomplete="off" placeholder="请输入电话" class="layui-input"  value="${customer.mobile}">
-    </div>
-  </div>
-  <div class="layui-form-item my-layui-form-item my-top">
-    <label class="layui-form-label">客户级别<span style="color:red">*</span></label>
-    <div class="layui-input-block">
- 		<select name="level"  lay-search="">
-          <option value="">搜索或者选择客户级别</option>
-          <option value="1">A(重点客户)</option>
-          <option value="2">B(普通用户)</option>
-          <option value="3">C(非优先客户)</option>
-          
-        </select>    </div>
-  </div>
+  
+  
    <div class="layui-form-item my-layui-form-item layui-form-text">
     <label class="layui-form-label">备注</label>
     <div class="layui-input-block">
-      <textarea placeholder="请输入备注" class="layui-textarea" name="remark"> ${customer.remark} </textarea>
+      <textarea placeholder="请输入备注" class="layui-textarea" name="remark">${customer.remark}</textarea>
     </div>
   </div>
-  <div class="layui-form-item my-layui-form-item">
-    <label class="layui-form-label">所属部门<span style="color:red">*</span></label>
-    <div class="layui-input-inline" style="margin-right: 0px;">
-    	<c:choose>
-    		<c:when test="${customer == null || customer.id == null || customer.id == '' }">
-    			<input placeholder="请选择所属部门" type="text" id="txtDepartmentName" autocomplete="off" name="departmentName"  class="layui-input" value="全公司" disabled="disabled">
-       			<input type="hidden" value="-${user.companyId}" id="hidDeptId"/>   
-    		</c:when>
-    		<c:otherwise>
-    			<input placeholder="请选择所属部门" type="text" id="txtDepartmentName" autocomplete="off" name="departmentName"  class="layui-input" value="${customer.departmentName}" disabled="disabled">
-       			<input type="hidden" value="${customer.departmentId}" id="hidDeptId"/>   
-    		</c:otherwise>
-    	</c:choose>
-    	
-    </div>
-    <button class="layui-btn  layui-btn-primary" onclick="selectDepartment();"><i class="layui-icon">&#xe61f;</i></button>
-  </div>
- 
-  <div id="divViewer">
-  	 <div class="layui-form-item my-layui-form-item">
+  
+ 	<div class="layui-form-item my-layui-form-item">
 	    <label class="layui-form-label">上级客户</label>
 	    <div class="layui-input-inline" style="margin-right: 0px;">
 	    	<input placeholder="请输入或者选择上级客户" type="text" id="txtParentCustomerName" autocomplete="off"   class="layui-input" value="${customer.parentCustomerId}">
@@ -155,22 +154,22 @@ margin: 0px 15px 0px 0px;
 	    </div>
 	    <button class="layui-btn  layui-btn-primary" onclick="selectDepartment();"><i class="layui-icon">&#xe61f;</i></button>
 	  </div>
+  <div id="divViewer">
   	<div class="layui-form-item my-layui-form-item" style="margin-top:  20px;">
-    <label class="layui-form-label"></label>
-    <div class="layui-input-block">
-      <a href="#" onclick="addMoreInfo();" style="color:#009688">
-      	
-      	<c:choose>
-      		<c:when test="${customer != null && customer.id != '' }">
-      		编辑更多信息
-      		</c:when>
-      		<c:otherwise>
-      		新增更多信息
-      		</c:otherwise>
-      	</c:choose>
-      </a>
-    </div>
-  </div>
+    	<label class="layui-form-label"></label>
+    	<div class="layui-input-block">
+      		<a href="#" onclick="addMoreInfo();" style="color:#009688">
+	      		<c:choose>
+		      		<c:when test="${customer != null && customer.id != '' }">
+		      		编辑更多信息
+		      		</c:when>
+		      		<c:otherwise>
+		      		新增更多信息
+		      		</c:otherwise>
+		      	</c:choose>
+      		</a>
+    	</div>
+ 	 </div>
   </div>
   <div id="divOther" style="display: none;">
    <div class="layui-form-item my-layui-form-item layui-form-text">
@@ -178,22 +177,22 @@ margin: 0px 15px 0px 0px;
     <div class="layui-input-block">
       <select name="industry"  lay-search="">
           <option value="">搜索或者选择行业</option>
-          <option value="1">金融</option>
-          <option value="2">电信</option>
-          <option value="3">教育</option>
-          <option value="4">高科技</option>
-          <option value="5">政府</option>
-          <option value="6">制造业</option>
-          <option value="7">服务</option>
-          <option value="8">能源</option>
-          <option value="9">零售</option>
-          <option value="10">媒体</option>
-          <option value="11">制造业</option>
-          <option value="12">娱乐</option>
-          <option value="13">咨询</option>
-          <option value="14">非盈利事业</option>
-          <option value="15">公共事业</option>
-          <option value="16">其他</option>
+          <option value="1" <c:if test='${customer.level == 1}'>selected="selected"</c:if>>金融</option>
+          <option value="2" <c:if test='${customer.level == 2}'>selected="selected"</c:if>>电信</option>
+          <option value="3" <c:if test='${customer.level == 3}'>selected="selected"</c:if>>教育</option>
+          <option value="4" <c:if test='${customer.level == 4}'>selected="selected"</c:if>>高科技</option>
+          <option value="5" <c:if test='${customer.level == 5}'>selected="selected"</c:if>>政府</option>
+          <option value="6" <c:if test='${customer.level == 6}'>selected="selected"</c:if>>制造业</option>
+          <option value="7" <c:if test='${customer.level == 7}'>selected="selected"</c:if>>服务</option>
+          <option value="8" <c:if test='${customer.level == 8}'>selected="selected"</c:if>>能源</option>
+          <option value="9" <c:if test='${customer.level == 9}'>selected="selected"</c:if>>零售</option>
+          <option value="10" <c:if test='${customer.level == 10}'>selected="selected"</c:if>>媒体</option>
+          <option value="11" <c:if test='${customer.level == 11}'>selected="selected"</c:if>>制造业</option>
+          <option value="12" <c:if test='${customer.level == 12}'>selected="selected"</c:if>>娱乐</option>
+          <option value="13" <c:if test='${customer.level == 13}'>selected="selected"</c:if>>咨询</option>
+          <option value="14" <c:if test='${customer.level == 14}'>selected="selected"</c:if>>非盈利事业</option>
+          <option value="15" <c:if test='${customer.level == 15}'>selected="selected"</c:if>>公共事业</option>
+          <option value="16" <c:if test='${customer.level == 16}'>selected="selected"</c:if>>其他</option>
         </select>
     </div>
   </div>
@@ -265,7 +264,16 @@ layui.use(['form', 'layedit', 'laydate'], function(){
 	          return '客户名称的长度不能大于00个字符';
 	       }
 	    },
-	  
+	  level: function(value){
+				if(value == null || value == '' || value == undefined){
+					return '请选择客户级别';
+				}
+			},
+	  mobile: function(value){
+		  if(value == null || value == '' || value == undefined){
+				return '请输入电话';
+			}
+		}
   });
   
   

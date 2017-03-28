@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.qjp.base.ResponseStatus;
 import com.qjp.base.RoleEnum;
 import com.qjp.entity.CustomerEntity;
+import com.qjp.entity.DepartmentEntity;
 import com.qjp.entity.LogEntity;
 import com.qjp.entity.UserEntity;
 import com.qjp.service.CustomerService;
@@ -71,6 +72,20 @@ public class CustomerController {
 		CustomerEntity customer = null;
 		if(StringUtils.isNotBlank(id)){
 			customer = customerService.getCustomerById(id);
+			if(customer != null){
+				String departmentId = customer.getDepartmentId();
+				if(StringUtils.isNotBlank(departmentId)){
+					if(departmentId.contains("-")){
+						customer.setDepartmentName("全公司");
+					}else{
+						DepartmentEntity department = departmentService.getDepartmentById(Integer.parseInt(departmentId));
+						if(department != null){
+							customer.setDepartmentName(department.getDepartmentName());
+						}
+					}
+				}
+				
+			}
 		}
 		
 		mav.addObject("customer", customer);
@@ -84,11 +99,24 @@ public class CustomerController {
 		UserEntity user = UserUtils.getLoginUser(request);
 		mav.addObject("user", user);
 		CustomerEntity customer = customerService.getCustomerById(id);
+		if(customer != null){
+			String departmentId = customer.getDepartmentId();
+			if(StringUtils.isNotBlank(departmentId)){
+				if(departmentId.contains("-")){
+					customer.setDepartmentName("全公司");
+				}else{
+					DepartmentEntity department = departmentService.getDepartmentById(Integer.parseInt(departmentId));
+					if(department != null){
+						customer.setDepartmentName(department.getDepartmentName());
+					}
+				}
+			}
+			
+		}
 		mav.addObject("customer", customer);
 		LogQuery logQuery = new LogQuery();
 		logQuery.setCasecadeId(id);
-		logQuery.setLogType("2");
-		logQuery.setSize(30);
+		logQuery.setLogType("3");
 		logQuery.setCompanyId(user.getCompanyId().toString());
 		logQuery = logService.getLogPage(logQuery);
 		List<LogEntity> logList = logQuery.getItems();
@@ -104,6 +132,7 @@ public class CustomerController {
 		if(StringUtils.isNotBlank(id)){
 			customerService.deleteCustomerById(id);
 			UserEntity user = UserUtils.getLoginUser(request);
+			LogUtils.log(3, "删除了客户", id, "CRM-客户ID", user);
 			result = ResponseStatus.UPDATE_SUCCESS;
 		}
 		
@@ -170,8 +199,10 @@ public class CustomerController {
 		UserEntity user = UserUtils.getLoginUser(request);
 		if(id == null){
 			String returnId = customerService.insertCustomer(customer);
+			LogUtils.log(3, "添加了新客户", returnId, "CRM-客户ID", user);
 		}else{
 			customerService.updateCustomer(customer);
+			LogUtils.log(3, "更新了新客户", customer.getId().toString(), "CRM-客户ID", user);
 		}
 
 		return mav;

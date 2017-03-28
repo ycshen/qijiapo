@@ -12,7 +12,6 @@ function returnInfo(id, name){
 	$("#txtDepartmentName").val(name);
 	$("#txtDepartmentName").attr("disabled","disabled");//再改成disabled  
 	$("#hidDeptId").val(id);
-	$("#hidDeptId").val(name);
 }
 
 function isBlank(args){
