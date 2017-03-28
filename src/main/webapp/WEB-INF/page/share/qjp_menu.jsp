@@ -65,22 +65,7 @@
 	        	 
 	        </c:forEach>
         </c:if>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-dashboard"></i> <span>CRM</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="${ctx}/inner/competitor/list"><i class="fa fa-circle-o"></i>合同</a></li>
-            <li><a href="${ctx}/inner/competitor/list"><i class="fa fa-circle-o"></i>市场活动</a></li>
-            <li><a href="${ctx}/inner/competitor/list"><i class="fa fa-circle-o"></i>销售线索</a></li>
-            <li><a href="${ctx}/inner/competitor/list"><i class="fa fa-circle-o"></i>目标</a></li>
-            <li><a href="${ctx}/inner/competitor/list"><i class="fa fa-circle-o"></i>回款</a></li>
-            <li><a href="${ctx}/inner/competitor/list"><i class="fa fa-circle-o"></i>活动记录</a></li>
-          </ul>
-        </li>
+
         <li class="treeview">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>CRM统计分析</span>
