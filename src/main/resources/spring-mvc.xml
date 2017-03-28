@@ -48,6 +48,10 @@
 	<mvc:view-controller path="/" view-name="redirect:/login"/> 
 	<mvc:interceptors>
 		<mvc:interceptor>
+			<mvc:mapping path="/inner/admin/**"/>
+			<bean id="adminInterceptor" class="com.qjp.interceptors.AdminInterceptor"></bean>
+		</mvc:interceptor>
+		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
 			<mvc:exclude-mapping path="/"/>  
 			<mvc:exclude-mapping path="/login"/>
