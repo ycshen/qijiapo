@@ -69,7 +69,7 @@ margin: 0px 15px 0px 0px;
     	<input placeholder="请选择客户名称" type="text" id="txtCustomerName" autocomplete="off" name="customerName"  class="layui-input" value="${salesOpportunity.customerName}" disabled="disabled">
            
     </div>
-    <button class="layui-btn  layui-btn-primary" onclick="selectDepartment();"><i class="layui-icon">&#xe61f;</i></button>
+    <button class="layui-btn  layui-btn-primary" onclick="selectCustomer();"><i class="layui-icon">&#xe61f;</i></button>
   </div>
  <div class="layui-form-item my-layui-form-item my-top">
     <label class="layui-form-label">销售价格（元）<span style="color:red">*</span></label>

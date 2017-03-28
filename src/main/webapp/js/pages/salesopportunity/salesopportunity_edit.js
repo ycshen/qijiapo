@@ -24,4 +24,15 @@ function isBlank(args){
 	return result;
 }
 
-
+function selectCustomer(){
+	var url = ctx + "/inner/customer/sampleList";
+	layer.open({
+		type: 2,
+		title : false,
+		shadeClose: false,
+		closeBtn: 0,
+		shade: 0.8,
+		area: ['830px', '400px'],
+		content: url
+	});
+}

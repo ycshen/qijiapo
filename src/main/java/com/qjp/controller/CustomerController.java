@@ -208,4 +208,11 @@ public class CustomerController {
 		return mav;
 	}
 	
+	@RequestMapping(value = "/sampleList", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+	public ModelAndView sampleList(@ModelAttribute CustomerQuery customerQuery, HttpServletRequest request){
+		ModelAndView mav = new ModelAndView("/customer/customer_sample_list");
+		mav.addObject("customerQuery", customerQuery);
+		return mav;
+	}
+	
 }

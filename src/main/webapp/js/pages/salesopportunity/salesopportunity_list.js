@@ -3,9 +3,9 @@ function addSalesOpportunity(){
 	layer.open({
 		type: 2,
 		title: '新增销售机会',
-		shadeClose: true,
+		shadeClose: false,
 		shade: 0.8,
-		area: ['800px', '400px'],
+		area: ['830px', '450px'],
 		content: url
 	});
 }
@@ -538,3 +538,4 @@ Date.prototype.Format = function (fmt) { //author: meizz
     if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
     return fmt;
 }
+
