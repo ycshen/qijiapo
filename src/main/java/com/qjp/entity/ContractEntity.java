@@ -50,11 +50,9 @@ public class ContractEntity extends CRMBaseEntity {
     public void setContractType(Integer contractType) {
         this.contractType = contractType;
     }
-
     public Date getContractStartTime() {
         return contractStartTime;
     }
-
     public void setContractStartTime(Date contractStartTime) {
         this.contractStartTime = contractStartTime;
     }

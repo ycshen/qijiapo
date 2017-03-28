@@ -7,6 +7,7 @@ import com.qjp.entity.ContractEntity;
 import com.qjp.entity.UserEntity;
 import com.qjp.service.*;
 import com.qjp.util.JsonUtils;
+import com.qjp.util.LogUtils;
 import com.qjp.util.StringUtils;
 import com.qjp.util.UserUtils;
 import com.qjp.util.query.LogQuery;
@@ -103,6 +104,7 @@ public class ContractController {
         if(StringUtils.isNotBlank(id)){
             contractService.deleteContractById(id);
             UserEntity user = UserUtils.getLoginUser(request);
+            LogUtils.logCRMContract("删除了合同(" + name + ")", id, user);
             result = ResponseStatus.UPDATE_SUCCESS;
         }
 
@@ -138,7 +140,9 @@ public class ContractController {
         String transferUserName = transferToUser.getUserName();
         oldContract.setUserName(transferUserName);
         oldContract.setUpdateTime(new Date());
-        oldContract.setUpdateUser(loginUser.getUserName());	}
+        oldContract.setUpdateUser(loginUser.getUserName());
+        LogUtils.logCRMContract("删除了合同(" + oldContract.getContractName() + ")到" + transferUserName, contractId, loginUser);
+    }
 
     @RequestMapping(value = "/batchDeleteById", method = RequestMethod.GET)
     @ResponseBody
@@ -148,7 +152,10 @@ public class ContractController {
             String[] idArr = ids.split("\\,");
             List<String> idList =  Arrays.asList(idArr);
             contractService.batchDeleteContract(idList);
-
+            UserEntity user = UserUtils.getLoginUser(request);
+            for (String id : idList) {
+                LogUtils.logCRMProduct("删除了合同", id, user);
+            }
             result = ResponseStatus.UPDATE_SUCCESS;
         }
 
@@ -169,8 +176,10 @@ public class ContractController {
         UserEntity user = UserUtils.getLoginUser(request);
         if(id == null){
             String returnId = contractService.insertContract(contract);
+            LogUtils.logCRMContract("添加了产品(" + contract.getContractName() + ")", returnId, user);
         }else{
             contractService.updateContract(contract);
+            LogUtils.logCRMContract("修改了产品(" + contract.getContractName() + ")", id.toString(), user);
         }
 
         return mav;

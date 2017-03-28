@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +17,9 @@
     <script type="text/javascript" src="${ctx}/js/pages/contract/contract_edit.js"></script>
     <script type="text/javascript">
         var ctx = "${pageContext.request.contextPath}";
+    </script>
+    <script>
+        var sdf = new SimpleDateFormat("yyyy-MM-dd");
     </script>
     <style type="text/css">
         .my-layui-form-item {
@@ -82,16 +86,18 @@
         <div class="layui-form-item my-layui-form-item my-top">
             <label class="layui-form-label">总金额<span style="color:red">*</span></label>
             <div class="layui-input-block">
-                <input type="text" name="totalPrice" lay-verify="contractName" autocomplete="off"
+                <input type="text" name="totalPrice"  autocomplete="off"
                        placeholder="请输入总金额"
-                       class="layui-input" maxlength="10" value="${contract.contractName}">
+                       class="layui-input" maxlength="10" value="${contract.totalPrice}">
             </div>
         </div>
         <div class="layui-form-item my-layui-form-item my-top">
             <label class="layui-form-label">开始日期<span style="color:red">*</span></label>
             <div class="layui-input-block">
-                <input type="text" name="contractStartTime" id="txtStartTime" lay-verify="memoStartTime"
+                <input type="text" name="contractStartTime" id="contractStartTime" lay-verify="memoStartTime"
                        placeholder="请选择合同开始日期" autocomplete="off" class="layui-input"
+                       dataformatas="YYYY-MM-DD"
+                       value=""
                        onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD'})">
             </div>
         </div>
@@ -100,6 +106,7 @@
             <div class="layui-input-block">
                 <input type="text" name="contractEndTime" id="txtEndTime" lay-verify="memoStartTime"
                        placeholder="请选择合同结束日期" autocomplete="off" class="layui-input"
+                       value="${contract.contractEndTime}"
                        onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD'})">
             </div>
         </div>
@@ -144,7 +151,7 @@
             <div class="layui-form-item my-layui-form-item layui-form-text">
                 <label class="layui-form-label">合同类型</label>
                 <div class="layui-input-block">
-                    <select name="contractType" lay-search="">
+                    <select name="contractType" lay-search="" >
                         <option value="">请选择合同类型</option>
                         <option value="1">产品销售</option>
                         <option value="2">服务</option>
@@ -183,21 +190,21 @@
                 <label class="layui-form-label">合同正文</label>
                 <div class="layui-input-block">
                     <textarea placeholder="请输入活动说明" class="layui-textarea"
-                              name="contractBody"> ${contract.remark} </textarea>
+                              name="contractBody"> ${contract.contractBody} </textarea>
                 </div>
             </div>
             <div class="layui-form-item my-layui-form-item my-top">
                 <label class="layui-form-label">合同编号</label>
                 <div class="layui-input-block">
-                    <input type="num" name="contractNum" autocomplete="off" value="${contract.postcode}"
+                    <input type="num" name="contractNum" autocomplete="off" value="${contract.contractNum}"
                            placeholder="请输入合同编号"
-                           class="layui-input" aria-valuemax="99999999999" autocomplete="off">
+                           class="layui-input"  autocomplete="off">
                 </div>
             </div>
             <div class="layui-form-item my-layui-form-item my-top">
                 <label class="layui-form-label">客户方签约人</label>
                 <div class="layui-input-block">
-                    <input type="text" name="customerSigner" autocomplete="off" value="${contract.phoneNum}"
+                    <input type="text" name="customerSigner" autocomplete="off" value="${contract.customerSigner}"
                            placeholder="请输入客户方签约人"
                            class="layui-input" maxlength="11">
                 </div>
@@ -205,7 +212,7 @@
             <div class="layui-form-item my-layui-form-item my-top">
                 <label class="layui-form-label">我方签约人</label>
                 <div class="layui-input-block">
-                    <input type="text" name="signerId" autocomplete="off" value="${contract.mobilePhoneNum}"
+                    <input type="text" name="signerId" autocomplete="off" value="${contract.signerId}"
                            placeholder="请输入我方签约人"
                            class="layui-input" maxlength="11">
                 </div>
@@ -215,6 +222,7 @@
                 <div class="layui-input-block">
                     <input type="text" name="signTime" id="txtSignTime" lay-verify=""
                            placeholder="请选择合同签约日期" autocomplete="off" class="layui-input"
+                           value="${contract.signTime}"
                            onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD'})">
                 </div>
             </div>

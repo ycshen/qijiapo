@@ -821,7 +821,7 @@ public class CRMApiUtils {
     public static String getContractById(String id) {
         String result = StringUtils.EMPTY;
         try {
-            String url = getCRMUrl() + CRMApiUrl.crm_deleteContractById;
+            String url = getCRMUrl() + CRMApiUrl.crm_getContractById;
             Map<String, Object> maps = SHA1Utils.getSha1Map();
             maps.put("id", id);
             String secret = SHA1Utils.SHA1(maps);

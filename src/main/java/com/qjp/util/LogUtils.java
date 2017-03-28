@@ -53,7 +53,7 @@ public class LogUtils {
 	/**
 	 * 记录CRM联系人动态日志
 	 * @param logMsg 日志内容
-	 * @param competitorId 竞争对手id
+	 * @param attnId 竞争对手id
 	 * @param user 登录人信息
 	 */
 	public static void logCRMAttn(String logMsg, String attnId, UserEntity user){
@@ -77,7 +77,7 @@ public class LogUtils {
 	/**
 	 * 记录CRM产品动态日志
 	 * @param logMsg 日志内容
-	 * @param competitorId 产品id
+	 * @param productId 产品id
 	 * @param user 登录人信息
 	 */
 	public static void logCRMProduct(String logMsg, String productId, UserEntity user){
@@ -124,7 +124,7 @@ public class LogUtils {
 	
 	/**
 	 * 记录管理员操作日志
-	 * @param log 日志内容
+	 * @param logMsg 日志内容
 	 */
 	public static void logAdmin(String logMsg, UserEntity user){
 		LogEntity log = new LogEntity();
@@ -137,6 +137,25 @@ public class LogUtils {
 		log.setUserName(user.getUserName());
 		log.setLogType(1);
 		log.setLogMsg(logMsg);
+		String logJson = new Gson().toJson(log);
+		MyBaseApiUtils.log(logJson);
+	}
+
+	public static void logCRMContract(String s, String returnId, UserEntity user) {
+
+		LogEntity log = new LogEntity();
+		log.setCompanyId(user.getCompanyId().toString());
+		Integer departmentId = user.getDepartmentId();
+		if(departmentId != null){
+			log.setDepartmentId(departmentId.toString());
+		}
+		log.setUserId(user.getId().toString());
+		log.setUserName(user.getUserName());
+		log.setLogType(2);
+		log.setLogMsg(s);
+		log.setCasecadeId(returnId);
+		log.setCasecadeIdDesc("CRM-产品ID");
+		log.setCreateUser(user.getUserName());
 		String logJson = new Gson().toJson(log);
 		MyBaseApiUtils.log(logJson);
 	}

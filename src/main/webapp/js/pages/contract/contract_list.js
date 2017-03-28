@@ -382,19 +382,13 @@ function deleteById(id, name) {
 
 function queryContract() {
     $("#myDataTable").dataTable().fnDestroy();
-    var contractName = $("#txtContractName").val();
-    // var provinceId = $("select[name='provinceId']").find("option:selected").val();
-    // var cityId = $("select[name='cityId']").find("option:selected").val();
-    // var areaId = $("select[name='areaId']").find("option:selected").val();
+    var contractName = $("#contractName").val();
     $("#myDataTable").dataTable({
         ajax: {
             type: "GET",
             url: ctx + '/inner/contract/listAjax',
             // 传入已封装的参数
             data: function (data) {
-                // data.provinceId = provinceId;
-                // data.cityId = cityId;
-                // data.areaId = areaId;
                 data.contractName = contractName;
                 data.page = data.start / data.length + 1;
                 data.size = data.length;
@@ -443,14 +437,29 @@ function queryContract() {
                 }
             },
             {data: 'userName'},
-            {data: 'contractType'},
-            {data: 'contractState'},
+            {data: 'contractType',
+                render: function (data, type, contract) {
+                    return getContractType(contract.contractType)
+                }
+            },
+            {data: 'contractState',
+                render: function (data, type, contract) {
+                    return getContractState(contract.contractState)
+                }
+            },
             {data: 'contractStartTime'},
             {data: 'contractEndTime'},
-            {data: 'invitationPopulation'},
-            {data: 'realNum'},
-            {data: 'createTime'},
-            {data: 'businessType'}
+            {data: 'totalPrice'},
+            {data: 'paymentMethod',
+                render: function (data, type, contract) {
+                    return getPaymentMethod(contract.contractState)
+                }},
+            {data: 'contractNum'},
+            {data: 'businessType',
+                render: function (data, type, contract) {
+                    return getContractBusinessType(contract.businessType)
+                }
+            }
         ],
         "bProcessing": true, //DataTables载入数据时，是否显示‘进度’提示
         "bPaginate": true,
@@ -536,9 +545,12 @@ function initDataTable() {
             },
             {data: 'contractStartTime'},
             {data: 'contractEndTime'},
-            {data: 'invitationPopulation'},
-            {data: 'realNum'},
-            {data: 'createTime'},
+            {data: 'totalPrice'},
+            {data: 'paymentMethod',
+                render: function (data, type, contract) {
+                    return getPaymentMethod(contract.contractState)
+            }},
+            {data: 'contractNum'},
             {data: 'businessType',
                 render: function (data, type, contract) {
                     return getContractBusinessType(contract.businessType)
@@ -560,22 +572,31 @@ function initDataTable() {
 
     });
 }
+function getPaymentMethod(contractType){
+    var typeStr = "";
+    if(contractType == 1){
+        typeStr = "支票";
+    }else if(contractType == 2){
+        typeStr = "现金";
+    }else if(contractType == 3){
+        typeStr = "银行转账";
+    }else if(contractType == 4){
+        typeStr = "其它";
+    }
 
+    return typeStr;
+}
 function getContractType(contractType){
     var typeStr = "";
     if(contractType == 1){
-        typeStr = "广告";
+        typeStr = "产品销售";
     }else if(contractType == 2){
-        typeStr = "研讨会/会议";
+        typeStr = "服务";
     }else if(contractType == 3){
-        typeStr = "电子邮件";
+        typeStr = "业务合作";
     }else if(contractType == 4){
-        typeStr = "电话营销";
+        typeStr = "代理分销";
     }else if(contractType == 5){
-        typeStr = "公共关系";
-    }else if(contractType == 6){
-        typeStr = "合作伙伴";
-    }else if(contractType == 7){
         typeStr = "其它";
     }
 
@@ -585,19 +606,17 @@ function getContractType(contractType){
 function getContractState(contractState){
     var stateStr = "";
     if(contractState == 1){
-        stateStr = "已计划";
+        stateStr = "执行中";
     }else if(contractState == 2){
-        stateStr = "进行中";
+        stateStr = "结束";
     }else if(contractState == 3){
-        stateStr = "已结束";
-    }else if(contractState == 4){
-        stateStr = "中止";
+        stateStr = "意外终止";
     }
 
     return stateStr;
 }
 function getContractBusinessType(businessType){
-    var businessTypeStr = "";
+    var businessTypeStr = "默认业务类型";
     if(businessType == 0){
         businessTypeStr = "默认业务类型";
     }

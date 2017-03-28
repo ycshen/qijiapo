@@ -98,7 +98,7 @@
 
                             </tr> -->
                             <tr>
-                                <td class="title-td">合同名称:</td>
+                                <td class="title-td">主题:</td>
                                 <td>${contract.contractName}</td>
                                 <td class="title-td">合同所属人:</td>
                                 <td>${contract.userName}</td>
@@ -114,79 +114,86 @@
                             </tr>
                             <tr>
                                 <td class="title-td">开始日期:</td>
-                                <td><f:formatDate value="${contract.contractStartTime}" pattern="yyyy-MM-dd" /></td>
+                                <td><f:formatDate value="${contract.contractStartTime}" pattern="yyyy-MM-dd"/></td>
                                 <td class="title-td">结束日期:</td>
-                                <td><f:formatDate value="${contract.contractEndTime}" pattern="yyyy-MM-dd" /></td>
+                                <td><f:formatDate value="${contract.contractEndTime}" pattern="yyyy-MM-dd"/></td>
                             </tr>
                             <tr>
-                                <td class="title-td">活动类型:</td>
+                                <td class="title-td">合同类型:</td>
                                 <td>
                                     <c:choose>
                                         <c:when test="${contract.contractType == 1}">
-                                            广告
+                                            产品销售
                                         </c:when>
                                         <c:when test="${contract.contractType == 2}">
-                                            研讨会/会议
+                                            服务
                                         </c:when>
                                         <c:when test="${contract.contractType == 3}">
-                                            电子邮件
+                                            业务合作
                                         </c:when>
                                         <c:when test="${contract.contractType == 4}">
-                                            电话营销
-                                        </c:when>
-                                        <c:when test="${contract.contractType == 5}">
-                                            公共关系
-                                        </c:when>
-                                        <c:when test="${contract.contractType == 6}">
-                                            合作伙伴
+                                            代理分销
                                         </c:when>
                                         <c:otherwise>
                                             其他
                                         </c:otherwise>
                                     </c:choose>
                                 </td>
-                                <td class="title-td">活动状态:</td>
+                                <td class="title-td">合同状态:</td>
                                 <td>
                                     <c:choose>
                                         <c:when test="${contract.contractType == 1}">
-                                            已计划
+                                            执行中
                                         </c:when>
                                         <c:when test="${contract.contractType == 2}">
-                                            进行中
+                                            结束
                                         </c:when>
                                         <c:when test="${contract.contractType == 3}">
-                                            已结束
+                                            意外终止
                                         </c:when>
-                                        <c:when test="${contract.contractType == 4}">
-                                            中止
-                                        </c:when>
+
                                     </c:choose>
                                 </td>
 
                             </tr>
                             <tr>
-                                <td class="title-td">活动成本:</td>
-                                <td>${contract.contractCost}</td>
-                                <td class="title-td">实际成本:</td>
-                                <td>${contract.realContractCost}</td>
+                                <td class="title-td">付款方式:</td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${contract.paymentMethod == 1}">
+                                            支票
+                                        </c:when>
+                                        <c:when test="${contract.paymentMethod == 2}">
+                                            现金
+                                        </c:when>
+                                        <c:when test="${contract.paymentMethod == 3}">
+                                            银行转账
+                                        </c:when>
+                                        <c:otherwise>
+                                            其他
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
+                                <td class="title-td">总金额:</td>
+                                <td>${contract.totalPrice}</td>
                             </tr>
                             <tr>
-                                <td class="title-td">预期收入:</td>
-                                <td>${contract.expectedIncome}</td>
-                                <td class="title-td">邀请人数:</td>
-                                <td>${contract.invitationPopulation}</td>
+
+                                <td class="title-td">客户方签约人:</td>
+                                <td>${contract.customerSigner}</td>
+                                <td class="title-td">我方签约人:</td>
+                                <td>${contract.signerId}</td>
+                            </tr>
+                            <tr>
+                                <td class="title-td">签约日期:</td>
+                                <td><f:formatDate value="${contract.signTime}" pattern="yyyy-MM-dd" /></td>
+                                <td class="title-td">合同编号:</td>
+                                <td>${contract.contractNum}</td>
 
                             </tr>
                             <tr>
-                                <td class="title-td">预期响应:</td>
-                                <td>${contract.expectedNum}</td>
-                                <td class="title-td">实际人数:</td>
-                                <td>${contract.realNum}"</td>
-
-                            </tr>
-                            <tr>
-                                <td class="title-td">活动说明:</td>
-                                <td colspan="3">${contract.contractNote}</td>
+                                <td class="title-td">合同正文:</td>
+                                <td colspan="3">${contract.contractBody}</td>
 
                             </tr>
                             <tr>

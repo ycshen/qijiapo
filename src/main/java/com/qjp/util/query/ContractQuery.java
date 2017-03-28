@@ -9,6 +9,15 @@ import com.qjp.model.pageutil.Page;
 public class ContractQuery extends Page<ContractEntity> {
 
     private Long id;
+    private String contractName;
+
+    public String getContractName() {
+        return contractName;
+    }
+
+    public void setContractName(String contractName) {
+        this.contractName = contractName;
+    }
 
     public Long getId() {
         return id;

@@ -77,12 +77,12 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                市场活动
+                合同
                 <small></small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> 企家婆</a></li>
-                <li class="active">市场活动</li>
+                <li class="active">合同</li>
             </ol>
         </section>
 
@@ -96,11 +96,11 @@
                                 <table class="table mytable">
                                     <tr>
                                         <td>
-                                            <label class="layui-form-label my-label">市场活动名称</label>
+                                            <label class="layui-form-label my-label">合同名称</label>
 
                                         </td>
-                                        <td><input type="text" class="layui-input my-input" id="txtContractName"
-                                                   placeholder="市场活动名称"></td>
+                                        <td><input type="text" class="layui-input my-input" id="contractName"
+                                                   placeholder="合同名称"></td>
                                         <%--<td><label class="layui-form-label my-label">省市区</label></td>--%>
                                         <%--<td colspan="3">--%>
                                             <%--<div class="layui-form-item">--%>
@@ -132,7 +132,7 @@
 
                                                 </button>
                                                 <button class="layui-btn layui-btn-primary" onclick="addContract();">
-                                                    <i class="layui-icon">&#xe61f;</i>新增市场活动
+                                                    <i class="layui-icon">&#xe61f;</i>新增合同
                                                 </button>
                                                 <button class="layui-btn layui-btn-primary" onclick="batchDelete()">
                                                     <i class="layui-icon">&#xe640;</i>批量删除
@@ -156,21 +156,19 @@
                                 <tr>
                                     <th><input type="checkbox" name="contract-list-checkable"></th>
                                     <th>操作</th>
-                                    <th>活动名称</th>
-                                    <th>市场活动所有人</th>
-                                    <th>活动类型</th>
-                                    <th>活动状态</th>
-                                    <th>开始日期</th>
-                                    <th>结束日期</th>
-                                    <th>邀请人数</th>
-                                    <th>实际人数</th>
-                                    <th>创建日期</th>
+                                    <th>主题</th>
+                                    <th>合同所有人</th>
+                                    <th>合同类型</th>
+                                    <th>合同状态</th>
+                                    <th>开始时间</th>
+                                    <th>结束时间</th>
+                                    <th>总金额</th>
+                                    <th>付款方式</th>
+                                    <th>合同编号</th>
                                     <th>业务类型</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-
-
                                 </tfoot>
                             </table>
                         </div>
