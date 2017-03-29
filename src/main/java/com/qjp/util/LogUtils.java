@@ -173,5 +173,24 @@ public class LogUtils {
 		String logJson = new Gson().toJson(log);
 		MyBaseApiUtils.log(logJson);
 	}
+
+    public static void logCRMSalesLeads(String msg, String id, UserEntity user) {
+
+		LogEntity log = new LogEntity();
+		log.setCompanyId(user.getCompanyId().toString());
+		Integer departmentId = user.getDepartmentId();
+		if(departmentId != null){
+			log.setDepartmentId(departmentId.toString());
+		}
+		log.setUserId(user.getId().toString());
+		log.setUserName(user.getUserName());
+		log.setLogType(2);
+		log.setLogMsg(msg);
+		log.setCasecadeId(id);
+		log.setCasecadeIdDesc("CRM-产品ID");
+		log.setCreateUser(user.getUserName());
+		String logJson = new Gson().toJson(log);
+		MyBaseApiUtils.log(logJson);
+    }
 }
 

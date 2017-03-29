@@ -1,10 +1,5 @@
 package com.qjp.service.impl;
 
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.stereotype.Service;
-
 import com.alibaba.fastjson.JSONObject;
 import com.qjp.entity.CustomerEntity;
 import com.qjp.service.CustomerService;
@@ -12,6 +7,10 @@ import com.qjp.util.JsonUtils;
 import com.qjp.util.api.CRMApiUtils;
 import com.qjp.util.api.model.ApiCode;
 import com.qjp.util.query.CustomerQuery;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /** 
  * <p>Project: qijiapo</p> 
@@ -131,6 +130,31 @@ public class CustomerServiceImpl implements CustomerService{
 		System.out.println(idArr);
 		
 	}
-	
+
+	@Override
+	public Integer getSelfCustomerCount(CustomerQuery customerQuery) {
+		String json = JsonUtils.json2Str(customerQuery);
+		Integer count = 0;
+		String loginResult = CRMApiUtils.getSelfCustomerCount(json);
+		if(StringUtils.isNotBlank(loginResult)){
+			JSONObject jsonObject = JSONObject.parseObject(loginResult);
+			if(jsonObject != null){
+				Object codeObj = jsonObject.get("code");
+				if(codeObj != null){
+					String code = codeObj.toString();
+					if (ApiCode.OK.toString().equals(code)) {
+						Object dataObj = jsonObject.get("data");
+						if(dataObj != null){
+							String data = dataObj.toString();
+							count = Integer.parseInt(data);
+						}
+					}
+				}
+			}
+		}
+
+		return count;
+	}
+
 }
 

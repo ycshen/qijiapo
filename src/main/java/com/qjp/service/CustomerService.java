@@ -1,9 +1,9 @@
 package com.qjp.service;
 
-import java.util.List;
-
 import com.qjp.entity.CustomerEntity;
 import com.qjp.util.query.CustomerQuery;
+
+import java.util.List;
 
 /** 
  * <p>Project: qijiapo</p> 
@@ -22,5 +22,6 @@ public interface CustomerService {
 	void updateCustomer(CustomerEntity customer);
 	void batchDelete(String idArr);
 	void batchTransfer(String idArr);
+	Integer getSelfCustomerCount(CustomerQuery customerQuery);
 }
 

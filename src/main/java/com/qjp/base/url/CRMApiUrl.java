@@ -1,9 +1,9 @@
 package com.qjp.base.url;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
 
 /** 
  * <p>Project: BRP</p> 
@@ -137,6 +137,9 @@ public class CRMApiUrl {
 	@Value("${crm.updateCustomer}")
 	private String crm_updateCustomer_url;
 	public static String crm_updateCustomer;
+	@Value("${crm.getSelfCustomerCount}")
+	private String crm_getSelfCustomerCount_url;
+	public static String crm_getSelfCustomerCount;
 
 	//contract
 	@Value("${crm.insertContract}")
@@ -154,9 +157,29 @@ public class CRMApiUrl {
 	@Value("${crm.deleteContractById}")
 	private String crm_deleteContractById_url;
 	public static String crm_deleteContractById;
-	@Value("${crm.updateProduct}")
+	@Value("${crm.updateContract}")
 	private String crm_updateContract_url;
 	public static String crm_updateContract;
+
+	//SalesLeads
+	@Value("${crm.insertSalesLeads}")
+	private String crm_insertSalesLeads_url;
+	public static String crm_insertSalesLeads;
+	@Value("${crm.getSalesLeadsPage}")
+	private String crm_getSalesLeadsPage_url;
+	public static String crm_getSalesLeadsPage;
+	@Value("${crm.getSalesLeadsById}")
+	private String crm_getSalesLeadsById_url;
+	public static String crm_getSalesLeadsById;
+	@Value("${crm.batchDeleteSalesLeads}")
+	private String crm_batchDeleteSalesLeads_url;
+	public static String crm_batchDeleteSalesLeads;
+	@Value("${crm.deleteSalesLeadsById}")
+	private String crm_deleteSalesLeadsById_url;
+	public static String crm_deleteSalesLeadsById;
+	@Value("${crm.updateSalesLeads}")
+	private String crm_updateSalesLeads_url;
+	public static String crm_updateSalesLeads;
 
 	@PostConstruct
 	public void init() {
@@ -210,7 +233,7 @@ public class CRMApiUrl {
 		crm_batchDeleteActivity = this.crm_batchDeleteActivity_url;
 		crm_deleteActivityById = this.crm_deleteActivityById_url;
 		crm_updateActivity = this.crm_updateActivity_url;
-
+		crm_getSelfCustomerCount = this.crm_getSelfCustomerCount_url;
 		//contract
 		crm_insertContract = this.crm_insertContract_url;
 		crm_getContractPage = this.crm_getContractPage_url;
@@ -218,6 +241,14 @@ public class CRMApiUrl {
 		crm_batchDeleteContract = this.crm_batchDeleteContract_url;
 		crm_deleteContractById = this.crm_deleteContractById_url;
 		crm_updateContract = this.crm_updateContract_url;
+
+		//SalesLeads
+		crm_insertSalesLeads = this.crm_insertSalesLeads_url;
+		crm_getSalesLeadsPage = this.crm_getSalesLeadsPage_url;
+		crm_getSalesLeadsById = this.crm_getSalesLeadsById_url;
+		crm_batchDeleteSalesLeads = this.crm_batchDeleteSalesLeads_url;
+		crm_deleteSalesLeadsById = this.crm_deleteSalesLeadsById_url;
+		crm_updateSalesLeads = this.crm_updateSalesLeads_url;
 	}
 	
 }
