@@ -44,7 +44,7 @@ function isNotBlank(args){
 	if(args != "" && args != null && args != undefined){
 		result = true;
 	}
-	
+
 	return result;
 }
 
@@ -70,7 +70,7 @@ function viewDetail(id, customerName){
 		shade: 0.8,
 		area: ['80%', '80%'],
 		content: url
-	}); 
+	});
 }
 
 function transfer(id, customerName){
@@ -83,13 +83,13 @@ function transfer(id, customerName){
 		shade: 0.8,
 		area: ['500px', '400px'],
 		content: url
-	}); 
+	});
 }
 
 $(function(){
 	/*$(".select2").select2();
 */
-	
+
 	initDataTable();
 	initLocation();
 	initAllCheckEvt();
@@ -99,16 +99,16 @@ $(function(){
 function initAllCheckEvt(){
 	$("#chkAll").change(function(){
 		if($("#chkAll").is(':checked')) {
-		    $("input:checkbox").each(function () {     
-	            $(this).prop('checked', true);//  
-	  
-	        });  
-		   
+		    $("input:checkbox").each(function () {
+	            $(this).prop('checked', true);//
+
+	        });
+
 		}else{
-		    $("input:checkbox").removeAttr("checked");  
+		    $("input:checkbox").removeAttr("checked");
 		}
 	});
-	
+
 	 $("input[type='checkbox']").on("change", function(){
 		 var idValue = $(this).attr("id");
 		if(idValue != "chkAll"){
@@ -123,9 +123,9 @@ function initAllCheckEvt(){
 						break;
 					}
 				}
-				
+
 				if(!isCheckedAll){
-					$("#chkAll").removeAttr("checked");  
+					$("#chkAll").removeAttr("checked");
 				}
 			}
 		}
@@ -145,11 +145,11 @@ function getCheckedBox(){
 			}
 		}
 	});
-	
+
 	if(isNotBlank(chkedStr)){
 		chkedStr = chkedStr.substring(0, chkedStr.length - 1);
 	}
-	
+
 	return chkedStr;
 }
 
@@ -201,7 +201,7 @@ function batchTransfer(){
 					shade: 0.8,
 					area: ['500px', '400px'],
 					content: url
-				}); 
+				});
 		})
 	}else{
 		layer.alert("请选择需要批量转移的客户",{closeBtn: false,
@@ -220,86 +220,86 @@ function getArea(data){
 	if(isNotBlank(data.provinceName)){
 		area += data.provinceName;
 	}
-	
+
 	if(isNotBlank(data.cityName)){
 		area += "-" + data.cityName;
 	}
-	
+
 	if(isNotBlank(data.areaName)){
 		area += "-" + data.areaName;
 	}
-	
+
 	return area;
 }
 
-var CONSTANT = {  
-	    // datatables常量  
-	    DATA_TABLES : {  
-	        DEFAULT_OPTION : { // DataTables初始化选项  
-	            LANGUAGE : {  
-	                sProcessing : "数据加载中...",  
-	                sLengthMenu : "显示 _MENU_ 项结果",  
-	                sZeroRecords : "没有匹配结果",  
-	                sInfo : "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",  
-	                sInfoEmpty : "显示第 0 至 0 项结果，共 0 项",  
-	                sInfoFiltered : "(由 _MAX_ 项结果过滤)",  
-	                sInfoPostFix : "",  
-	                sSearch : "本页搜索:",  
-	                sUrl : "",  
-	                sEmptyTable : "抱歉，没有查询到数据",  
-	                sLoadingRecords : "载入中...",  
-	                sInfoThousands : ",",  
-	                oPaginate : {  
-	                    sFirst : "首页",  
-	                    sPrevious : "上页",  
-	                    sNext : "下页",  
-	                    sLast : "末页"  
-	                },  
-	                "oAria" : {  
-	                    "sSortAscending" : ": 以升序排列此列",  
-	                    "sSortDescending" : ": 以降序排列此列"  
-	                }  
-	            },  
-	            // 禁用自动调整列宽  
-	            autoWidth : false,  
-	            // 为奇偶行加上样式，兼容不支持CSS伪类的场合  
-	            stripeClasses : [ "odd", "even" ],  
-	            // 取消默认排序查询,否则复选框一列会出现小箭头  
-	            order : [],  
-	            // 隐藏加载提示,自行处理  
-	            processing : false,  
-	            // 启用服务器端分页  
-	            serverSide : true,  
-	            // 禁用原生搜索  
-	            searching : false  
-	        },  
-	        COLUMN : {  
-	            // 复选框单元格  
-	            CHECKBOX : {  
-	                className: "td-checkbox",  
-	                orderable : false,  
-	                bSortable : false,  
-	                data : "id",  
-	                render : function(data, type, row, meta) {  
-	                    var content = '<input type="checkbox"  value="' + data + '" />';  
-	                   
-	                    return content;  
-	                }  
-	            }  
-	        },  
-	        // 常用render可以抽取出来，如日期时间、头像等  
-	        RENDER : {  
-	            ELLIPSIS : function(data, type, row, meta) {  
-	                data = data || "";  
-	                return '<span title="' + data + '">' + data + '</span>';  
-	            }  
-	        }  
-	    }  
-	      
-	  
-	};  
+var CONSTANT = {
+	    // datatables常量
+	    DATA_TABLES : {
+	        DEFAULT_OPTION : { // DataTables初始化选项
+	            LANGUAGE : {
+	                sProcessing : "数据加载中...",
+	                sLengthMenu : "显示 _MENU_ 项结果",
+	                sZeroRecords : "没有匹配结果",
+	                sInfo : "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+	                sInfoEmpty : "显示第 0 至 0 项结果，共 0 项",
+	                sInfoFiltered : "(由 _MAX_ 项结果过滤)",
+	                sInfoPostFix : "",
+	                sSearch : "本页搜索:",
+	                sUrl : "",
+	                sEmptyTable : "抱歉，没有查询到数据",
+	                sLoadingRecords : "载入中...",
+	                sInfoThousands : ",",
+	                oPaginate : {
+	                    sFirst : "首页",
+	                    sPrevious : "上页",
+	                    sNext : "下页",
+	                    sLast : "末页"
+	                },
+	                "oAria" : {
+	                    "sSortAscending" : ": 以升序排列此列",
+	                    "sSortDescending" : ": 以降序排列此列"
+	                }
+	            },
+	            // 禁用自动调整列宽
+	            autoWidth : false,
+	            // 为奇偶行加上样式，兼容不支持CSS伪类的场合
+	            stripeClasses : [ "odd", "even" ],
+	            // 取消默认排序查询,否则复选框一列会出现小箭头
+	            order : [],
+	            // 隐藏加载提示,自行处理
+	            processing : false,
+	            // 启用服务器端分页
+	            serverSide : true,
+	            // 禁用原生搜索
+	            searching : false
+	        },
+	        COLUMN : {
+	            // 复选框单元格
+	            CHECKBOX : {
+	                className: "td-checkbox",
+	                orderable : false,
+	                bSortable : false,
+	                data : "id",
+	                render : function(data, type, row, meta) {
+	                    var content = '<input type="checkbox"  value="' + data + '" />';
+
+	                    return content;
+	                }
+	            }
+	        },
+	        // 常用render可以抽取出来，如日期时间、头像等
+	        RENDER : {
+	            ELLIPSIS : function(data, type, row, meta) {
+	                data = data || "";
+	                return '<span title="' + data + '">' + data + '</span>';
+	            }
+	        }
+	    }
+
+
+	};
 function refreshTable(){
-	var table = $('#myDataTable').dataTable();  
+	var table = $('#myDataTable').dataTable();
 	table.fnDraw(false);
 }
 
@@ -356,53 +356,53 @@ function deleteById(id, name){
 }
 
 function queryCustomer(){
-	$("#myDataTable").dataTable().fnDestroy(); 
+	$("#myDataTable").dataTable().fnDestroy();
 	var customerName = $("#txtCustomerName").val();
 	$("#myDataTable").dataTable( {
-	       ajax : {  
-	            type: "GET",  
-	            url: ctx + '/inner/customer/listAjax',  
-	            // 传入已封装的参数  
-	            data: function(data){ 
+	       ajax : {
+	            type: "GET",
+	            url: ctx + '/inner/customer/listAjax',
+	            // 传入已封装的参数
+	            data: function(data){
 	            	data.customerName = customerName;
-	                data.page = data.start / data.length + 1;  
-	                data.size = data.length;  
-	                // 右上角搜索  
-	                delete data.columns;  
-	            },  
-		            dataType: "json",  
-		            dataSrc : function(result) {  
-		                // 后台不实现过滤功能，每次查询均视作全部结果  
-		                result.recordsTotal = result.count;  
-		                result.recordsFiltered = result.count || 0;  
-		                result.data = result.items || {};  
-		                delete result.count;  
-		                delete result.items; 
-		                return result.data;  
-		            }  
-	       	},  
+	                data.page = data.start / data.length + 1;
+	                data.size = data.length;
+	                // 右上角搜索
+	                delete data.columns;
+	            },
+		            dataType: "json",
+		            dataSrc : function(result) {
+		                // 后台不实现过滤功能，每次查询均视作全部结果
+		                result.recordsTotal = result.count;
+		                result.recordsFiltered = result.count || 0;
+		                result.data = result.items || {};
+		                delete result.count;
+		                delete result.items;
+		                return result.data;
+		            }
+	       	},
 	       	"columns": [
-	   	             CONSTANT.DATA_TABLES.COLUMN.CHECKBOX, 
-	   	             {  
-	   	                 data : 'operate',  
-	   	                 bSortable : false,  
-	   	                 visible : true,  
-	   	                 render : function(data, type, customer) {  
-	   	                       
+	   	             CONSTANT.DATA_TABLES.COLUMN.CHECKBOX,
+	   	             {
+	   	                 data : 'operate',
+	   	                 bSortable : false,
+	   	                 visible : true,
+	   	                 render : function(data, type, customer) {
+
 	   	                	 var operResult = "<div class=\"btn-group\">";
 	   	                	 operResult += "<button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\">";
 	   	                	 operResult +=  "<span class=\"caret\"></span>";
 	   	                	 operResult +=  "</button>";
 	   	                	 operResult += " <ul class=\"dropdown-menu\">";
-	   	                          
+
 	   	                	 operResult += 	" <li><a href=\"#\" onclick=\"deleteById('" + customer.id + "', '" + customer.customerName + "');\">删除</a></li>";
 	   	                	 operResult += 	" <li><a href=\"#\" onclick=\"editCustomer('" + customer.id + "');\">编辑</a></li>";
-	   	                         	
+
 	   	                	 operResult += " </ul>";
 	   	                	 operResult += " </div>";
-	   	                     
-	   	                     return operResult;  
-	   	                 }   
+
+	   	                     return operResult;
+	   	                 }
 	   	             },
 	   	             { data: 'customerName',
 	   	            	render: function(data, type, customer){
@@ -418,21 +418,21 @@ function queryCustomer(){
 	   	             /*{ data: 'imgPath' },*/
 	   	             { data: 'createTime' }
 	   	         ],
-	       "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示  
+	       "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示
 	       "bPaginate": true,
-	       "serverSide": true, 
+	       "serverSide": true,
            "searching" : true,
-	       "bFilter": true, 
-	       "sPaginationType": "full_numbers", 
+	       "bFilter": true,
+	       "sPaginationType": "full_numbers",
 	       "paging": true,
 	       "lengthChange": true,
 	       "info": true,
 	       "autoWidth": true,
 	       "bSort": false,
 	       "oLanguage": CONSTANT.DATA_TABLES.DEFAULT_OPTION.LANGUAGE
-	      
+
 	   } );
-	
+
 }
 
 function getStatus(status){
@@ -449,49 +449,49 @@ function getStatus(status){
 
 function initDataTable(){
 	$("#myDataTable").dataTable( {
-	       ajax : {  
-	            type: "GET",  
-	            url: ctx + '/inner/customer/listAjax',  
-	            // 传入已封装的参数  
-	            data: function(data){ 
-	                data.page = data.start / data.length + 1;  
-	                data.size = data.length;  
-	                // 右上角搜索  
-	                delete data.columns;  
-	            },  
-		            dataType: "json",  
-		            dataSrc : function(result) {  
-		                // 后台不实现过滤功能，每次查询均视作全部结果  
-		                result.recordsTotal = result.count;  
-		                result.recordsFiltered = result.count || 0;  
-		                result.data = result.items || {};  
-		                delete result.count;  
-		                delete result.items; 
-		                return result.data;  
-		            }  
-	       	},  
+	       ajax : {
+	            type: "GET",
+	            url: ctx + '/inner/customer/listAjax',
+	            // 传入已封装的参数
+	            data: function(data){
+	                data.page = data.start / data.length + 1;
+	                data.size = data.length;
+	                // 右上角搜索
+	                delete data.columns;
+	            },
+		            dataType: "json",
+		            dataSrc : function(result) {
+		                // 后台不实现过滤功能，每次查询均视作全部结果
+		                result.recordsTotal = result.count;
+		                result.recordsFiltered = result.count || 0;
+		                result.data = result.items || {};
+		                delete result.count;
+		                delete result.items;
+		                return result.data;
+		            }
+	       	},
 	       	"columns": [
-	             CONSTANT.DATA_TABLES.COLUMN.CHECKBOX, 
-	             {  
-	                 data : 'operate',  
-	                 bSortable : false,  
-	                 visible : true,  
-	                 render : function(data, type, customer) {  
-	                       
+	             CONSTANT.DATA_TABLES.COLUMN.CHECKBOX,
+	             {
+	                 data : 'operate',
+	                 bSortable : false,
+	                 visible : true,
+	                 render : function(data, type, customer) {
+
 	                	 var operResult = "<div class=\"btn-group\">";
 	                	 operResult += "<button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\">";
 	                	 operResult +=  "<span class=\"caret\"></span>";
 	                	 operResult +=  "</button>";
 	                	 operResult += " <ul class=\"dropdown-menu\">";
-	                          
+
 	                	 operResult += 	" <li><a href=\"#\" onclick=\"deleteById('" + customer.id + "', '" + customer.customerName + "');\">删除</a></li>";
 	                	 operResult += 	" <li><a href=\"#\" onclick=\"editCustomer('" + customer.id + "');\">编辑</a></li>";
-	                         	
+
 	                	 operResult += " </ul>";
 	                	 operResult += " </div>";
-	                     
-	                     return operResult;  
-	                 }   
+
+	                     return operResult;
+	                 }
 	             },
 	             { data: 'customerName',
 	            	render: function(data, type, customer){
@@ -510,19 +510,19 @@ function initDataTable(){
 	             { data: 'mobile' },
 	             { data: 'createTime' }
 	         ],
-	       "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示  
+	       "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示
 	       "bPaginate": true,
-	       "serverSide": true, 
+	       "serverSide": true,
            "searching" : false,
-	       "bFilter": true, 
-	       "sPaginationType": "full_numbers", 
+	       "bFilter": true,
+	       "sPaginationType": "full_numbers",
 	       "paging": true,
 	       "lengthChange": true,
 	       "info": true,
 	       "autoWidth": true,
 	       "bSort": false,
 	       "oLanguage": CONSTANT.DATA_TABLES.DEFAULT_OPTION.LANGUAGE
-	      
+
 	   } );
 }
 

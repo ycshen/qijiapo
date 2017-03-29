@@ -83,7 +83,7 @@
         <div class="layui-form-item my-layui-form-item my-top">
             <label class="layui-form-label">开始日期<span style="color:red">*</span></label>
             <div class="layui-input-block">
-                <input type="text" name="activityStartTime" id="txtStartTime" lay-verify="memoStartTime"
+                <input type="text" name="activityStartTime" id="txtStartTime" lay-verify="activityStartTime" lay-verify="memoStartTime"
                        placeholder="请选择市场活动开始日期" autocomplete="off" class="layui-input"
                        onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD'})">
             </div>
@@ -91,7 +91,7 @@
         <div class="layui-form-item my-layui-form-item my-top">
             <label class="layui-form-label">结束日期<span style="color:red">*</span></label>
             <div class="layui-input-block">
-                <input type="text" name="activityEndTime" id="txtEndTime" lay-verify="memoStartTime"
+                <input type="text" name="activityEndTime" id="txtEndTime" lay-verify="activityEndTime"
                        placeholder="请选择市场活动结束日期" autocomplete="off" class="layui-input"
                        onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD'})">
             </div>

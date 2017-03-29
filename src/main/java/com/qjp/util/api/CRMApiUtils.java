@@ -890,5 +890,114 @@ public class CRMApiUtils {
 
         return result;
     }
+
+    public static String insertSalesLeads(String jsonStr) {
+        String result = StringUtils.EMPTY;
+        try {
+            String url = getCRMUrl() + CRMApiUrl.crm_insertSalesLeads;
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("salesLeads", jsonStr);
+            Map<String, Object> maps = SHA1Utils.getSha1Map();
+            maps.put("salesLeads", jsonStr);
+            String secret = SHA1Utils.SHA1(maps);
+            jsonObject.put("secret", secret);
+            result = HttpUtils.postUrl(url, jsonObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public static String getSalesLeadsPage(String json) {
+        String result = StringUtils.EMPTY;
+        try {
+            String url = getCRMUrl() + CRMApiUrl.crm_getSalesLeadsPage;
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("query", json);
+            Map<String, Object> maps = SHA1Utils.getSha1Map();
+            maps.put("query", json);
+            String secret = SHA1Utils.SHA1(maps);
+            jsonObject.put("secret", secret);
+            result = HttpUtils.postUrl(url, jsonObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public static String getSalesLeadsById(String id) {
+        String result = StringUtils.EMPTY;
+        try {
+            String url = getCRMUrl() + CRMApiUrl.crm_getSalesLeadsById;
+            Map<String, Object> maps = SHA1Utils.getSha1Map();
+            maps.put("id", id);
+            String secret = SHA1Utils.SHA1(maps);
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("secret", secret);
+            jsonObject.put("id", id);
+            result = HttpUtils.postUrl(url, jsonObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+
+    }
+
+    public static String deleteSalesLeadsById(String id) {
+        String result = StringUtils.EMPTY;
+        try {
+            String url = getCRMUrl() + CRMApiUrl.crm_deleteSalesLeadsById;
+            Map<String, Object> maps = SHA1Utils.getSha1Map();
+            maps.put("id", id);
+            String secret = SHA1Utils.SHA1(maps);
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("secret", secret);
+            jsonObject.put("id", id);
+            result = HttpUtils.postUrl(url, jsonObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+
+    }
+
+    public static String batchDeleteSalesLeads(String idList) {
+        String result = StringUtils.EMPTY;
+        try {
+            String url = getCRMUrl() + CRMApiUrl.crm_batchDeleteSalesLeads;
+            Map<String, Object> maps = SHA1Utils.getSha1Map();
+            maps.put("idList", idList);
+            String secret = SHA1Utils.SHA1(maps);
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("secret", secret);
+            jsonObject.put("idList", idList);
+            result = HttpUtils.postUrl(url, jsonObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public static String updateSalesLeads(String jsonStr) {
+        String result = StringUtils.EMPTY;
+        try {
+            String url = getCRMUrl() + CRMApiUrl.crm_updateSalesLeads;
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("salesLeads", jsonStr);
+            Map<String, Object> maps = SHA1Utils.getSha1Map();
+            maps.put("salesLeads", jsonStr);
+            String secret = SHA1Utils.SHA1(maps);
+            jsonObject.put("secret", secret);
+            result = HttpUtils.postUrl(url, jsonObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
 }
 
