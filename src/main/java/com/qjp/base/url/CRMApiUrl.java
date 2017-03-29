@@ -1,9 +1,9 @@
 package com.qjp.base.url;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
 
 /** 
  * <p>Project: BRP</p> 
@@ -137,6 +137,9 @@ public class CRMApiUrl {
 	@Value("${crm.updateCustomer}")
 	private String crm_updateCustomer_url;
 	public static String crm_updateCustomer;
+	@Value("${crm.getSelfCustomerCount}")
+	private String crm_getSelfCustomerCount_url;
+	public static String crm_getSelfCustomerCount;
 
 	//contract
 	@Value("${crm.insertContract}")
@@ -230,7 +233,7 @@ public class CRMApiUrl {
 		crm_batchDeleteActivity = this.crm_batchDeleteActivity_url;
 		crm_deleteActivityById = this.crm_deleteActivityById_url;
 		crm_updateActivity = this.crm_updateActivity_url;
-
+		crm_getSelfCustomerCount = this.crm_getSelfCustomerCount_url;
 		//contract
 		crm_insertContract = this.crm_insertContract_url;
 		crm_getContractPage = this.crm_getContractPage_url;

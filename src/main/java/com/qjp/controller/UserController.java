@@ -2,16 +2,19 @@ package com.qjp.controller;
 
 import com.google.gson.Gson;
 import com.qjp.base.ResponseStatus;
+import com.qjp.base.RoleEnum;
 import com.qjp.base.UserStatus;
 import com.qjp.entity.Constant;
 import com.qjp.entity.DepartmentEntity;
 import com.qjp.entity.UserEntity;
 import com.qjp.service.ConfigService;
+import com.qjp.service.CustomerService;
 import com.qjp.service.DepartmentService;
 import com.qjp.service.UserService;
 import com.qjp.util.LogUtils;
 import com.qjp.util.UserUtils;
 import com.qjp.util.ValidateUtils;
+import com.qjp.util.query.CustomerQuery;
 import com.qjp.util.query.UserQuery;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +45,8 @@ public class UserController {
 	private DepartmentService departmentService;
 	@Autowired
 	private ConfigService configService;
-	
+	@Autowired
+	private CustomerService customerService;
 	@RequestMapping(value = "/saveOrUpdate", method = RequestMethod.POST)
 	@ResponseBody
 	public Integer saveOrUpdate(@ModelAttribute UserEntity user, HttpServletRequest request){
@@ -318,6 +322,15 @@ public class UserController {
         //重新获取，以便修改
         UserEntity user = userService.getUserById(loginUser.getId().toString());
         mav.addObject("user", user);
+		CustomerQuery customerQuery = new CustomerQuery();
+		customerQuery.init(request);
+		String roleType = customerQuery.getRoleType();
+		if(RoleEnum.DEP.getRoleId().toString().equals(roleType)){
+			String idList = departmentService.getSubDepList(customerQuery.getDepartmentId(), customerQuery.getCompanyId());
+			customerQuery.setDepartmentId(idList);
+		}
+		Integer customerCount = customerService.getSelfCustomerCount(customerQuery);
+		mav.addObject("customerCount", customerCount);
 		return mav;
 	}
 

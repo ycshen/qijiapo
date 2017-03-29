@@ -1,14 +1,13 @@
 package com.qjp.util.api;
 
-import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.alibaba.fastjson.JSONObject;
 import com.qjp.base.url.CRMApiUrl;
 import com.qjp.util.CommonUtils;
 import com.qjp.util.HttpUtils;
 import com.qjp.util.SHA1Utils;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Map;
 
 /**
  * <p>Project: qijiapo</p>
@@ -585,6 +584,24 @@ public class CRMApiUtils {
         String result = StringUtils.EMPTY;
         try {
             String url = getCRMUrl() + CRMApiUrl.crm_getCustomerPage;
+            Map<String, Object> maps = SHA1Utils.getSha1Map();
+            maps.put("query", query);
+            String secret = SHA1Utils.SHA1(maps);
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("query", query);
+            jsonObject.put("secret", secret);
+            result = HttpUtils.postUrl(url, jsonObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public static String getSelfCustomerCount(String query) {
+        String result = StringUtils.EMPTY;
+        try {
+            String url = getCRMUrl() + CRMApiUrl.crm_getSelfCustomerCount;
             Map<String, Object> maps = SHA1Utils.getSha1Map();
             maps.put("query", query);
             String secret = SHA1Utils.SHA1(maps);

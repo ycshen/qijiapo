@@ -104,7 +104,7 @@
                                         <b>公司同事</b> <a class="pull-right" href="#"><input type="button" value="${userCount}(人)" class="btn btn-default btn-xs"/></a>
                                     </li>
                                     <li class="list-group-item">
-                                        <b>我的客户</b> <a class="pull-right">543</a>
+                                        <b>我的客户</b>  <a class="pull-right" href="${ctx}/inner/customer/list"><input type="button" value="${customerCount}(位)" class="btn btn-default btn-xs"/></a>
                                     </li>
                                     <li class="list-group-item">
                                         <b>销售业绩</b> <a class="pull-right">13,287</a>
