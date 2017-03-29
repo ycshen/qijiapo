@@ -1,10 +1,5 @@
 package com.qjp.service.impl;
 
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.stereotype.Service;
-
 import com.alibaba.fastjson.JSONObject;
 import com.qjp.entity.UserEntity;
 import com.qjp.service.UserService;
@@ -16,6 +11,10 @@ import com.qjp.util.query.UserQuery;
 import com.qjp.util.query.UserRoleQuery;
 import com.qjp.util.vo.UserAuthVO;
 import com.qjp.util.vo.UserRoleVO;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /** 
  * <p>Project: MyBase</p> 
@@ -371,6 +370,30 @@ public class UserServiceImpl implements UserService{
 		
 		return list;
 	}
-	
+
+	@Override
+	public Integer getUserCountByCompanyId(String companyId) {
+		Integer count = 0;
+		String result = MyBaseApiUtils.getUserCountByCompanyId(companyId);
+		if(StringUtils.isNotBlank(result)){
+			JSONObject jsonObject = JSONObject.parseObject(result);
+			if(jsonObject != null){
+				Object codeObj = jsonObject.get("code");
+				if(codeObj != null){
+					String code = codeObj.toString();
+					if (ApiCode.OK.toString().equals(code)) {
+						Object dataObj = jsonObject.get("data");
+						if(dataObj != null){
+							String data = dataObj.toString();
+							count = Integer.parseInt(data);
+						}
+					}
+				}
+			}
+		}
+
+		return count;
+	}
+
 }
 

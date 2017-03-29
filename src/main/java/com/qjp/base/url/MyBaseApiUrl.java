@@ -1,9 +1,9 @@
 package com.qjp.base.url;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
 
 /** 
  * <p>Project: BRP</p> 
@@ -131,7 +131,10 @@ public class MyBaseApiUrl {
 	@Value("${mybase.getRoleUserByCidAndRoleId}")
 	private String mybase_getRoleUserByCidAndRoleId_url;
 	public static String mybase_getRoleUserByCidAndRoleId;
-	
+	@Value("${mybase.getUserCountByCompanyId}")
+	private String mybase_getUserCountByCompanyId_url;
+	public static String mybase_getUserCountByCompanyId;
+
 	//Company
 	@Value("${mybase.getCompanyStaffTreeById}")
 	private String mybase_getCompanyStaffTreeById_url;
@@ -270,6 +273,7 @@ public class MyBaseApiUrl {
 		mybase_getUserListByCompanyId = this.mybase_getUserListByCompanyId_url;
 		mybase_getUserListByRoleId = this.mybase_getUserListByRoleId_url;
 		mybase_getRoleUserByCidAndRoleId = this.mybase_getRoleUserByCidAndRoleId_url;
+		mybase_getUserCountByCompanyId = this.mybase_getUserCountByCompanyId_url;
 		//position
 		mybase_getSystemPosition = this.mybase_getSystemPosition_url;
 		mybase_getPositionByCompanyId = this.mybase_getPositionByCompanyId_url;

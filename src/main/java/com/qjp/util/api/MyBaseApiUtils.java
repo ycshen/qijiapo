@@ -234,7 +234,7 @@ public class MyBaseApiUtils {
 	
 	/**
 	 * 记录日志
-	 * @param id
+	 * @param logJson
 	 * @return
 	 */
 	public static String log(String logJson){
@@ -670,8 +670,8 @@ public class MyBaseApiUtils {
 	}
 	
 	/**
-	 * 更新公司信息
-	 * @param companyJson
+	 * 更新部门信息
+	 * @param departmentJson
 	 * @return
 	 */
 	public static String updateDepartment(String departmentJson){
@@ -734,7 +734,7 @@ public class MyBaseApiUtils {
 	
 	/**
 	 * 更新员工信息
-	 * @param companyJson
+	 * @param userJson
 	 * @return
 	 */
 	public static String updateUser(String userJson){
@@ -1080,7 +1080,29 @@ public class MyBaseApiUtils {
 		
 		return result;
 	}
-	
+
+	/**
+	 * 根据公司id获取公司员工数量
+	 * @param companyId
+	 * @return
+	 */
+	public static String getUserCountByCompanyId(String companyId){
+		String result = StringUtils.EMPTY;
+		try {
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_getUserCountByCompanyId;
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("companyId", companyId);
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("companyId", companyId);
+			String secret = SHA1Utils.SHA1(maps);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
 	public static String getUserById(String id){
 		String result = StringUtils.EMPTY;
 		try {	
@@ -1092,7 +1114,6 @@ public class MyBaseApiUtils {
 			String secret = SHA1Utils.SHA1(maps);
 			jsonObject.put("secret", secret);
 			result = HttpUtils.postUrl(url, jsonObject);
-			System.out.println(result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

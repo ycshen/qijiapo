@@ -1,21 +1,5 @@
 package com.qjp.controller;
 
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.google.gson.Gson;
 import com.qjp.base.ResponseStatus;
 import com.qjp.base.UserStatus;
@@ -29,6 +13,17 @@ import com.qjp.util.LogUtils;
 import com.qjp.util.UserUtils;
 import com.qjp.util.ValidateUtils;
 import com.qjp.util.query.UserQuery;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 /** 
  * <p>Project: MyBase</p> 
@@ -313,6 +308,44 @@ public class UserController {
 
 		return mav;
 	}
+
+	@RequestMapping(value = "/profile", method = RequestMethod.GET)
+	public ModelAndView profile(HttpServletRequest request){
+		ModelAndView mav = new ModelAndView("/user/user_profile");
+        UserEntity loginUser = UserUtils.getLoginUser(request);
+        Integer userCount = userService.getUserCountByCompanyId(loginUser.getCompanyId().toString());
+        mav.addObject("userCount", userCount);
+        //重新获取，以便修改
+        UserEntity user = userService.getUserById(loginUser.getId().toString());
+        mav.addObject("user", user);
+		return mav;
+	}
+
+    @RequestMapping(value = "/modifyInfo", method = RequestMethod.POST)
+    @ResponseBody
+    public Integer modifyInfo(@RequestBody  UserEntity user, HttpServletRequest request){
+        Integer result = 0;
+        try{
+            UserEntity loginUser = UserUtils.getLoginUser(request);
+            UserEntity oldUser = userService.getUserById(loginUser.getId().toString());
+            oldUser.setSchool(user.getSchool());
+            oldUser.setEducation(user.getEducation());
+            oldUser.setSignature(user.getSignature());
+            oldUser.setEmail(user.getEmail());
+            oldUser.setUpdateTime(new Date());
+            oldUser.setUpdateUser(loginUser.getUserName());
+            userService.updateUser(oldUser);
+
+            result = 2;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
+        return result;
+    }
+
 	
 }
 

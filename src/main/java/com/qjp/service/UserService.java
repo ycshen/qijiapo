@@ -1,13 +1,13 @@
 package com.qjp.service;
 
-import java.util.List;
-
 import com.qjp.entity.UserEntity;
 import com.qjp.util.query.UserAuthQuery;
 import com.qjp.util.query.UserQuery;
 import com.qjp.util.query.UserRoleQuery;
 import com.qjp.util.vo.UserAuthVO;
 import com.qjp.util.vo.UserRoleVO;
+
+import java.util.List;
 
 /** 
  * <p>Project: MyBase</p> 
@@ -45,5 +45,6 @@ public interface UserService {
 	void changeCollapse(String userId, String isCollapseMenu);
 	List<UserEntity> getUserListByCompanyId(String id);
 	List<UserRoleVO> getRoleUserByCidAndRoleId(String companyId, String roleId, String isRole);
+	Integer getUserCountByCompanyId(String companyId);
 }
 

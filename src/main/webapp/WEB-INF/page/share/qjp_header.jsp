@@ -4,7 +4,7 @@
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="#" class="logo">
+    <a href="${ctx}/inner/user/profile" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"></span>
       <!-- logo for regular state and mobile devices -->
@@ -148,7 +148,7 @@
 
                 <p>
                   ${loginUser.companyName} - ${loginUser.departmentName}
-                  <small>Member since Nov. 2012</small>
+                  <small>${loginUser.createTime}</small>
                 </p>
               </li>
               <!-- Menu Body -->
@@ -158,7 +158,7 @@
                     <a href="#">Followers</a>
                   </div>
                   <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
+                    <a href="#">销售业绩</a>
                   </div>
                   <div class="col-xs-4 text-center">
                     <a href="#">Friends</a>
@@ -169,7 +169,7 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">个人资料</a>
+                  <a href="${ctx}/inner/user/profile" class="btn btn-default btn-flat">个人中心</a>
                 </div>
                 <div class="pull-right">
                   <a href="${ctx}/logout" class="btn btn-default btn-flat">退出登录</a>
