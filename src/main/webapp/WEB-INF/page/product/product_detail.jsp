@@ -117,8 +117,20 @@ font-size: 14px !important;
 			    		<tr>
 			    			<td class="title-td">产品描述:</td>
 			    			<td colspan="3">${product.productDesc}</td>
-			    			
+
 			    		</tr>
+						<tr>
+							<td class="title-td">备注:</td>
+							<td colspan="3">${product.remark}</td>
+
+						</tr>
+						<tr>
+							<td class="title-td">邮编:</td>
+							<td>${product.postcode}</td>
+							<td class="title-td">传真:</td>
+							<td>${product.facsimile}</td>
+
+						</tr>
 			    	</table>
 			    	
 			    	

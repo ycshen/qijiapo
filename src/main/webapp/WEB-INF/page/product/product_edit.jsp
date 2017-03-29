@@ -37,7 +37,7 @@ margin: 0px 15px 0px 0px;
 	margin-top: 10px;
 }
 .content_div{
-	height: 300px;
+	height: 400px;
 	overflow-y:auto;
 }
 </style>
@@ -65,20 +65,20 @@ margin: 0px 15px 0px 0px;
   <div class="layui-form-item my-layui-form-item">
     <label class="layui-form-label">启用状态</label>
     <div class="layui-input-block">
-      <input type="radio" name="status" value="1" title="启用"  checked="">
-      <input type="radio" name="status"  value="2" title="停用">
+      <input type="radio" name="status" value="1" title="启用"   <c:if test="${product.status == 1}">checked="checked" </c:if>>
+      <input type="radio" name="status"  value="2" title="停用" <c:if test="${product.status == 2}">checked="checked" </c:if>>
     </div>
   </div>
  <div class="layui-form-item my-layui-form-item my-top">
     <label class="layui-form-label">销售价格（元）<span style="color:red">*</span></label>
     <div class="layui-input-block">
-      <input type="num" name="price"  autocomplete="off" value="${product.price}"  placeholder="请输入销售价格" class="layui-input">
+      <input type="num" name="price"  onkeydown="onlyNum();" lay-verify="price" autocomplete="off" value="${product.price}"  placeholder="请输入销售价格" class="layui-input">
     </div>
   </div>
   <div class="layui-form-item my-layui-form-item layui-form-text">
     <label class="layui-form-label">产品描述</label>
     <div class="layui-input-block">
-      <textarea placeholder="请输入产品描述" class="layui-textarea" name="productDesc"> ${product.productDesc} </textarea>
+      <textarea placeholder="请输入产品描述" class="layui-textarea" name="productDesc">${product.productDesc}</textarea>
     </div>
   </div>
   <div id="divViewer">
@@ -105,7 +105,7 @@ margin: 0px 15px 0px 0px;
    <div class="layui-form-item my-layui-form-item my-top">
     <label class="layui-form-label">邮政编码</label>
     <div class="layui-input-block">
-      <input type="num" name="postcode" autocomplete="off"   value="${product.postcode}"  placeholder="请输入邮政编码" class="layui-input" maxlength="6">
+      <input type="num" name="postcode" onkeydown="onlyNum();" autocomplete="off"   value="${product.postcode}"  placeholder="请输入邮政编码" class="layui-input" maxlength="6">
     </div>
   </div>
   
@@ -137,6 +137,7 @@ margin: 0px 15px 0px 0px;
 </form>
 
 <script>
+
 layui.use(['form', 'layedit', 'laydate'], function(){
   var form = layui.form()
   ,layer = layui.layer
@@ -154,6 +155,11 @@ layui.use(['form', 'layedit', 'laydate'], function(){
 	          return '产品名称的长度不能大于00个字符';
 	       }
 	    },
+      price:function(value){
+          if(value == null || value == '' || value == undefined){
+              return '请输入销售价格';
+          }
+      }
 	  
   });
   

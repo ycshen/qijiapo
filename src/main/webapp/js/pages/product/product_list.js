@@ -3,9 +3,9 @@ function addProduct(){
 	layer.open({
 		type: 2,
 		title: '新增产品',
-		shadeClose: true,
+		shadeClose: false,
 		shade: 0.8,
-		area: ['800px', '400px'],
+		area: ['800px', '500px'],
 		content: url
 	});
 }
@@ -16,9 +16,9 @@ function editProduct(id){
 	layer.open({
 		type: 2,
 		title: '编辑产品',
-		shadeClose: true,
+		shadeClose: false,
 		shade: 0.8,
-		area: ['800px', '400px'],
+		area: ['800px', '500px'],
 		content: url
 	});
 }
@@ -197,7 +197,7 @@ function batchTransfer(){
 				layer.open({
 					type: 2,
 					title: title,
-					shadeClose: true,
+					shadeClose: false,
 					shade: 0.8,
 					area: ['500px', '400px'],
 					content: url
@@ -439,7 +439,7 @@ function getStatus(status){
 	var statusStr = "";
 	if(status == 1){
 		statusStr = "<span class=\"label label-success\">启用</span>";
-	}else if(status == 0){
+	}else if(status == 2){
 		statusStr = "<span class=\"label label-success\">停用</span>";
 	}
 
