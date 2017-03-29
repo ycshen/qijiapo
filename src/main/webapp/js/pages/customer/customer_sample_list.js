@@ -256,9 +256,12 @@ function confirmSelect(){
 			layer.alert("只能选择一位客户",{closeBtn: false,
 				skin: 'layui-layer-molv'
 			});
+
 		}else{
+            console.log("获取信息开始")
 			var name = $("#customerName" + id).html();
 			parent.getCustomer(id, name);
+            console.log("获取信息结束")
 		}
 	}
 

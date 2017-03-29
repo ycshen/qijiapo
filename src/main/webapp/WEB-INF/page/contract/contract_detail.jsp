@@ -104,14 +104,13 @@
                                 <td>${contract.userName}</td>
 
                             </tr>
-
                             <tr>
+                                <td class="title-td">客户:</td>
+                                <td>${contract.customerName}</td>
                                 <td class="title-td">合同所属部门:</td>
                                 <td>${contract.departmentName}</td>
-                                <td class="title-td">业务类型:</td>
-                                <td>默认业务类型</td>
-
                             </tr>
+
                             <tr>
                                 <td class="title-td">开始日期:</td>
                                 <td><f:formatDate value="${contract.contractStartTime}" pattern="yyyy-MM-dd"/></td>
@@ -189,6 +188,12 @@
                                 <td><f:formatDate value="${contract.signTime}" pattern="yyyy-MM-dd" /></td>
                                 <td class="title-td">合同编号:</td>
                                 <td>${contract.contractNum}</td>
+
+                            </tr>
+                            <tr>
+
+                                <td class="title-td">业务类型:</td>
+                                <td>默认业务类型</td>
 
                             </tr>
                             <tr>

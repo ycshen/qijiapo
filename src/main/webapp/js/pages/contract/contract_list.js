@@ -437,6 +437,7 @@ function queryContract() {
                 }
             },
             {data: 'userName'},
+            {data: 'customerName'},
             {data: 'contractType',
                 render: function (data, type, contract) {
                     return getContractType(contract.contractType)
@@ -533,6 +534,7 @@ function initDataTable() {
                 }
             },
             {data: 'userName'},
+            {data: 'customerName'},
             {data: 'contractType',
                 render: function (data, type, contract) {
                     return getContractType(contract.contractType)

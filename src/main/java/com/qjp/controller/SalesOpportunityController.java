@@ -164,8 +164,8 @@ public class SalesOpportunityController {
 		salesOpportunity.setCityId(StringUtils.splitLocation(cityId));
 		String areaId = salesOpportunity.getAreaId();
 		salesOpportunity.setAreaId(StringUtils.splitLocation(areaId));
-		String winRate = this.getWinRateBySaleStage(salesOpportunity.getSaleStage());
-		salesOpportunity.setWinRate(winRate);
+//		String winRate = this.getWinRateBySaleStage(salesOpportunity.getSaleStage());
+//		salesOpportunity.setWinRate(winRate);
 		Long id = salesOpportunity.getId();
 		UserEntity user = UserUtils.getLoginUser(request);
 		if(id == null){
@@ -179,34 +179,34 @@ public class SalesOpportunityController {
 		return mav;
 	}
 
-	/**
-	 *
-	 * @param saleStage
-	 * @return
-	 */
-	private String getWinRateBySaleStage(Integer saleStage){
-		String winRate = "0%";
-		switch (saleStage){
-			case 1 : //初步接洽
-				winRate = "10%";
-				break;
-			case 2 : //需求确定
-				winRate = "30%";
-				break;
-			case 3 : //方案/报价
-				winRate = "60%";
-				break;
-			case 4 : //谈判审核
-				winRate = "80%";
-				break;
-			case 5 : //赢单
-				winRate = "100%";
-				break;
-			case 6 : //输单
-				winRate = "0%";
-				break;
-		}
-
-		return winRate;
-	}
+//	/**
+//	 *
+//	 * @param saleStage
+//	 * @return
+//	 */
+//	private String getWinRateBySaleStage(Integer saleStage){
+//		String winRate = "0%";
+//		switch (saleStage){
+//			case 1 : //初步接洽
+//				winRate = "10%";
+//				break;
+//			case 2 : //需求确定
+//				winRate = "30%";
+//				break;
+//			case 3 : //方案/报价
+//				winRate = "60%";
+//				break;
+//			case 4 : //谈判审核
+//				winRate = "80%";
+//				break;
+//			case 5 : //赢单
+//				winRate = "100%";
+//				break;
+//			case 6 : //输单
+//				winRate = "0%";
+//				break;
+//		}
+//
+//		return winRate;
+//	}
 }

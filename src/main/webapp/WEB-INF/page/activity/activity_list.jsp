@@ -140,6 +140,9 @@
                                                 <button class="layui-btn layui-btn-primary" onclick="batchTransfer()">
                                                     <i class="layui-icon">&#xe620;</i>批量转移
                                                 </button>
+                                                <button class="layui-btn layui-btn-primary" onclick="selectActivity()">
+                                                    <i class="layui-icon">&#xe620;</i>查找活动
+                                                </button>
                                             </div>
                                         </td>
                                     </tr>

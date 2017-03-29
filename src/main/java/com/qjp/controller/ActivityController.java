@@ -10,6 +10,7 @@ import com.qjp.util.JsonUtils;
 import com.qjp.util.LogUtils;
 import com.qjp.util.StringUtils;
 import com.qjp.util.UserUtils;
+import com.qjp.util.query.CustomerQuery;
 import com.qjp.util.query.LogQuery;
 import com.qjp.util.query.ActivityQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -180,6 +181,13 @@ public class ActivityController {
             LogUtils.logCRMActivity("修改了市场活动(" + activity.getActivityName() + ")", id.toString(), user);
         }
 
+        return mav;
+    }
+
+    @RequestMapping(value = "/sampleList", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    public ModelAndView sampleList(@ModelAttribute ActivityQuery activityQuery, HttpServletRequest request){
+        ModelAndView mav = new ModelAndView("/activity/activity_sample_list");
+        mav.addObject("activityQuery", activityQuery);
         return mav;
     }
 

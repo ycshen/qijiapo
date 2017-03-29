@@ -18,9 +18,6 @@
     <script type="text/javascript">
         var ctx = "${pageContext.request.contextPath}";
     </script>
-    <script>
-        var sdf = new SimpleDateFormat("yyyy-MM-dd");
-    </script>
     <style type="text/css">
         .my-layui-form-item {
             margin: 0px 15px 0px 0px;
@@ -84,6 +81,16 @@
             </div>
         </div>
         <div class="layui-form-item my-layui-form-item my-top">
+            <div class="layui-form-item my-layui-form-item">
+                <label class="layui-form-label">客户名称<span style="color:red">*</span></label>
+                <div class="layui-input-inline" style="margin-right: 0px;">
+                    <input placeholder="请选择客户名称" type="text" id="txtCustomerName" autocomplete="off"  class="layui-input" value="${contract.customerName}" disabled="disabled">
+                    <input type="hidden" value="${contract.customerId}" id="txtCustomerId" name="customerId"/>
+                    <input type="hidden" lay-verify="customerName" value="${contract.customerName}" id="txtCustomerNameHide" name="customerName"/>
+                </div>
+                <button class="layui-btn  layui-btn-primary" onclick="selectCustomer();"><i class="layui-icon">&#xe61f;</i></button>
+            </div>
+            <div class="layui-form-item my-layui-form-item my-top">
             <label class="layui-form-label">总金额<span style="color:red">*</span></label>
             <div class="layui-input-block">
                 <input type="text" name="totalPrice"  autocomplete="off"
