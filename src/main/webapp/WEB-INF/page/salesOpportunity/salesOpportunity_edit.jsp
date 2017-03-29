@@ -117,7 +117,10 @@ margin: 0px 15px 0px 0px;
    <div class="layui-form-item my-layui-form-item my-top">
     <label class="layui-form-label">结单日期</label>
     <div class="layui-input-block">
-      <input type="num" name="postcode" autocomplete="off"   value="${salesOpportunity.postcode}"  placeholder="请输入邮政编码" class="layui-input" maxlength="6">
+
+        <input type="text" name="endOppoTime" id="txtEndOppoTime"
+               placeholder="请选择结单日期" autocomplete="off" class="layui-input"
+               onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD'})">
     </div>
   </div>
 
@@ -130,7 +133,7 @@ margin: 0px 15px 0px 0px;
   <div class="layui-form-item my-layui-form-item my-top">
     <label class="layui-form-label">机会类型</label>
     <div class="layui-input-block">
-      <select name="oppoSource"  lay-search="">
+      <select name="oppotunityType"  lay-search="">
           <option value="">搜索或者选择机会类型</option>
           <option value="1">新客户机会</option>
           <option value="2">老客户机会</option>

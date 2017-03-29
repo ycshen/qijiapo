@@ -1,5 +1,7 @@
 package com.qjp.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 /**
@@ -13,6 +15,7 @@ public class SalesOpportunityEntity extends CRMBaseEntity{
 	private String customerName; //客户名称
 	private Integer oppotunityType; //机会类型
 	private String saleMoney; //销售金额
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date endOppoTime; //结单日期
 	private Integer saleStage;//销售阶段
 	private String winRate; //赢率
