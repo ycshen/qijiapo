@@ -72,7 +72,7 @@
 	          				<label class="layui-form-label my-label">电话</label>
 		          				
 						  </td>
-						  <td><input type="text" class="layui-input my-input" id="txtCustomerName" placeholder="电话"></td>
+						  <td><input type="text" class="layui-input my-input" id="txtMobile" placeholder="电话"></td>
 	          				
 	          				<td colspan="2">
 									<button class="layui-btn layui-btn-primary" onclick="queryCustomer();">

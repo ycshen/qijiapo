@@ -106,6 +106,7 @@ function refreshTable(){
 function queryCustomer(){
 	$("#myDataTable").dataTable().fnDestroy(); 
 	var customerName = $("#txtCustomerName").val();
+	var mobile = $("#txtMobile").val();
 	$("#myDataTable").dataTable( {
 	       ajax : {  
 	            type: "GET",  
@@ -113,6 +114,7 @@ function queryCustomer(){
 	            // 传入已封装的参数  
 	            data: function(data){ 
 	            	data.customerName = customerName;
+	            	data.mobile = mobile;
 	                data.page = data.start / data.length + 1;  
 	                data.size = data.length;  
 	                // 右上角搜索  
@@ -147,7 +149,7 @@ function queryCustomer(){
 	       "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示  
 	       "bPaginate": true,
 	       "serverSide": true, 
-           "searching" : true,
+           "searching" : false,
 	       "bFilter": false, 
 	       "sPaginationType": "full_numbers", 
 	       "paging": true,
