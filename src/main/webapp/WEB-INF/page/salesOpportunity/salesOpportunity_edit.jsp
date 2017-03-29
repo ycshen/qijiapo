@@ -66,31 +66,33 @@ margin: 0px 15px 0px 0px;
   <div class="layui-form-item my-layui-form-item">
     <label class="layui-form-label">客户名称<span style="color:red">*</span></label>
     <div class="layui-input-inline" style="margin-right: 0px;">
-    	<input placeholder="请选择客户名称" type="text" id="txtCustomerName" autocomplete="off" name="customerName"  class="layui-input" value="${salesOpportunity.customerName}" disabled="disabled">
-           
+    	<input placeholder="请选择客户名称" type="text" id="txtCustomerName" autocomplete="off"  class="layui-input" value="${salesOpportunity.customerName}" disabled="disabled">
+        <input type="hidden" value="${salesOpportunity.customerId}" id="txtCustomerId" name="customerId"/>
+        <input type="hidden" lay-verify="customerName" value="${salesOpportunity.customerName}" id="txtCustomerNameHide" name="customerName"/>
     </div>
     <button class="layui-btn  layui-btn-primary" onclick="selectCustomer();"><i class="layui-icon">&#xe61f;</i></button>
   </div>
+    <div class="layui-form-item my-layui-form-item layui-form-text">
+        <label class="layui-form-label">销售阶段<span style="color:red">*</span></label>
+        <div class="layui-input-block">
+            <select name="saleStage" lay-verify="saleStage" lay-search="" >
+                <option value="">搜索或者选择销售阶段</option>
+                <option value="1">初步接洽</option>
+                <option value="2">需求确定</option>
+                <option value="3">方案/报价</option>
+                <option value="4">谈判审核</option>
+                <option value="5">赢单</option>
+                <option value="6">输单</option>
+            </select>
+        </div>
+    </div>
  <div class="layui-form-item my-layui-form-item my-top">
-    <label class="layui-form-label">销售价格（元）<span style="color:red">*</span></label>
+    <label class="layui-form-label">销售价格（元</label>
     <div class="layui-input-block">
       <input type="num" name="saleMoney"  autocomplete="off" value="${salesOpportunity.saleMoney}"  placeholder="请输入销售价格" class="layui-input">
     </div>
   </div>
-  <div class="layui-form-item my-layui-form-item layui-form-text">
-    <label class="layui-form-label">销售阶段</label>
-    <div class="layui-input-block">
-      <select name="saleStage" lay-verify="required" lay-search="" >
-          <option value="">搜索或者选择销售阶段</option>
-          <option value="1">初步接洽</option>
-          <option value="2">需求确定</option>
-          <option value="3">方案/报价</option>
-          <option value="4">谈判审核</option>
-          <option value="5">赢单</option>
-          <option value="5">输单</option>
-        </select>
-    </div>
-  </div>
+
   <div id="divViewer">
   	
   	<div class="layui-form-item my-layui-form-item" style="margin-top:  20px;">
@@ -118,15 +120,7 @@ margin: 0px 15px 0px 0px;
       <input type="num" name="postcode" autocomplete="off"   value="${salesOpportunity.postcode}"  placeholder="请输入邮政编码" class="layui-input" maxlength="6">
     </div>
   </div>
-  
-   <div class="layui-form-item my-layui-form-item my-top">
-    <label class="layui-form-label">客户名称</label>
-    <div class="layui-input-inline" style="margin-right: 0px;">
-    	<input placeholder="请输入客户名称" type="text" id="txtCustomerName" autocomplete="off" name="customerName"  class="layui-input" value="${salesOpportunity.customerName}" disabled="disabled">
-           
-    </div>
-    <button class="layui-btn  layui-btn-primary" onclick="selectDepartment();"><i class="layui-icon">&#xe61f;</i></button>
-  </div>
+
    <div class="layui-form-item my-layui-form-item my-top">
     <label class="layui-form-label">市场活动</label>
     <div class="layui-input-block">
@@ -159,7 +153,7 @@ margin: 0px 15px 0px 0px;
   <div class="layui-form-item my-layui-form-item layui-form-text">
     <label class="layui-form-label">备注</label>
     <div class="layui-input-block">
-      <textarea placeholder="请输入备注" class="layui-textarea" name="remark"> ${salesOpportunity.remark} </textarea>
+      <textarea placeholder="请输入备注" class="layui-textarea" name="remark">${salesOpportunity.remark}</textarea>
     </div>
   </div>
 </div>
@@ -191,7 +185,16 @@ layui.use(['form', 'layedit', 'laydate'], function(){
 	          return '销售机会名称的长度不能大于00个字符';
 	       }
 	    },
-	  
+      saleStage: function(value){
+          if(value == null || value == '' || value == undefined){
+              return '请选择销售阶段';
+          }
+      },
+      customerName: function(value){
+          if(value == null || value == '' || value == undefined){
+              return '请选择客户';
+          }
+      }
   });
   
   

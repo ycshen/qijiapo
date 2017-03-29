@@ -132,8 +132,10 @@ function queryCustomer(){
 		            }  
 	       	},  
 	       	"columns": [
-				CONSTANT.DATA_TABLES.COLUMN.CHECKBOX, 
-				{ data: 'customerName'},
+				CONSTANT.DATA_TABLES.COLUMN.CHECKBOX,
+				{ data: 'customerName',render: function(data, type, customer){
+					return renderCustomer(customer.id, customer.customerName);
+				}},
 				{ data: 'mobile' },
 				{ data: 'level',
 				   	render: function(data, type, customer){
@@ -189,7 +191,9 @@ function initDataTable(){
 	       	},  
 	       	"columns": [
 	             CONSTANT.DATA_TABLES.COLUMN.CHECKBOX, 
-	             { data: 'customerName'},
+	             { data: 'customerName',render: function(data, type, customer){
+					 return renderCustomer(customer.id, customer.customerName);
+				 }},
 	             { data: 'mobile' },
 	             { data: 'level',
 		            	render: function(data, type, customer){
@@ -220,6 +224,10 @@ function initDataTable(){
 function renderPCA(provinceName, cityName, areaName){
 	return provinceName + cityName + areaName;
 }
+
+function renderCustomer(id, name){
+	return "<span id='customerName" + id + "'>" +  name +"</span>";
+}
 function renderLevel(level){
 	if(level == 1){
 		return "A(重点客户)";
@@ -228,4 +236,50 @@ function renderLevel(level){
 	}else{
 		return "C(非优先级客户)";
 	}
+}
+function isBlank(args){
+	var result = false;
+	if(args == "" || args == null || args == undefined){
+		result = true;
+	}
+
+	return result;
+}
+function confirmSelect(){
+	var id = getCheckedBoxValue();
+	if(isBlank(id)){
+		layer.alert("请选择客户",{closeBtn: false,
+			skin: 'layui-layer-molv'
+		});
+	}else{
+		if(id.indexOf(",") > 0){
+			layer.alert("只能选择一位客户",{closeBtn: false,
+				skin: 'layui-layer-molv'
+			});
+		}else{
+			var name = $("#customerName" + id).html();
+			parent.getCustomer(id, name);
+		}
+	}
+
+}
+
+
+function getCheckedBoxValue(){
+	var chkArr = $("input:checkbox");
+	var chkedStr = "";
+	$.each(chkArr, function(index, obj){
+		var attrId = $(obj).attr("id");
+		if(attrId != "chkAll"){
+			if($(obj).is(':checked')){
+				chkedStr += $(obj).val() + ",";
+			}
+		}
+	});
+
+	if(isNotBlank(chkedStr)){
+		chkedStr = chkedStr.substring(0, chkedStr.length - 1);
+	}
+
+	return chkedStr;
 }

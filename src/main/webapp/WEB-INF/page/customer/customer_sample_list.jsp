@@ -111,7 +111,7 @@
             </div>
             <div class="layui-form-item my-top" style="margin-top: 5px;">
 			    <div class="layui-input-block" style="text-align:right;">
-			      <button class="layui-btn" lay-submit="" lay-filter="mySubmit">确定选择</button>
+			      <button class="layui-btn" lay-submit="" lay-filter="mySubmit" onclick="confirmSelect();">确定选择</button>
 			      <button class="layui-btn layui-btn-primary" style="margin-right:50px;" onclick="cancelEdit();">取消选择</button>
 			    </div>
 			  </div>  

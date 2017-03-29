@@ -1,11 +1,20 @@
 package com.qjp.controller;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.qjp.base.ResponseStatus;
+import com.qjp.base.RoleEnum;
+import com.qjp.entity.LogEntity;
+import com.qjp.entity.SalesOpportunityEntity;
+import com.qjp.entity.UserEntity;
+import com.qjp.service.DepartmentService;
+import com.qjp.service.LogService;
+import com.qjp.service.SalesOpportunityService;
+import com.qjp.service.UserService;
+import com.qjp.util.JsonUtils;
+import com.qjp.util.LogUtils;
+import com.qjp.util.StringUtils;
+import com.qjp.util.UserUtils;
+import com.qjp.util.query.LogQuery;
+import com.qjp.util.query.SalesOpportunityQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,21 +23,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.qjp.base.ResponseStatus;
-import com.qjp.base.RoleEnum;
-import com.qjp.entity.SalesOpportunityEntity;
-import com.qjp.entity.LogEntity;
-import com.qjp.entity.UserEntity;
-import com.qjp.service.SalesOpportunityService;
-import com.qjp.service.DepartmentService;
-import com.qjp.service.LogService;
-import com.qjp.service.UserService;
-import com.qjp.util.JsonUtils;
-import com.qjp.util.LogUtils;
-import com.qjp.util.StringUtils;
-import com.qjp.util.UserUtils;
-import com.qjp.util.query.SalesOpportunityQuery;
-import com.qjp.util.query.LogQuery;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/inner/salesOpportunity")
@@ -166,15 +164,49 @@ public class SalesOpportunityController {
 		salesOpportunity.setCityId(StringUtils.splitLocation(cityId));
 		String areaId = salesOpportunity.getAreaId();
 		salesOpportunity.setAreaId(StringUtils.splitLocation(areaId));
+		String winRate = this.getWinRateBySaleStage(salesOpportunity.getSaleStage());
+		salesOpportunity.setWinRate(winRate);
 		Long id = salesOpportunity.getId();
 		UserEntity user = UserUtils.getLoginUser(request);
 		if(id == null){
 			String returnId = salesOpportunityService.insertSalesOpportunity(salesOpportunity);
+			LogUtils.log(5, "添加了销售机会", returnId, "销售机会ID", user);
 		}else{
 			salesOpportunityService.updateSalesOpportunity(salesOpportunity);
+			LogUtils.log(5, "更新了销售机会", salesOpportunity.getId().toString(), "销售机会ID", user);
 		}
 
 		return mav;
 	}
-	
+
+	/**
+	 *
+	 * @param saleStage
+	 * @return
+	 */
+	private String getWinRateBySaleStage(Integer saleStage){
+		String winRate = "0%";
+		switch (saleStage){
+			case 1 : //初步接洽
+				winRate = "10%";
+				break;
+			case 2 : //需求确定
+				winRate = "30%";
+				break;
+			case 3 : //方案/报价
+				winRate = "60%";
+				break;
+			case 4 : //谈判审核
+				winRate = "80%";
+				break;
+			case 5 : //赢单
+				winRate = "100%";
+				break;
+			case 6 : //输单
+				winRate = "0%";
+				break;
+		}
+
+		return winRate;
+	}
 }

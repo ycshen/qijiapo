@@ -36,3 +36,10 @@ function selectCustomer(){
 		content: url
 	});
 }
+
+function getCustomer(id, name){
+	$("#txtCustomerName").val(name);
+	$("#txtCustomerId").val(id);
+	$("#txtCustomerNameHide").val(name);
+	layui.layer.closeAll();
+}

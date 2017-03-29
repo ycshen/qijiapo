@@ -131,12 +131,12 @@
                   <th><input type="checkbox" name="salesopportunity-list-checkable" id="chkAll"></th>
                   <th>操作</th>
                   <th>机会名称</th>
+                    <th>销售阶段</th>
                   <th>销售机会所有人</th>
                   <th>客户名称</th>
                   <th>机会类型</th>
                   <th>销售金额</th>
                   <th>结单日期</th>
-                  <th>销售阶段</th>
                   <th>赢率</th>
                   <th>创建日期</th>
                 </tr>

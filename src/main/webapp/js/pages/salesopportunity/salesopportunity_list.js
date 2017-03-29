@@ -498,13 +498,20 @@ function initDataTable(){
 	            		return renderSalesOpportunityName(salesOpportunity.id, salesOpportunity.salesOpportunityName);
 	            	}
 	             },
+				{ data: 'saleStage',
+					render: function(data, type, salesOpportunity){
+						return renderSaleStage(salesOpportunity.saleStage);
+					}
+				},
 	             { data: 'companyName' },
 	             { data: 'customerName' },
-	             { data: 'oppotunityType' },
+	             { data: 'oppotunityType',
+					 render: function(data, type, salesOpportunity){
+						 return renderOppotunityType(salesOpportunity.oppotunityType);
+					 } },
 	             { data: 'saleMoney'},
 	             { data: 'endOppoTime' },
-	             { data: 'endOppoTime' },
-	             { data: 'endOppoTime' },
+	             { data: 'winRate' },
 	             { data: 'createTime' }
 	         ],
 	       "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示  
@@ -522,8 +529,34 @@ function initDataTable(){
 	      
 	   } );
 }
+function renderSaleStage(value){
+		if(value == 1){
+			return "初步接洽";
+		}else if(value == 2){
+			return "需求确定";
+		}else if(value == 3){
+			return "方案/报价";
+		}else if(value == 4){
+			return "谈判审核";
+		}else if(value == 5){
+		return "赢单";
+		}else if(value == 6){
+		return "输单";
+		}
 
-Date.prototype.Format = function (fmt) { //author: meizz 
+		return "";
+}
+
+function renderOppotunityType(value){
+	if(value == 2){
+		return "老客户机会";
+	}else if(value == 1){
+		return "新客户机会";
+	}
+
+	return "";
+}
+Date.prototype.Format = function (fmt) { //author: meizz
     var o = {
         "M+": this.getMonth() + 1, //月份 
         "d+": this.getDate(), //日 
