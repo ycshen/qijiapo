@@ -181,6 +181,10 @@ public class CRMApiUrl {
 	private String crm_updateSalesLeads_url;
 	public static String crm_updateSalesLeads;
 
+	//SalesOppoProduct
+	// @Value("${crm.insertSop}")
+	private String crm_insertSop_url;
+	public static String crm_insertSop;
 	@PostConstruct
 	public void init() {
 		crm = this.crm_url;
@@ -249,6 +253,9 @@ public class CRMApiUrl {
 		crm_batchDeleteSalesLeads = this.crm_batchDeleteSalesLeads_url;
 		crm_deleteSalesLeadsById = this.crm_deleteSalesLeadsById_url;
 		crm_updateSalesLeads = this.crm_updateSalesLeads_url;
+
+		//SalesOppoProduct
+		crm_insertSop = this.crm_insertSop_url;
 	}
 	
 }

@@ -77,12 +77,12 @@ margin: 0px 15px 0px 0px;
         <div class="layui-input-block">
             <select name="saleStage" lay-verify="saleStage" lay-search="" >
                 <option value="">搜索或者选择销售阶段</option>
-                <option value="1">初步接洽</option>
-                <option value="2">需求确定</option>
-                <option value="3">方案/报价</option>
-                <option value="4">谈判审核</option>
-                <option value="5">赢单</option>
-                <option value="6">输单</option>
+                <option value="1" <c:if test="${salesOpportunity.saleStage == 1}">selected="selected"</c:if>>初步接洽</option>
+                <option value="2" <c:if test="${salesOpportunity.saleStage == 2}">selected="selected"</c:if>>需求确定</option>
+                <option value="3" <c:if test="${salesOpportunity.saleStage == 3}">selected="selected"</c:if>>方案/报价</option>
+                <option value="4" <c:if test="${salesOpportunity.saleStage == 4}">selected="selected"</c:if>>谈判审核</option>
+                <option value="5" <c:if test="${salesOpportunity.saleStage == 5}">selected="selected"</c:if>>赢单</option>
+                <option value="6" <c:if test="${salesOpportunity.saleStage == 6}">selected="selected"</c:if>>输单</option>
             </select>
         </div>
     </div>
@@ -135,8 +135,8 @@ margin: 0px 15px 0px 0px;
     <div class="layui-input-block">
       <select name="oppotunityType"  lay-search="">
           <option value="">搜索或者选择机会类型</option>
-          <option value="1">新客户机会</option>
-          <option value="2">老客户机会</option>
+          <option value="1" <c:if test="${salesOpportunity.oppotunityType == 1}">selected="selected"</c:if>>新客户机会</option>
+          <option value="2" <c:if test="${salesOpportunity.oppotunityType == 2}">selected="selected"</c:if>>老客户机会</option>
         </select>
     </div>
   </div>
@@ -145,11 +145,11 @@ margin: 0px 15px 0px 0px;
     <div class="layui-input-block">
      <select name="oppoSource" lay-search="">
           <option value="">搜索或者选择机会来源</option>
-          <option value="1">客户介绍</option>
-          <option value="2">广告</option>
-          <option value="3">研讨会</option>
-          <option value="4">搜索引擎</option>
-          <option value="5">其他</option>
+          <option value="1" <c:if test="${salesOpportunity.oppoSource == 1}">selected="selected"</c:if>>客户介绍</option>
+          <option value="2" <c:if test="${salesOpportunity.oppoSource == 2}">selected="selected"</c:if>>广告</option>
+          <option value="3" <c:if test="${salesOpportunity.oppoSource == 3}">selected="selected"</c:if>>研讨会</option>
+          <option value="4" <c:if test="${salesOpportunity.oppoSource == 4}">selected="selected"</c:if>>搜索引擎</option>
+          <option value="5" <c:if test="${salesOpportunity.oppoSource == 5}">selected="selected"</c:if>>其他</option>
         </select>
     </div>
   </div>
@@ -163,6 +163,7 @@ margin: 0px 15px 0px 0px;
 </div>	
   <div class="layui-form-item my-top">
     <div class="layui-input-block" style="text-align:right;">
+      <button class="layui-btn" onclick="addProduct();">添加产品(0)</button>
       <button class="layui-btn" lay-submit="" lay-filter="mySubmit">保存</button>
       <button class="layui-btn layui-btn-primary" style="margin-right:50px;" onclick="cancelEdit();">取消</button>
     </div>

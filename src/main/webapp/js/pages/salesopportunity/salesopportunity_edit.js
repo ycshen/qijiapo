@@ -43,3 +43,7 @@ function getCustomer(id, name){
 	$("#txtCustomerNameHide").val(name);
 	layui.layer.closeAll();
 }
+
+function addProduct(){
+
+}

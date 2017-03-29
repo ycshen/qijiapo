@@ -85,8 +85,7 @@ public class SalesOpportunityController {
 		mav.addObject("salesOpportunity", salesOpportunity);
 		LogQuery logQuery = new LogQuery();
 		logQuery.setCasecadeId(id);
-		logQuery.setLogType("2");
-		logQuery.setSize(30);
+		logQuery.setLogType("5");
 		logQuery.setCompanyId(user.getCompanyId().toString());
 		logQuery = logService.getLogPage(logQuery);
 		List<LogEntity> logList = logQuery.getItems();

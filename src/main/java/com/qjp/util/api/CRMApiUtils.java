@@ -1016,5 +1016,28 @@ public class CRMApiUtils {
 
         return result;
     }
+
+    /**
+     * 插入销售机会和产品的对应关系
+     * @param jsonStr
+     * @return
+     */
+    public static String insertSop(String jsonStr) {
+        String result = StringUtils.EMPTY;
+        try {
+            String url = getCRMUrl() + CRMApiUrl.crm_insertSop;
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("sop", jsonStr);
+            Map<String, Object> maps = SHA1Utils.getSha1Map();
+            maps.put("sop", jsonStr);
+            String secret = SHA1Utils.SHA1(maps);
+            jsonObject.put("secret", secret);
+            result = HttpUtils.postUrl(url, jsonObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
 }
 
