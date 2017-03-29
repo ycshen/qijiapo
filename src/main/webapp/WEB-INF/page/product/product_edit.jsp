@@ -101,7 +101,12 @@ margin: 0px 15px 0px 0px;
   </div>
   </div>
   <div id="divOther" style="display: none;">
-
+   <div class="layui-form-item my-layui-form-item my-top">
+    <label class="layui-form-label">销售单位</label>
+    <div class="layui-input-block">
+      <input type="text" name="saleUnit"  autocomplete="off"   value="${product.saleUnit}"  placeholder="请输入销售单位" class="layui-input">
+    </div>
+  </div>
    <div class="layui-form-item my-layui-form-item my-top">
     <label class="layui-form-label">邮政编码</label>
     <div class="layui-input-block">

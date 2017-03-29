@@ -16,7 +16,7 @@ function editSalesOpportunity(id){
 	layer.open({
 		type: 2,
 		title: '编辑销售机会',
-		shadeClose: true,
+		shadeClose: false,
 		shade: 0.8,
 		area: ['800px', '400px'],
 		content: url
@@ -397,7 +397,7 @@ function querySalesOpportunity(){
 	   	                          
 	   	                	 operResult += 	" <li><a href=\"#\" onclick=\"deleteById('" + salesOpportunity.id + "', '" + salesOpportunity.salesOpportunityName + "');\">删除</a></li>";
 	   	                	 operResult += 	" <li><a href=\"#\" onclick=\"editSalesOpportunity('" + salesOpportunity.id + "');\">编辑</a></li>";
-	   	                         	
+	   	                	 operResult += 	" <li><a href=\"#\" onclick=\"addProduct('" + salesOpportunity.id + "');\">添加产品</a></li>";
 	   	                	 operResult += " </ul>";
 	   	                	 operResult += " </div>";
 	   	                     
@@ -486,7 +486,7 @@ function initDataTable(){
 	                          
 	                	 operResult += 	" <li><a href=\"#\" onclick=\"deleteById('" + salesOpportunity.id + "', '" + salesOpportunity.salesOpportunityName + "');\">删除</a></li>";
 	                	 operResult += 	" <li><a href=\"#\" onclick=\"editSalesOpportunity('" + salesOpportunity.id + "');\">编辑</a></li>";
-	                         	
+	                	 operResult += 	" <li><a href=\"#\" onclick=\"addProduct('" + salesOpportunity.id + "');\">添加产品</a></li>";    	
 	                	 operResult += " </ul>";
 	                	 operResult += " </div>";
 	                     
@@ -571,4 +571,18 @@ Date.prototype.Format = function (fmt) { //author: meizz
     if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
     return fmt;
 }
+
+
+function addProduct(id){
+	var url = ctx + "/inner/product/selectProduct?id=" + id;
+	layer.open({
+		type: 2,
+		title: '销售机会-添加产品',
+		shadeClose: false,
+		shade: 0.8,
+		area: ['800px', '400px'],
+		content: url
+	});
+}
+
 

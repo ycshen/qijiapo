@@ -48,6 +48,13 @@ public class ProductController {
 		return mav;
 	}
 	
+	@RequestMapping(value = "/selectProduct", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+	public ModelAndView selectProduct(String saleOppoId, HttpServletRequest request){
+		ModelAndView mav = new ModelAndView("/product/select_product");
+		mav.addObject("saleOppoId", saleOppoId);
+		return mav;
+	}
+	
 	
 	@RequestMapping(value = "/listAjax", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	@ResponseBody

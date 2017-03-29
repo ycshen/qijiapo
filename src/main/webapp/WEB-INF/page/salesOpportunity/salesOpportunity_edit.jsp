@@ -87,7 +87,7 @@ margin: 0px 15px 0px 0px;
         </div>
     </div>
  <div class="layui-form-item my-layui-form-item my-top">
-    <label class="layui-form-label">销售价格（元</label>
+    <label class="layui-form-label">销售价格（元)<span style="color:red">*</span></label>
     <div class="layui-input-block">
       <input type="num" name="saleMoney"  autocomplete="off" value="${salesOpportunity.saleMoney}"  placeholder="请输入销售价格" class="layui-input">
     </div>
@@ -163,7 +163,6 @@ margin: 0px 15px 0px 0px;
 </div>	
   <div class="layui-form-item my-top">
     <div class="layui-input-block" style="text-align:right;">
-      <button class="layui-btn" onclick="addProduct();">添加产品(0)</button>
       <button class="layui-btn" lay-submit="" lay-filter="mySubmit">保存</button>
       <button class="layui-btn layui-btn-primary" style="margin-right:50px;" onclick="cancelEdit();">取消</button>
     </div>
