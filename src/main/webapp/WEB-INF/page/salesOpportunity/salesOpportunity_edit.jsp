@@ -59,19 +59,36 @@ margin: 0px 15px 0px 0px;
   <div class="layui-form-item my-layui-form-item my-top">
     <label class="layui-form-label">销售机会名称<span style="color:red">*</span></label>
     <div class="layui-input-block">
-      <input type="text" name="salesOpportunityName" lay-verify="salesOpportunityName" autocomplete="off" placeholder="请输入销售机会名称" class="layui-input" maxlength="10" value="${salesOpportunity.salesOpportunityName}">
+      <input type="text" name="salesOpportunityName" lay-verify="salesOpportunityName" autocomplete="off" placeholder="请输入销售机会名称" class="layui-input"  value="${salesOpportunity.salesOpportunityName}">
     </div>
   </div>
-  
-  <div class="layui-form-item my-layui-form-item">
-    <label class="layui-form-label">客户名称<span style="color:red">*</span></label>
-    <div class="layui-input-inline" style="margin-right: 0px;">
-    	<input placeholder="请选择客户名称" type="text" id="txtCustomerName" autocomplete="off"  class="layui-input" value="${salesOpportunity.customerName}" disabled="disabled">
-        <input type="hidden" value="${salesOpportunity.customerId}" id="txtCustomerId" name="customerId"/>
-        <input type="hidden" lay-verify="customerName" value="${salesOpportunity.customerName}" id="txtCustomerNameHide" name="customerName"/>
-    </div>
-    <button class="layui-btn  layui-btn-primary" onclick="selectCustomer();"><i class="layui-icon">&#xe61f;</i></button>
-  </div>
+    <c:choose>
+        <c:when test="${customer != null && customer.id != null}">
+            <div class="layui-form-item my-layui-form-item">
+                <label class="layui-form-label">客户名称<span style="color:red">*</span></label>
+                <div class="layui-input-inline" style="margin-right: 0px;">
+                    <input type="text" style="border: 0px;" class="layui-input" value=" ${customer.customerName}" disabled="disabled">
+                    <input type="hidden" value="${customer.id}"  name="customerId"/>
+                    <input type="hidden"  value="${customer.customerName}"  name="customerName"/>
+                    <input type="hidden" value="1" id="hidEditType"/>
+                </div>
+            </div>
+        </c:when>
+        <c:otherwise>
+            <div class="layui-form-item my-layui-form-item">
+                <label class="layui-form-label">客户名称<span style="color:red">*</span></label>
+                <div class="layui-input-inline" style="margin-right: 0px;">
+                    <input placeholder="请选择客户名称" type="text" id="txtCustomerName" autocomplete="off"  class="layui-input" value="${salesOpportunity.customerName}" disabled="disabled">
+                    <input type="hidden" value="${salesOpportunity.customerId}" id="txtCustomerId" name="customerId"/>
+                    <input type="hidden" lay-verify="customerName" value="${salesOpportunity.customerName}" id="txtCustomerNameHide" name="customerName"/>
+                    <input type="hidden" value="0" id="hidEditType"/>
+                </div>
+                <button class="layui-btn  layui-btn-primary" onclick="selectCustomer();"><i class="layui-icon">&#xe61f;</i></button>
+            </div>
+
+        </c:otherwise>
+    </c:choose>
+
     <div class="layui-form-item my-layui-form-item layui-form-text">
         <label class="layui-form-label">销售阶段<span style="color:red">*</span></label>
         <div class="layui-input-block">
@@ -220,8 +237,14 @@ layui.use(['form', 'layedit', 'laydate'], function(){
 			  skin: 'layui-layer-molv'
 			  },
 			  function(index){
-		          parent.refreshTable();
-		          parent.layer.closeAll();
+                  var editType = $("#hidEditType").val();
+                  if(editType == 1){
+                      parent.layer.closeAll();
+                      parent.reloadSaleOppo();
+                  }else {
+                      parent.refreshTable();
+                      parent.layer.closeAll();
+                  }
 			  });
         }
     }); 

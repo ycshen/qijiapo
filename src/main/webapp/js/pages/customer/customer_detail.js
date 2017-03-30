@@ -79,3 +79,33 @@ function deleteById(id, name){
 		});
 	})
 }
+
+function addSalesOpportunity(customerId){
+	var url = ctx + "/inner/salesOpportunity/forwardEdit?customerId=" + customerId;
+	layer.open({
+		type: 2,
+		title: '新增销售机会',
+		shadeClose: false,
+		shade: 0.8,
+		area: ['830px', '450px'],
+		content: url
+	});
+}
+
+function reloadSaleOppo(){
+
+}
+
+function viewSalesOppoDetail(id, name){
+	parent.layer.closeAll();
+	var url = ctx + "/inner/salesOpportunity/detail?id=" + id;
+	var title = "销售机会【" + name   +"】";
+	layer.open({
+		type: 2,
+		title: title,
+		shadeClose: false,
+		shade: 0.8,
+		area: ['80%', '100%'],
+		content: url
+	});
+}

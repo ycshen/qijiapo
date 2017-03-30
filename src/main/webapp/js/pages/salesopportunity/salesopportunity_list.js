@@ -66,9 +66,9 @@ function viewDetail(id, salesOpportunityName){
 	layer.open({
 		type: 2,
 		title: title,
-		shadeClose: true,
+		shadeClose: false,
 		shade: 0.8,
-		area: ['80%', '80%'],
+		area: ['80%', '100%'],
 		content: url
 	}); 
 }
@@ -585,4 +585,15 @@ function addProduct(id){
 	});
 }
 
-
+function viewCustomerDetail(id, customerName){
+	var url = ctx + "/inner/customer/detail?id=" + id;
+	var title = "客户【" + customerName   +"】";
+	layer.open({
+		type: 2,
+		title: title,
+		shadeClose: false,
+		shade: 0.8,
+		area: ['80%', '80%'],
+		content: url
+	});
+}

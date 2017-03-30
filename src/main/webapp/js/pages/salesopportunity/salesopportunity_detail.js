@@ -79,3 +79,8 @@ function deleteById(id, name){
 		});
 	})
 }
+
+function viewCustomer(id, name){
+	parent.layer.closeAll();
+	parent.viewCustomerDetail(id, name);
+}

@@ -2,13 +2,11 @@ package com.qjp.controller;
 
 import com.qjp.base.ResponseStatus;
 import com.qjp.base.RoleEnum;
+import com.qjp.entity.CustomerEntity;
 import com.qjp.entity.LogEntity;
 import com.qjp.entity.SalesOpportunityEntity;
 import com.qjp.entity.UserEntity;
-import com.qjp.service.DepartmentService;
-import com.qjp.service.LogService;
-import com.qjp.service.SalesOpportunityService;
-import com.qjp.service.UserService;
+import com.qjp.service.*;
 import com.qjp.util.JsonUtils;
 import com.qjp.util.LogUtils;
 import com.qjp.util.StringUtils;
@@ -39,6 +37,8 @@ public class SalesOpportunityController {
 	private LogService logService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private CustomerService customerService;
 	@RequestMapping(value = "/list", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	public ModelAndView list(@ModelAttribute SalesOpportunityQuery salesOpportunityQuery, HttpServletRequest request){
 		ModelAndView mav = new ModelAndView("/salesOpportunity/salesOpportunity_list");
@@ -63,12 +63,17 @@ public class SalesOpportunityController {
 		return jsonStr;
 	}
 	@RequestMapping(value = "/forwardEdit", method = RequestMethod.GET)
-	public ModelAndView forwardEdit(String id, HttpServletRequest request){
+	public ModelAndView forwardEdit(String id, String customerId, HttpServletRequest request){
 		ModelAndView mav = new ModelAndView("/salesOpportunity/salesOpportunity_edit");
 		UserEntity user = UserUtils.getLoginUser(request);
 		SalesOpportunityEntity salesOpportunity = null;
 		if(StringUtils.isNotBlank(id)){
 			salesOpportunity = salesOpportunityService.getSalesOpportunityById(id);
+		}
+
+		if(StringUtils.isNotBlank(customerId)){
+			CustomerEntity customer = customerService.getCustomerById(customerId);
+			mav.addObject("customer", customer);
 		}
 		
 		mav.addObject("salesOpportunity", salesOpportunity);
@@ -83,9 +88,13 @@ public class SalesOpportunityController {
 		mav.addObject("user", user);
 		SalesOpportunityEntity salesOpportunity = salesOpportunityService.getSalesOpportunityById(id);
 		mav.addObject("salesOpportunity", salesOpportunity);
+		String customerId = salesOpportunity.getCustomerId();
+		if(StringUtils.isNotBlank(customerId)){
+			CustomerEntity customer = customerService.getCustomerById(customerId);
+			mav.addObject("customer", customer);
+		}
 		LogQuery logQuery = new LogQuery();
 		logQuery.setCasecadeId(id);
-		logQuery.setLogType("5");
 		logQuery.setCompanyId(user.getCompanyId().toString());
 		logQuery = logService.getLogPage(logQuery);
 		List<LogEntity> logList = logQuery.getItems();
@@ -163,49 +172,50 @@ public class SalesOpportunityController {
 		salesOpportunity.setCityId(StringUtils.splitLocation(cityId));
 		String areaId = salesOpportunity.getAreaId();
 		salesOpportunity.setAreaId(StringUtils.splitLocation(areaId));
-//		String winRate = this.getWinRateBySaleStage(salesOpportunity.getSaleStage());
-//		salesOpportunity.setWinRate(winRate);
+		String winRate = this.getWinRateBySaleStage(salesOpportunity.getSaleStage());
+		salesOpportunity.setWinRate(winRate);
 		Long id = salesOpportunity.getId();
 		UserEntity user = UserUtils.getLoginUser(request);
 		if(id == null){
 			String returnId = salesOpportunityService.insertSalesOpportunity(salesOpportunity);
-			LogUtils.log(5, "添加了销售机会", returnId, "销售机会ID", user);
+			LogUtils.log(LogUtils.SALES_OPPORTUNITY, "添加了销售机会", returnId, "销售机会ID", user);
+			LogUtils.log(LogUtils.CUSTOMER, "添加了销售机会", salesOpportunity.getCustomerId(), "客户ID", user);
 		}else{
 			salesOpportunityService.updateSalesOpportunity(salesOpportunity);
-			LogUtils.log(5, "更新了销售机会", salesOpportunity.getId().toString(), "销售机会ID", user);
+			LogUtils.log(LogUtils.SALES_OPPORTUNITY, "更新了销售机会", salesOpportunity.getId().toString(), "销售机会ID", user);
 		}
 
 		return mav;
 	}
 
-//	/**
-//	 *
-//	 * @param saleStage
-//	 * @return
-//	 */
-//	private String getWinRateBySaleStage(Integer saleStage){
-//		String winRate = "0%";
-//		switch (saleStage){
-//			case 1 : //初步接洽
-//				winRate = "10%";
-//				break;
-//			case 2 : //需求确定
-//				winRate = "30%";
-//				break;
-//			case 3 : //方案/报价
-//				winRate = "60%";
-//				break;
-//			case 4 : //谈判审核
-//				winRate = "80%";
-//				break;
-//			case 5 : //赢单
-//				winRate = "100%";
-//				break;
-//			case 6 : //输单
-//				winRate = "0%";
-//				break;
-//		}
-//
-//		return winRate;
-//	}
+	/**
+	 *
+	 * @param saleStage
+	 * @return
+	 */
+	private String getWinRateBySaleStage(Integer saleStage){
+		String winRate = "0%";
+		switch (saleStage){
+			case 1 : //初步接洽
+				winRate = "10%";
+				break;
+			case 2 : //需求确定
+				winRate = "30%";
+				break;
+			case 3 : //方案/报价
+				winRate = "60%";
+				break;
+			case 4 : //谈判审核
+				winRate = "80%";
+				break;
+			case 5 : //赢单
+				winRate = "100%";
+				break;
+			case 6 : //输单
+				winRate = "0%";
+				break;
+		}
+
+		return winRate;
+	}
 }

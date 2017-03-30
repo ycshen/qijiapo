@@ -14,7 +14,34 @@ import com.qjp.util.api.MyBaseApiUtils;
  * @author <a href="mailto:shenyuchuan@itiaoling.com">申鱼川</a>
  */
 public class LogUtils {
-	
+	/**
+	 * 管理日志
+	 */
+	public static Integer ADMIN = 1;
+	/**
+	 * crm竞争对手动态日志
+	 */
+	public static Integer COMPETITOR = 2;
+	/**
+	 * 客户日志
+	 */
+	public static Integer CUSTOMER = 3;
+	/**
+	 * 合同日志
+	 */
+	public static Integer CONTRACT = 4;
+	/**
+	 * 销售机会日志
+	 */
+	public static Integer SALES_OPPORTUNITY =5;
+	/**
+	 * 销售线索日志
+	 */
+	public static Integer SALES_LEADS = 6;
+	/**
+	 * 回款日志
+	 */
+	public static Integer RETURN_MONEY = 7;
 	/**
 	 * 记录日志
 	 * @param logType logType 0-功能日志 1-管理日志  2-crm竞争对手动态日志 3-客户日志 4-合同日志 5-销售机会日志 6-销售线索日志 7-回款日志

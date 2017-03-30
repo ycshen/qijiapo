@@ -66,9 +66,9 @@ function viewDetail(id, customerName){
 	layer.open({
 		type: 2,
 		title: title,
-		shadeClose: true,
+		shadeClose: false,
 		shade: 0.8,
-		area: ['80%', '80%'],
+		area: ['80%', '100%'],
 		content: url
 	});
 }

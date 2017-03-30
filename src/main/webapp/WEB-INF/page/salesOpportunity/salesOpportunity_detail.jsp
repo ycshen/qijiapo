@@ -65,7 +65,34 @@ font-size: 14px !important;
 <div class="container-fluid">
 	<div class="row">
         <div class="col-md-8">
-        	<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+			<div class="box-body">
+				<table class="table">
+					<tr>
+						<th>客户名称：<a class="btn btn-link"  href="#" onclick="viewCustomer('${customer.id}', '${customer.customerName}')">${customer.customerName}</a></th>
+						<th>客户级别：
+							<c:choose>
+							<c:when test="${customer.level == 1}">
+								<a class="btn btn-default  disabled"  style="border:0px;" href="#">A(重点客户)</a>
+							</c:when>
+							<c:when test="${customer.level == 2}">
+								<a class="btn btn-default  disabled" style="border:0px;"  href="#">B(普通用户)</a>
+
+							</c:when>
+							<c:otherwise>
+								<a class="btn btn-default  disabled" style="border:0px;"  href="#">C(非优先客户)</a>
+
+							</c:otherwise>
+						</c:choose>
+						</th>
+						<th>客户电话：
+							<a class="btn btn-default  disabled" style="border:0px;"  href="#">${customer.mobile}</a></th>
+					</tr>
+
+				</table>
+			</div>
+			<!-- /.box-body -->
+
+			<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
 			  <ul class="layui-tab-title">
 			    <li class="layui-this">资料</li>
 			    <li>动态</li>

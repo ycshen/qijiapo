@@ -25,5 +25,10 @@ function selectDepartment(){
 		content: url
 	});
 }
-
+$(function(){
+    var href = window.location.href;
+    if(href.indexOf("login") > 0){
+        parent.location.href = ctx + "/login";
+    }
+});
 </script>

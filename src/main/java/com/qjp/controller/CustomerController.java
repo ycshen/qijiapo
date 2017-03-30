@@ -1,11 +1,19 @@
 package com.qjp.controller;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.qjp.base.ResponseStatus;
+import com.qjp.base.RoleEnum;
+import com.qjp.entity.CustomerEntity;
+import com.qjp.entity.DepartmentEntity;
+import com.qjp.entity.LogEntity;
+import com.qjp.entity.UserEntity;
+import com.qjp.service.*;
+import com.qjp.util.JsonUtils;
+import com.qjp.util.LogUtils;
+import com.qjp.util.StringUtils;
+import com.qjp.util.UserUtils;
+import com.qjp.util.query.CustomerQuery;
+import com.qjp.util.query.LogQuery;
+import com.qjp.util.query.SalesOpportunityQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,26 +22,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.qjp.base.ResponseStatus;
-import com.qjp.base.RoleEnum;
-import com.qjp.entity.CustomerEntity;
-import com.qjp.entity.DepartmentEntity;
-import com.qjp.entity.LogEntity;
-import com.qjp.entity.UserEntity;
-import com.qjp.service.CustomerService;
-import com.qjp.service.DepartmentService;
-import com.qjp.service.LogService;
-import com.qjp.service.UserService;
-import com.qjp.util.JsonUtils;
-import com.qjp.util.LogUtils;
-import com.qjp.util.StringUtils;
-import com.qjp.util.UserUtils;
-import com.qjp.util.query.CustomerQuery;
-import com.qjp.util.query.LogQuery;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/inner/customer")
 public class CustomerController {
+	@Autowired
+	private SalesOpportunityService salesOppoService;
 	@Autowired
 	private CustomerService customerService;
 	@Autowired
@@ -113,7 +111,15 @@ public class CustomerController {
 			}
 			
 		}
+
 		mav.addObject("customer", customer);
+
+		SalesOpportunityQuery salesOpportunityQuery = new SalesOpportunityQuery();
+		salesOpportunityQuery.init(request);
+		salesOpportunityQuery.setSize(20);
+		salesOpportunityQuery.setCustomerId(id);
+		salesOppoService.getSalesOpportunityPage(salesOpportunityQuery);
+		mav.addObject("salesOpportunityQuery", salesOpportunityQuery);
 		LogQuery logQuery = new LogQuery();
 		logQuery.setCasecadeId(id);
 		logQuery.setLogType("3");

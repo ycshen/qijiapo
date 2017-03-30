@@ -14,6 +14,7 @@ import com.qjp.model.pageutil.Page;
 public class SalesOpportunityQuery extends Page<SalesOpportunityEntity>{
 	private String salesOpportunityName;
 	private String customerName;
+	private String customerId;
 	private Integer saleStage;//销售阶段
 	public String getSalesOpportunityName() {
 		return salesOpportunityName;
@@ -33,6 +34,13 @@ public class SalesOpportunityQuery extends Page<SalesOpportunityEntity>{
 	public void setSaleStage(Integer saleStage) {
 		this.saleStage = saleStage;
 	}
-	
+
+	public String getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
+	}
 }
 

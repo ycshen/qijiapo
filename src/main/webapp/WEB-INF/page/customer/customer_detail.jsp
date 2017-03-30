@@ -72,9 +72,7 @@ font-size: 14px !important;
 			   <li>销售机会</li>
 			   <li>销售线索</li>
 			   <li>合同</li>
-			   <li>回款</li>
 			   <li>市场活动</li>
-			   <li>相关产品</li>
 			  </ul>
 			  <div class="layui-tab-content">
 			    <div class="layui-tab-item layui-show">
@@ -225,12 +223,41 @@ font-size: 14px !important;
 			    	</table>
 			    </div>
 			    
-			    <div class="layui-tab-item">销售机会</div>
+			    <div class="layui-tab-item">
+					<div class="col-md-12">
+						<fieldset class="layui-elem-field layui-field-title" style="border: 0px;">
+							<div class="layui-field-box">
+								<div class="layui-btn-group">
+
+									<button class="layui-btn layui-btn-primary" onclick="addSalesOpportunity('${customer.id}');">
+										<i class="layui-icon">&#xe61f;</i>添加销售机会
+									</button>
+								</div>
+							</div>
+						</fieldset>
+
+					<c:if test="${salesOpportunityQuery.items != null && salesOpportunityQuery.items.size() > 0}">
+						<c:forEach items="${salesOpportunityQuery.items}" var="salesOppo">
+							<a href="#" onclick="viewSalesOppoDetail('${salesOppo.id}','${salesOppo.salesOpportunityName}')" title="点击查看销售机会详细信息">
+								<div class="col-md-6 col-sm-6 col-xs-12">
+								<div class="info-box">
+									<span class="info-box-icon bg-green"><i class="fa fa-cny"></i></span>
+									<div class="info-box-content">
+										<span class="info-box-text">销售金额(元)</span>
+										<span class="info-box-number">${salesOppo.saleMoney}</span>
+										<span class="info-box-text">销售机会名称</span>
+										<span class="info-box-number">${salesOppo.salesOpportunityName}</span>
+									</div>
+								</div>
+							</div>
+							</a>
+						</c:forEach>
+						</c:if>
+					</div>
+				</div>
 			    <div class="layui-tab-item">销售线索</div>
-			    <div class="layui-tab-item">合同</div>
 			    <div class="layui-tab-item">回款</div>
-			    <div class="layui-tab-item">市场活动</div> 
-			    <div class="layui-tab-item">产品</div> 
+			    <div class="layui-tab-item">市场活动</div>
 			  </div>
 			</div> 
         </div>
@@ -239,15 +266,12 @@ font-size: 14px !important;
         				<tr>
 			    			<td class="title-td-left" colspan="1">
 								<fieldset class="layui-elem-field">
-								  <legend>操作</legend>
+								  <legend>客户操作</legend>
 								  <div class="layui-field-box">
 								<div class="layui-btn-group">
 									 
 									  <button class="layui-btn layui-btn-primary" onclick="deleteById('${customer.id}','${customer.customerName}');">
 									    <i class="layui-icon">&#xe640;</i>删除
-									  </button>
-									   <button class="layui-btn layui-btn-primary" onclick="deleteById('${customer.id}','${customer.customerName}');">
-									    <i class="layui-icon">&#xe640;</i>添加产品
 									  </button>
 									</div>
 								  </div>
@@ -262,7 +286,7 @@ font-size: 14px !important;
 </div>
 
 
-<script>
+<script type="text/javascript">
 layui.use('element', function(){
 	  var $ = layui.jquery
 	  ,element = layui.element(); //Tab的切换功能，切换事件监听等，需要依赖element模块
