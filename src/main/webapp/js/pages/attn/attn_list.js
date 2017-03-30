@@ -88,7 +88,7 @@ function viewDetail(id, attnName) {
 }
 
 function transfer(id, attnName) {
-    var url = ctx + "/inner/user/selectAllUser?id=" + id + "&name=" + attnName;
+    var url = ctx + "/inner/user/selectAllUserAttn?id=" + id + "&name=" + attnName;
     var title = "转移联系人【" + attnName + "】";
     layer.open({
         type: 2,

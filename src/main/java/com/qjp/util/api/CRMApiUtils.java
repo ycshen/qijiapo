@@ -395,9 +395,9 @@ public class CRMApiUtils {
         try {
             String url = getCRMUrl() + CRMApiUrl.crm_updateAttn;
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("competitor", attn);
+            jsonObject.put("attn", attn);
             Map<String, Object> maps = SHA1Utils.getSha1Map();
-            maps.put("competitor", attn);
+            maps.put("attn", attn);
             String secret = SHA1Utils.SHA1(maps);
             jsonObject.put("secret", secret);
             result = HttpUtils.postUrl(url, jsonObject);

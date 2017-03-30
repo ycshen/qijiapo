@@ -83,7 +83,7 @@
         <div class="layui-form-item my-layui-form-item my-top">
             <label class="layui-form-label">开始日期<span style="color:red">*</span></label>
             <div class="layui-input-block">
-                <input type="text" name="activityStartTime" id="txtStartTime" lay-verify="activityStartTime" lay-verify="memoStartTime"
+                <input type="text" name="activityStartTime" id="activityStartTime" lay-verify="activityStartTime"
                        placeholder="请选择市场活动开始日期" autocomplete="off" class="layui-input"
                        onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD'})">
             </div>
@@ -91,7 +91,7 @@
         <div class="layui-form-item my-layui-form-item my-top">
             <label class="layui-form-label">结束日期<span style="color:red">*</span></label>
             <div class="layui-input-block">
-                <input type="text" name="activityEndTime" id="txtEndTime" lay-verify="activityEndTime"
+                <input type="text" name="activityEndTime" id="activityEndTime" lay-verify="activityEndTime"
                        placeholder="请选择市场活动结束日期" autocomplete="off" class="layui-input"
                        onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD'})">
             </div>
@@ -254,6 +254,16 @@
 
                 if (value.length > 30) {
                     return '市场活动名称的长度不能大于30个字符';
+                }
+            },
+            activityStartTime: function (value) {
+                if (value == null || value == '' || value == undefined){
+                    return '开始时间还未选择';
+                }
+            },
+            activityEndTime: function (value) {
+                if (value == null || value == '' || value == undefined){
+                    return '结束时间还未选择';
                 }
             },
 

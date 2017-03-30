@@ -71,8 +71,7 @@
             <label class="layui-form-label">公司名称<span style="color:red">*</span></label>
             <div class="layui-input-block">
                 <input type="text" name="customerCompanyName" lay-verify="customerCompanyName" autocomplete="off"
-                       lay-verify="customerCompanyName"
-                       placeholder="请输入公司名称" class="layui-input" maxlength="10"
+                       placeholder="请输入公司名称" class="layui-input"
                        value="${salesLeads.customerCompanyName}">
 
             </div>
@@ -254,11 +253,16 @@
         form.verify({
             customerName: function (value) {
                 if (value.length < 2) {
-                    return '产品名称的长度不能小于2个字符';
+                    return '名称的长度不能小于2个字符';
                 }
 
                 if (value.length > 30) {
-                    return '产品名称的长度不能大于30个字符';
+                    return '名称的长度不能大于30个字符';
+                }
+            },
+            customerCompanyName: function (value) {
+                if (value == null || value == '' || value == undefined){
+                    return '公司名称还未填写';
                 }
             },
 

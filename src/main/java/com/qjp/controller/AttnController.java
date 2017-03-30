@@ -169,6 +169,7 @@ public class AttnController {
         oldAttn.setUserName(transferUserName);
         oldAttn.setUpdateTime(new Date());
         oldAttn.setUpdateUser(loginUser.getUserName());
+        attnService.updateAttn(oldAttn);
         LogUtils.logCRMAttn("转移竞争对手(" + oldAttn.getAttnName() + ")到" + transferUserName, attnId, loginUser);
     }
     

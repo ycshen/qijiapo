@@ -94,14 +94,15 @@
             <label class="layui-form-label">总金额<span style="color:red">*</span></label>
             <div class="layui-input-block">
                 <input type="text" name="totalPrice"  autocomplete="off"
+                       id="totalPrice" lay-verify="totalPrice"
                        placeholder="请输入总金额"
-                       class="layui-input" maxlength="10" value="${contract.totalPrice}">
+                       class="layui-input" value="${contract.totalPrice}">
             </div>
         </div>
         <div class="layui-form-item my-layui-form-item my-top">
             <label class="layui-form-label">开始日期<span style="color:red">*</span></label>
             <div class="layui-input-block">
-                <input type="text" name="contractStartTime" id="contractStartTime" lay-verify="memoStartTime"
+                <input type="text" name="contractStartTime" id="contractStartTime" lay-verify="contractStartTime"
                        placeholder="请选择合同开始日期" autocomplete="off" class="layui-input"
                        dataformatas="YYYY-MM-DD"
                        value=""
@@ -111,7 +112,7 @@
         <div class="layui-form-item my-layui-form-item my-top">
             <label class="layui-form-label">结束日期<span style="color:red">*</span></label>
             <div class="layui-input-block">
-                <input type="text" name="contractEndTime" id="txtEndTime" lay-verify="memoStartTime"
+                <input type="text" name="contractEndTime" id="txtEndTime" lay-verify="contractEndTime"
                        placeholder="请选择合同结束日期" autocomplete="off" class="layui-input"
                        value="${contract.contractEndTime}"
                        onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD'})">
@@ -268,11 +269,31 @@
         form.verify({
             contractName: function (value) {
                 if (value.length < 2) {
-                    return '合同名称的长度不能小于2个字符';
+                    return '主题的长度不能小于2个字符';
                 }
 
                 if (value.length > 30) {
-                    return '合同名称的长度不能大于30个字符';
+                    return '主题的长度不能大于30个字符';
+                }
+            },
+            customerName: function (value) {
+                if (value == null || value == '' || value == undefined){
+                    return '客户还未选择';
+                }
+            },
+            totalPrice: function (value) {
+                if (value < 1){
+                    return '总金额还未填写';
+                }
+            },
+            contractStartTime: function (value) {
+                if (value == null || value == '' || value == undefined){
+                    return '开始时间还未选择';
+                }
+            },
+            contractEndTime: function (value) {
+                if (value == null || value == '' || value == undefined){
+                    return '结束时间还未选择';
                 }
             },
 

@@ -24,7 +24,7 @@ function refreshTable(){
 }
 function transfer(id, customerName){
 	var url = ctx + "/inner/user/selectAllUser?id=" + id + "&name=" + customerName;
-	var title = "转移销售机会【" + customerName   +"】";
+	var title = "转移销售线索【" + customerName   +"】";
 	layer.open({
 		type: 2,
 		title: title,
@@ -55,7 +55,7 @@ function cancelSalesLeads(){
 	$("#btnSave").hide();
 }
 function deleteById(id, name){
-	layer.confirm("确定要删除销售机会【" + name + "】相关信息吗？",{closeBtn: false,
+	layer.confirm("确定要删除销售线索【" + name + "】相关信息吗？",{closeBtn: false,
   		skin: 'layui-layer-molv'
 	  }, function(){
 		  var url = ctx + "/inner/salesLeads/deleteById?id=" + id +"&name=" + name;
@@ -64,14 +64,14 @@ function deleteById(id, name){
 			url: url,
 			success: function(result){
 				if(result == 2){
-					layer.alert("删除销售机会成功",{closeBtn: false,
+					layer.alert("删除销售线索成功",{closeBtn: false,
 				  		skin: 'layui-layer-molv'
 					  }, function(){
 						  parent.refreshTable();
 						  parent.layer.closeAll();
 					  });
 				}else{
-					layer.alert("删除销售机会失败",{closeBtn: false,
+					layer.alert("删除销售线索失败",{closeBtn: false,
 				  		skin: 'layui-layer-molv'
 					  });
 				}
