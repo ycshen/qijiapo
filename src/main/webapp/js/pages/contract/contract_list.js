@@ -82,7 +82,7 @@ function viewDetail(id, contractName) {
         title: title,
         shadeClose: true,
         shade: 0.8,
-        area: ['80%', '80%'],
+        area: ['80%', '100%'],
         content: url
     });
 }
@@ -639,4 +639,17 @@ Date.prototype.Format = function (fmt) { //author: meizz
     for (var k in o)
         if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
     return fmt;
+}
+
+function viewCustomerDetail(id, customerName){
+    var url = ctx + "/inner/customer/detail?id=" + id;
+    var title = "客户【" + customerName   +"】";
+    layer.open({
+        type: 2,
+        title: title,
+        shadeClose: false,
+        shade: 0.8,
+        area: ['80%', '100%'],
+        content: url
+    });
 }

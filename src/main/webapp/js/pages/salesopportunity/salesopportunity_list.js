@@ -593,7 +593,7 @@ function viewCustomerDetail(id, customerName){
 		title: title,
 		shadeClose: false,
 		shade: 0.8,
-		area: ['80%', '80%'],
+		area: ['80%', '100%'],
 		content: url
 	});
 }

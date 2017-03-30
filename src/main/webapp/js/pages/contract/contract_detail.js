@@ -28,7 +28,7 @@ function transfer(id, contractName){
 	layer.open({
 		type: 2,
 		title: title,
-		shadeClose: true,
+		shadeClose: false,
 		shade: 0.8,
 		area: ['500px', '400px'],
 		content: url
@@ -121,4 +121,21 @@ function getContractBusinessType(businessType){
     }
 
     return businessTypeStr;
+}
+
+function viewCustomer(id, name){
+	parent.layer.closeAll();
+	parent.viewCustomerDetail(id, name);
+}
+
+function addReturnMoney(){
+	var url = ctx + "/inner/returnMoney/forwardEdit";
+	layer.open({
+		type: 2,
+		title: '新增回款期次',
+		shadeClose: false,
+		shade: 0.8,
+		area: ['830px', '450px'],
+		content: url
+	});
 }
