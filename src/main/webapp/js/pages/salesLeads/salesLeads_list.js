@@ -88,7 +88,7 @@ function viewDetail(id, salesLeadsName) {
 }
 
 function transfer(id, salesLeadsName) {
-    var url = ctx + "/inner/user/selectAllUser?id=" + id + "&name=" + salesLeadsName;
+    var url = ctx + "/inner/user/selectAllUserSalesLeads?id=" + id + "&name=" + salesLeadsName;
     var title = "转移销售线索【" + salesLeadsName + "】";
     layer.open({
         type: 2,

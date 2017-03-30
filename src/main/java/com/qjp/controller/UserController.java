@@ -313,6 +313,42 @@ public class UserController {
 		return mav;
 	}
 
+	@RequestMapping(value = "/selectAllUserSalesLeads", method = RequestMethod.GET)
+	public ModelAndView selectAllUserSalesLeads(String id, String name, HttpServletRequest request){
+		ModelAndView mav = new ModelAndView("/user/user_allcompany_sales_leads_select");
+		UserEntity loginUser = UserUtils.getLoginUser(request);
+		List<UserEntity> userList = userService.getUserListByCompanyId(loginUser.getCompanyId().toString());
+		mav.addObject("userList", userList);
+		mav.addObject("id", id);
+		mav.addObject("name", name);
+
+		return mav;
+	}
+
+	@RequestMapping(value = "/selectAllUserContract", method = RequestMethod.GET)
+	public ModelAndView selectAllUserContract(String id, String name, HttpServletRequest request){
+		ModelAndView mav = new ModelAndView("/user/user_allcompany_contract_select");
+		UserEntity loginUser = UserUtils.getLoginUser(request);
+		List<UserEntity> userList = userService.getUserListByCompanyId(loginUser.getCompanyId().toString());
+		mav.addObject("userList", userList);
+		mav.addObject("id", id);
+		mav.addObject("name", name);
+
+		return mav;
+	}
+
+	@RequestMapping(value = "/selectAllUserActivity", method = RequestMethod.GET)
+	public ModelAndView selectAllUserActivity(String id, String name, HttpServletRequest request){
+		ModelAndView mav = new ModelAndView("/user/user_allcompany_activity_select");
+		UserEntity loginUser = UserUtils.getLoginUser(request);
+		List<UserEntity> userList = userService.getUserListByCompanyId(loginUser.getCompanyId().toString());
+		mav.addObject("userList", userList);
+		mav.addObject("id", id);
+		mav.addObject("name", name);
+
+		return mav;
+	}
+
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public ModelAndView profile(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView("/user/user_profile");

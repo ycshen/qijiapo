@@ -88,7 +88,7 @@ function viewDetail(id, activityName) {
 }
 
 function transfer(id, activityName) {
-    var url = ctx + "/inner/user/selectAllUser?id=" + id + "&name=" + activityName;
+    var url = ctx + "/inner/user/selectAllUserActivity?id=" + id + "&name=" + activityName;
     var title = "转移市场活动【" + activityName + "】";
     layer.open({
         type: 2,

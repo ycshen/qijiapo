@@ -23,7 +23,7 @@ function refreshTable(){
 	  window.parent.layer.closeAll();
 }
 function transfer(id, contractName){
-	var url = ctx + "/inner/user/selectAllUser?id=" + id + "&name=" + contractName;
+	var url = ctx + "/inner/user/selectAllUserContract?id=" + id + "&name=" + contractName;
 	var title = "转移合同【" + contractName   +"】";
 	layer.open({
 		type: 2,

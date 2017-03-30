@@ -208,7 +208,9 @@ font-size: 14px !important;
 								  <legend>操作</legend>
 								  <div class="layui-field-box">
 								<div class="layui-btn-group">
-									 
+									<button class="layui-btn layui-btn-primary" onclick="transfer('${salesLeads.id}','${salesLeads.customerName}');">
+										<i class="layui-icon">&#xe640;</i>转移销售线索
+									</button>
 									  <button class="layui-btn layui-btn-primary" onclick="deleteById('${salesLeads.id}','${salesLeads.customerName}');">
 									    <i class="layui-icon">&#xe640;</i>删除
 									  </button>

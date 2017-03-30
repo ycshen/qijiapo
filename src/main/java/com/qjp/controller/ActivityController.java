@@ -140,6 +140,7 @@ public class ActivityController {
         oldActivity.setUserName(transferUserName);
         oldActivity.setUpdateTime(new Date());
         oldActivity.setUpdateUser(loginUser.getUserName());
+        activityService.updateActivity(oldActivity);
         LogUtils.logCRMActivity("转移市场活动(" + oldActivity.getActivityName() + ")到" + transferUserName, activityId, loginUser);
     }
 

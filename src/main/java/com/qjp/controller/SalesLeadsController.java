@@ -102,7 +102,7 @@ public class SalesLeadsController {
 		if(StringUtils.isNotBlank(id)){
 			salesLeadsService.deleteSalesLeadsById(id);
 			UserEntity user = UserUtils.getLoginUser(request);
-			LogUtils.logCRMSalesLeads("删除了销售机会(" + name + ")", id, user);
+			LogUtils.logCRMSalesLeads("删除了销售线索(" + name + ")", id, user);
 			result = ResponseStatus.UPDATE_SUCCESS;
 		}
 		
@@ -139,7 +139,8 @@ public class SalesLeadsController {
 		oldSalesLeads.setUserName(transferUserName);
 		oldSalesLeads.setUpdateTime(new Date());
 		oldSalesLeads.setUpdateUser(loginUser.getUserName());
-		LogUtils.logCRMSalesLeads("转移销售机会(" + oldSalesLeads.getCustomerName() + ")到" + transferUserName, salesLeadsId, loginUser);
+		salesLeadsService.updateSalesLeads(oldSalesLeads);
+		LogUtils.logCRMSalesLeads("转移销售线索(" + oldSalesLeads.getCustomerName() + ")到" + transferUserName, salesLeadsId, loginUser);
 	}
 	
 	@RequestMapping(value = "/batchDeleteById", method = RequestMethod.GET)
@@ -152,7 +153,7 @@ public class SalesLeadsController {
 			salesLeadsService.batchDeleteSalesLeads(idList);
 			UserEntity user = UserUtils.getLoginUser(request);
 			for (String id : idList) {
-				LogUtils.logCRMSalesLeads("删除了销售机会", id, user);
+				LogUtils.logCRMSalesLeads("删除了销售线索", id, user);
 			}
 			result = ResponseStatus.UPDATE_SUCCESS;
 		}
@@ -174,10 +175,10 @@ public class SalesLeadsController {
 		UserEntity user = UserUtils.getLoginUser(request);
 		if(id == null){
 			String returnId = salesLeadsService.insertSalesLeads(salesLeads);
-			LogUtils.logCRMSalesLeads("添加了销售机会(" + salesLeads.getCustomerName() + ")", returnId, user);
+			LogUtils.logCRMSalesLeads("添加了销售线索(" + salesLeads.getCustomerName() + ")", returnId, user);
 		}else{
 			salesLeadsService.updateSalesLeads(salesLeads);
-			LogUtils.logCRMSalesLeads("修改了销售机会(" + salesLeads.getCustomerName() + ")", id.toString(), user);
+			LogUtils.logCRMSalesLeads("修改了销售线索(" + salesLeads.getCustomerName() + ")", id.toString(), user);
 		}
 
 		return mav;

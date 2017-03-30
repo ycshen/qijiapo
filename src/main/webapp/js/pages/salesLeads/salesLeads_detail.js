@@ -23,7 +23,7 @@ function refreshTable(){
 	  window.parent.layer.closeAll();
 }
 function transfer(id, customerName){
-	var url = ctx + "/inner/user/selectAllUser?id=" + id + "&name=" + customerName;
+	var url = ctx + "/inner/user/transferSalesLeads?id=" + id + "&name=" + customerName;
 	var title = "转移销售线索【" + customerName   +"】";
 	layer.open({
 		type: 2,

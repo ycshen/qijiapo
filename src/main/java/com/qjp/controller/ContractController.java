@@ -141,6 +141,7 @@ public class ContractController {
         oldContract.setUserName(transferUserName);
         oldContract.setUpdateTime(new Date());
         oldContract.setUpdateUser(loginUser.getUserName());
+        contractService.updateContract(oldContract);
         LogUtils.logCRMContract("删除了合同(" + oldContract.getContractName() + ")到" + transferUserName, contractId, loginUser);
     }
 
