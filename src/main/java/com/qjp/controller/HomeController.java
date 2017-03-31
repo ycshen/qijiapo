@@ -1,13 +1,12 @@
 package com.qjp.controller;
 
-import java.net.URLEncoder;
-import java.util.List;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import com.qjp.entity.MenuEntity;
+import com.qjp.entity.UserEntity;
+import com.qjp.service.CustomerService;
+import com.qjp.service.DepartmentService;
+import com.qjp.service.MenuService;
+import com.qjp.service.UserService;
+import com.qjp.util.UserUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,10 +15,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.qjp.entity.MenuEntity;
-import com.qjp.entity.UserEntity;
-import com.qjp.service.MenuService;
-import com.qjp.service.UserService;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.net.URLEncoder;
+import java.util.List;
 
 
 @Controller
@@ -31,6 +32,10 @@ public class HomeController {
 	private UserService userService;
 	@Autowired
 	private MenuService menuService;
+	@Autowired
+	private CustomerService customerService;
+	@Autowired
+	private DepartmentService departmentService;
 /*	@RequestMapping("/")
 	public String main() {
 		return "main";
@@ -49,6 +54,8 @@ public class HomeController {
 			if(loginUser != null){
 				HttpSession seesion = request.getSession();
 				seesion.setAttribute("loginUser",loginUser);
+				String roleType = UserUtils.getRoleType(request);
+				seesion.setAttribute("roleType",roleType);
 				Integer menuDefineType = loginUser.getMenuDefinedType();
 				if(menuDefineType == null){
 					menuDefineType = 4;
@@ -153,7 +160,7 @@ public class HomeController {
 		HttpSession seesion = request.getSession();
 		UserEntity loginUser = (UserEntity) seesion.getAttribute("loginUser");
 		mav.addObject("loginUser", loginUser); //不想直接取
-		
+
 		return mav;
 	}
 	

@@ -232,6 +232,24 @@ public class MyBaseApiUrl {
 	@Value("${mybase.batchRole}")
 	private String mybase_batchRole_url;
 	public static String mybase_batchRole;
+
+	//dailyaccount
+
+	@Value("${mybase.insertDailyAccount}")
+	private String mybase_insertDailyAccount_url;
+	public static String mybase_insertDailyAccount;
+	@Value("${mybase.getDailyAccountPage}")
+	private String mybase_getDailyAccountPage_url;
+	public static String mybase_getDailyAccountPage;
+	@Value("${mybase.getDailyAccountById}")
+	private String mybase_getDailyAccountById_url;
+	public static String mybase_getDailyAccountById;
+	@Value("${mybase.deleteDailyAccountById}")
+	private String mybase_deleteDailyAccountById_url;
+	public static String mybase_deleteDailyAccountById;
+	@Value("${mybase.updateDailyAccount}")
+	private String mybase_updateDailyAccount_url;
+	public static String mybase_updateDailyAccount;
 	@PostConstruct
 	public void init() {
 		mybase_login = this.mybase_login_url;
@@ -318,6 +336,13 @@ public class MyBaseApiUrl {
 		mybase_cancelRole = this.mybase_cancelRole_url;
 		mybase_insertRole = this.mybase_insertRole_url;
 		mybase_batchRole = this.mybase_batchRole_url;
+
+		//DailyAccount
+		mybase_insertDailyAccount = this.mybase_insertDailyAccount_url;
+		mybase_getDailyAccountPage = this.mybase_getDailyAccountPage_url;
+		mybase_getDailyAccountById = this.mybase_getDailyAccountById_url;
+		mybase_deleteDailyAccountById = this.mybase_deleteDailyAccountById_url;
+		mybase_updateDailyAccount = this.mybase_updateDailyAccount_url;
 	}
 	
 }

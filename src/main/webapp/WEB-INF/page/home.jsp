@@ -25,9 +25,7 @@
 	<%@include file="share/qjp_header.jsp"%>
  	<%@include file="share/qjp_menu.jsp"%>
   
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
         企家婆
@@ -43,20 +41,19 @@
     <section class="content">
 
       <div class="row">
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <a href="${ctx}/inner/admin/home">
-            	<span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
-			</a>
-            <div class="info-box-content">
-              <a href="${ctx}/inner/admin/home"><span class="info-box-text">>></span>
-              <span class="info-box-number">企业管理<small></small></span></a>
+        <c:if test="${roleType == 1}">
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+              <a href="${ctx}/inner/admin/home">
+                  <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+              </a>
+              <div class="info-box-content">
+                <a href="${ctx}/inner/admin/home"><span class="info-box-text">>></span>
+                <span class="info-box-number">企业管理<small></small></span></a>
+              </div>
             </div>
-            <!-- /.info-box-content -->
           </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
+        </c:if>
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
             <span class="info-box-icon bg-red"><i class="fa fa-google-plus"></i></span>
@@ -65,13 +62,9 @@
               <span class="info-box-text">6</span>
               <span class="info-box-number">我的应用</span>
             </div>
-            <!-- /.info-box-content -->
           </div>
-          <!-- /.info-box -->
         </div>
-        <!-- /.col -->
 
-        <!-- fix for small devices only -->
         <div class="clearfix visible-sm-block"></div>
 
         <div class="col-md-3 col-sm-6 col-xs-12">
@@ -82,42 +75,33 @@
               <span class="info-box-text">9600</span>
               <span class="info-box-number">我的销售</span>
             </div>
-            <!-- /.info-box-content -->
           </div>
-          <!-- /.info-box -->
         </div>
-        <!-- /.col -->
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
-            <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
-
+            <a href="${ctx}/inner/admin/home" title="查看详细信息">
+              <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
+            </a>
             <div class="info-box-content">
-              <span class="info-box-text">86</span>
-              <span class="info-box-number">部门资料</span>
+              <a href="${ctx}/inner/admin/home"  title="查看详细信息"><span class="info-box-text">${customerCount}</span>
+              <span class="info-box-number">公司同事资料</span>
+              </a>
             </div>
-            <!-- /.info-box-content -->
           </div>
-          <!-- /.info-box -->
         </div>
-        <!-- /.col -->
       </div>
 
     </section>
-    <!-- /.content -->
   </div>
 
   <%@include file="share/qjp_footer.jsp"%>
 
-  <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
-    <!-- Create the tabs -->
     <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
       <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
       <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
     </ul>
-    <!-- Tab panes -->
     <div class="tab-content">
-      <!-- Home tab content -->
       <div class="tab-pane active" id="control-sidebar-home-tab">
         <h3 class="control-sidebar-heading">Recent Activity</h3>
         <ul class="control-sidebar-menu">

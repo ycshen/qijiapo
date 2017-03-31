@@ -30,8 +30,12 @@
       <!-- Navbar Right Menu -->
      <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="${ctx}/home">工作<span class="sr-only">(current)</span></a></li>
-            <li><a href="${ctx}/inner/admin/home">企业管理</a></li>
+
+            <li><a href="${ctx}/home">工作<span class="sr-only">(current)</span></a></li>
+            <c:if test="${roleType == 1}">
+              <li><a href="${ctx}/inner/admin/home">企业管理</a></li>
+            </c:if>
+
 
           </ul>
         </div>

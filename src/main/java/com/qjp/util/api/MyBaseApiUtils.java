@@ -1,15 +1,15 @@
 package com.qjp.util.api;
 
-import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.alibaba.fastjson.JSONObject;
 import com.qjp.base.UserStatus;
+import com.qjp.base.url.CRMApiUrl;
 import com.qjp.base.url.MyBaseApiUrl;
 import com.qjp.util.CommonUtils;
 import com.qjp.util.HttpUtils;
 import com.qjp.util.SHA1Utils;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Map;
 
 /** 
  * <p>Project: qijiapo</p> 
@@ -1473,6 +1473,99 @@ public class MyBaseApiUtils {
 		
 		return result;
 	}
-	
+
+
+	//DailyAccount dailyAccount
+	public static String insertDailyAccount(String dailyAccount) {
+		String result = StringUtils.EMPTY;
+		try {
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_insertDailyAccount;
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("dailyAccount", dailyAccount);
+			Map<String, Object> maps = SHA1Utils.getSha1Map();
+			maps.put("dailyAccount", dailyAccount);
+			String secret = SHA1Utils.SHA1(maps);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+
+
+	public static String updateDailyAccount(String dailyAccount) {
+		String result = StringUtils.EMPTY;
+		try {
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_updateDailyAccount;
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("dailyAccount", dailyAccount);
+			Map<String, Object> maps = SHA1Utils.getSha1Map();
+			maps.put("dailyAccount", dailyAccount);
+			String secret = SHA1Utils.SHA1(maps);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+	public static String getDailyAccountPage(String query) {
+		String result = StringUtils.EMPTY;
+		try {
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_getDailyAccountPage;
+			Map<String, Object> maps = SHA1Utils.getSha1Map();
+			maps.put("query", query);
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("query", query);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+	public static String getDailyAccountById(String id) {
+		String result = StringUtils.EMPTY;
+		try {
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_getDailyAccountById;
+			Map<String, Object> maps = SHA1Utils.getSha1Map();
+			maps.put("id", id);
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("secret", secret);
+			jsonObject.put("id", id);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+	public static String deleteDailyAccountById(String id) {
+		String result = StringUtils.EMPTY;
+		try {
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_deleteDailyAccountById;
+			Map<String, Object> maps = SHA1Utils.getSha1Map();
+			maps.put("id", id);
+			String secret = SHA1Utils.SHA1(maps);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("secret", secret);
+			jsonObject.put("id", id);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
 }
 
