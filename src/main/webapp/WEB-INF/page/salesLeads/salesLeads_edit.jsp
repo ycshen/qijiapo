@@ -221,13 +221,14 @@
                 </div>
 
             </div>
-        </div>
-        <div class="layui-form-item my-layui-form-item layui-form-text">
-            <label class="layui-form-label">备注</label>
-            <div class="layui-input-block">
-                <textarea placeholder="请输入备注" class="layui-textarea" name="remark"> ${salesLeads.remark} </textarea>
+            <div class="layui-form-item my-layui-form-item layui-form-text">
+                <label class="layui-form-label">备注</label>
+                <div class="layui-input-block">
+                    <textarea placeholder="请输入备注" class="layui-textarea" name="remark">${salesLeads.remark}</textarea>
+                </div>
             </div>
         </div>
+
     </div>
 
     <div class="layui-form-item my-top">

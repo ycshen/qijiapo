@@ -67,10 +67,8 @@ font-size: 14px !important;
         <div class="col-md-8">
         	<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
 			  <ul class="layui-tab-title">
-			    <li class="layui-this">资料</li>
+			    <li class="layui-this">详细资料</li>
 			    <li>动态</li>
-			    <li>销售机会</li>
-			   <!--  <li>文档</li> -->
 			  </ul>
 			  <div class="layui-tab-content">
 			    <div class="layui-tab-item layui-show">
@@ -155,7 +153,7 @@ font-size: 14px !important;
 							</td>
 						</tr>
 						<tr>
-							<td class="title-td">gender:</td>
+							<td class="title-td">性别:</td>
 							<td>
 								<c:choose>
 									<c:when test="${salesLeads.gender == 0}">
@@ -195,8 +193,7 @@ font-size: 14px !important;
 			    		</c:if>
 			    	</table>
 			    </div>
-			    <div class="layui-tab-item">内容3</div>
-			    <!-- <div class="layui-tab-item">内容4</div> -->
+
 			  </div>
 			</div> 
         </div>
