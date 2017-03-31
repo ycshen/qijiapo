@@ -11,6 +11,7 @@ public class SalesOppoProductEntity {
     private String id;
     private String salesOppoId; //销售机会id
     private String productId; //产品id
+    private String productName;
     private String salePrice; //销售价格
     private String productPrice; //产品价格
     private String saleMoney; //销售金额
@@ -125,4 +126,13 @@ public class SalesOppoProductEntity {
     public void setIsDelete(Integer isDelete) {
         this.isDelete = isDelete;
     }
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+    
 }

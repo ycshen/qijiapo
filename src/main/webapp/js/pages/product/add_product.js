@@ -74,26 +74,8 @@ function viewDetail(id, productName){
 	}); 
 }
 
-function transfer(id, productName){
-	var url = ctx + "/inner/user/selectAllUser?id=" + id + "&name=" + productName;
-	var title = "转移产品【" + productName   +"】";
-	layer.open({
-		type: 2,
-		title: title,
-		shadeClose: true,
-		shade: 0.8,
-		area: ['500px', '400px'],
-		content: url
-	}); 
-}
-
 $(function(){
-	/*$(".select2").select2();
-*/
-	
 	initDataTable();
-	initLocation();
-	initAllCheckEvt();
 });
 
 
@@ -536,13 +518,14 @@ function getProduct(product){
 	var newHtml = oldHtml + getAppendProduct(product);
 	$("#productTable").empty();
 	$("#productTable").html(newHtml);
-	layui.layer.closeAll();
+	layer.closeAll();
 }
 
 function getAppendProduct(product){
 	var trHtml = "";
 	trHtml +="<tr>";
 	trHtml +="<td><a><img src=\""+ ctx+"/img/product/product_delete_normal.png\"/></a></td>";
+	trHtml +="<td style=\"display:none;\">" + product.id + "</td>";
 	trHtml +="<td>" + product.productName + "</td>";
 	trHtml +="<td id='tdPrice" + product.id + "'>" + product.price + "</td>";
 	trHtml +="<td><input type=\"text\" id='txtPrice" + product.id + "' title='按Enter键或者失去焦点自动计算' onblur='calculate("+product.id +", 1)' onkeydown='enterCalculate("+product.id +", 1)' onkeyup='clearNoNum(this)'  class=\"form-control\" value=\"" + product.price + "\" style=\"width: 100px;height:30px;display:inline\"/></td>";
@@ -550,7 +533,7 @@ function getAppendProduct(product){
 	trHtml +="<td><input type=\"text\" id='txtDiscount" + product.id + "' title='按Enter键或者失去焦点自动计算' onblur='calculate("+product.id +", 3)' onkeydown='enterCalculate("+product.id +", 3)' onkeyup='clearNoNum(this)'class=\"form-control\" value=\"100\" style=\"width: 100px;height:30px;display:inline\"/></td>";
 	trHtml +="<td><input type=\"text\" id='txtActualPrice" + product.id + "' title='按Enter键或者失去焦点自动计算' onblur='calculate("+product.id +", 4)' onkeydown='enterCalculate("+product.id +", 4)' onkeyup='clearNoNum(this)' class=\"form-control\" value=\"" + product.price + "\" style=\"width: 100px;height:30px;display:inline\"/></td>";
 	trHtml +="<td>企家婆</td>";
-	trHtml +="<td><textarea style=\"height: 30px;width: 100px;\"></textarea></td>";
+	trHtml +="<td><textarea style=\"height: 30px;width: 100px;\" id='txtRemark" + product.id + "'></textarea></td>";
 	trHtml +="</tr>";
 	return trHtml;
 }
@@ -639,13 +622,34 @@ function getTableTitle(){
  * @param saleOpportunityId
  */
 function confirmAdd(saleOpportunityId){
-	var obj = new Object();
-	obj.salesOppoId = saleOpportunityId;
 	var length = $("#productTable").find("tr").length;
 	if(length > 1){
+		var index = layer.load(0, {
+			  shade: [0.5,'#b8c7ce']
+			});
 		//开始保存
 		for(var i =1; i< length; i ++){
+			var obj = new Object();
+			obj.salesOppoId = saleOpportunityId;
 			//产品id
+			var productId = $("#productTable").find("tr").eq(i).find("td").eq(1).html();
+			obj.productId = productId;
+			var productName = $("#productTable").find("tr").eq(i).find("td").eq(2).html();
+			obj.productName = productName;
+			
+			var productPrice = $("#productTable").find("tr").eq(i).find("td").eq(3).html();
+			obj.productPrice = productPrice;
+			var salePrice = $("#tdPrice" + productId).html();
+			obj.salePrice = salePrice;
+			var saleNum = $("#txtNum" + productId).val();
+			obj.saleNum = saleNum;
+			var discount = $("#txtDiscount" + productId).val();
+			obj.discount = discount;
+			var saleMoney = $("#txtActualPrice" + productId).val();
+			obj.saleMoney = saleMoney;
+			var saleUnit = $("#productTable").find("tr").eq(i).find("td").eq(8).html();
+			var remark = $("#txtRemark" + productId).val();
+			obj.remark = remark;
 			//产品名称
 			//标准价格
 			//销售价格
@@ -653,7 +657,25 @@ function confirmAdd(saleOpportunityId){
 			//折扣
 			//销售总金额
 			//备注
+			var saleOppoJson = JSON.stringify(obj);
+			$.ajax({
+				type: "post",
+				url: ctx + "/inner/sop/saveOrUpdate",
+				contentType:"application/json",
+				data: saleOppoJson,
+				success:function(result){
+					console.log(result)
+				}
+			});
 		}
+		
+		 layer.closeAll('loading');
+        layer.alert("添加产品成功",{closeBtn: false,
+	  		skin: 'layui-layer-molv'
+		  }, function(){
+			  parent.refreshTable();
+		        parent.layer.closeAll();
+		  });
 	}
 
 }

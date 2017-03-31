@@ -182,7 +182,7 @@ public class CRMApiUrl {
 	public static String crm_updateSalesLeads;
 
 	//SalesOppoProduct
-	// @Value("${crm.insertSop}")
+	@Value("${crm.insertSop}")
 	private String crm_insertSop_url;
 	public static String crm_insertSop;
 	@PostConstruct

@@ -14,15 +14,12 @@
    <%@include file="../share/common_css.jsp"%>
 <link rel="stylesheet" href="${ctx}/js/plugins/datatables/dataTables.bootstrap.css">
 <link rel="stylesheet" href="${ctx}/js/layui/css/layui.css">
-<link rel="stylesheet" href="${ctx}/js/select2/select2.min.css">
 <%@include file="../share/common_js.jsp"%>
 <script src="${ctx}/js/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="${ctx}/js/plugins/datatables/dataTables.bootstrap.min.js"></script>
 <script src="${ctx}/js/plugins/slimScroll/jquery.slimscroll.min.js"></script> 
 <script src="${ctx}/js/plugins/fastclick/fastclick.js"></script>
 <script src="${ctx}/js/adminlte/dist/js/app.min.js"></script>
-<script src="${ctx}/js/select2/select2.full.min.js"></script>
-<script src="${ctx}/js/pages/common/province_city_area.js"></script>
 <script src="${ctx}/js/pages/product/add_product.js"></script>
 <style type="text/css">
     .mytable tr td{
