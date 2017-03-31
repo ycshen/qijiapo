@@ -11,6 +11,9 @@ public class SalesOppoProductEntity {
     private String id;
     private String salesOppoId; //销售机会id
     private String productId; //产品id
+    private String salePrice; //销售价格
+    private String productPrice; //产品价格
+    private String saleMoney; //销售金额
     private Integer saleNum; //销售数量
     private String discount; //折扣
     private String remark;
@@ -53,6 +56,30 @@ public class SalesOppoProductEntity {
 
     public String getDiscount() {
         return discount;
+    }
+
+    public String getSalePrice() {
+        return salePrice;
+    }
+
+    public void setSalePrice(String salePrice) {
+        this.salePrice = salePrice;
+    }
+
+    public String getProductPrice() {
+        return productPrice;
+    }
+
+    public void setProductPrice(String productPrice) {
+        this.productPrice = productPrice;
+    }
+
+    public String getSaleMoney() {
+        return saleMoney;
+    }
+
+    public void setSaleMoney(String saleMoney) {
+        this.saleMoney = saleMoney;
     }
 
     public void setDiscount(String discount) {

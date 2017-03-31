@@ -1,11 +1,20 @@
 package com.qjp.controller;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.qjp.base.ResponseStatus;
+import com.qjp.base.RoleEnum;
+import com.qjp.entity.LogEntity;
+import com.qjp.entity.ProductEntity;
+import com.qjp.entity.UserEntity;
+import com.qjp.service.DepartmentService;
+import com.qjp.service.LogService;
+import com.qjp.service.ProductService;
+import com.qjp.service.UserService;
+import com.qjp.util.JsonUtils;
+import com.qjp.util.LogUtils;
+import com.qjp.util.StringUtils;
+import com.qjp.util.UserUtils;
+import com.qjp.util.query.LogQuery;
+import com.qjp.util.query.ProductQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,21 +23,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.qjp.base.ResponseStatus;
-import com.qjp.base.RoleEnum;
-import com.qjp.entity.ProductEntity;
-import com.qjp.entity.LogEntity;
-import com.qjp.entity.UserEntity;
-import com.qjp.service.ProductService;
-import com.qjp.service.DepartmentService;
-import com.qjp.service.LogService;
-import com.qjp.service.UserService;
-import com.qjp.util.JsonUtils;
-import com.qjp.util.LogUtils;
-import com.qjp.util.StringUtils;
-import com.qjp.util.UserUtils;
-import com.qjp.util.query.ProductQuery;
-import com.qjp.util.query.LogQuery;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/inner/product")
@@ -48,13 +46,20 @@ public class ProductController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/selectProduct", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
-	public ModelAndView selectProduct(String saleOppoId, HttpServletRequest request){
-		ModelAndView mav = new ModelAndView("/product/select_product");
+	@RequestMapping(value = "/addProduct")
+	public ModelAndView addProduct(String saleOppoId, HttpServletRequest request){
+		ModelAndView mav = new ModelAndView("/product/add_product");
 		mav.addObject("saleOppoId", saleOppoId);
 		return mav;
 	}
-	
+
+	@RequestMapping(value = "/selectProduct", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+	public ModelAndView selectProduct(@ModelAttribute ProductQuery productQuery, HttpServletRequest request){
+		ModelAndView mav = new ModelAndView("/product/select_product_list");
+		mav.addObject("productQuery", productQuery);
+		return mav;
+	}
+
 	
 	@RequestMapping(value = "/listAjax", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	@ResponseBody

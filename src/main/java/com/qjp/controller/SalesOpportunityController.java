@@ -146,10 +146,15 @@ public class SalesOpportunityController {
 		oldSalesOpportunity.setUserName(transferUserName);
 		oldSalesOpportunity.setUpdateTime(new Date());
 		oldSalesOpportunity.setUpdateUser(loginUser.getUserName());	}
-	
+
+    /**
+     * 批量删除
+     * @param ids ids
+     * @return 返回Integer
+     */
 	@RequestMapping(value = "/batchDeleteById", method = RequestMethod.GET)
 	@ResponseBody
-	public Integer batchDeleteById(String ids, HttpServletRequest request){
+	public Integer batchDeleteById(String ids){
 		Integer result = ResponseStatus.INIT;
 		if(StringUtils.isNotBlank(ids)){
 			String[] idArr = ids.split("\\,");
@@ -189,9 +194,9 @@ public class SalesOpportunityController {
 	}
 
 	/**
-	 *
-	 * @param saleStage
-	 * @return
+	 * 根据销售阶段获取盈率
+	 * @param saleStage 销售阶段
+	 * @return 盈率
 	 */
 	private String getWinRateBySaleStage(Integer saleStage){
 		String winRate = "0%";

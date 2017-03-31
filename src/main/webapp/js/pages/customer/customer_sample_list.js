@@ -245,6 +245,7 @@ function isBlank(args){
 
 	return result;
 }
+
 function confirmSelect(){
 	var id = getCheckedBoxValue();
 	if(isBlank(id)){

@@ -574,13 +574,13 @@ Date.prototype.Format = function (fmt) { //author: meizz
 
 
 function addProduct(id){
-	var url = ctx + "/inner/product/selectProduct?id=" + id;
+	var url = ctx + "/inner/product/addProduct?saleOppoId=" + id;
 	layer.open({
 		type: 2,
 		title: '销售机会-添加产品',
 		shadeClose: false,
 		shade: 0.8,
-		area: ['800px', '100%'],
+		area: ['80%', '100%'],
 		content: url
 	});
 }
