@@ -633,3 +633,17 @@ function getTableTitle(){
 
 	return titleHtml;
 }
+
+/**
+ * 确定给销售机会添加产品
+ * @param saleOpportunityId
+ */
+function confirmAdd(saleOpportunityId){
+	var obj = new Object();
+	obj.salesOppoId = saleOpportunityId;
+	var length = $("#productTable").find("tr").length;
+	if(length > 1){
+		//开始保存
+	}
+
+}

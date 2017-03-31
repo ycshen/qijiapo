@@ -51,7 +51,7 @@
                         <button class="layui-btn layui-btn-primary" onclick="selectProduct();">
                             <i class="layui-icon">&#xe61f;</i>选择产品
                         </button>
-                        <button class="layui-btn" lay-submit="" lay-filter="mySubmit" onclick="confirmSelect();">确定添加</button>
+                        <button class="layui-btn" lay-submit="" lay-filter="mySubmit" onclick="confirmAdd('${saleOppoId}');">确定添加</button>
                         <button class="layui-btn layui-btn-primary" style="margin-right:50px;" onclick="cancelEdit();">取消添加</button>
                     </td>
                 </tr>
