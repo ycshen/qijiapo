@@ -644,6 +644,16 @@ function confirmAdd(saleOpportunityId){
 	var length = $("#productTable").find("tr").length;
 	if(length > 1){
 		//开始保存
+		for(var i =1; i< length; i ++){
+			//产品id
+			//产品名称
+			//标准价格
+			//销售价格
+			//数量
+			//折扣
+			//销售总金额
+			//备注
+		}
 	}
 
 }
