@@ -59,26 +59,21 @@
 
       <div class="row">
         <div class="col-md-12">
-            		<form class="layui-form"  onsubmit="return false;">
-	          		<table class="table mytable" style="margin-bottom: 0px;">
-	          			
-	          			<tr>
-	          			
-	          			<td colspan="6">
-				  		<div class="layui-btn-group">
-						  <button class="layui-btn layui-btn-primary" onclick="addProduct();">
-						    <i class="layui-icon">&#xe61f;</i>选择产品
-						  </button>
-						</div>
-	          			</td>
-	          			</tr>
-	          			
-	          		</table>
-				  
-				</form>
-	          					
+            <table class="table mytable" style="margin-bottom: 0px;text-align:right;margin-top: 20px;">
+                <tr>
+                    <td>已添加产品：(9)种</td>
+                    <td>销售总金额（元）：1699</td>
+                    <td>
+                        <button class="layui-btn layui-btn-primary" onclick="addProduct();">
+                            <i class="layui-icon">&#xe61f;</i>选择产品
+                        </button>
+                        <button class="layui-btn" lay-submit="" lay-filter="mySubmit" onclick="confirmSelect();">确定添加</button>
+                        <button class="layui-btn layui-btn-primary" style="margin-right:50px;" onclick="cancelEdit();">取消添加</button>
+                    </td>
+                </tr>
+            </table>
             <!-- /.box-header -->
-            <div class="box-body" style="height: 220px;overflow-y:auto;overflow-x:auto;">
+            <div class="box-body" style="overflow-y:auto;overflow-x:auto;">
               <table class="table table-bordered table-striped mytable">
                 <thead>
                 <tr>
@@ -154,16 +149,7 @@
               </table>
             </div>
             <!-- /.box-body -->
-          <table class="table mytable" style="margin-bottom: 0px;text-align:right;margin-top: 20px;">
-          	<tr>
-          		<td>已添加产品：(9)种</td>
-          		<td>销售总金额（元）：1699</td>
-          		<td>
-          		<button class="layui-btn" lay-submit="" lay-filter="mySubmit" onclick="confirmSelect();">确定添加</button>
-			      <button class="layui-btn layui-btn-primary" style="margin-right:50px;" onclick="cancelEdit();">取消添加</button>
-          		</td>
-          	</tr>
-          </table>
+
           </div>
         </div>
 </body>

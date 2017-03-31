@@ -71,12 +71,12 @@ function submit(){
 			tips("亲，密码的长度是由6-15位的数字、字母、特殊字符组成~~~");
 			isSubmit = false;
 			return;
-		}else if(!passRegex.test(password)){
+		}/*else if(!passRegex.test(password)){
 			
 			tips("亲，密码的长度是由6-15位的数字、字母、下划线组成~~~");
 			isSubmit = false;
 			return;
-		}
+		}*/
 		
 		var confirmPass = $("#txtConfirmPass").val();
 		if(isBlank(confirmPass)){

@@ -580,7 +580,7 @@ function addProduct(id){
 		title: '销售机会-添加产品',
 		shadeClose: false,
 		shade: 0.8,
-		area: ['800px', '400px'],
+		area: ['800px', '100%'],
 		content: url
 	});
 }

@@ -1,24 +1,12 @@
 package com.qjp.controller;
 
-import java.net.URLEncoder;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import com.qjp.entity.MenuEntity;
+import com.qjp.entity.UserEntity;
+import com.qjp.service.CompanyService;
+import com.qjp.service.MenuService;
+import com.qjp.service.UserService;
+import com.qjp.util.ValidateUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.LockedAccountException;
-import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.session.Session;
-import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,17 +17,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.Gson;
-import com.qjp.base.UserStatus;
-import com.qjp.entity.CompanyEntity;
-import com.qjp.entity.MenuEntity;
-import com.qjp.entity.ResultEnum;
-import com.qjp.entity.UserEntity;
-import com.qjp.model.ResultModel;
-import com.qjp.service.CompanyService;
-import com.qjp.service.MenuService;
-import com.qjp.service.UserService;
-import com.qjp.util.ValidateUtils;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.net.URLEncoder;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 @Controller
@@ -242,10 +227,10 @@ public class OuterController {
 			tip = "亲，密码不能为空哦~~~";
 			return tip;
 		}else{
-			if(!ValidateUtils.isValidPass(password)){
+			/*if(!ValidateUtils.isValidPass(password)){
 				tip = "亲，密码的长度是由6-15位的数字、字母、特殊字符组成~~~";
 				return tip;
-			}
+			}*/
 		}
 		
 		return tip;
