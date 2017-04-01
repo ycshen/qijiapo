@@ -56,7 +56,7 @@ public class SalesOppoProductController {
 
 				oldSaleMoney += Float.parseFloat(newSaleMoney);
 				salesOpportunityService.updateSaleMoneyById(saleOppoId, oldSaleMoney.toString());
-				LogUtils.log(LogUtils.SALES_OPPORTUNITY, "添加销售机会后更新对应销售金额（添加前（元）： " + saleOppo.getSaleMoney() +",添加后（元）：" + oldSaleMoney + "）", saleOppoId, "销售机会ID", UserUtils.getLoginUser(request));
+				LogUtils.log(LogUtils.SALES_OPPORTUNITY, "添加销售机会后更新对应销售金额【添加前（元）： " + saleOppo.getSaleMoney() +",添加后（元）：" + oldSaleMoney + "】", saleOppoId, "销售机会ID", UserUtils.getLoginUser(request));
 			}
 		}
 
