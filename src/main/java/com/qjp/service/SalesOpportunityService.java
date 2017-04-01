@@ -1,9 +1,9 @@
 package com.qjp.service;
 
-import java.util.List;
-
 import com.qjp.entity.SalesOpportunityEntity;
 import com.qjp.util.query.SalesOpportunityQuery;
+
+import java.util.List;
 
 /** 
  * <p>Project: qijiapo</p> 
@@ -22,5 +22,12 @@ public interface SalesOpportunityService {
 	void updateSalesOpportunity(SalesOpportunityEntity salesOpportunity);
 	void batchDelete(String idArr);
 	void batchTransfer(String idArr);
+	/**
+	 * 根据id更新销售金额
+	 * @param id id
+	 * @param saleMoney 销售金额
+	 * @return 返回更新结果
+	 */
+	void updateSaleMoneyById(String id, String saleMoney);
 }
 

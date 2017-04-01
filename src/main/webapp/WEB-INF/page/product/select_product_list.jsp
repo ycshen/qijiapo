@@ -85,7 +85,7 @@
 							
 						  </button>
 						  <button class="layui-btn layui-btn-primary" onclick="confirmSelect();">
-						    <i class="layui-icon">&#xe61f;</i>选择产品
+						    <i class="layui-icon">&#xe61f;</i>确定选择
 						  </button>
                             <button class="layui-btn layui-btn-primary" onclick="confirmSelect();">
                                 <i class="layui-icon"></i>取消选择

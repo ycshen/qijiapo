@@ -80,7 +80,71 @@ function deleteById(id, name){
 	})
 }
 
+
+function isNotBlank(args){
+	var result = false;
+	if(args != "" && args != null && args != undefined){
+		result = true;
+	}
+
+	return result;
+}
+
+
 function viewCustomer(id, name){
 	parent.layer.closeAll();
 	parent.viewCustomerDetail(id, name);
+}
+function getAppendProduct(product){
+	var trHtml = "";
+	trHtml +="<tr>";
+	trHtml +="<td><a><img src=\""+ ctx+"/img/product/product_delete_normal.png\"/></a></td>";
+	trHtml +="<td style=\"display:none;\">" + product.id + "</td>";
+	trHtml +="<td>" + handleStr(product.productName) + "</td>";
+	trHtml +="<td>" + handleStr(product.productPrice) + "</td>";
+	trHtml +="<td>" + handleStr(product.salePrice) + "</td>";
+	trHtml +="<td>" + handleStr(product.saleNum) + "</td>";
+	trHtml +="<td>" + handleStr(product.discount) + "</td>";
+	trHtml +="<td>" + handleStr(product.saleMoney) + "</td>";
+	trHtml +="<td>企家婆</td>";
+	trHtml +="<td>" + handleStr(product.remark) + "</td>";
+	trHtml +="</tr>";
+	return trHtml;
+}
+
+function  getTrTitle() {
+	var trHtml = "";
+	trHtml +="<tr>";
+	trHtml +="<td>操作</td>";
+	trHtml +="<td>产品名称</td>";
+	trHtml +="<td>标准价格（元）</td>";
+	trHtml +="<td>销售单价（元）</td>";
+	trHtml +="<td>数量</td>";
+	trHtml +="<td>折扣（%）</td>";
+	trHtml +="<td>销售金额（元）</td>";
+	trHtml +="<td>销售单位</td>";
+	trHtml +="<td>备注</td>";
+	trHtml +="</tr>";
+
+	return trHtml;
+}
+function handleStr(str){
+	if(str == null || str == "" || str == undefined){
+		return "";
+	}
+
+	return str;
+}
+
+
+function addProduct(id){
+	var url = ctx + "/inner/product/addProduct?saleOppoId=" + id;
+	layer.open({
+		type: 2,
+		title: '销售机会-添加产品',
+		shadeClose: false,
+		shade: 0.8,
+		area: ['80%', '100%'],
+		content: url
+	});
 }

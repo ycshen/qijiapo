@@ -1,10 +1,5 @@
 package com.qjp.service.impl;
 
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.stereotype.Service;
-
 import com.alibaba.fastjson.JSONObject;
 import com.qjp.entity.SalesOpportunityEntity;
 import com.qjp.service.SalesOpportunityService;
@@ -12,6 +7,10 @@ import com.qjp.util.JsonUtils;
 import com.qjp.util.api.CRMApiUtils;
 import com.qjp.util.api.model.ApiCode;
 import com.qjp.util.query.SalesOpportunityQuery;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /** 
  * <p>Project: qijiapo</p> 
@@ -131,6 +130,10 @@ public class SalesOpportunityServiceImpl implements SalesOpportunityService{
 		System.out.println(idArr);
 		
 	}
-	
+
+	@Override
+	public void updateSaleMoneyById(String id, String saleMoney) {
+		CRMApiUtils.updateSaleMoneyById(id, saleMoney);
+	}
 }
 

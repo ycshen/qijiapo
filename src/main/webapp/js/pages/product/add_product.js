@@ -679,3 +679,16 @@ function confirmAdd(saleOpportunityId){
 	}
 
 }
+
+function addProduct(){
+	var url = ctx + "/inner/product/forwardEdit";
+	layer.open({
+		type: 2,
+		title: '新增产品',
+		shadeClose: false,
+		shade: 0.8,
+		area: ['800px', '500px'],
+		content: url
+	});
+}
+

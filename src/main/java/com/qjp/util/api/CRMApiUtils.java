@@ -1039,5 +1039,56 @@ public class CRMApiUtils {
 
         return result;
     }
+
+    /**
+     * 根据销售机会id获取对应的销售产品信息
+     * @param saleOppoId 销售机会id
+     * @return 返回对应的销售产品信息
+     */
+    public static String getSopBySaleOppoId(String saleOppoId) {
+        String result = StringUtils.EMPTY;
+        try {
+            String url = getCRMUrl() + CRMApiUrl.crm_getSopBySaleOppoId;
+            Map<String, Object> maps = SHA1Utils.getSha1Map();
+            maps.put("saleOppoId", saleOppoId);
+            String secret = SHA1Utils.SHA1(maps);
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("secret", secret);
+            jsonObject.put("saleOppoId", saleOppoId);
+            result = HttpUtils.postUrl(url, jsonObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+
+    }
+
+    /**
+     * 根据id更新销售金额
+     * @param id id
+     * @param saleMoney 销售金额
+     * @return 返回更新结果
+     */
+    public static String updateSaleMoneyById(String id, String saleMoney) {
+        String result = StringUtils.EMPTY;
+        try {
+            String url = getCRMUrl() + CRMApiUrl.crm_updateSaleMoneyById;
+            Map<String, Object> maps = SHA1Utils.getSha1Map();
+            maps.put("id", id);
+            maps.put("saleMoney", saleMoney);
+            String secret = SHA1Utils.SHA1(maps);
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("secret", secret);
+            jsonObject.put("id", id);
+            jsonObject.put("saleMoney", saleMoney);
+            result = HttpUtils.postUrl(url, jsonObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+
+    }
 }
 

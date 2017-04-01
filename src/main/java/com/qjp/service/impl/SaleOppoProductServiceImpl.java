@@ -9,6 +9,8 @@ import com.qjp.util.api.model.ApiCode;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /** 
  * <p>Project: qijiapo</p> 
  * <p>Title: SaleOppoProductServiceImpl.java</p>
@@ -45,5 +47,27 @@ public class SaleOppoProductServiceImpl implements SaleOppoProductService{
 		return id;
 	}
 
+	@Override
+	public List<SalesOppoProductEntity> getSopListBySaleOppoId(String saleOppoId) {
+		String sopResult = CRMApiUtils.getSopBySaleOppoId(saleOppoId);
+		List<SalesOppoProductEntity> list = null;
+		if (StringUtils.isNotBlank(sopResult)){
+			JSONObject object = JSONObject.parseObject(sopResult);
+			if(object != null) {
+				Object codeObj = object.get("code");
+				if (codeObj != null) {
+					String code = codeObj.toString();
+					if (ApiCode.OK.toString().equals(code)) {
+						Object dataObj = object.get("data");
+						if (dataObj != null) {
+							String data = dataObj.toString();
+							list = JSONObject.parseArray(data, SalesOppoProductEntity.class);
+						}
+					}
+				}
+			}
+		}
+		return list;
+	}
 }
 

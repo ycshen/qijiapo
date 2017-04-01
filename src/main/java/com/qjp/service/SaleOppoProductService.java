@@ -2,6 +2,8 @@ package com.qjp.service;
 
 import com.qjp.entity.SalesOppoProductEntity;
 
+import java.util.List;
+
 /** 
  * <p>Project: MyBase</p> 
  * <p>Title: SaleOppoProductService.java</p>
@@ -18,5 +20,6 @@ public interface SaleOppoProductService {
 	 * @return
 	 */
 	String insertSop(SalesOppoProductEntity sop);
+	List<SalesOppoProductEntity> getSopListBySaleOppoId(String saleOppoId);
 }
 

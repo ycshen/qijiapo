@@ -69,6 +69,7 @@ font-size: 14px !important;
 				<table class="table">
 					<tr>
 						<th>客户名称：<a class="btn btn-link"  href="#" onclick="viewCustomer('${customer.id}', '${customer.customerName}')">${customer.customerName}</a></th>
+						<th>本次销售金额（元）：<a class="btn btn-default  disabled"  style="border:0px;" href="#">${salesOpportunity.saleMoney}</a></th>
 						<th>客户级别：
 							<c:choose>
 							<c:when test="${customer.level == 1}">
@@ -90,16 +91,14 @@ font-size: 14px !important;
 
 				</table>
 			</div>
-			<!-- /.box-body -->
-
 			<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
 			  <ul class="layui-tab-title">
-			    <li class="layui-this">资料</li>
+			    <li class="layui-this" lay-id>详细资料</li>
 			    <li>动态</li>
-			   <li>产品</li>
+			    <li  lay-filter="tabProduct">相关产品</li>
 			  </ul>
 			  <div class="layui-tab-content">
-			    <div class="layui-tab-item layui-show">
+			    <div class="layui-tab-item layui-show" >
 			    	<table class="table my-table" id="detailTable">
 			    		
 			    		<tr>
@@ -110,7 +109,7 @@ font-size: 14px !important;
 			    			
 			    		</tr>
 			    		<tr>
-			    			<td class="title-td">销售金额:</td>
+			    			<td class="title-td">销售金额（元）:</td>
 			    			<td>${salesOpportunity.saleMoney}</td>
 			    			<td class="title-td">销售阶段:</td>
 			    			<td>${salesOpportunity.saleStage}</td>
@@ -201,7 +200,26 @@ font-size: 14px !important;
 			    	</table>
 			    </div>
 			    
-			    <div class="layui-tab-item">产品</div> 
+			    <div class="layui-tab-item">
+					<p class="pull-right">产品销售总金额（元）：<span id="spanTotalPrice">0</span>
+					</p>
+
+					<table class="table">
+						<tbody id="tableProduct">
+							<tr>
+								<td>操作</td>
+								<td>产品名称</td>
+								<td>标准价格（元）</td>
+								<td>销售单价（元）</td>
+								<td>数量</td>
+								<td>折扣（%）</td>
+								<td>销售金额（元）</td>
+								<td>销售单位</td>
+								<td>备注</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			  </div>
 			</div> 
         </div>
@@ -210,13 +228,16 @@ font-size: 14px !important;
         				<tr>
 			    			<td class="title-td-left" colspan="1">
 								<fieldset class="layui-elem-field">
-								  <legend>操作</legend>
+								  <legend>销售机会操作</legend>
 								  <div class="layui-field-box">
 								<div class="layui-btn-group">
 									 
 									  <button class="layui-btn layui-btn-primary" onclick="deleteById('${salesOpportunity.id}','${salesOpportunity.salesOpportunityName}');">
 									    <i class="layui-icon">&#xe640;</i>删除
 									  </button>
+									<button class="layui-btn layui-btn-primary" onclick="addProduct('${salesOpportunity.id}');">
+										<i class="layui-icon">&#xe61f;</i>添加产品
+									</button>
 									</div>
 								  </div>
 								</fieldset>
@@ -230,36 +251,49 @@ font-size: 14px !important;
 </div>
 
 
-<script>
+<script type="text/javascript">
 layui.use('element', function(){
 	  var $ = layui.jquery
 	  ,element = layui.element(); //Tab的切换功能，切换事件监听等，需要依赖element模块
-	  
-	  //触发事件
-	  var active = {
-	    tabAdd: function(){
-	      //新增一个Tab项
-	      element.tabAdd('demo', {
-	        title: '新选项'+ (Math.random()*1000|0) //用于演示
-	        ,content: '内容'+ (Math.random()*1000|0)
-	      })
-	    }
-	    ,tabDelete: function(){
-	      //删除指定Tab项
-	      element.tabDelete('demo', 2); //删除第3项（注意序号是从0开始计算）
-	    }
-	    ,tabChange: function(){
-	      //切换到指定Tab项
-	      element.tabChange('demo', 1); //切换到第2项（注意序号是从0开始计算）
-	    }
-	  };
-	  
-	  $('.site-demo-active').on('click', function(){
-	    var type = $(this).data('type');
-	    active[type] ? active[type].call(this) : '';
-	  });
-	});
-	</script>
+
+		element.on('tab(docDemoTabBrief)', function(data){
+			if(data.index == 2){
+				//产品tab
+				var index = layer.load(0, {
+					shade: [0.5,'#b8c7ce']
+				});
+				var url = ctx + "/inner/sop/listProduct?saleOppoId=${salesOpportunity.id}";
+				$.ajax({
+					type: "get",
+					url: url,
+					dataType: "json",
+					success: function(data){
+						var trHtml = "";
+						var totalPrice = 0;
+						$.each(data, function(index, obj){
+							var saleMoney = obj.saleMoney;
+							totalPrice += parseFloat(saleMoney);
+							totalPrice = parseFloat(totalPrice).toFixed(2);
+							trHtml += getAppendProduct(obj);
+						});
+						if(isNotBlank(trHtml)){
+							var tableHtml = getTrTitle() + trHtml;
+							$("#tableProduct").empty()
+							$("#tableProduct").html(tableHtml);
+							$("#spanTotalPrice").html(totalPrice);
+						}
+					},
+					error: function(){
+						layer.alert("加载失败",{closeBtn: false,
+							skin: 'layui-layer-molv'
+						});
+					}
+				});
+
+				layer.closeAll('loading');
+			}
+		});
+});
 
 </script>
 

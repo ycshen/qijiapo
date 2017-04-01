@@ -118,6 +118,10 @@ public class CRMApiUrl {
 	@Value("${crm.updateSalesOpportunity}")
 	private String crm_updateSalesOpportunity_url;
 	public static String crm_updateSalesOpportunity;
+	@Value("${crm.updateSaleMoneyById}")
+	private String crm_updateSaleMoneyById_url;
+	public static String crm_updateSaleMoneyById;
+
 	//Customer
 	@Value("${crm.insertCustomer}")
 	private String crm_insertCustomer_url;
@@ -185,6 +189,10 @@ public class CRMApiUrl {
 	@Value("${crm.insertSop}")
 	private String crm_insertSop_url;
 	public static String crm_insertSop;
+	@Value("${crm.getSopBySaleOppoId}")
+	private String crm_getSopBySaleOppoId_url;
+	public static String crm_getSopBySaleOppoId;
+
 	@PostConstruct
 	public void init() {
 		crm = this.crm_url;
@@ -222,6 +230,7 @@ public class CRMApiUrl {
 		crm_batchDeleteSalesOpportunity = this.crm_batchDeleteSalesOpportunity_url;
 		crm_deleteSalesOpportunityById = this.crm_deleteSalesOpportunityById_url;
 		crm_updateSalesOpportunity = this.crm_updateSalesOpportunity_url;
+		crm_updateSaleMoneyById = this.crm_updateSaleMoneyById_url;
 
 		//Customer
 		crm_insertCustomer = this.crm_insertCustomer_url;
@@ -256,6 +265,7 @@ public class CRMApiUrl {
 
 		//SalesOppoProduct
 		crm_insertSop = this.crm_insertSop_url;
+		crm_getSopBySaleOppoId = this.crm_getSopBySaleOppoId_url;
 	}
 	
 }
