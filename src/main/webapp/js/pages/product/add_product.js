@@ -673,7 +673,7 @@ function confirmAdd(saleOpportunityId){
         layer.alert("添加产品成功",{closeBtn: false,
 	  		skin: 'layui-layer-molv'
 		  }, function(){
-			  parent.refreshTable();
+			  	parent.refreshTable();
 		        parent.layer.closeAll();
 		  });
 	}

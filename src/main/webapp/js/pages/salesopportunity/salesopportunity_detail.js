@@ -19,8 +19,8 @@ function isBlank(args){
 	return result;
 }
 function refreshTable(){
-	  window.parent.refreshTable();
-	  window.parent.layer.closeAll();
+	  layer.closeAll();
+	  window.location.reload();
 }
 function transfer(id, competitorName){
 	var url = ctx + "/inner/user/selectAllUser?id=" + id + "&name=" + competitorName;
