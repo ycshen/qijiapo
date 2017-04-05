@@ -395,5 +395,28 @@ public class UserServiceImpl implements UserService{
 		return count;
 	}
 
+	@Override
+	public String resetPass(String oldPass, String newPass, Long userId) {
+		String result = MyBaseApiUtils.resetPwd(oldPass, newPass, userId.toString());
+		String tips = StringUtils.EMPTY;
+		if(StringUtils.isNotBlank(result)){
+			JSONObject jsonObject = JSONObject.parseObject(result);
+			if(jsonObject != null){
+				Object codeObj = jsonObject.get("code");
+				if(codeObj != null){
+					String code = codeObj.toString();
+					if (ApiCode.OK.toString().equals(code)) {
+						Object dataObj = jsonObject.get("data");
+						if(dataObj != null){
+							tips = dataObj.toString();
+						}
+					}
+				}
+			}
+		}
+
+		return tips;
+	}
+
 }
 

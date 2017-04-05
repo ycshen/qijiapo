@@ -17,6 +17,7 @@ function isNotBlank(args){
 
     return result;
 }
+
 function modifyInfo(){
     var email = $("#txtEmail").val();
     if(isBlank(email)){
@@ -57,6 +58,59 @@ function modifyInfo(){
                         skin: 'layui-layer-molv'
                     });
                 }
+            }
+        });
+    })
+}
+
+
+function resetPass(){
+    var oldPass = $("#txtOldPassword").val();
+    var newPass = $("#txtNewPass").val();
+    var confirmNewPass = $("#txtConfirmNewPass").val();
+
+    if(isBlank(oldPass)){
+        layer.alert("原始密码不能为空",{closeBtn: false,
+            skin: 'layui-layer-molv'
+        });
+        return;
+    }
+
+    if(isBlank(newPass)){
+        layer.alert("新密码不能为空",{closeBtn: false,
+            skin: 'layui-layer-molv'
+        });
+        return;
+    }
+
+    if(isBlank(confirmNewPass)){
+        layer.alert("确认新密码不能为空",{closeBtn: false,
+            skin: 'layui-layer-molv'
+        });
+        return;
+    }
+
+    if(newPass != confirmNewPass ){
+        layer.alert("两次输入的密码不一致！",{closeBtn: false,
+            skin: 'layui-layer-molv'
+        });
+        return;
+    }
+
+    layer.confirm("是否确定要重置密码？",{closeBtn: false,
+        skin: 'layui-layer-molv'
+    }, function(){
+        var url = ctx + "/inner/user/resetPwd?oldPass=" + oldPass +"&newPass=" + newPass +"&confirmNewPass=" + confirmNewPass;
+        $.ajax({
+            type: "get",
+            url: url,
+            success: function(result){
+                layer.alert(result,{closeBtn: false,
+                    skin: 'layui-layer-molv'
+                }, function(){
+                    layer.closeAll();
+                    window.location.href = ctx + "/inner/user/profile";
+                });
             }
         });
     })

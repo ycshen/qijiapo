@@ -395,6 +395,42 @@ public class UserController {
         return result;
     }
 
-	
+	@RequestMapping(value = "/resetPwd", method = RequestMethod.GET)
+	@ResponseBody
+	public String resetPwd(String oldPass, String newPass, String confirmNewPass, HttpServletRequest request){
+		String result = this.validateResetPwdArgs(oldPass, newPass, confirmNewPass);
+		if(StringUtils.isBlank(result)){
+			UserEntity loginUser = UserUtils.getLoginUser(request);
+			result = userService.resetPass(oldPass, newPass, loginUser.getId());
+			LogUtils.logAdmin("员工自己重置了密码", loginUser);
+		}
+
+		return result;
+	}
+
+	private String validateResetPwdArgs(String oldPass, String newPass, String confirmNewPass){
+		String result = StringUtils.EMPTY;
+		if(StringUtils.isBlank(oldPass)){
+			return "原始密码不能为空";
+		}
+
+		if(StringUtils.isBlank(newPass)){
+			return "新密码不能为空";
+		}
+
+		if(StringUtils.isBlank(confirmNewPass)){
+			return "确认新密码不能为空";
+		}
+
+		if(newPass.equals(oldPass)){
+			return "新密码不能与原始密码一致";
+		}
+
+		if(newPass.equals(confirmNewPass)){
+			return "两次输入新密码不一致";
+		}
+
+		return result;
+	}
 }
 

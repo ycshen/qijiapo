@@ -134,7 +134,9 @@ public class MyBaseApiUrl {
 	@Value("${mybase.getUserCountByCompanyId}")
 	private String mybase_getUserCountByCompanyId_url;
 	public static String mybase_getUserCountByCompanyId;
-
+	@Value("${mybase.resetPwd}")
+	private String mybase_resetPwd_url;
+	public static String mybase_resetPwd;
 	//Company
 	@Value("${mybase.getCompanyStaffTreeById}")
 	private String mybase_getCompanyStaffTreeById_url;
@@ -292,6 +294,7 @@ public class MyBaseApiUrl {
 		mybase_getUserListByRoleId = this.mybase_getUserListByRoleId_url;
 		mybase_getRoleUserByCidAndRoleId = this.mybase_getRoleUserByCidAndRoleId_url;
 		mybase_getUserCountByCompanyId = this.mybase_getUserCountByCompanyId_url;
+		mybase_resetPwd = this.mybase_resetPwd_url;
 		//position
 		mybase_getSystemPosition = this.mybase_getSystemPosition_url;
 		mybase_getPositionByCompanyId = this.mybase_getPositionByCompanyId_url;

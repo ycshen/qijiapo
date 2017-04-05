@@ -46,5 +46,6 @@ public interface UserService {
 	List<UserEntity> getUserListByCompanyId(String id);
 	List<UserRoleVO> getRoleUserByCidAndRoleId(String companyId, String roleId, String isRole);
 	Integer getUserCountByCompanyId(String companyId);
+	String resetPass(String oldPass, String newPass, Long userId);
 }
 

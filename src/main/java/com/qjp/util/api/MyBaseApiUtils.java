@@ -1120,7 +1120,36 @@ public class MyBaseApiUtils {
 		
 		return result;
 	}
-	
+
+	/**
+	 * 员工自己重置密码
+	 * @param newPass 新密码
+	 * @param oldPass 老密码
+	 * @param userId 员工id
+	 * @return 返回重置提示信息
+	 */
+	public static String resetPwd(String newPass, String oldPass, String userId){
+		String result = StringUtils.EMPTY;
+		try {
+			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_resetPwd;
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("newPass", newPass);
+			jsonObject.put("oldPass", oldPass);
+			jsonObject.put("userId", userId);
+			Map<String,Object> maps = SHA1Utils.getSha1Map();
+			maps.put("newPass", newPass);
+			maps.put("oldPass", oldPass);
+			maps.put("userId", userId);
+			String secret = SHA1Utils.SHA1(maps);
+			jsonObject.put("secret", secret);
+			result = HttpUtils.postUrl(url, jsonObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
 	public static String deleteDepartmentById(String id, String companyId){
 		String result = StringUtils.EMPTY;
 		try {	
