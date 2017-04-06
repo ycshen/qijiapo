@@ -1123,12 +1123,12 @@ public class MyBaseApiUtils {
 
 	/**
 	 * 员工自己重置密码
-	 * @param newPass 新密码
 	 * @param oldPass 老密码
+	 * @param newPass 新密码
 	 * @param userId 员工id
 	 * @return 返回重置提示信息
 	 */
-	public static String resetPwd(String newPass, String oldPass, String userId){
+	public static String resetPwd(String oldPass, String newPass, String userId){
 		String result = StringUtils.EMPTY;
 		try {
 			String url = getMyBaseUrl() + MyBaseApiUrl.mybase_resetPwd;

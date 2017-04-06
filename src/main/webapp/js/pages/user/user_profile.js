@@ -111,6 +111,14 @@ function resetPass(){
                     layer.closeAll();
                     window.location.href = ctx + "/inner/user/profile";
                 });
+            },
+            error: function(result){
+                layer.alert(result,{closeBtn: false,
+                    skin: 'layui-layer-molv'
+                }, function(){
+                    layer.closeAll();
+                    window.location.href = ctx + "/inner/user/profile";
+                });
             }
         });
     })

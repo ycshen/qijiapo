@@ -395,7 +395,7 @@ public class UserController {
         return result;
     }
 
-	@RequestMapping(value = "/resetPwd", method = RequestMethod.GET)
+	@RequestMapping(value = "/resetPwd", method = RequestMethod.GET, produces = "application/text; charset=utf-8")
 	@ResponseBody
 	public String resetPwd(String oldPass, String newPass, String confirmNewPass, HttpServletRequest request){
 		String result = this.validateResetPwdArgs(oldPass, newPass, confirmNewPass);
@@ -426,7 +426,7 @@ public class UserController {
 			return "新密码不能与原始密码一致";
 		}
 
-		if(newPass.equals(confirmNewPass)){
+		if(!newPass.equals(confirmNewPass)){
 			return "两次输入新密码不一致";
 		}
 
