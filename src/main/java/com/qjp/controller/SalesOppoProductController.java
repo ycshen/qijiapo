@@ -75,4 +75,14 @@ public class SalesOppoProductController {
 		return result;
 	}
 
+	@RequestMapping(value = "/deleteSopById", method = RequestMethod.GET)
+	@ResponseBody
+	public Integer deleteSopById(String id, String saleOppoId, String saleProductName, HttpServletRequest request) {
+		if (StringUtils.isNotBlank(id) && StringUtils.isNotBlank(saleOppoId)) {
+			sopService.deleteById(id);
+			LogUtils.log(LogUtils.SALES_OPPORTUNITY, "删除了销售机会的对应产品" + saleProductName, saleOppoId, "销售机会ID", UserUtils.getLoginUser(request));
+		}
+
+		return 1;
+	}
 }

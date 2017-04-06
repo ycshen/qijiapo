@@ -69,5 +69,10 @@ public class SaleOppoProductServiceImpl implements SaleOppoProductService{
 		}
 		return list;
 	}
+
+	@Override
+	public void deleteById(String id) {
+		CRMApiUtils.deleteSopById(id);
+	}
 }
 

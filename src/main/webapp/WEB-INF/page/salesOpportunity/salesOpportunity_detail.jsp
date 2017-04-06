@@ -259,38 +259,7 @@ layui.use('element', function(){
 		element.on('tab(docDemoTabBrief)', function(data){
 			if(data.index == 2){
 				//产品tab
-				var index = layer.load(0, {
-					shade: [0.5,'#b8c7ce']
-				});
-				var url = ctx + "/inner/sop/listProduct?saleOppoId=${salesOpportunity.id}";
-				$.ajax({
-					type: "get",
-					url: url,
-					dataType: "json",
-					success: function(data){
-						var trHtml = "";
-						var totalPrice = 0;
-						$.each(data, function(index, obj){
-							var saleMoney = obj.saleMoney;
-							totalPrice += parseFloat(saleMoney);
-							totalPrice = parseFloat(totalPrice).toFixed(2);
-							trHtml += getAppendProduct(obj);
-						});
-						if(isNotBlank(trHtml)){
-							var tableHtml = getTrTitle() + trHtml;
-							$("#tableProduct").empty()
-							$("#tableProduct").html(tableHtml);
-							$("#spanTotalPrice").html(totalPrice);
-						}
-					},
-					error: function(){
-						layer.alert("加载失败",{closeBtn: false,
-							skin: 'layui-layer-molv'
-						});
-					}
-				});
-
-				layer.closeAll('loading');
+				reloadProduct(${salesOpportunity.id});
 			}
 		});
 });

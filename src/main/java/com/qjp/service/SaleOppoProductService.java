@@ -21,5 +21,6 @@ public interface SaleOppoProductService {
 	 */
 	String insertSop(SalesOppoProductEntity sop);
 	List<SalesOppoProductEntity> getSopListBySaleOppoId(String saleOppoId);
+	void deleteById(String id);
 }
 

@@ -192,6 +192,9 @@ public class CRMApiUrl {
 	@Value("${crm.getSopBySaleOppoId}")
 	private String crm_getSopBySaleOppoId_url;
 	public static String crm_getSopBySaleOppoId;
+	@Value("${crm.deleteSopById}")
+	private String crm_deleteSopById_url;
+	public static String crm_deleteSopById;
 
 	@PostConstruct
 	public void init() {
@@ -266,6 +269,7 @@ public class CRMApiUrl {
 		//SalesOppoProduct
 		crm_insertSop = this.crm_insertSop_url;
 		crm_getSopBySaleOppoId = this.crm_getSopBySaleOppoId_url;
+		crm_deleteSopById = this.crm_deleteSopById_url;
 	}
 	
 }

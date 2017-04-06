@@ -95,10 +95,10 @@ function viewCustomer(id, name){
 	parent.layer.closeAll();
 	parent.viewCustomerDetail(id, name);
 }
-function getAppendProduct(product){
+function getAppendProduct(product, saleOppoId){
 	var trHtml = "";
 	trHtml +="<tr>";
-	trHtml +="<td><a><img src=\""+ ctx+"/img/product/product_delete_normal.png\"/></a></td>";
+	trHtml +="<td><a href='#' onclick=\"deleteSopById('"+ product.id + "', '" + product.productName + "', '" + saleOppoId + "');\"><img src=\""+ ctx+"/img/product/product_delete_normal.png\"/></a></td>";
 	trHtml +="<td style=\"display:none;\">" + product.id + "</td>";
 	trHtml +="<td>" + handleStr(product.productName) + "</td>";
 	trHtml +="<td>" + handleStr(product.productPrice) + "</td>";
@@ -147,4 +147,66 @@ function addProduct(id){
 		area: ['80%', '100%'],
 		content: url
 	});
+}
+
+function deleteSopById(productId, productName, saleOppoId){
+	layer.confirm("确定要删除销售机会对应的产品【" + productName + "】吗？",{closeBtn: false,
+		skin: 'layui-layer-molv'
+	}, function(){
+		var url = ctx + "/inner/sop/deleteSopById?id=" + productId +"&saleOppoId=" + saleOppoId  +"&saleProductName=" + productName;
+		$.ajax({
+			type: "get",
+			url: url,
+			success: function(result){
+				if(result == 1){
+					layer.alert("删除产品成功",{closeBtn: false,
+						skin: 'layui-layer-molv'
+					}, function(){
+						reloadProduct(saleOppoId);
+						layer.closeAll();
+					});
+				}else{
+					layer.alert("删除产品失败",{closeBtn: false,
+						skin: 'layui-layer-molv'
+					});
+				}
+			}
+		});
+	});
+}
+
+function reloadProduct(saleOppoId){
+	//产品tab
+	var index = layer.load(0, {
+		shade: [0.5,'#b8c7ce']
+	});
+	var url = ctx + "/inner/sop/listProduct?saleOppoId=" +　saleOppoId;
+	$.ajax({
+		type: "get",
+		url: url,
+		dataType: "json",
+		success: function(data){
+			var trHtml = "";
+			var totalPrice = 0;
+			$.each(data, function(index, obj){
+				var saleMoney = obj.saleMoney;
+				totalPrice += parseFloat(saleMoney);
+				totalPrice = parseFloat(totalPrice).toFixed(2);
+				trHtml += getAppendProduct(obj, saleOppoId);
+			});
+			if(isNotBlank(trHtml)){
+				var tableHtml = getTrTitle() + trHtml;
+				$("#tableProduct").empty()
+				$("#tableProduct").html(tableHtml);
+				$("#spanTotalPrice").html(totalPrice);
+			}
+		},
+		error: function(){
+			layer.alert("加载失败",{closeBtn: false,
+				skin: 'layui-layer-molv'
+			});
+		}
+	});
+
+	layer.closeAll('loading');
 }
