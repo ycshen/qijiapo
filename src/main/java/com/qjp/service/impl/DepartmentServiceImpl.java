@@ -1,20 +1,18 @@
 package com.qjp.service.impl;
 
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.stereotype.Service;
-
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import com.qjp.base.Constant;
-import com.qjp.entity.CompanyEntity;
 import com.qjp.entity.DepartmentEntity;
 import com.qjp.service.DepartmentService;
 import com.qjp.util.JsonUtils;
 import com.qjp.util.api.MyBaseApiUtils;
 import com.qjp.util.api.model.ApiCode;
 import com.qjp.util.query.DepartmentQuery;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /** 
  * <p>Project: MyBase</p> 
@@ -197,6 +195,30 @@ public class DepartmentServiceImpl implements DepartmentService{
 		}
 		
 		return data;
+	}
+
+	@Override
+	public List<DepartmentEntity> getAllDepByCompanyId(String companyId) {
+		List<DepartmentEntity> list = null;
+		String result = MyBaseApiUtils.getAllDepByCompanyId(companyId);
+		if(StringUtils.isNotBlank(result)){
+			JSONObject jsonObject = JSONObject.parseObject(result);
+			if(jsonObject != null){
+				Object codeObj = jsonObject.get("code");
+				if(codeObj != null){
+					String code = codeObj.toString();
+					if (ApiCode.OK.toString().equals(code)) {
+						Object dataObj = jsonObject.get("data");
+						if(dataObj != null){
+							String data = dataObj.toString();
+							list = JSONObject.parseArray(data, DepartmentEntity.class);
+						}
+					}
+				}
+			}
+		}
+
+		return list;
 	}
 }
 

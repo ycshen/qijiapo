@@ -224,6 +224,7 @@ function selectSuccess(id, positionName){
 	$("#hidPositionId").val(id);
 }
 
+/*
 $(function(){
 	$(".select2").select2();
-})
+})*/

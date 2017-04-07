@@ -344,16 +344,16 @@ function showStaff(event, treeId, treeNode){
 	var nodeType = nodeIdStr.split("_")[1];
 	//判断有没有子节点
 	var childrenNodes = treeNode.children;
-	if(childrenNodes != undefined && childrenNodes.length > 0){
+	/*if(childrenNodes != undefined && childrenNodes.length > 0){
 		$("#btnAddUser").hide();
 	}else{
 		$("#btnAddUser").show();
-	}
+	}*/
 	
 	$("#txtUserName").val('');
 	if(nodeType == 3){
 		//获取对应部门的员工
-		$("#btnAddUser").text("添加" + treeNode.name + "旗下员工");
+		/*$("#btnAddUser").text("添加" + treeNode.name + "旗下员工");*/
 		$("#spanName").text(treeNode.name);
 		$("#hidDid").val(id);
 		var userName = $("#txtUserName").val();

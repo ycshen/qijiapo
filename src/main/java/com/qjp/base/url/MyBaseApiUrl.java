@@ -89,7 +89,10 @@ public class MyBaseApiUrl {
 	@Value("${mybase.getSubDepIdList}")
 	private String mybase_getSubDepIdList_url; //获取部门的子部门，包括自己部门
 	public static String mybase_getSubDepIdList;
-	
+
+	@Value("${mybase.getAllDepByCompanyId}")
+	private String mybase_getAllDepByCompanyId_url; //获取部门的子部门，包括自己部门
+	public static String mybase_getAllDepByCompanyId;
 	
 	//User
 	@Value("${mybase.getUserPage}")
@@ -279,6 +282,7 @@ public class MyBaseApiUrl {
 		mybase_getNoSubDepListByCId = this.mybase_getNoSubDepListByCId_url;
 		mybase_deleteDepartmentById = this.mybase_deleteDepartmentById_url;
 		mybase_getSubDepIdList = this.mybase_getSubDepIdList_url;
+		mybase_getAllDepByCompanyId = this.mybase_getAllDepByCompanyId_url;
 		//user
 		mybase_updateUser = this.mybase_updateUser_url;
 		mybase_insertUser = this.mybase_insertUser_url;

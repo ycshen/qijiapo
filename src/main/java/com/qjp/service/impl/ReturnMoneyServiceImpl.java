@@ -2,7 +2,6 @@ package com.qjp.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.qjp.entity.ReturnMoneyEntity;
-import com.qjp.entity.SalesOppoProductEntity;
 import com.qjp.service.ReturnMoneyService;
 import com.qjp.util.JsonUtils;
 import com.qjp.util.api.CRMApiUtils;
@@ -65,4 +64,8 @@ public class ReturnMoneyServiceImpl implements ReturnMoneyService {
         return returnMoneyEntity;
     }
 
+    @Override
+    public void updateReturnMoney(ReturnMoneyEntity returnMoneyEntity) {
+
+    }
 }

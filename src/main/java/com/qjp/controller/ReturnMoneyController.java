@@ -44,6 +44,8 @@ public class ReturnMoneyController {
     private ReturnMoneyService returnMoneyService;
     @Autowired
     private ContractService contractService;
+    @Autowired
+    private ReturnMoneyDetailService returnMoneyDetailService;
 
     private ReturnMoneyEntity getTestEntity(){
         ReturnMoneyEntity returnMoney = new ReturnMoneyEntity();
@@ -142,11 +144,25 @@ public class ReturnMoneyController {
         return result;
     }
 
-    @RequestMapping(value = "/saveOrUpdate", method = RequestMethod.POST)
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
     public Integer saveOrUpdate(@ModelAttribute ReturnMoneyEntity returnMoney, HttpServletRequest request){
+        Integer result = 0;
+        List<ReturnMoneyDetailEntity> detailList = returnMoney.getDetailList();
+        if(detailList != null && detailList.size() > 0){
+            result = 2; //回款详情不能为空
+            return result;
+        }
+
         UserEntity user = UserUtils.getLoginUser(request);
         returnMoney.setUserId(user.getId().toString());
         returnMoney.setUserName(user.getUserName());
+        List<ReturnMoneyDetailEntity> newList = new LinkedList<ReturnMoneyDetailEntity>();
+        for (ReturnMoneyDetailEntity returnMoneyDetail : detailList) {
+            returnMoneyDetail.init(request);
+            newList.add(returnMoneyDetail);
+        }
+
+        returnMoney.setDetailList(newList);
         returnMoneyService.insertReturnMoney(returnMoney);
         String contractId = returnMoney.getContractId();
         ContractEntity contractEntity = contractService.getContractById(contractId);

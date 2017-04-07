@@ -71,8 +71,8 @@
 		          	 	<input type="hidden" value="" id="hidIsCompany"/>
 		          		<h5><span id="spanName">${loginUser.companyName}</span>（<span id="spanCount">${userQuery.count}</span>名员工）</h5> 
 		          	 </div>
-		          	 <button type="button" id="btnAddUser" class="btn btn-default" style="display:none;" onclick="addUser();">添加本部门员工</button>
-		          	 <button type="button" id="btnAddUser" class="btn btn-default" style="display:none;" onclick="addUser();">添加员工</button>
+		          	 <%--<button type="button" id="btnAddUser" class="btn btn-default" style="display:none;" onclick="addUser();">添加本部门员工</button>--%>
+		          	 <button type="button" id="btnAddUser" class="btn btn-default" onclick="addUser();">添加员工</button>
 					  <div class="form-group">
 					    <input type="text" class="form-control" id="txtUserName" placeholder="员工姓名" value="${userQuery.userName}">
 					  </div>

@@ -1,9 +1,9 @@
 package com.qjp.service;
 
-import java.util.List;
-
 import com.qjp.entity.DepartmentEntity;
 import com.qjp.util.query.DepartmentQuery;
+
+import java.util.List;
 
 /** 
  * <p>Project: qijiapo</p> 
@@ -29,5 +29,7 @@ public interface DepartmentService {
 	List<DepartmentEntity> getNoSubDeptListByCompanyId(String id);
 	void deleteDepartmentById(String id, String companyId);
 	String getSubDepList(String departmentId, String companyId);
+	List<DepartmentEntity> getAllDepByCompanyId(String companyId);
+
 }
 

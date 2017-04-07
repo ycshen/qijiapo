@@ -112,7 +112,7 @@ public class UserController {
 		if(StringUtils.isNotBlank(id)){
 			user = userService.getUserById(id);
 			Long companyId = user.getCompanyId();
-			departmentList = departmentService.getNoSubDeptListByCompanyId(companyId.toString());
+			departmentList = departmentService.getListByCompanyId(companyId.toString());
 			editType = 2;//编辑
 		}
 		
@@ -135,7 +135,7 @@ public class UserController {
 		}else{
 			UserEntity loginUser = UserUtils.getLoginUser(request);
 			Long companyId = loginUser.getCompanyId();
-			List<DepartmentEntity> departmentList = departmentService.getListByCompanyId(companyId.toString());
+			List<DepartmentEntity> departmentList = departmentService.getAllDepByCompanyId(companyId.toString());
 			mav.addObject("departmentList", departmentList);
 			mav.addObject("editType", 2);
 		}
