@@ -2,12 +2,8 @@ package com.qjp.controller;
 
 import com.qjp.base.ResponseStatus;
 import com.qjp.base.RoleEnum;
-import com.qjp.entity.LogEntity;
-import com.qjp.entity.ReturnMoneyEntity;
-import com.qjp.entity.UserEntity;
-import com.qjp.service.DepartmentService;
-import com.qjp.service.LogService;
-import com.qjp.service.UserService;
+import com.qjp.entity.*;
+import com.qjp.service.*;
 import com.qjp.util.JsonUtils;
 import com.qjp.util.LogUtils;
 import com.qjp.util.StringUtils;
@@ -44,6 +40,10 @@ public class ReturnMoneyController {
     private LogService logService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private ReturnMoneyService returnMoneyService;
+    @Autowired
+    private ContractService contractService;
 
     private ReturnMoneyEntity getTestEntity(){
         ReturnMoneyEntity returnMoney = new ReturnMoneyEntity();
@@ -143,26 +143,31 @@ public class ReturnMoneyController {
     }
 
     @RequestMapping(value = "/saveOrUpdate", method = RequestMethod.POST)
-    public ModelAndView saveOrUpdate(@ModelAttribute ReturnMoneyEntity returnMoney, HttpServletRequest request){
-        ModelAndView mav = new ModelAndView("/returnMoney/returnMoney_edit");
-        /*returnMoney.init(request); //初始化公司、部门、用户信息
-        String provinceId = returnMoney.getProvinceId();
-        returnMoney.setProvinceId(StringUtils.splitLocation(provinceId));
-        String cityId = returnMoney.getCityId();
-        returnMoney.setCityId(StringUtils.splitLocation(cityId));
-        String areaId = returnMoney.getAreaId();
-        returnMoney.setAreaId(StringUtils.splitLocation(areaId));
-        Long id = returnMoney.getId();
+    public Integer saveOrUpdate(@ModelAttribute ReturnMoneyEntity returnMoney, HttpServletRequest request){
         UserEntity user = UserUtils.getLoginUser(request);
-        if(id == null){
-            String returnId = returnMoneyService.insertReturnMoney(returnMoney);
-            LogUtils.logCRMReturnMoney("添加了产品(" + returnMoney.getReturnMoneyName() + ")", returnId, user);
-        }else{
-            returnMoneyService.updateReturnMoney(returnMoney);
-            LogUtils.logCRMReturnMoney("修改了产品(" + returnMoney.getReturnMoneyName() + ")", id.toString(), user);
-        }*/
+        returnMoney.setUserId(user.getId().toString());
+        returnMoney.setUserName(user.getUserName());
+        returnMoneyService.insertReturnMoney(returnMoney);
+        String contractId = returnMoney.getContractId();
+        ContractEntity contractEntity = contractService.getContractById(contractId);
+        LogUtils.log(LogUtils.RETURN_MONEY, "添加了合同的回款" + contractEntity.getContractName(), contractId, "合同ID", UserUtils.getLoginUser(request));
+        //更新合同回款信息
+        String newReturnMoney = returnMoney.getActualReturnMoney();
+        if (StringUtils.isNotBlank(newReturnMoney)){
+            ContractEntity contract = contractService.getContractById(contractId);
+            if (contract != null){
+                String rm = contract.getReturnMoney();
+                Float oldRM = 0f;
+                if (StringUtils.isNotBlank(rm)){
+                    oldRM = Float.parseFloat(rm);
+                }
+                oldRM += Float.parseFloat(newReturnMoney);
+                contractService.updateReturnMoneyById(contractId,oldRM.toString());
+                LogUtils.log(LogUtils.RETURN_MONEY,"添加回款后更新合同对应金额【添加前回款金额（元）" + rm + ",添加后回款金额（元）" + oldRM + "]",contractId,"回款ID",  UserUtils.getLoginUser(request));
+            }
+        }
 
-        return mav;
+        return 1;
     }
 
 }

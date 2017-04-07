@@ -28,6 +28,7 @@ public class ReturnMoneyEntity {
     private Integer returnMoneyNum; //回款期次
     private Date planReturnDate; //计划回款时间
     private String planReturnMoney; //计划回款金额
+    private Date actualReturnDate;//实际回款时间
     private String actualReturnMoney;//实际回款金额
     private String actualNotReturnMoney;//未回款金额
     private Integer returnMoneyStatus; //本期回款状态 0-未逾期 1-有逾期
@@ -36,6 +37,14 @@ public class ReturnMoneyEntity {
     private Integer lockStatus; //锁定状态（0-未锁定， 1-锁定）
     public String getId() {
         return id;
+    }
+
+    public Date getActualReturnDate() {
+        return actualReturnDate;
+    }
+
+    public void setActualReturnDate(Date actualReturnDate) {
+        this.actualReturnDate = actualReturnDate;
     }
 
     public void setId(String id) {

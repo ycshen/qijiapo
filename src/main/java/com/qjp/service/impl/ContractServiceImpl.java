@@ -127,4 +127,9 @@ public class ContractServiceImpl implements ContractService {
         System.out.println(idArr);
 
     }
+
+    @Override
+    public void updateReturnMoneyById(String contractId, String s) {
+        CRMApiUtils.updateReturnMoneyById(contractId,s);
+    }
 }

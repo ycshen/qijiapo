@@ -24,7 +24,7 @@ public class ReturnMoneyDetailEntity {
     private String updateUser; //更新人
     private String returnMoneyId; //回款期次id
     private String money;//金额
-    private Date date; //日期
+    private Date startDate; //日期
     private Integer payType; //支付方式(1-支票 2-现金 3-银行转账 4-支付宝 5-微信  6-其他)
     private String remark; //备注
     private Integer returnMoneyType; //回款类型（1-计划  2-实际  3-开票）
@@ -49,12 +49,12 @@ public class ReturnMoneyDetailEntity {
         this.money = money;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
     public Integer getPayType() {

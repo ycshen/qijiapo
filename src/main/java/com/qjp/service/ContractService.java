@@ -18,4 +18,6 @@ public interface ContractService {
     void updateContract(ContractEntity contract);
     void batchDelete(String idArr);
     void batchTransfer(String idArr);
+
+    void updateReturnMoneyById(String contractId, String s);
 }

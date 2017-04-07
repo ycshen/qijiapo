@@ -15,6 +15,7 @@ import javax.annotation.PostConstruct;
  */
 @Component
 public class CRMApiUrl {
+
 	@Value("${qijiapoCrm}")
 	private String crm_url;
 	public static String crm;
@@ -164,6 +165,9 @@ public class CRMApiUrl {
 	@Value("${crm.updateContract}")
 	private String crm_updateContract_url;
 	public static String crm_updateContract;
+	@Value("${crm.updateReturnMoneyById}")
+	private String crm_updateReturnMoneyById_url;
+	private static String crm_updateReturnMoneyById;
 
 	//SalesLeads
 	@Value("${crm.insertSalesLeads}")
@@ -195,6 +199,18 @@ public class CRMApiUrl {
 	@Value("${crm.deleteSopById}")
 	private String crm_deleteSopById_url;
 	public static String crm_deleteSopById;
+
+	//returnMoney
+	@Value("${crm.insertReturnMoney}")
+	private String crm_insertReturnMoney_url;
+	public static String crm_insertReturnMoney;
+	@Value("${crm.getReturnMoneyById}")
+	private String crm_getReturnMoneyById_url;
+	public static String crm_getReturnMoneyById;
+	//returnMoneyDetail
+	@Value("${crm.insertReturnMoneyDetail}")
+	private String crm_insertReturnMoneyDetail_url;
+	public static String crm_insertReturnMoneyDetail;
 
 	@PostConstruct
 	public void init() {
@@ -257,6 +273,7 @@ public class CRMApiUrl {
 		crm_batchDeleteContract = this.crm_batchDeleteContract_url;
 		crm_deleteContractById = this.crm_deleteContractById_url;
 		crm_updateContract = this.crm_updateContract_url;
+		crm_updateReturnMoneyById = this.crm_updateReturnMoneyById_url;
 
 		//SalesLeads
 		crm_insertSalesLeads = this.crm_insertSalesLeads_url;
@@ -269,7 +286,13 @@ public class CRMApiUrl {
 		//SalesOppoProduct
 		crm_insertSop = this.crm_insertSop_url;
 		crm_getSopBySaleOppoId = this.crm_getSopBySaleOppoId_url;
-		crm_deleteSopById = this.crm_deleteSopById_url;
+
+		//returnMoney
+		crm_insertReturnMoney = this.crm_insertReturnMoney_url;
+		crm_getReturnMoneyById = this.crm_getReturnMoneyById_url;
+
+		//returnMoneyDetail
+		crm_insertReturnMoneyDetail = this.crm_insertReturnMoneyDetail_url;
 	}
 	
 }

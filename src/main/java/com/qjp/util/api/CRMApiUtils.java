@@ -908,6 +908,33 @@ public class CRMApiUtils {
         return result;
     }
 
+    /**
+     * 根据id更新合同回款金额
+     * @param id id
+     * @param returnMoney 合同回款金额
+     * @return 返回更新结果
+     */
+    public static String updateReturnMoneyById(String id, String returnMoney) {
+        String result = StringUtils.EMPTY;
+        try {
+            String url = getCRMUrl() + CRMApiUrl.crm_updateSaleMoneyById;
+            Map<String, Object> maps = SHA1Utils.getSha1Map();
+            maps.put("id", id);
+            maps.put("returnMoney", returnMoney);
+            String secret = SHA1Utils.SHA1(maps);
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("secret", secret);
+            jsonObject.put("id", id);
+            jsonObject.put("returnMoney", returnMoney);
+            result = HttpUtils.postUrl(url, jsonObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+
+    }
+
     public static String insertSalesLeads(String jsonStr) {
         String result = StringUtils.EMPTY;
         try {
@@ -1110,6 +1137,75 @@ public class CRMApiUtils {
 
         return result;
 
+    }
+
+    /**
+     * 插入合同和回款的对应关系
+     * @param jsonStr
+     * @return
+     */
+    public static String insertReturnMoney(String jsonStr) {
+        String result = StringUtils.EMPTY;
+        try {
+            String url = getCRMUrl() + CRMApiUrl.crm_insertReturnMoney;
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("returnMoney", jsonStr);
+            Map<String, Object> maps = SHA1Utils.getSha1Map();
+            maps.put("returnMoney", jsonStr);
+            String secret = SHA1Utils.SHA1(maps);
+            jsonObject.put("secret", secret);
+            result = HttpUtils.postUrl(url, jsonObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    /**
+     * 获取回款的信息
+     * @param id
+     * @return
+     */
+    public static String getReturnMoneyById(String id) {
+        String result = StringUtils.EMPTY;
+        try {
+            String url = getCRMUrl() + CRMApiUrl.crm_getReturnMoneyById;
+            Map<String, Object> maps = SHA1Utils.getSha1Map();
+            maps.put("id", id);
+            String secret = SHA1Utils.SHA1(maps);
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("secret", secret);
+            jsonObject.put("id", id);
+            result = HttpUtils.postUrl(url, jsonObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+
+    }
+
+    /**
+     * 插入回款详情和回款的对应关系
+     * @param jsonStr
+     * @return
+     */
+    public static String insertReturnMoneyDetail(String jsonStr) {
+        String result = StringUtils.EMPTY;
+        try {
+            String url = getCRMUrl() + CRMApiUrl.crm_insertReturnMoneyDetail;
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("returnMoneyDetail", jsonStr);
+            Map<String, Object> maps = SHA1Utils.getSha1Map();
+            maps.put("returnMoneyDetail", jsonStr);
+            String secret = SHA1Utils.SHA1(maps);
+            jsonObject.put("secret", secret);
+            result = HttpUtils.postUrl(url, jsonObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 }
 
