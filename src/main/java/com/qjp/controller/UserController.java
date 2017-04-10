@@ -112,7 +112,7 @@ public class UserController {
 		if(StringUtils.isNotBlank(id)){
 			user = userService.getUserById(id);
 			Long companyId = user.getCompanyId();
-			departmentList = departmentService.getListByCompanyId(companyId.toString());
+			departmentList = departmentService.getAllDepByCompanyId(companyId.toString());
 			editType = 2;//编辑
 		}
 		
@@ -127,20 +127,11 @@ public class UserController {
 	public ModelAndView addUser(String did, HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/user/user_edit");
-		DepartmentEntity department = null;
-		if(StringUtils.isNotBlank(did)){
-			department = departmentService.getDepartmentById(Integer.parseInt(did));
-			mav.addObject("department", department);
-			mav.addObject("editType", 1);
-		}else{
-			UserEntity loginUser = UserUtils.getLoginUser(request);
-			Long companyId = loginUser.getCompanyId();
-			List<DepartmentEntity> departmentList = departmentService.getAllDepByCompanyId(companyId.toString());
-			mav.addObject("departmentList", departmentList);
-			mav.addObject("editType", 2);
-		}
-		
-		
+		UserEntity loginUser = UserUtils.getLoginUser(request);
+		Long companyId = loginUser.getCompanyId();
+		List<DepartmentEntity> departmentList = departmentService.getAllDepByCompanyId(companyId.toString());
+		mav.addObject("departmentList", departmentList);
+		mav.addObject("editType", 2);
 		
 		return mav;
 	}

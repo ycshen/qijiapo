@@ -276,16 +276,16 @@ function addPlanSuccess(obj){
 
 
 function addPlan(id){
-    /*var url = ctx + "/inner/returnMoneyDetail/forwardEdit?id=" + id;
+    var url = ctx + "/inner/returnMoneyDetail/forwardEdit?id=" + id;
     layer.open({
-        type: "2",
+        type: 2,
         title: "新建回款计划",
         shadeClose: false,
         shade: 0.8,
         area: ['800px', '400px'],
         content: url
-    });*/
-     var url = ctx + "/inner/returnMoneyDetail/forwardEdit?contractId=" + id;
+    });
+     /*var url = ctx + "/inner/returnMoneyDetail/forwardEdit?contractId=" + id;
      layer.open({
          type: 2,
          title: "新建回款计划",
@@ -293,5 +293,5 @@ function addPlan(id){
          shade: 0.8,
          area: ['500px', '400px'],
          content: url
-     });
+     });*/
 }
