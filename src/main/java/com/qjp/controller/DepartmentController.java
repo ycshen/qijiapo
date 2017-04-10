@@ -1,19 +1,5 @@
 package com.qjp.controller;
 
-import java.util.Date;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.qjp.base.ResponseStatus;
 import com.qjp.entity.CompanyEntity;
 import com.qjp.entity.DepartmentEntity;
@@ -25,6 +11,18 @@ import com.qjp.util.LogUtils;
 import com.qjp.util.UserUtils;
 import com.qjp.util.query.DepartmentQuery;
 import com.qjp.util.query.UserQuery;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
+import java.util.List;
 
 /** 
  * <p>Project: MyBase</p> 
@@ -172,7 +170,7 @@ public class DepartmentController extends BaseController{
 		if(StringUtils.isNotBlank(userId)){
 			UserEntity user = userService.getUserById(userId);
 			Long companyId = user.getCompanyId();
-			List<DepartmentEntity> departmentList = departmentService.getNoSubDeptListByCompanyId(companyId.toString());
+			List<DepartmentEntity> departmentList = departmentService.getAllDepByCompanyId(companyId.toString());
 			mav.addObject("departmentList", departmentList);
 			mav.addObject("userId", userId);
 		}

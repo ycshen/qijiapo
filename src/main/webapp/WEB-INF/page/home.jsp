@@ -83,7 +83,7 @@
               <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
             </a>
             <div class="info-box-content">
-              <a href="${ctx}/inner/admin/home"  title="查看详细信息"><span class="info-box-text">${customerCount}</span>
+              <a href="${ctx}/inner/user/listCompanyUser"  title="查看详细信息"><span class="info-box-text">${customerCount}</span>
               <span class="info-box-number">公司同事资料</span>
               </a>
             </div>

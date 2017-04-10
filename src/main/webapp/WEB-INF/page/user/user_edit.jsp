@@ -25,24 +25,6 @@
 <input type="hidden" value="${editType}" id="hidEditType"/>
 	<input type="hidden" value="${department.id}" name="departmentId" id="hidDepartmentId"/>
 	<input type="hidden" value="${user.id}" id="hidId" name="id"/>
-  <%--<div class="layui-form-item">
-    <label class="layui-form-label" style="width:100px;">所属部门</label>
-    <div class="layui-input-block">
-    	<c:if test="${editType == 2}">
-                <select class="form-control select2" style="width: 100%;display:inline;" name="departmentId">
-                  <option value="-1">请选择部门</option>
-                  <c:if test="${departmentList != null && departmentList.size() > 0 }">
-                  	<c:forEach items="${departmentList}" var="department">
-                  		 <option <c:if test="${department.id == user.departmentId}">selected="selected"</c:if> value="${department.id}">${department.departmentName }</option>
-                  	</c:forEach>
-                  </c:if>
-                </select>
-    	</c:if>
-    	<c:if test="${editType == 1}">
-    		<a name="departmentName" class="layui-btn layui-btn-small layui-btn-normal layui-btn-radius">${department.departmentName}</a>
-    	</c:if>
-    </div>
-  </div>--%>
     <div class="layui-form-item">
         <label class="layui-form-label" style="width:100px;">所属部门</label>
         <div class="layui-input-block">
