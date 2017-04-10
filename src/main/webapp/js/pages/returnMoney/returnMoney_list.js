@@ -170,4 +170,5 @@ function initDataTable() {
 function redenerCode(id, code){
     var str = "<a href=\"#\" onclick=\"viewDetail('" + id + "');\" style=\"color:#009688;\">" + code + "</a>";
     return str;
- }
+}
+

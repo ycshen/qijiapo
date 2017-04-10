@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -36,54 +37,18 @@ public class ReturnMoneyDetailController {
     @Autowired
     private ContractService contractService;
 
-    @RequestMapping(value = "/saveOrUpdate", method = RequestMethod.POST)
-    public Integer saveOrUpdate(@ModelAttribute ReturnMoneyDetailEntity returnMoneyDetailEntity, HttpServletRequest request){
+    @RequestMapping(value = "/forwardEdit", method = RequestMethod.GET)
+    public ModelAndView forwardEdit(String contractId, HttpServletRequest request){
+        ModelAndView mav = new ModelAndView("/returnMoney/returnMoney_plan_edit");
         UserEntity user = UserUtils.getLoginUser(request);
-        returnMoneyDetailEntity.setUserId(user.getId().toString());
-        returnMoneyDetailEntity.setUserName(user.getUserName());
-        String returnMoneyId = returnMoneyDetailEntity.getReturnMoneyId();
-        if (!TextUtils.isBlank(returnMoneyId)){//判断回款详情是否有回款，有回款则插入回款详情，更新回款，无则新增回款，插入回款详情
-            ReturnMoneyEntity returnMoneyEntity = returnMoneyService.getReturnMoneyById(returnMoneyId);
-
-            returnMoneyService.insertReturnMoney(returnMoneyEntity);
-            returnMoneyDetailService.insertReturnMoneyDetail(returnMoneyDetailEntity);
-
-            //回款类型（1-计划  2-实际  3-开票）
-            switch (returnMoneyDetailEntity.getReturnMoneyType()){
-                case 1:
-                    returnMoneyEntity.setPlanReturnMoney(returnMoneyDetailEntity.getMoney());
-                    returnMoneyEntity.setPlanReturnDate(returnMoneyDetailEntity.getStartDate());
-                    returnMoneyService.updateReturnMoney(returnMoneyEntity);
-                    break;
-                case 2:
-                    returnMoneyEntity.setActualReturnMoney(returnMoneyDetailEntity.getMoney());
-                    returnMoneyEntity.setActualReturnDate(returnMoneyDetailEntity.getStartDate());
-                    returnMoneyService.updateReturnMoney(returnMoneyEntity);
-                    //实际回款，修改合同回款信息
-                    String contractId = returnMoneyEntity.getContractId();
-                    String newReturnMoney = returnMoneyEntity.getActualReturnMoney();
-                    if (StringUtils.isNotBlank(newReturnMoney)){
-                        ContractEntity contract = contractService.getContractById(contractId);
-                        if (contract != null){
-                            String rm = contract.getReturnMoney();
-                            Float oldRM = 0f;
-                            if (StringUtils.isNotBlank(rm)){
-                                oldRM = Float.parseFloat(rm);
-                            }
-                            oldRM += Float.parseFloat(newReturnMoney);
-                            contractService.updateReturnMoneyById(contractId,oldRM.toString());
-                            LogUtils.log(LogUtils.RETURN_MONEY,"添加回款后更新合同对应金额【添加前回款金额（元）" + rm + ",添加后回款金额（元）" + oldRM + "]",contractId,"回款ID",  UserUtils.getLoginUser(request));
-                        }
-                    }
-                    break;
-
-            }
-
-
-        }else {
-            ReturnMoneyEntity returnMoneyEntity = new ReturnMoneyEntity();
+        ReturnMoneyDetailEntity detailEntity = null;
+        if(StringUtils.isNotBlank(contractId)){
+//            contract = returnMoneyDetailService.(id);
         }
 
-        return 1;
+        mav.addObject("returnMoneyDetail", detailEntity);
+        mav.addObject("contractId",contractId);
+        mav.addObject("user", user);
+        return mav;
     }
 }

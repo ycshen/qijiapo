@@ -12,6 +12,7 @@ import com.qjp.util.StringUtils;
 import com.qjp.util.UserUtils;
 import com.qjp.util.query.LogQuery;
 import com.qjp.util.query.ContractQuery;
+import org.apache.http.util.TextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -85,6 +86,11 @@ public class ContractController {
         mav.addObject("user", user);
         ContractEntity contract = contractService.getContractById(id);
         mav.addObject("contract", contract);
+        double notReturnMoney = contract.getTotalPrice();
+        if (!TextUtils.isBlank(contract.getReturnMoney())) {
+            notReturnMoney -= Float.parseFloat(contract.getReturnMoney());
+        }
+        contract.setNotReturnMoney(notReturnMoney + "");
         LogQuery logQuery = new LogQuery();
         logQuery.setCasecadeId(id);
         logQuery.setLogType("2");

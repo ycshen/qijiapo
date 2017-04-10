@@ -127,15 +127,158 @@ function viewCustomer(id, name){
 	parent.layer.closeAll();
 	parent.viewCustomerDetail(id, name);
 }
+var i=1;
+function addReturnMoney(id){
+	var numHtml = getReturnMoneyNum(id,0, 0, 0);
+	$("#sectionDiv").html(numHtml);
 
-function addReturnMoney(){
-	var url = ctx + "/inner/returnMoney/forwardEdit";
-	layer.open({
-		type: 2,
-		title: '新增回款期次',
-		shadeClose: false,
-		shade: 0.8,
-		area: ['830px', '450px'],
-		content: url
+}
+
+
+
+function getReturnMoneyNum(id,planMoney, actualMoney, taxMoney){
+	var numTitle = "";
+    numTitle += "<div class=\"row\">";
+    numTitle += "<div class=\"col-xs-12\">";
+    numTitle += "<h2 class=\"page-box\">";
+    numTitle += "第1期";
+
+    numTitle += "</h2>";
+    numTitle += "</div>";
+    numTitle += "</div>";
+    numTitle += "<div class=\"row invoice-info\">";
+    numTitle += "<div class=\"col-sm-4 invoice-col\">";
+    numTitle += "计划(元）:<span style=\"color: green;\">" + planMoney + "</span>   <a href=\"#\" title=\"添加回款计划\" onclick=\"addPlan(" + id + ")\"><i class=\"layui-icon\">&#xe61f;</i></a>";
+    numTitle += "</div>";
+    numTitle += "<div class=\"col-sm-4 invoice-col\">";
+    numTitle += "实际(元）：<span style=\"color: green;\">" + actualMoney + "</span>  <a href=\"#\" title=\"添加回款记录\"><i class=\"layui-icon\">&#xe61f;</i></a>";
+    numTitle += "</div>";
+    numTitle += "<div class=\"col-sm-4 invoice-col\">";
+    numTitle += "开票(元）：<span style=\"color: green;\">" + taxMoney + "</span>   <a href=\"#\" title=\"添加开票记录\"><i class=\"layui-icon\">&#xe61f;</i></a>";
+    numTitle += "</div>";
+    numTitle += "</div>";
+
+    return numTitle;
+}
+
+function appendDetail(){
+// 	var appendHtml = "";
+// <div class="row">
+//         <div class="col-xs-12 table-responsive">
+//         <table class="table">
+//         <tr>
+//         <td>
+//         <span class="label label-success">计划</span>
+//         </td>
+//         <td>2017-08-08</td>
+//         <td>收款：100元</td>
+//     <td>已完成</td>
+//     <td>
+//     <div class="task_tool">
+//         <a href="" target="_blank" title="查看" style="float: left;margin-right: 10px;color: #aaa;">
+//         <img src="${ctx}/img/contract/view.png">
+//         </a>
+//         <a title="编辑" class="edit"  postdata="{&quot;planId&quot;:156536}" >
+//         <img src="${ctx}/img/contract/edit_pen.png">
+//         </a>
+//         <a title="删除" business="paymentplan" class="delete" href="javascript:;">
+//         <img src="${ctx}/img/contract/delete_gray.png">
+//         </a>
+//         </div>
+//         </td>
+//         </tr>
+//         <tr>
+//         <td><span class="label label-info">实际</span></td>
+//         <td>2017-08-08</td>
+//         <td>收款：100元</td>
+//     <td>已完成</td>
+//     <td>
+//     <div class="task_tool">
+//         <a href="" target="_blank" title="查看" style="float: left;margin-right: 10px;color: #aaa;">
+//         <img src="${ctx}/img/contract/view.png">
+//         </a>
+//         <a title="编辑" class="edit"  postdata="{&quot;planId&quot;:156536}" >
+//         <img src="${ctx}/img/contract/edit_pen.png">
+//         </a>
+//         <a title="删除" business="paymentplan" class="delete" href="javascript:;">
+//         <img src="${ctx}/img/contract/delete_gray.png">
+//         </a>
+//         </div>
+//         </td>
+//         </tr>
+//         <tr>
+//         <td><span class="label label-warning">开票</span></td>
+//         <td>2017-08-08</td>
+//         <td>收款：100元</td>
+//     <td>已完成</td>
+//     <td>
+//     <div class="task_tool">
+//         <a href="" target="_blank" title="查看" style="float: left;margin-right: 10px;color: #aaa;">
+//         <img src="${ctx}/img/contract/view.png">
+//         </a>
+//         <a title="编辑" class="edit"  postdata="{&quot;planId&quot;:156536}" >
+//         <img src="${ctx}/img/contract/edit_pen.png">
+//         </a>
+//         <a title="删除" business="paymentplan" class="delete" href="javascript:;">
+//         <img src="${ctx}/img/contract/delete_gray.png">
+//         </a>
+//         </div>
+//         </td>
+//         </tr>
+//         </table>
+//         </div>
+//         </div>
+}
+
+function addPlan(id){
+    var url = ctx + "/inner/returnMoneyDetail/forwardEdit?id=" + id;
+    layer.open({
+        type: "",
+        title: '新建回款计划',
+        shadeClose: true,
+        shade: 0.8,
+        area: ['800px', '400px'],
+        content: url
+    });
+}
+
+function addPlanSuccess(obj){
+	//获取回款其次
+	var returnMoney = new Object();
+	returnMoney.returnMoneyNum = 2;//还未传活，暂时写死数据
+	returnMoney.contractId = obj.contractId;
+	returnMoney.planReturnMoney = obj.money;
+	returnMoney.planReturnDate = obj.startDate;
+	returnMoney.detailList = obj;
+
+	var json = JSON.stringify(returnMoney);
+	$.ajax({
+		data: json,
+		type: "post",
+
 	});
+	//把obj封装回款其次
+    var url = ctx + "/inner/returnMoney/save"
+
+    var contract = $('#myForm').serialize();
+//            var contract = "contractStartTime=2017-03-27"
+    $.ajax({
+        cache: true,
+        type: "POST",
+        url: url,
+        data: contract,
+        async: false,
+        success: function (returnMoney) {
+            layer.alert('保存成功',
+                {
+                    closeBtn: false,
+                    skin: 'layui-layer-molv'
+                },
+                function (index) {
+                    parent.refreshTable();
+                    parent.layer.closeAll();
+                });
+        }
+    });
+    return false;
 }

@@ -237,20 +237,21 @@
                     </div>
                     <div class="layui-tab-item">
                         <div class="col-md-12">
-                            <blockquote class="layui-elem-quote">合计：<span style="color:green;">99999</span>元/未收款：<span style="color:red;">8888元</span></blockquote>
+                            <blockquote class="layui-elem-quote">合计：<span style="color:green;">${contract.totalPrice}</span>元/未收款：<span style="color:red;">${contract.notReturnMoney}元</span></blockquote>
                             <fieldset class="layui-elem-field layui-field-title" style="border: 0px;">
                                 <div class="layui-field-box">
                                     <div class="layui-btn-group">
 
-                                        <button class="layui-btn layui-btn-primary" onclick="addReturnMoney();">
+                                        <button class="layui-btn layui-btn-primary" onclick="addReturnMoney('${contract.id}');">
                                             <i class="layui-icon">&#xe61f;</i>添加回款期次
                                         </button>
                                     </div>
                                 </div>
                             </fieldset>
-                            <section class="invoice" style="padding: 0px;">
+                            <input type="hidden" id="hidDetailNum" value="1"/>
+                            <section class="invoice" style="padding: 0px;" id="sectionDiv">
                                 <!-- title row -->
-                                <div class="row">
+                               <%-- <div class="row">
                                     <div class="col-xs-12">
                                         <h2 class="page-box">
                                             第1期
@@ -334,71 +335,10 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <h2 class="page-box">
-                                            第2期
-                                        </h2>
-                                    </div>
-                                </div>
-                                <div class="row invoice-info">
-                                    <div class="col-sm-4 invoice-col">
-                                        计划(元）:<span style="color: green;">120</span>   <a href="#" title="添加回款计划"><i class="layui-icon">&#xe61f;</i></a>
-                                    </div>
-                                    <div class="col-sm-4 invoice-col">
-                                        实际(元）：<span style="color: green;">120</span>    <a href="#" title="添加回款记录"><i class="layui-icon">&#xe61f;</i></a>
-                                    </div>
-                                    <div class="col-sm-4 invoice-col">
-                                        开票(元）：<span style="color: green;">120</span>    <a href="#" title="添加开票记录"><i class="layui-icon">&#xe61f;</i></a>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-12 table-responsive">
-                                        <table class="table">
-                                            <tr>
-                                                <td>
-                                                    <span class="label label-success">计划</span>
-                                                </td>
-                                                <td>2017-08-08</td>
-                                                <td>收款：100元</td>
-                                                <td>已完成</td>
-                                                <td>
-                                                    <div class="task_tool">
-                                                        <a href="" target="_blank" title="查看" style="float: left;margin-right: 10px;color: #aaa;">
-                                                            <img src="${ctx}/img/contract/view.png">
-                                                        </a>
-                                                        <a title="编辑" class="edit"  postdata="{&quot;planId&quot;:156536}" >
-                                                            <img src="${ctx}/img/contract/edit_pen.png">
-                                                        </a>
-                                                        <a title="删除" business="paymentplan" class="delete" href="javascript:;">
-                                                            <img src="${ctx}/img/contract/delete_gray.png">
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><span class="label label-info">实际</span></td>
-                                                <td>2017-08-08</td>
-                                                <td>收款：100元</td>
-                                                <td>已完成</td>
-                                                <td>
-                                                    <div class="task_tool">
-                                                        <a href="" target="_blank" title="查看" style="float: left;margin-right: 10px;color: #aaa;">
-                                                            <img src="${ctx}/img/contract/view.png">
-                                                        </a>
-                                                        <a title="编辑" class="edit"  postdata="{&quot;planId&quot;:156536}" >
-                                                            <img src="${ctx}/img/contract/edit_pen.png">
-                                                        </a>
-                                                        <a title="删除" business="paymentplan" class="delete" href="javascript:;">
-                                                            <img src="${ctx}/img/contract/delete_gray.png">
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
+--%>
 
-                                        </table>
-                                    </div>
-                                </div>
+
+
 
                             </section>
                         </div>
@@ -467,6 +407,7 @@
         </div>
     </div>
 </div>
+
 
 
 <script>
