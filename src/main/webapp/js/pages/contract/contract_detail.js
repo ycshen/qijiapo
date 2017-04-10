@@ -230,17 +230,7 @@ function appendDetail(){
 //         </div>
 }
 
-function addPlan(id){
-    var url = ctx + "/inner/returnMoneyDetail/forwardEdit?id=" + id;
-    layer.open({
-        type: "",
-        title: '新建回款计划',
-        shadeClose: true,
-        shade: 0.8,
-        area: ['800px', '400px'],
-        content: url
-    });
-}
+
 
 function addPlanSuccess(obj){
 	//获取回款其次
@@ -281,4 +271,27 @@ function addPlanSuccess(obj){
         }
     });
     return false;
+}
+
+
+
+function addPlan(id){
+    /*var url = ctx + "/inner/returnMoneyDetail/forwardEdit?id=" + id;
+    layer.open({
+        type: "2",
+        title: "新建回款计划",
+        shadeClose: false,
+        shade: 0.8,
+        area: ['800px', '400px'],
+        content: url
+    });*/
+     var url = ctx + "/inner/returnMoneyDetail/forwardEdit?contractId=" + id;
+     layer.open({
+     type: 2,
+     title: "新建回款计划",
+     shadeClose: false,
+     shade: 0.8,
+     area: ['500px', '400px'],
+     content: url
+     });
 }
