@@ -233,7 +233,7 @@ function appendDetail(){
 function addPlan(id){
     var url = ctx + "/inner/returnMoneyDetail/forwardEdit?id=" + id;
     layer.open({
-        type: "",
+        type: 2,
         title: '新建回款计划',
         shadeClose: true,
         shade: 0.8,
@@ -246,9 +246,9 @@ function addPlanSuccess(obj){
 	//获取回款其次
 	var returnMoney = new Object();
 	returnMoney.returnMoneyNum = 2;//还未传活，暂时写死数据
-	returnMoney.contractId = obj.contractId;
-	returnMoney.planReturnMoney = obj.money;
-	returnMoney.planReturnDate = obj.startDate;
+    returnMoney.contractId = getQueryString(obj,"contractId");
+    returnMoney.planReturnMoney = getQueryString(obj,"planReturnMoney");
+    returnMoney.planReturnDate = getQueryString(obj,"startDate");
 	returnMoney.detailList = obj;
 
 	var json = JSON.stringify(returnMoney);
@@ -260,15 +260,15 @@ function addPlanSuccess(obj){
 	//把obj封装回款其次
     var url = ctx + "/inner/returnMoney/save"
 
-    var contract = $('#myForm').serialize();
-//            var contract = "contractStartTime=2017-03-27"
+//     var contract = $('#myForm').serialize();
+// //            var contract = "contractStartTime=2017-03-27"
     $.ajax({
         cache: true,
         type: "POST",
         url: url,
-        data: contract,
+        data: json,
         async: false,
-        success: function (returnMoney) {
+        success: function (data) {
             layer.alert('保存成功',
                 {
                     closeBtn: false,
@@ -281,4 +281,9 @@ function addPlanSuccess(obj){
         }
     });
     return false;
+}
+function getQueryString(obj,name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = obj.substr(1).match(reg);
+    if (r != null) return unescape(r[2]); return null;
 }

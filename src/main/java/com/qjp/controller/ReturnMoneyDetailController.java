@@ -38,16 +38,16 @@ public class ReturnMoneyDetailController {
     private ContractService contractService;
 
     @RequestMapping(value = "/forwardEdit", method = RequestMethod.GET)
-    public ModelAndView forwardEdit(String contractId, HttpServletRequest request){
+    public ModelAndView forwardEdit(String id, HttpServletRequest request){
         ModelAndView mav = new ModelAndView("/returnMoney/returnMoney_plan_edit");
         UserEntity user = UserUtils.getLoginUser(request);
         ReturnMoneyDetailEntity detailEntity = null;
-        if(StringUtils.isNotBlank(contractId)){
+        if(StringUtils.isNotBlank(id)){
 //            contract = returnMoneyDetailService.(id);
         }
 
         mav.addObject("returnMoneyDetail", detailEntity);
-        mav.addObject("contractId",contractId);
+        mav.addObject("contractId",id);
         mav.addObject("user", user);
         return mav;
     }

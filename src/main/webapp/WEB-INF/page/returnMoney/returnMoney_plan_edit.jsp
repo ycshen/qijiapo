@@ -51,9 +51,9 @@
 <body style="background: #fff;">
 
 <form class="layui-form" id="myForm" onsubmit="return false;">
-    <input type="hidden" id="hidAttnId" name="id" value="${contract.id}"/>
-    <input type="hidden" id="hidBeyondDeptId" name="departmentId" value="${contract.departmentId}"/>
-    <input type="hidden" id="hidBeyondDeptName" name="departmentName" value="${contract.departmentName}"/>
+    <%--<input type="hidden" id="hidAttnId" name="id" value="${contract.id}"/>--%>
+    <input type="hidden" id="departmentId" name="departmentId" value="${contract.departmentId}"/>
+    <input type="hidden" id="departmentName" name="departmentName" value="${contract.departmentName}"/>
 
     <div class="container content_div">
         <div class="layui-form-item my-layui-form-item my-top">
@@ -128,13 +128,11 @@
         //自定义验证规则
         form.verify({
             planReturnMoney: function (value) {
-                if (value.length < 2) {
-                    return '主题的长度不能小于2个字符';
+                if (value < 1) {
+                    return '计划金额还未填写';
                 }
 
-                if (value.length > 30) {
-                    return '主题的长度不能大于30个字符';
-                }
+
             },
             startDate: function (value) {
                 if (value == null || value == '' || value == undefined) {
@@ -143,10 +141,10 @@
             },
 
         });
-
-
+//        var data = $('#myForm').serialize();
         //监听提交
         form.on('submit(mySubmit)', function (data) {
+            data = $('#myForm').serialize();
             parent.addPlanSuccess(data);
         });
 
