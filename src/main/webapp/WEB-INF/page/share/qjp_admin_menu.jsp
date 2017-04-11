@@ -62,6 +62,8 @@
         	<a href="<c:url value="/inner/log/logs"/>"><i class="fa fa-file-text"></i> <span>管理日志</span></a></li>
         <li <c:if test="${param.nav=='auth_list'}"> class="active"</c:if>>
         	<a href="<c:url value="/inner/memo/memo"/>"><i class="fa fa-bullhorn"></i> <span>公告管理</span></a></li>
+        <li <c:if test="${param.nav=='ck_att_list'}"> class="active"</c:if>>
+              <a href="<c:url value="/admin/checkAttendance/list"/>"><i class="fa fa-times-circle-o"></i> <span>考勤点管理</span></a></li>
         <li <c:if test="${param.nav=='auth_list'}"> class="active"</c:if>>
         	<a href="<c:url value="/inner/memo/memo"/><i class="fa fa-weibo"></i> <span>话题管理</span></a></li>
       </ul>

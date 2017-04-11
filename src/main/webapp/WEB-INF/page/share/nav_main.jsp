@@ -70,6 +70,11 @@
 				href="<c:url value="/inner/menu/list"/>"
 				data-placement="auto right" title="code"><span
 					class="glyphicon glyphicon-modal-window" aria-hidden="true"></span>菜单管理</a></li>
+			<li <c:if test="${param.nav=='list_checkattendance_rule'}"> class="current"</c:if>><a
+					data-toggle="tooltip"
+					href="<c:url value="/admin/checkAttendance/list"/>"
+					data-placement="auto right" title="code"><span
+					class="glyphicon glyphicon-modal-window" aria-hidden="true"></span>考勤点管理</a></li>
 			
 			
 			
