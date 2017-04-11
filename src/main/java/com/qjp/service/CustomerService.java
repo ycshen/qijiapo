@@ -23,5 +23,6 @@ public interface CustomerService {
 	void batchDelete(String idArr);
 	void batchTransfer(String idArr);
 	Integer getSelfCustomerCount(CustomerQuery customerQuery);
+	List<CustomerEntity> getAllCustomer(String companyId);
 }
 

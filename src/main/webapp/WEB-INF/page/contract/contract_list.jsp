@@ -10,22 +10,17 @@
     <title>企家婆-专业的企业服务好帮手</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <%@include file="../share/common_css.jsp" %>
+    <%@include file="../share/common_css.jsp"%>
     <link rel="stylesheet" href="${ctx}/js/plugins/datatables/dataTables.bootstrap.css">
     <link rel="stylesheet" href="${ctx}/js/layui/css/layui.css">
     <link rel="stylesheet" href="${ctx}/js/select2/select2.min.css">
-    <script type="text/javascript" src="${ctx}/js/jquery.js"></script>
-    <script src="${ctx}/js/bootstrap/js/bootstrap.min.js"></script>
+    <%@include file="../share/common_js.jsp"%>
     <script src="${ctx}/js/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="${ctx}/js/plugins/datatables/dataTables.bootstrap.min.js"></script>
     <script src="${ctx}/js/plugins/slimScroll/jquery.slimscroll.min.js"></script>
     <script src="${ctx}/js/plugins/fastclick/fastclick.js"></script>
     <script src="${ctx}/js/adminlte/dist/js/app.min.js"></script>
     <script src="${ctx}/js/select2/select2.full.min.js"></script>
-    <script type="text/javascript" src="${ctx}/js/layer/layer.js"></script>
-    <script type="text/javascript" src="http://zhengjinfan.cn/js/area.js"></script>
-    <script type="text/javascript" src="${ctx}/js/layui/layui.js"></script>
-    <script src="${ctx}/js/pages/common/province_city_area.js"></script>
     <script src="${ctx}/js/pages/contract/contract_list.js"></script>
     <style type="text/css">
         .mybox {
@@ -97,10 +92,27 @@
                                     <tr>
                                         <td>
                                             <label class="layui-form-label my-label">合同名称</label>
-
+                                            <input type="text" class="layui-input my-input" id="contractName"
+                                                   placeholder="合同名称">
                                         </td>
-                                        <td><input type="text" class="layui-input my-input" id="contractName"
-                                                   placeholder="合同名称"></td>
+                                        <td>
+                                            <div class="layui-inline">
+                                                <label class="layui-form-label">客户</label>
+                                                <div class="layui-input-inline">
+                                                    <select name="modules" lay-verify="required" lay-search>
+                                                        <option value="">直接选择或搜索客户</option>
+                                                        <c:if test="${customerList != null && customerList.size() > 0 }">
+                                                            <c:forEach items="${customerList}" var="customer">
+                                                                <option value="${customer.id}">${customer.customerName}</option>
+                                                            </c:forEach>
+                                                        </c:if>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                        </div>
+                                        </td>
+
                                         <%--<td><label class="layui-form-label my-label">省市区</label></td>--%>
                                         <%--<td colspan="3">--%>
                                             <%--<div class="layui-form-item">--%>
@@ -183,5 +195,14 @@
     </div>
     <!-- /.content-wrapper -->
     <%@include file="../share/qjp_footer.jsp" %>
+
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        var form = layui.form()
+                , layer = layui.layer
+                , layedit = layui.layedit
+                , laydate = layui.laydate;
+    });
+</script>
 </body>
 </html>

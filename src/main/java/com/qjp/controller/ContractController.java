@@ -2,6 +2,7 @@ package com.qjp.controller;
 
 import com.qjp.base.ResponseStatus;
 import com.qjp.base.RoleEnum;
+import com.qjp.entity.CustomerEntity;
 import com.qjp.entity.LogEntity;
 import com.qjp.entity.ContractEntity;
 import com.qjp.entity.UserEntity;
@@ -41,11 +42,17 @@ public class ContractController {
     private LogService logService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private CustomerService customerService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     public ModelAndView list(@ModelAttribute ContractQuery contractQuery, HttpServletRequest request){
         ModelAndView mav = new ModelAndView("/contract/contract_list");
         mav.addObject("contractQuery", contractQuery);
+        UserEntity loginUser = UserUtils.getLoginUser(request);
+        List<CustomerEntity> customerList = customerService.getAllCustomer(loginUser.getCompanyId().toString());
+        mav.addObject("customerList", customerList);
+
         return mav;
     }
 
