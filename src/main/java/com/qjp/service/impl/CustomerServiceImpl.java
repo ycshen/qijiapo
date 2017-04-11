@@ -156,5 +156,28 @@ public class CustomerServiceImpl implements CustomerService{
 		return count;
 	}
 
+	@Override
+	public List<CustomerEntity> getAllCustomer(String companyId) {
+		String result = CRMApiUtils.getAllCustomer(companyId);
+		List<CustomerEntity> list = null;
+		if(StringUtils.isNotBlank(result)){
+			JSONObject jsonObject = JSONObject.parseObject(result);
+			if(jsonObject != null){
+				Object codeObj = jsonObject.get("code");
+				if(codeObj != null){
+					String code = codeObj.toString();
+					if (ApiCode.OK.toString().equals(code)) {
+						Object dataObj = jsonObject.get("data");
+						if(dataObj != null){
+							String data = dataObj.toString();
+							list = JSONObject.parseArray(data, CustomerEntity.class);
+						}
+					}
+				}
+			}
+		}
+
+		return list;
+	}
 }
 

@@ -145,6 +145,9 @@ public class CRMApiUrl {
 	@Value("${crm.getSelfCustomerCount}")
 	private String crm_getSelfCustomerCount_url;
 	public static String crm_getSelfCustomerCount;
+	@Value("${crm.getAllCustomer}")
+	private String crm_getAllCustomer_url;
+	public static String crm_getAllCustomer;
 
 	//contract
 	@Value("${crm.insertContract}")
@@ -258,6 +261,8 @@ public class CRMApiUrl {
 		crm_batchDeleteCustomer = this.crm_batchDeleteCustomer_url;
 		crm_deleteCustomerById = this.crm_deleteCustomerById_url;
 		crm_updateCustomer = this.crm_updateCustomer_url;
+		crm_getAllCustomer = this.crm_getAllCustomer_url;
+
 		//activity
 		crm_insertActivity = this.crm_insertActivity_url;
 		crm_getActivityPage = this.crm_getActivityPage_url;

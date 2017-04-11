@@ -101,11 +101,7 @@ function transfer(id, contractName) {
 }
 
 $(function () {
-    /*$(".select2").select2();
-     */
-
     initDataTable();
-    initLocation();
     initAllCheckEvt();
 });
 
