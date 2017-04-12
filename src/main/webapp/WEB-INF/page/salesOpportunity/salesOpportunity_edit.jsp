@@ -34,7 +34,9 @@ margin: 0px 15px 0px 0px;
     min-height: 36px;
 }
 
-
+.qjp_oper{
+    position:fixed; top: 0; left: 0;background-color:#F8F8F8;width: 100%;z-index: 999;
+}
 </style>
 </head>
 <body style="background: #fff;overflow-y:auto;">
@@ -43,7 +45,7 @@ margin: 0px 15px 0px 0px;
 <input type="hidden" id="hidProductId" name="id" value="${salesOpportunity.id}"/>
 <input type="hidden" id="hidBeyondDeptId" name="departmentId" value="${salesOpportunity.departmentId}"/>
 <input type="hidden" id="hidBeyondDeptName" name="departmentName" value="${salesOpportunity.departmentName}"/>
-<div class="layui-form-item my-top" style="position:fixed; top: 0; left: 0;background-color:#F8F8F8;width: 100%;z-index: 999">
+<div class="layui-form-item my-top qjp_oper">
     <div class="layui-input-block" style="text-align:right;">
         <button class="layui-btn" lay-submit="" lay-filter="mySubmit">保存</button>
         <button class="layui-btn layui-btn-primary" style="margin-right:50px;" onclick="cancelEdit();">取消</button>
