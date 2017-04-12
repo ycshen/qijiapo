@@ -5,7 +5,7 @@ function addCustomer(){
 		title: '新增客户',
 		shadeClose: false,
 		shade: 0.8,
-		area: ['800px', '600px'],
+		area: ['80%', '100%'],
 		content: url
 	});
 }
