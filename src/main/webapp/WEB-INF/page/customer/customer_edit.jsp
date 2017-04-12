@@ -154,13 +154,13 @@ margin: 0px 15px 0px 0px;
     </div>
   </div>
   
- 	<div class="layui-form-item my-layui-form-item">
+ 	<div class="layui-form-item my-layui-form-item  my-top">
 	    <label class="layui-form-label">上级客户</label>
 	    <div class="layui-input-inline" style="margin-right: 0px;">
-	    	<input placeholder="请输入或者选择上级客户" type="text" id="txtParentCustomerName" autocomplete="off"   class="layui-input" value="${customer.parentCustomerId}">
-	           
+	    	<input placeholder="请输入或者选择上级客户" type="text" id="txtParentCustomerName" value="${customer.parentCustomerName}" autocomplete="off"   class="layui-input" >
+            <input type="hidden" id="txtParentCustomerId" name="parentCustomerId" value="${customer.parentCustomerId}"/>
 	    </div>
-	    <button class="layui-btn  layui-btn-primary" onclick="selectDepartment();"><i class="layui-icon">&#xe61f;</i></button>
+	    <button class="layui-btn  layui-btn-primary" onclick="selectCustomer();"><i class="layui-icon">&#xe61f;</i></button>
 	  </div>
 
    <div class="layui-form-item my-layui-form-item layui-form-text">

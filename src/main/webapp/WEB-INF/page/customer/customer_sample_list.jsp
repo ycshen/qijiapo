@@ -39,8 +39,9 @@
     .my-input{
     	width: 150px;
     }
-    .my-layui-input-inline{
-    	width: 100px;
+    .qjp_oper{
+        position:fixed; top: 0; left: 0;background-color:#F8F8F8;width: 100%;z-index: 999;
+        padding-top: 10px;
     }
 </style>
  <script type="text/javascript">
@@ -49,11 +50,18 @@
 
 
 </head>
-<body class="hold-transition skin-black sidebar-mini">
+<body class="hold-transition skin-black sidebar-mini" style="overflow-y:auto;">
 
 
     <section class="content">
-      <div class="row">
+        <div class="layui-form-item my-top qjp_oper" >
+            <div class="layui-input-block" style="text-align:right;">
+                <button class="layui-btn" lay-submit="" lay-filter="mySubmit" onclick="confirmSelect();">确定选择</button>
+                <button class="layui-btn layui-btn-primary" style="margin-right:50px;" onclick="cancelEdit();">取消选择</button>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top: 50px;">
         <div class="col-md-12">
           <div class="box mybox">
             <div class="box-body my-box-body">
@@ -94,7 +102,7 @@
 								</form>
 	          					
 	        </div>
-            <div class="box-body"  style="height: 220px; width: 750px;overflow-y: auto;overflow-x: hidden;padding:0px;">
+            <div class="box-body">
               <table id="myDataTable" class="table table-bordered table-striped">
                 <thead>
                 <tr>
@@ -109,12 +117,7 @@
                 </tfoot>
               </table>
             </div>
-            <div class="layui-form-item my-top" style="margin-top: 5px;">
-			    <div class="layui-input-block" style="text-align:right;">
-			      <button class="layui-btn" lay-submit="" lay-filter="mySubmit" onclick="confirmSelect();">确定选择</button>
-			      <button class="layui-btn layui-btn-primary" style="margin-right:50px;" onclick="cancelEdit();">取消选择</button>
-			    </div>
-			  </div>  
+
           </div>
           
         </div>
