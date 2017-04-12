@@ -191,7 +191,7 @@ font-size: 14px !important;
 							</td>
 			    			
 			    		</tr>
-			    		<tr>
+			    		<%--<tr>
 			    			<td class="title-td-left" colspan="1">
 								<fieldset class="layui-elem-field">
 								  <legend>竞争对手负责人</legend>
@@ -226,7 +226,7 @@ font-size: 14px !important;
 								</fieldset>
 							</td>
 			    			
-			    		</tr>
+			    		</tr>--%>
 			    		<%-- <tr>
 			    			<td class="title-td-left" colspan="1">
 								<fieldset class="layui-elem-field">
