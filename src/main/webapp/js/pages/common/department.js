@@ -41,11 +41,14 @@ var nodeId = "";
 function initTree() {
    $.ajax({
 	   type : 'get',
-	   url : ctx + "/inner/admin/deptree",
+	   url : ctx + "/inner/department/deptree",
 	   success: function(zNodes){
 		   zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
 		   zTreeObj.expandAll(true); 
 		   
+	   },
+	   error: function(data){
+		   console.log(data);
 	   }
    })         
 }
