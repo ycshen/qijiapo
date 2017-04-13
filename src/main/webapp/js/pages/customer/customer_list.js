@@ -5,7 +5,7 @@ function addCustomer(){
 		title: '新增客户',
 		shadeClose: false,
 		shade: 0.8,
-		area: ['800px', '600px'],
+		area: ['80%', '100%'],
 		content: url
 	});
 }
@@ -18,22 +18,11 @@ function editCustomer(id){
 		title: '编辑客户',
 		shadeClose: false,
 		shade: 0.8,
-		area: ['800px', '600px'],
+		area: ['80%', '100%'],
 		content: url
 	});
 }
 
-function addSubCompany(id){
-	var url = ctx + "/inner/company/addSub?id=" + id;
-	layer.open({
-		type: 2,
-		title: '添加子公司信息',
-		shadeClose: false,
-		shade: 0.8,
-		area: ['550px', '400px'],
-		content: url
-	});
-}
 function addSuccess(){
 	window.location.href = ctx + "/inner/company/list";
 }

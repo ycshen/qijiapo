@@ -5,7 +5,7 @@ function addCompeotitor(){
 		title: '新增竞争对手',
 		shadeClose: false,
 		shade: 0.8,
-		area: ['800px', '400px'],
+		area: ['80%', '100%'],
 		content: url
 	});
 }

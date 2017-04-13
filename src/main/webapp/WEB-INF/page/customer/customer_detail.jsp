@@ -110,6 +110,11 @@ font-size: 14px !important;
 			    			<td>${customer.departmentName}</td>
 			    			
 			    		</tr>
+						<tr>
+							<td class="title-td">上级客户:</td>
+							<td colspan="3">${customer.parentCustomerName}</td>
+
+						</tr>
 			    		<tr>
 			    			<td class="title-td">备注:</td>
 			    			<td colspan="3">${customer.remark}</td>

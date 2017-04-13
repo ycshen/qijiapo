@@ -287,3 +287,7 @@ function getCheckedBoxValue(){
 
 	return chkedStr;
 }
+
+function cancelEdit(){
+	parent.layer.closeAll();
+}

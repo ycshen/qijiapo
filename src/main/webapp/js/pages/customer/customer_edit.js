@@ -27,3 +27,25 @@ function isBlank(args){
 $(function(){
 	initLocation();
 });
+
+function selectCustomer(){
+	var url = ctx + "/inner/customer/sampleList";
+	layer.open({
+		type: 2,
+		title : false,
+		shadeClose: false,
+		closeBtn: 0,
+		shade: 0.8,
+		area: ['80%', '80%'],
+		content: url
+	});
+}
+
+function getCustomer(id, name){
+	$("#txtParentCustomerName").val(name);
+	$("#txtParentCustomerId").val(id);
+	layui.layer.closeAll();
+}
+function cancelEdit(){
+	parent.layer.closeAll();
+}

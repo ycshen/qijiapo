@@ -193,5 +193,14 @@ public class DepartmentController extends BaseController{
 		
 		return response;
 	}
+
+	@RequestMapping(value = "/deptree", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public String treeData(HttpServletRequest request){
+		UserEntity loginUser = UserUtils.getAdminLoginUser(request);
+		String tree = companyService.getCompanyStaffTreeById(loginUser.getCompanyId().toString());
+
+		return tree;
+	}
 }
 

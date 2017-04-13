@@ -12,10 +12,7 @@ import com.qjp.util.query.LogQuery;
 import com.qjp.util.query.ReturnMoneyQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -145,26 +142,26 @@ public class ReturnMoneyController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public Integer saveOrUpdate(@ModelAttribute ReturnMoneyEntity returnMoney, HttpServletRequest request){
+    @ResponseBody
+    public Integer saveOrUpdate(@RequestBody ReturnMoneyEntity returnMoney, HttpServletRequest request){
         Integer result = 0;
-        List<ReturnMoneyDetailEntity> detailList = returnMoney.getDetailList();
-        if(detailList != null && detailList.size() > 0){
-            result = 2; //回款详情不能为空
-            return result;
-        }
+        //判断该合同对应的期次是否有对应的详细回款
+        boolean isHasDetail = false;  //接口1
+        //没有详细回款，此处保存必须要携带回款详细
+        if(!isHasDetail){
+            ReturnMoneyDetailEntity returnMoneyDetail = returnMoney.getReturnMoneyDetail();
+            if(returnMoneyDetail == null){
+                result = 2;
+                return result;
+            }
 
+            returnMoneyDetail.init(request);
+        }
         UserEntity user = UserUtils.getLoginUser(request);
         returnMoney.setUserId(user.getId().toString());
         returnMoney.setUserName(user.getUserName());
-        List<ReturnMoneyDetailEntity> newList = new LinkedList<ReturnMoneyDetailEntity>();
-        for (ReturnMoneyDetailEntity returnMoneyDetail : detailList) {
-            returnMoneyDetail.init(request);
-            newList.add(returnMoneyDetail);
-        }
-
-        returnMoney.setDetailList(newList);
         returnMoneyService.insertReturnMoney(returnMoney);
-        String contractId = returnMoney.getContractId();
+        /*String contractId = returnMoney.getContractId();
         ContractEntity contractEntity = contractService.getContractById(contractId);
         LogUtils.log(LogUtils.RETURN_MONEY, "添加了合同的回款" + contractEntity.getContractName(), contractId, "合同ID", UserUtils.getLoginUser(request));
         //更新合同回款信息
@@ -181,7 +178,7 @@ public class ReturnMoneyController {
                 contractService.updateReturnMoneyById(contractId,oldRM.toString());
                 LogUtils.log(LogUtils.RETURN_MONEY,"添加回款后更新合同对应金额【添加前回款金额（元）" + rm + ",添加后回款金额（元）" + oldRM + "]",contractId,"回款ID",  UserUtils.getLoginUser(request));
             }
-        }
+        }*/
 
         return 1;
     }

@@ -55,6 +55,12 @@ public class CustomerController {
 		String roleType = customerQuery.getRoleType();
 		if(RoleEnum.DEP.getRoleId().toString().equals(roleType)){
 			String idList = departmentService.getSubDepList(customerQuery.getDepartmentId(), customerQuery.getCompanyId());
+			if(StringUtils.isNotBlank(idList)){
+				idList = idList + "," + "-" + customerQuery.getCompanyId();
+			}else{
+				idList = "-" + customerQuery.getCompanyId();
+			}
+
 			customerQuery.setDepartmentId(idList);
 		}
 		

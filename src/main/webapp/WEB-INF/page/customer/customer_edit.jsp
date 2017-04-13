@@ -40,14 +40,22 @@ margin: 0px 15px 0px 0px;
 	height: 500px;
 	overflow-y:auto;
 }
+.qjp_oper{
+     position:fixed; top: 0; left: 0;background-color:#F8F8F8;width: 100%;z-index: 999;
+ }
 </style>
 </head>
-<body style="background: #fff;">
+<body style="background: #fff;overflow-y:auto;">
 	
 <form class="layui-form" id="myForm" onsubmit="return false;">
 <input type="hidden" id="hidProductId" name="id" value="${customer.id}"/>
-
-<div class="container content_div">
+    <div class="layui-form-item qjp_oper">
+        <div class="layui-input-block" style="text-align:right;">
+            <button class="layui-btn" lay-submit="" lay-filter="mySubmit">保存</button>
+            <button class="layui-btn layui-btn-primary" style="margin-right:50px;" onclick="cancelEdit();">取消</button>
+        </div>
+    </div>
+<div class="container" style="margin-top: 50px;">
 	
   <div class="layui-form-item my-layui-form-item my-top">
     <label class="layui-form-label">客户名称<span style="color:red">*</span></label>
@@ -146,32 +154,15 @@ margin: 0px 15px 0px 0px;
     </div>
   </div>
   
- 	<div class="layui-form-item my-layui-form-item">
+ 	<div class="layui-form-item my-layui-form-item  my-top">
 	    <label class="layui-form-label">上级客户</label>
 	    <div class="layui-input-inline" style="margin-right: 0px;">
-	    	<input placeholder="请输入或者选择上级客户" type="text" id="txtParentCustomerName" autocomplete="off"   class="layui-input" value="${customer.parentCustomerId}">
-	           
+	    	<input placeholder="请输入或者选择上级客户" type="text" id="txtParentCustomerName" value="${customer.parentCustomerName}" autocomplete="off"   class="layui-input" >
+            <input type="hidden" id="txtParentCustomerId" name="parentCustomerId" value="${customer.parentCustomerId}"/>
 	    </div>
-	    <button class="layui-btn  layui-btn-primary" onclick="selectDepartment();"><i class="layui-icon">&#xe61f;</i></button>
+	    <button class="layui-btn  layui-btn-primary" onclick="selectCustomer();"><i class="layui-icon">&#xe61f;</i></button>
 	  </div>
-  <div id="divViewer">
-  	<div class="layui-form-item my-layui-form-item" style="margin-top:  20px;">
-    	<label class="layui-form-label"></label>
-    	<div class="layui-input-block">
-      		<a href="#" onclick="addMoreInfo();" style="color:#009688">
-	      		<c:choose>
-		      		<c:when test="${customer != null && customer.id != '' }">
-		      		编辑更多信息
-		      		</c:when>
-		      		<c:otherwise>
-		      		新增更多信息
-		      		</c:otherwise>
-		      	</c:choose>
-      		</a>
-    	</div>
- 	 </div>
-  </div>
-  <div id="divOther" style="display: none;">
+
    <div class="layui-form-item my-layui-form-item layui-form-text">
     <label class="layui-form-label">行业</label>
     <div class="layui-input-block">
@@ -233,13 +224,7 @@ margin: 0px 15px 0px 0px;
     </div>
   </div>
 </div>
-</div>	
-  <div class="layui-form-item my-top">
-    <div class="layui-input-block" style="text-align:right;">
-      <button class="layui-btn" lay-submit="" lay-filter="mySubmit">保存</button>
-      <button class="layui-btn layui-btn-primary" style="margin-right:50px;" onclick="cancelEdit();">取消</button>
-    </div>
-  </div>  
+
   
   <input type="hidden" value="" id="hidProvinceName" name="provinceName"/>
   <input type="hidden" value="" id="hidCityName" name="cityName"/>

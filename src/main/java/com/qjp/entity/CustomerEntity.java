@@ -1,8 +1,6 @@
 package com.qjp.entity;
 
-import java.sql.Date;
-
-/** 
+/**
  * <p>Project: qijiapo-crm</p> 
  * <p>Title: CustomerEntity.java</p> 
  * <p>Description: TODO</p> 
@@ -16,6 +14,7 @@ public class CustomerEntity extends CRMBaseEntity{
 	private String mobile; //电话
 	private Integer level;// 客户级别
 	private String parentCustomerId;//上级客户
+	private String parentCustomerName; //上级客户名称
 	private Integer industry;  //行业
 	private String website; //公司网址
 	private Integer totalStaff; //总人数
@@ -74,6 +73,13 @@ public class CustomerEntity extends CRMBaseEntity{
 	public void setSaleMoney(String saleMoney) {
 		this.saleMoney = saleMoney;
 	}
-	
+
+	public String getParentCustomerName() {
+		return parentCustomerName;
+	}
+
+	public void setParentCustomerName(String parentCustomerName) {
+		this.parentCustomerName = parentCustomerName;
+	}
 }
 

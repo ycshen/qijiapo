@@ -1,22 +1,16 @@
 package com.qjp.controller;
 
-import com.qjp.entity.ContractEntity;
-import com.qjp.entity.ReturnMoneyDetailEntity;
-import com.qjp.entity.ReturnMoneyEntity;
 import com.qjp.entity.UserEntity;
 import com.qjp.service.*;
-import com.qjp.util.LogUtils;
-import com.qjp.util.StringUtils;
 import com.qjp.util.UserUtils;
-import org.apache.http.util.TextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * Created by fengyue on 2017/4/7.
@@ -37,18 +31,21 @@ public class ReturnMoneyDetailController {
     @Autowired
     private ContractService contractService;
 
-    @RequestMapping(value = "/forwardEdit", method = RequestMethod.GET)
-    public ModelAndView forwardEdit(String id, HttpServletRequest request){
+    @RequestMapping(value = "/addPlan", method = RequestMethod.GET)
+    public ModelAndView addPlan(String contractId, HttpServletRequest request){
         ModelAndView mav = new ModelAndView("/returnMoney/returnMoney_plan_edit");
         UserEntity user = UserUtils.getLoginUser(request);
-        ReturnMoneyDetailEntity detailEntity = null;
-        if(StringUtils.isNotBlank(id)){
-//            contract = returnMoneyDetailService.(id);
-        }
-
-        mav.addObject("returnMoneyDetail", detailEntity);
-        mav.addObject("contractId",id);
+        //接口1：获取该合同本次调用的回款期次
+        //start
+        Integer returnMoneyNum = 1;
+        //end
+        UserEntity loginUser = UserUtils.getLoginUser(request);
+        List<UserEntity> userList = userService.getUserListByCompanyId(loginUser.getCompanyId().toString());
+        mav.addObject("userList", userList);
+        mav.addObject("contractId",contractId);
         mav.addObject("user", user);
+        mav.addObject("returnMoneyNum", returnMoneyNum);
         return mav;
     }
+
 }
