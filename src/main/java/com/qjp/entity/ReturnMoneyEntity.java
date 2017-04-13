@@ -5,7 +5,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @Author yuchuanshen
@@ -36,7 +35,15 @@ public class ReturnMoneyEntity {
     private String totalMoney; //总金额
     private String remark; //备注
     private Integer lockStatus; //锁定状态（0-未锁定， 1-锁定）
-    List<ReturnMoneyDetailEntity> detailList; //回款详情信息
+    ReturnMoneyDetailEntity returnMoneyDetail; //回款详情信息
+    private Integer isDelete;
+    public Integer getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Integer isDelete) {
+        this.isDelete = isDelete;
+    }
     public String getId() {
         return id;
     }
@@ -221,12 +228,12 @@ public class ReturnMoneyEntity {
         this.lockStatus = lockStatus;
     }
 
-    public List<ReturnMoneyDetailEntity> getDetailList() {
-        return detailList;
+    public ReturnMoneyDetailEntity getReturnMoneyDetail() {
+        return returnMoneyDetail;
     }
 
-    public void setDetailList(List<ReturnMoneyDetailEntity> detailList) {
-        this.detailList = detailList;
+    public void setReturnMoneyDetail(ReturnMoneyDetailEntity returnMoneyDetail) {
+        this.returnMoneyDetail = returnMoneyDetail;
     }
 
     /**

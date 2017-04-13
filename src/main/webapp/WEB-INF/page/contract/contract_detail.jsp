@@ -241,16 +241,8 @@
                             <fieldset class="layui-elem-field layui-field-title" style="border: 0px;">
                                 <div class="layui-field-box">
                                     <div class="layui-btn-group">
-
                                         <button class="layui-btn layui-btn-primary" onclick="addReturnMoney('${contract.id}');">
                                             <i class="layui-icon">&#xe61f;</i>添加回款期次
-                                        </button>
-                                        <button class="layui-btn layui-btn-primary" onclick="addPlan('${contract.id}');">
-                                            <i class="layui-icon">&#xe61f;</i>添加回款期次1
-                                        </button>
-                                        <button class="layui-btn layui-btn-primary"
-                                                onclick="transfer('${contract.id}', '${contract.contractName}');">
-                                            <i class="layui-icon">&#xe620;</i>编辑
                                         </button>
                                     </div>
                                 </div>

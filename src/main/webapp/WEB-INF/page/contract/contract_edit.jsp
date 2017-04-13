@@ -153,11 +153,11 @@
                 <div class="layui-input-block">
                     <select name="contractType" lay-search="" >
                         <option value="">请选择合同类型</option>
-                        <option value="1">产品销售</option>
-                        <option value="2">服务</option>
-                        <option value="3">业务合作</option>
-                        <option value="4">代理分销</option>
-                        <option value="5">其它</option>
+                        <option value="1" <c:if test="${contract.contractType == 1}">selected</c:if>>产品销售</option>
+                        <option value="2" <c:if test="${contract.contractType == 2}">selected</c:if>>服务</option>
+                        <option value="3" <c:if test="${contract.contractType == 3}">selected</c:if>>业务合作</option>
+                        <option value="4" <c:if test="${contract.contractType == 4}">selected</c:if>>代理分销</option>
+                        <option value="5" <c:if test="${contract.contractType == 5}">selected</c:if>>其它</option>
                     </select>
                 </div>
             </div>
@@ -166,9 +166,9 @@
                 <div class="layui-input-block">
                     <select name="contractState" lay-search="">
                         <option value="">请选择合同状态</option>
-                        <option value="1">执行中</option>
-                        <option value="2">结束</option>
-                        <option value="3">意外终止</option>
+                        <option value="1" <c:if test="${contract.contractState == 1}">selected</c:if>>执行中</option>
+                        <option value="2" <c:if test="${contract.contractState == 2}">selected</c:if>>结束</option>
+                        <option value="3" <c:if test="${contract.contractState == 3}">selected</c:if>>意外终止</option>
                     </select>
                     </select>
                 </div>
@@ -178,10 +178,10 @@
                 <div class="layui-input-block">
                     <select name="paymentMethod" lay-search="">
                         <option value="">请选择付款方式</option>
-                        <option value="1">支票</option>
-                        <option value="2">现金</option>
-                        <option value="3">银行转账</option>
-                        <option value="4">其它</option>
+                        <option value="1" <c:if test="${contract.paymentMethod == 1}">selected</c:if>>支票</option>
+                        <option value="2" <c:if test="${contract.paymentMethod == 2}">selected</c:if>>现金</option>
+                        <option value="3" <c:if test="${contract.paymentMethod == 3}">selected</c:if>>银行转账</option>
+                        <option value="4" <c:if test="${contract.paymentMethod == 4}">selected</c:if>>其它</option>
                     </select>
                     </select>
                 </div>
@@ -236,12 +236,6 @@
         </div>
     </div>
     </div>
-
-    <%--<fmt:formatDate value="<%=new Date() %>" pattern="yyyy-MM-dd HH:mm:ss" type="hidden" id="recordTime"--%>
-                    <%--name="recordTime"/>--%>
-    <%--<input type="hidden" value="" id="recordTime" name="recordTime"/>--%>
-    <%--<input type="hidden" value="" id="hidCityName" name="cityName"/>--%>
-    <%--<input type="hidden" value="" id="hidAreaName" name="areaName"/>--%>
 </form>
 
 <script>

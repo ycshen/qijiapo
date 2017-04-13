@@ -28,7 +28,7 @@ function addSubCompany(id) {
     layer.open({
         type: 2,
         title: '添加子公司信息',
-        shadeClose: true,
+        shadeClose: false,
         shade: 0.8,
         area: ['550px', '400px'],
         content: url
@@ -67,7 +67,7 @@ function addDepartment(id) {
     layer.open({
         type: 2,
         title: '添加部门信息',
-        shadeClose: true,
+        shadeClose: false,
         shade: 0.8,
         area: ['550px', '400px'],
         content: url
@@ -80,7 +80,7 @@ function viewDetail(id, contractName) {
     layer.open({
         type: 2,
         title: title,
-        shadeClose: true,
+        shadeClose: false,
         shade: 0.8,
         area: ['80%', '100%'],
         content: url
