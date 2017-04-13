@@ -46,21 +46,32 @@
             height: 300px;
             overflow-y: auto;
         }
+        .qjp_oper{
+            position:fixed; top: 0; left: 0;background-color:#F8F8F8;width: 100%;z-index: 999;
+        }
     </style>
 </head>
-<body style="background: #fff;">
+<body style="background: #fff;overflow-y:auto;">
 
 <form class="layui-form" id="myForm" onsubmit="return false;">
     <input type="hidden" id="hidAttnId" name="id" value="${contract.id}"/>
     <input type="hidden" id="hidBeyondDeptId" name="departmentId" value="${contract.departmentId}"/>
     <input type="hidden" id="hidBeyondDeptName" name="departmentName" value="${contract.departmentName}"/>
-
-    <div class="container content_div">
+    <div class="layui-form-item qjp_oper">
+        <div class="layui-input-block" style="text-align:right;">
+            <button class="layui-btn" lay-submit="" lay-filter="mySubmit">保存</button>
+            <button class="layui-btn layui-btn-primary" style="margin-right:50px;" onclick="cancelEdit();">取消</button>
+        </div>
+    </div>
+    <div class="container"  style="margin-top: 50px;">
         <div class="layui-form-item my-layui-form-item my-top">
             <label class="layui-form-label">业务类型<span style="color:red">*</span></label>
 
             <div class="layui-input-block">
-                <input type="text" name="businessType" autocomplete="off" value="0" class="layui-input" style="border:0px;"
+
+                <input type="text" autocomplete="off" value="默认业务类型" class="layui-input" style="border:0px;"
+                       disabled="disabled">
+                <input type="hidden" name="businessType" autocomplete="off" value="0" class="layui-input" style="border:0px;"
                        disabled="disabled">
                 <%--<input type="hidden" name="contractType" value="0" class="layui-input" style="border:0px;" disabled="disabled">默认业务类型--%>
             </div>
@@ -73,7 +84,7 @@
             </div>
         </div>
         <div class="layui-form-item my-layui-form-item my-top">
-            <label class="layui-form-label">主题<span style="color:red">*</span></label>
+            <label class="layui-form-label">合同名称<span style="color:red">*</span></label>
             <div class="layui-input-block">
                 <input type="text" name="contractName" lay-verify="contractName" autocomplete="off"
                        placeholder="请输入合同名称"
@@ -136,26 +147,7 @@
             <button class="layui-btn  layui-btn-primary" onclick="selectDepartment();"><i class="layui-icon">
                 &#xe61f;</i></button>
         </div>
-        <div id="divViewer">
 
-            <div class="layui-form-item my-layui-form-item" style="margin-top:  20px;">
-                <label class="layui-form-label"></label>
-                <div class="layui-input-block">
-                    <a href="#" onclick="addMoreInfo();" style="color:#009688">
-
-                        <c:choose>
-                            <c:when test="${contract != null && contract.id != '' }">
-                                编辑更多信息
-                            </c:when>
-                            <c:otherwise>
-                                新增更多信息
-                            </c:otherwise>
-                        </c:choose>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div id="divOther" style="display: none;">
             <div class="layui-form-item my-layui-form-item layui-form-text">
                 <label class="layui-form-label">合同类型</label>
                 <div class="layui-input-block">
@@ -226,7 +218,7 @@
                 </div>
             </div>
             <div class="layui-form-item my-layui-form-item my-top">
-                <label class="layui-form-label">签约日期<span style="color:red">*</span></label>
+                <label class="layui-form-label">签约日期</label>
                 <div class="layui-input-block">
                     <input type="text" name="signTime" id="txtSignTime" lay-verify=""
                            placeholder="请选择合同签约日期" autocomplete="off" class="layui-input"
@@ -235,7 +227,6 @@
                 </div>
             </div>
 
-        </div>
 
         <div class="layui-form-item my-layui-form-item layui-form-text">
             <label class="layui-form-label">备注</label>
@@ -245,12 +236,7 @@
         </div>
     </div>
     </div>
-    <div class="layui-form-item my-top">
-        <div class="layui-input-block" style="text-align:right;">
-            <button class="layui-btn" lay-submit="" lay-filter="mySubmit">保存</button>
-            <button class="layui-btn layui-btn-primary" style="margin-right:50px;" onclick="cancelEdit();">取消</button>
-        </div>
-    </div>
+
     <%--<fmt:formatDate value="<%=new Date() %>" pattern="yyyy-MM-dd HH:mm:ss" type="hidden" id="recordTime"--%>
                     <%--name="recordTime"/>--%>
     <%--<input type="hidden" value="" id="recordTime" name="recordTime"/>--%>
@@ -269,11 +255,11 @@
         form.verify({
             contractName: function (value) {
                 if (value.length < 2) {
-                    return '主题的长度不能小于2个字符';
+                    return '合同名称的长度不能小于2个字符';
                 }
 
                 if (value.length > 30) {
-                    return '主题的长度不能大于30个字符';
+                    return '合同名称的长度不能大于30个字符';
                 }
             },
             customerName: function (value) {

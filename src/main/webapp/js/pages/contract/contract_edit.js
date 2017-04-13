@@ -36,7 +36,7 @@ function selectCustomer(){
         shadeClose: false,
         closeBtn: 0,
         shade: 0.8,
-        area: ['830px', '400px'],
+        area: ['80%', '80%'],
         content: url
     });
 }

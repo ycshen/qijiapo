@@ -1,10 +1,8 @@
 package com.qjp.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 /** 
  * <p>Project: BRP</p> 
@@ -19,6 +17,12 @@ public class TestController {
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public void test(){
 		System.out.println("aaaaaa");
+	}
+
+	public static void main(String[] args) {
+		String key = "04013b78d38a71987f31ca935eeb18ec";
+		String requestUrl ="http://api.map.baidu.com/location/ip";
+
 	}
 }
 
