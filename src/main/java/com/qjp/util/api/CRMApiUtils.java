@@ -1231,5 +1231,205 @@ public class CRMApiUtils {
         return result;
 
     }
+
+    public static String insertWorkAttendancePlace(String workAttendancePlace) {
+        String result = StringUtils.EMPTY;
+        try {
+            String url = getCRMUrl() + CRMApiUrl.crm_insertWorkAttendancePlace;
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("workAttendancePlace", workAttendancePlace);
+            Map<String, Object> maps = SHA1Utils.getSha1Map();
+            maps.put("workAttendancePlace", workAttendancePlace);
+            String secret = SHA1Utils.SHA1(maps);
+            jsonObject.put("secret", secret);
+            result = HttpUtils.postUrl(url, jsonObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public static String getWorkAttendancePlacePage(String query) {
+        String result = StringUtils.EMPTY;
+        try {
+            String url = getCRMUrl() + CRMApiUrl.crm_getWorkAttendancePlacePage;
+            Map<String, Object> maps = SHA1Utils.getSha1Map();
+            maps.put("query", query);
+            String secret = SHA1Utils.SHA1(maps);
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("query", query);
+            jsonObject.put("secret", secret);
+            result = HttpUtils.postUrl(url, jsonObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+
+    public static String getWorkAttendancePlaceById(String id) {
+        String result = StringUtils.EMPTY;
+        try {
+            String url = getCRMUrl() + CRMApiUrl.crm_getWorkAttendancePlaceById;
+            Map<String, Object> maps = SHA1Utils.getSha1Map();
+            maps.put("id", id);
+            String secret = SHA1Utils.SHA1(maps);
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("secret", secret);
+            jsonObject.put("id", id);
+            result = HttpUtils.postUrl(url, jsonObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    /**
+     * 批量删除考勤点
+     *
+     * @param idList
+     * @return
+     */
+    public static String batchDeleteWorkAttendancePlace(String idList) {
+        String result = StringUtils.EMPTY;
+        try {
+            String url = getCRMUrl() + CRMApiUrl.crm_batchDeleteWorkAttendancePlace;
+            Map<String, Object> maps = SHA1Utils.getSha1Map();
+            maps.put("idList", idList);
+            String secret = SHA1Utils.SHA1(maps);
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("secret", secret);
+            jsonObject.put("idList", idList);
+            result = HttpUtils.postUrl(url, jsonObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    /**
+     * 根据id删除考勤点
+     *
+     * @param id
+     * @return
+     */
+    public static String deleteWorkAttendancePlaceById(String id) {
+        String result = StringUtils.EMPTY;
+        try {
+            String url = getCRMUrl() + CRMApiUrl.crm_deleteWorkAttendancePlaceById;
+            Map<String, Object> maps = SHA1Utils.getSha1Map();
+            maps.put("id", id);
+            String secret = SHA1Utils.SHA1(maps);
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("secret", secret);
+            jsonObject.put("id", id);
+            result = HttpUtils.postUrl(url, jsonObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    /**
+     * 更新考勤点启用状态
+     *
+     * @param id
+     * @return
+     */
+    public static String enableOrDisableWorkAttendancePlaceById(String id) {
+        String result = StringUtils.EMPTY;
+        try {
+            String url = getCRMUrl() + CRMApiUrl.crm_enableOrDisableWorkAttendancePlaceById;
+            Map<String, Object> maps = SHA1Utils.getSha1Map();
+            maps.put("id", id);
+            String secret = SHA1Utils.SHA1(maps);
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("secret", secret);
+            jsonObject.put("id", id);
+            result = HttpUtils.postUrl(url, jsonObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public static String updateWorkAttendancePlace(String WorkAttendancePlace) {
+        String result = StringUtils.EMPTY;
+        try {
+            String url = getCRMUrl() + CRMApiUrl.crm_updateWorkAttendancePlace;
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("WorkAttendancePlace", WorkAttendancePlace);
+            Map<String, Object> maps = SHA1Utils.getSha1Map();
+            maps.put("WorkAttendancePlace", WorkAttendancePlace);
+            String secret = SHA1Utils.SHA1(maps);
+            jsonObject.put("secret", secret);
+            result = HttpUtils.postUrl(url, jsonObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public static String insertWorkAttendance(String workAttendance) {
+        String result = StringUtils.EMPTY;
+        try {
+            String url = getCRMUrl() + CRMApiUrl.crm_insertWorkAttendance;
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("workAttendance", workAttendance);
+            Map<String, Object> maps = SHA1Utils.getSha1Map();
+            maps.put("workAttendance", workAttendance);
+            String secret = SHA1Utils.SHA1(maps);
+            jsonObject.put("secret", secret);
+            result = HttpUtils.postUrl(url, jsonObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public static String getWorkAttendancePage(String query) {
+        String result = StringUtils.EMPTY;
+        try {
+            String url = getCRMUrl() + CRMApiUrl.crm_getWorkAttendancePage;
+            Map<String, Object> maps = SHA1Utils.getSha1Map();
+            maps.put("query", query);
+            String secret = SHA1Utils.SHA1(maps);
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("query", query);
+            jsonObject.put("secret", secret);
+            result = HttpUtils.postUrl(url, jsonObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+
+    }
+
+    public static String getWorkAttendanceById(String id) {
+        String result = StringUtils.EMPTY;
+        try {
+            String url = getCRMUrl() + CRMApiUrl.crm_getWorkAttendanceById;
+            Map<String, Object> maps = SHA1Utils.getSha1Map();
+            maps.put("id", id);
+            String secret = SHA1Utils.SHA1(maps);
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("secret", secret);
+            jsonObject.put("id", id);
+            result = HttpUtils.postUrl(url, jsonObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
 }
 
