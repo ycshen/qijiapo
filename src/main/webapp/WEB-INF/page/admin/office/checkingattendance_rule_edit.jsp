@@ -125,6 +125,7 @@
 			</div>
 
 		</div>
+	<input type="hidden" value="" id="hidId"/>
 </form>
 
 <script>

@@ -1,40 +1,34 @@
-/* 
- * Author: senthil
- * plugin: timepicker
- */
 (function ( $ ) {
-
     $.fn.timepicki = function(options) {
-        
         var defaults = {
             
         };
-        
+        this.defaultTime = options.defaultTime;
         var settings = $.extend( {}, defaults, options );
-        
-        return this.each( function() {
-            
+        return this.each( function(defaultTime) {
             var ele = $(this);
             var ele_hei = ele.outerHeight();
             var ele_lef = ele.position().left;
             ele_hei +=10;
             $(ele).wrap("<div class='time_pick'>");
             var ele_par = $(this).parents(".time_pick");
-            ele_par.append("<div class='timepicker_wrap'><div class='arrow_top'></div><div class='time'><div class='prev'></div><div class='ti_tx'></div><div class='next'></div></div><div class='mins'><div class='prev'></div><div class='mi_tx'></div><div class='next'></div></div><div class='meridian'><div class='prev'></div><div class='mer_tx'></div><div class='next'></div></div></div>");
+            ele_par.append("<div class='timepicker_wrap'>" +
+                "<div class='arrow_top'></div>" +
+                "<div class='time'><div class='prev'></div><div class='ti_tx'></div><div class='next'></div></div>" +
+                "<div class='mins'><div class='prev'></div><div class='mi_tx'></div><div class='next'></div></div>" +
+                "</div>");
             var ele_next = $(this).next(".timepicker_wrap");
             var ele_next_all_child = ele_next.find("div");
             ele_next.css({ "top": ele_hei+"px", "left": ele_lef+"px"});
             $(document).on( "click",function(event) {
-                if(!$(event.target).is(ele_next))
-                    {
+                if(!$(event.target).is(ele_next)){
                         if(!$(event.target).is(ele))
                             {
                                 var tim = ele_next.find(".ti_tx").html();
                                 var mini = ele_next.find(".mi_tx").text();
-                                var meri = ele_next.find(".mer_tx").text();
-                                if(tim.length !=0 && mini.length !=0 && meri.length !=0 )
+                                if(tim.length !=0 && mini.length !=0 )
                                 {
-                                    ele.val(tim+" : "+mini+" : "+meri);
+                                    ele.val(tim+" : "+mini);
                                 }
                                 if(!$(event.target).is(ele_next)&&!$(event.target).is(ele_next_all_child))
                                 {
@@ -49,13 +43,11 @@
             });
             function set_date()
             {
-                var d = new Date();
+                var d = new Date(defaultTime);
                 var ti = d.getHours();
                 var mi = d.getMinutes();
-                var mer = "上午";
-                if (12 < ti) {
-                    ti -= 12;
-                    mer = "下午";
+                if (24 < ti) {
+                    ti -= 24;
                 }
                 //console.log(ele_next);
                 if(ti<10)
@@ -71,13 +63,6 @@
                     }
                     else{
                         ele_next.find(".mi_tx").text(mi);
-                    }
-                if(mer<10)
-                    {
-                        ele_next.find(".mer_tx").text("0"+mer);
-                    }
-                else{
-                        ele_next.find(".mer_tx").text(mer);
                     }
             }
                 
@@ -102,7 +87,7 @@
                     //console.log(ele_next.find("." + cur_cli + " .ti_tx"));
                     if (cur_ele.attr("class") == "next") {
                         //alert("nex");
-                        if (cur_time == 12) {
+                        if (cur_time == 24) {
                             ele_next.find("." + cur_cli + " .ti_tx").text("01");
                         } 
                         else {

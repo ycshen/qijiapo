@@ -23,6 +23,19 @@ function returnInfo(id, name){
 	layer.closeAll();
 }
 $(function(){
-	$('#txtOffWorkTime').timepicki();
-	$('#txtOnWorkTime').timepicki();
+	var id = $("#hidId").val();
+	if(isBlank(id)){
+		$("#txtOnWorkTime").val("09 : 00");
+		$("#txtOffWorkTime").val("18 : 00");
+	}
+
+	var onWorkTime = $("#txtOnWorkTime").val();
+	var offWorkTime = $("#txtOffWorkTime").val();
+	$('#txtOffWorkTime').timepicki({
+		defaultTime: offWorkTime
+	});
+	$('#txtOnWorkTime').timepicki({
+		defaultTime: onWorkTime
+	});
+
 })
