@@ -10,10 +10,10 @@
 	<link href="${ctx}/js/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link href="${ctx}/css/common.css" rel="stylesheet">
 	<link rel="stylesheet" href="${ctx}/js/layui/css/layui.css">
-	<link rel="stylesheet" href="${ctx}/js/plugins/timepicker/bootstrap-timepicker.min.css">
+	<link rel="stylesheet" href="${ctx}/js/plugins/TimePicki/css/timepicki.css">
 	<%@include file="../../share/common_js.jsp"%>
-	<script src="${ctx}/js/plugins/timepicker/bootstrap-timepicker.min.js"></script>
-	<script type="text/javascript" src="${ctx}/js/pages/product/product_edit.js"></script>
+	<script src="${ctx}/js/plugins/TimePicki/js/timepicki.js"></script>
+	<script type="text/javascript" src="${ctx}/js/pages/admin/office/checkingattendance_rule_edit.js"></script>
 	<script type="text/javascript">
 		var ctx = "${pageContext.request.contextPath}";
 	</script>
@@ -58,38 +58,39 @@
 			<label class="layui-form-label">考勤点名称<span style="color:red">*</span></label>
 			<div class="layui-input-block">
 				<input type="text"  autocomplete="off"
-					   placeholder="请输入考勤点名称" class="layui-input" >
+					   placeholder="请输入考勤点名称" class="layui-input" name="placeName" lay-verify="placeName">
 			</div>
 		</div>
 		<div class="layui-form-item my-layui-form-item my-top">
 			<label class="layui-form-label">考勤地址<span style="color:red">*</span></label>
 			<div class="layui-input-block">
 				<input type="text"
-					   autocomplete="off" placeholder="请输入考勤地址" class="layui-input" >
+					   autocomplete="off" placeholder="请输入考勤地址" class="layui-input" name="address"  lay-verify="address">
 			</div>
 		</div>
 		<div class="layui-form-item my-layui-form-item my-top">
 			<label class="layui-form-label">上班时间<span style="color:red">*</span></label>
 			<div class="layui-input-block">
-				<input type="checkbox" name="like[write]" title="星期一" checked="">
-				<input type="checkbox" name="like[read]" title="星期二" checked="">
-				<input type="checkbox" name="like[game]" title="星期三" checked="">
-				<input type="checkbox" name="like[write]" title="星期四" checked="">
-				<input type="checkbox" name="like[read]" title="星期五" checked="">
-				<input type="checkbox" name="like[game]" title="星期六" >
-				<input type="checkbox" name="like[game]" title="星期天">
+				<input type="checkbox" id="chkWeek1" title="星期一" checked="checked">
+				<input type="checkbox" id="chkWeek2" title="星期二" checked="checked">
+				<input type="checkbox" id="chkWeek3" title="星期三" checked="checked">
+				<input type="checkbox" id="chkWeek4" title="星期四" checked="checked">
+				<input type="checkbox" id="chkWeek5" title="星期五" checked="checked">
+				<input type="checkbox" id="chkWeek6" title="星期六" >
+				<input type="checkbox"  id="chkWeek7"  title="星期天">
 			</div>
+			<input type="hidden" id="hidWorkTime" value="" name="workTime">
 		</div>
 		<div class="layui-form-item my-layui-form-item my-top">
 			<label class="layui-form-label">上班<span style="color:red">*</span></label>
 			<div class="layui-input-block">
-				<input id="timepicker1" type="text" class="layui-input">
+				<input id="txtOnWorkTime" type="text" class="layui-input" name="onWorkTime" lay-verify="onWorkTime">
 			</div>
 		</div>
 		<div class="layui-form-item my-layui-form-item my-top">
 			<label class="layui-form-label">下班<span style="color:red">*</span></label>
 			<div class="layui-input-block">
-				<input id="timepicker" type="text" class="layui-input">
+				<input id="txtOffWorkTime" type="text" class="layui-input" name="offWorkTime" lay-verify="offWorkTime">
 			</div>
 		</div>
 		<div class="layui-form-item my-layui-form-item">
@@ -127,11 +128,7 @@
 </form>
 
 <script>
-	$(function(){
-		//Timepicker
-		$('#timepicker').timepicker();
-		$('#timepicker1').timepicker();
-	})
+
 
 	layui.use(['form', 'layedit', 'laydate'], function () {
 		var form = layui.form()
@@ -141,44 +138,84 @@
 
 		//自定义验证规则
 		form.verify({
-			competitorName: function (value) {
+			placeName: function (value) {
 				if (value.length < 2) {
-					return '竞争对手名称的长度不能小于2个字符';
+					return '考勤点名称的长度不能小于2个字符';
 				}
 
 				if (value.length > 30) {
-					return '竞争对手名称的长度不能大于00个字符';
+					return '考勤点名称的长度不能大于00个字符';
 				}
 			},
+			address: function (value) {
+				if (value.length < 2) {
+					return '考勤点地址的长度不能小于2个字符';
+				}
+
+				if (value.length > 100) {
+					return '考勤点地址长度不符合';
+				}
+			},
+			onWorkTime: function (value) {
+				if (value == null || value == "" || value == undefined) {
+					return '请选择上班';
+				}
+			},
+			offWorkTime: function (value) {
+				if (value == null || value == "" || value == undefined) {
+					return '请选择下班';
+				}
+			}
 
 		});
 
 
 		//监听提交
 		form.on('submit(mySubmit)', function (data) {
-			var url = ctx + "/inner/competitor/saveOrUpdate"
-			var provinceName = $("select[name='provinceId']").find("option:selected").text();
-			if (provinceName != "请选择省") {
-				$("#hidProvinceName").val(provinceName);
+			var url = ctx + "/admin/checkAttendance/saveOrUpdate";
+			var monday = $("#chkWeek1").is(':checked');
+			var tuesday = $("#chkWeek2").is(':checked');
+			var wednesday = $("#chkWeek3").is(':checked');
+			var thursday = $("#chkWeek4").is(':checked');
+			var friday = $("#chkWeek5").is(':checked');
+			var saturday = $("#chkWeek6").is(':checked');
+			var sunday = $("#chkWeek7").is(':checked');
+			var workTime = "";
+			if(monday){
+				workTime += "星期一,"
+			}
+			if(tuesday){
+				workTime += "星期二,"
+			}
+			if(wednesday){
+				workTime += "星期三,"
+			}
+			if(thursday){
+				workTime += "星期四,"
+			}
+			if(friday){
+				workTime += "星期五,"
+			}
+			if(saturday){
+				workTime += "星期六,"
+			}
+			if(sunday){
+				workTime += "星期天,"
+			}
+			if(isBlank(workTime)){
+				layer.alert('请选择上班时间', { closeBtn: false, skin: 'layui-layer-molv'});
+				return false;
+			}else{
+				workTime = workTime.substring(0, workTime.length - 1);
+				$("#hidWorkTime").val(workTime);
 			}
 
-			var cityName = $("select[name='cityId']").find("option:selected").text();
-			if (cityName != "请选择市") {
-				$("#hidCityName").val(cityName);
-			}
-
-			var areaName = $("select[name='areaId']").find("option:selected").text();
-			if (areaName != "请选择县/区") {
-				$("#hidAreaName").val(areaName);
-			}
-
-
-			var competitor = $('#myForm').serialize();
+			var attendance = $('#myForm').serialize();
 			$.ajax({
 				cache: true,
 				type: "POST",
 				url: url,
-				data: competitor,
+				data: attendance,
 				async: false,
 				success: function (data) {
 					layer.alert('保存成功',
@@ -187,7 +224,7 @@
 								skin: 'layui-layer-molv'
 							},
 							function (index) {
-								parent.refreshTable();
+								parent.location.reload();
 								parent.layer.closeAll();
 							});
 				}
