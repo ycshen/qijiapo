@@ -46,21 +46,32 @@
             height: 300px;
             overflow-y: auto;
         }
+        .qjp_oper{
+            position:fixed; top: 0; left: 0;background-color:#F8F8F8;width: 100%;z-index: 999;
+        }
     </style>
 </head>
-<body style="background: #fff;">
+<body style="background: #fff;overflow-y:auto;">
 
 <form class="layui-form" id="myForm" onsubmit="return false;">
     <input type="hidden" id="hidAttnId" name="id" value="${contract.id}"/>
     <input type="hidden" id="hidBeyondDeptId" name="departmentId" value="${contract.departmentId}"/>
     <input type="hidden" id="hidBeyondDeptName" name="departmentName" value="${contract.departmentName}"/>
-
-    <div class="container content_div">
+    <div class="layui-form-item qjp_oper">
+        <div class="layui-input-block" style="text-align:right;">
+            <button class="layui-btn" lay-submit="" lay-filter="mySubmit">保存</button>
+            <button class="layui-btn layui-btn-primary" style="margin-right:50px;" onclick="cancelEdit();">取消</button>
+        </div>
+    </div>
+    <div class="container"  style="margin-top: 50px;">
         <div class="layui-form-item my-layui-form-item my-top">
             <label class="layui-form-label">业务类型<span style="color:red">*</span></label>
 
             <div class="layui-input-block">
-                <input type="text" name="businessType" autocomplete="off" value="0" class="layui-input" style="border:0px;"
+
+                <input type="text" autocomplete="off" value="默认业务类型" class="layui-input" style="border:0px;"
+                       disabled="disabled">
+                <input type="hidden" name="businessType" autocomplete="off" value="0" class="layui-input" style="border:0px;"
                        disabled="disabled">
                 <%--<input type="hidden" name="contractType" value="0" class="layui-input" style="border:0px;" disabled="disabled">默认业务类型--%>
             </div>
@@ -73,7 +84,7 @@
             </div>
         </div>
         <div class="layui-form-item my-layui-form-item my-top">
-            <label class="layui-form-label">主题<span style="color:red">*</span></label>
+            <label class="layui-form-label">合同名称<span style="color:red">*</span></label>
             <div class="layui-input-block">
                 <input type="text" name="contractName" lay-verify="contractName" autocomplete="off"
                        placeholder="请输入合同名称"
@@ -136,36 +147,17 @@
             <button class="layui-btn  layui-btn-primary" onclick="selectDepartment();"><i class="layui-icon">
                 &#xe61f;</i></button>
         </div>
-        <div id="divViewer">
 
-            <div class="layui-form-item my-layui-form-item" style="margin-top:  20px;">
-                <label class="layui-form-label"></label>
-                <div class="layui-input-block">
-                    <a href="#" onclick="addMoreInfo();" style="color:#009688">
-
-                        <c:choose>
-                            <c:when test="${contract != null && contract.id != '' }">
-                                编辑更多信息
-                            </c:when>
-                            <c:otherwise>
-                                新增更多信息
-                            </c:otherwise>
-                        </c:choose>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div id="divOther" style="display: none;">
             <div class="layui-form-item my-layui-form-item layui-form-text">
                 <label class="layui-form-label">合同类型</label>
                 <div class="layui-input-block">
                     <select name="contractType" lay-search="" >
                         <option value="">请选择合同类型</option>
-                        <option value="1">产品销售</option>
-                        <option value="2">服务</option>
-                        <option value="3">业务合作</option>
-                        <option value="4">代理分销</option>
-                        <option value="5">其它</option>
+                        <option value="1" <c:if test="${contract.contractType == 1}">selected</c:if>>产品销售</option>
+                        <option value="2" <c:if test="${contract.contractType == 2}">selected</c:if>>服务</option>
+                        <option value="3" <c:if test="${contract.contractType == 3}">selected</c:if>>业务合作</option>
+                        <option value="4" <c:if test="${contract.contractType == 4}">selected</c:if>>代理分销</option>
+                        <option value="5" <c:if test="${contract.contractType == 5}">selected</c:if>>其它</option>
                     </select>
                 </div>
             </div>
@@ -174,9 +166,9 @@
                 <div class="layui-input-block">
                     <select name="contractState" lay-search="">
                         <option value="">请选择合同状态</option>
-                        <option value="1">执行中</option>
-                        <option value="2">结束</option>
-                        <option value="3">意外终止</option>
+                        <option value="1" <c:if test="${contract.contractState == 1}">selected</c:if>>执行中</option>
+                        <option value="2" <c:if test="${contract.contractState == 2}">selected</c:if>>结束</option>
+                        <option value="3" <c:if test="${contract.contractState == 3}">selected</c:if>>意外终止</option>
                     </select>
                     </select>
                 </div>
@@ -186,10 +178,10 @@
                 <div class="layui-input-block">
                     <select name="paymentMethod" lay-search="">
                         <option value="">请选择付款方式</option>
-                        <option value="1">支票</option>
-                        <option value="2">现金</option>
-                        <option value="3">银行转账</option>
-                        <option value="4">其它</option>
+                        <option value="1" <c:if test="${contract.paymentMethod == 1}">selected</c:if>>支票</option>
+                        <option value="2" <c:if test="${contract.paymentMethod == 2}">selected</c:if>>现金</option>
+                        <option value="3" <c:if test="${contract.paymentMethod == 3}">selected</c:if>>银行转账</option>
+                        <option value="4" <c:if test="${contract.paymentMethod == 4}">selected</c:if>>其它</option>
                     </select>
                     </select>
                 </div>
@@ -226,7 +218,7 @@
                 </div>
             </div>
             <div class="layui-form-item my-layui-form-item my-top">
-                <label class="layui-form-label">签约日期<span style="color:red">*</span></label>
+                <label class="layui-form-label">签约日期</label>
                 <div class="layui-input-block">
                     <input type="text" name="signTime" id="txtSignTime" lay-verify=""
                            placeholder="请选择合同签约日期" autocomplete="off" class="layui-input"
@@ -235,7 +227,6 @@
                 </div>
             </div>
 
-        </div>
 
         <div class="layui-form-item my-layui-form-item layui-form-text">
             <label class="layui-form-label">备注</label>
@@ -245,17 +236,6 @@
         </div>
     </div>
     </div>
-    <div class="layui-form-item my-top">
-        <div class="layui-input-block" style="text-align:right;">
-            <button class="layui-btn" lay-submit="" lay-filter="mySubmit">保存</button>
-            <button class="layui-btn layui-btn-primary" style="margin-right:50px;" onclick="cancelEdit();">取消</button>
-        </div>
-    </div>
-    <%--<fmt:formatDate value="<%=new Date() %>" pattern="yyyy-MM-dd HH:mm:ss" type="hidden" id="recordTime"--%>
-                    <%--name="recordTime"/>--%>
-    <%--<input type="hidden" value="" id="recordTime" name="recordTime"/>--%>
-    <%--<input type="hidden" value="" id="hidCityName" name="cityName"/>--%>
-    <%--<input type="hidden" value="" id="hidAreaName" name="areaName"/>--%>
 </form>
 
 <script>
@@ -269,11 +249,11 @@
         form.verify({
             contractName: function (value) {
                 if (value.length < 2) {
-                    return '主题的长度不能小于2个字符';
+                    return '合同名称的长度不能小于2个字符';
                 }
 
                 if (value.length > 30) {
-                    return '主题的长度不能大于30个字符';
+                    return '合同名称的长度不能大于30个字符';
                 }
             },
             customerName: function (value) {

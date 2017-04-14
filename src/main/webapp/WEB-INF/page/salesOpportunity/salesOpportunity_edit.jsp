@@ -33,23 +33,25 @@ margin: 0px 15px 0px 0px;
     margin-left: 150px;
     min-height: 36px;
 }
-.my-top{
-	margin-top: 10px;
-}
-.content_div{
-	height: 310px;
-	overflow-y:auto;
+
+.qjp_oper{
+    position:fixed; top: 0; left: 0;background-color:#F8F8F8;width: 100%;z-index: 999;
 }
 </style>
 </head>
-<body style="background: #fff;">
+<body style="background: #fff;overflow-y:auto;">
 	
 <form class="layui-form" id="myForm" onsubmit="return false;">
 <input type="hidden" id="hidProductId" name="id" value="${salesOpportunity.id}"/>
 <input type="hidden" id="hidBeyondDeptId" name="departmentId" value="${salesOpportunity.departmentId}"/>
 <input type="hidden" id="hidBeyondDeptName" name="departmentName" value="${salesOpportunity.departmentName}"/>
-
-<div class="container content_div">
+<div class="layui-form-item my-top qjp_oper">
+    <div class="layui-input-block" style="text-align:right;">
+        <button class="layui-btn" lay-submit="" lay-filter="mySubmit">保存</button>
+        <button class="layui-btn layui-btn-primary" style="margin-right:50px;" onclick="cancelEdit();">取消</button>
+    </div>
+</div>
+<div class="container" style="margin-top: 50px;">
 	<div class="layui-form-item my-layui-form-item my-top">
     <label class="layui-form-label">销售机会所有人<span style="color:red">*</span></label>
     <div class="layui-input-block">
@@ -111,28 +113,6 @@ margin: 0px 15px 0px 0px;
              autocomplete="off" value="${salesOpportunity.saleMoney}"  placeholder="请输入销售价格" class="layui-input">
     </div>
   </div>
-
-  <div id="divViewer">
-  	
-  	<div class="layui-form-item my-layui-form-item" style="margin-top:  20px;">
-    <label class="layui-form-label"></label>
-    <div class="layui-input-block">
-      <a href="#" onclick="addMoreInfo();" style="color:#009688">
-      	
-      	<c:choose>
-      		<c:when test="${salesOpportunity != null && salesOpportunity.id != '' }">
-      		编辑更多信息
-      		</c:when>
-      		<c:otherwise>
-      		新增更多信息
-      		</c:otherwise>
-      	</c:choose>
-      </a>
-    </div>
-  </div>
-  </div>
-  <div id="divOther" style="display: none;">
-
    <div class="layui-form-item my-layui-form-item my-top">
     <label class="layui-form-label">结单日期</label>
     <div class="layui-input-block">
@@ -179,14 +159,6 @@ margin: 0px 15px 0px 0px;
     </div>
   </div>
 </div>
-</div>	
-  <div class="layui-form-item my-top">
-    <div class="layui-input-block" style="text-align:right;">
-      <button class="layui-btn" lay-submit="" lay-filter="mySubmit">保存</button>
-      <button class="layui-btn layui-btn-primary" style="margin-right:50px;" onclick="cancelEdit();">取消</button>
-    </div>
-  </div>  
-  
 </form>
 
 <script>

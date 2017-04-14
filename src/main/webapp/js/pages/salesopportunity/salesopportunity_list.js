@@ -5,7 +5,8 @@ function addSalesOpportunity(){
 		title: '新增销售机会',
 		shadeClose: false,
 		shade: 0.8,
-		area: ['830px', '450px'],
+		skin: 'demo-class',
+		area: ['80%', '100%'],
 		content: url
 	});
 }

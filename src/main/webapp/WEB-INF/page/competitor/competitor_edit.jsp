@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="${ctx}/js/layui/css/layui.css">
     <%@include file="../share/common_js.jsp"%>
     <script src="${ctx}/js/pages/common/province_city_area.js"></script>
-    <script type="text/javascript" src="${ctx}/js/pages/product/product_edit.js"></script>
+    <script type="text/javascript" src="${ctx}/js/pages/competitor/competitor_edit.js"></script>
     <script type="text/javascript">
         var ctx = "${pageContext.request.contextPath}";
     </script>
@@ -36,20 +36,24 @@
         .my-top{
             margin-top: 10px;
         }
-        .content_div{
-            height: 300px;
-            overflow-y:auto;
+        .qjp_oper{
+            position:fixed; top: 0; left: 0;background-color:#F8F8F8;width: 100%;z-index: 999;
         }
     </style>
 </head>
-<body style="background: #fff;">
+<body style="background: #fff;overflow-y:auto;">
 
 <form class="layui-form" id="myForm" onsubmit="return false;">
     <input type="hidden" id="hidCompetitorId" name="id" value="${competitor.id}"/>
     <input type="hidden" id="hidBeyondDeptId" name="departmentId" value="${competitor.departmentId}"/>
     <input type="hidden" id="hidBeyondDeptName" name="departmentName" value="${competitor.departmentName}"/>
-
-    <div class="container content_div">
+    <div class="layui-form-item qjp_oper">
+        <div class="layui-input-block" style="text-align:right;">
+            <button class="layui-btn" lay-submit="" lay-filter="mySubmit">保存</button>
+            <button class="layui-btn layui-btn-primary" style="margin-right:50px;" onclick="cancelEdit();">取消</button>
+        </div>
+    </div>
+    <div class="container" style="margin-top: 50px;">
         <div class="layui-form-item my-layui-form-item my-top">
             <label class="layui-form-label">竞争对手所有人<span style="color:red">*</span></label>
             <div class="layui-input-block">
@@ -61,7 +65,7 @@
             <label class="layui-form-label">竞争对手名称<span style="color:red">*</span></label>
             <div class="layui-input-block">
                 <input type="text" name="competitorName" lay-verify="competitorName" autocomplete="off"
-                       placeholder="请输入竞争对手名称" class="layui-input" maxlength="10" value="${competitor.competitorName}">
+                       placeholder="请输入竞争对手名称" class="layui-input" maxlength="100" value="${competitor.competitorName}">
             </div>
         </div>
         <div class="layui-form-item my-layui-form-item">
@@ -82,26 +86,7 @@
             <button class="layui-btn  layui-btn-primary" onclick="selectDepartment();"><i class="layui-icon">
                 &#xe61f;</i></button>
         </div>
-        <div id="divViewer">
 
-            <div class="layui-form-item my-layui-form-item" style="margin-top:  20px;">
-                <label class="layui-form-label"></label>
-                <div class="layui-input-block">
-                    <a href="#" onclick="addMoreInfo();" style="color:#009688">
-
-                        <c:choose>
-                            <c:when test="${competitor != null && competitor.id != '' }">
-                                编辑更多信息
-                            </c:when>
-                            <c:otherwise>
-                                新增更多信息
-                            </c:otherwise>
-                        </c:choose>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div id="divOther" style="display: none;">
             <div class="layui-form-item my-layui-form-item">
                 <label class="layui-form-label">省市区</label>
                 <div class="layui-input-block">
@@ -148,7 +133,7 @@
                 <label class="layui-form-label">地址</label>
                 <div class="layui-input-block">
                     <input type="text" name="address" lay-verify="address" value="${competitor.address}"
-                           autocomplete="off" placeholder="请输入地址" class="layui-input" maxlength="50">
+                           autocomplete="off" placeholder="请输入地址" class="layui-input" maxlength="80">
                 </div>
             </div>
             <div class="layui-form-item my-layui-form-item my-top">
@@ -162,28 +147,28 @@
                 <label class="layui-form-label">电话</label>
                 <div class="layui-input-block">
                     <input type="text" name="mobile" autocomplete="off" value="${competitor.mobile}" placeholder="请输入电话"
-                           class="layui-input" maxlength="10">
+                           class="layui-input" maxlength="15">
                 </div>
             </div>
             <div class="layui-form-item my-layui-form-item my-top">
                 <label class="layui-form-label">传真</label>
                 <div class="layui-input-block">
                     <input type="text" name="facsimile" autocomplete="off" value="${competitor.facsimile}"
-                           placeholder="请输入传真" class="layui-input" maxlength="10">
+                           placeholder="请输入传真" class="layui-input" maxlength="15">
                 </div>
             </div>
             <div class="layui-form-item my-layui-form-item my-top">
                 <label class="layui-form-label">公司网址</label>
                 <div class="layui-input-block">
                     <input type="text" name="website" autocomplete="off" value="${competitor.website}"
-                           placeholder="请输入公司网址" class="layui-input" maxlength="10">
+                           placeholder="请输入公司网址" class="layui-input" maxlength="50">
                 </div>
             </div>
             <div class="layui-form-item my-layui-form-item my-top">
                 <label class="layui-form-label">微博</label>
                 <div class="layui-input-block">
                     <input type="text" name="weibo" autocomplete="off" value="${competitor.weibo}" placeholder="请输入微博"
-                           class="layui-input" maxlength="10">
+                           class="layui-input" maxlength="100">
                 </div>
             </div>
             <div class="layui-form-item my-layui-form-item my-top">
@@ -206,14 +191,8 @@
                     <textarea placeholder="请输入备注" class="layui-textarea" name="remark"> ${competitor.remark} </textarea>
                 </div>
             </div>
-        </div>
     </div>
-    <div class="layui-form-item my-top">
-        <div class="layui-input-block" style="text-align:right;">
-            <button class="layui-btn" lay-submit="" lay-filter="mySubmit">保存</button>
-            <button class="layui-btn layui-btn-primary" style="margin-right:50px;" onclick="cancelEdit();">取消</button>
-        </div>
-    </div>
+
 
     <input type="hidden" value="" id="hidProvinceName" name="provinceName"/>
     <input type="hidden" value="" id="hidCityName" name="cityName"/>

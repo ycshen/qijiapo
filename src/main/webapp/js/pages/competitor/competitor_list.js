@@ -3,9 +3,9 @@ function addCompeotitor(){
 	layer.open({
 		type: 2,
 		title: '新增竞争对手',
-		shadeClose: true,
+		shadeClose: false,
 		shade: 0.8,
-		area: ['800px', '400px'],
+		area: ['80%', '100%'],
 		content: url
 	});
 }

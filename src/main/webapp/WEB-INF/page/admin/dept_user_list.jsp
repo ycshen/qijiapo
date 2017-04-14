@@ -25,7 +25,7 @@
 </head>
 <body class="hold-transition skin-black sidebar-mini">
 <div class="wrapper">
-	<%@include file="../share/qjp_header.jsp"%>
+<%@include file="../share/qjp_header.jsp"%>
  <jsp:include page="../share/qjp_admin_menu.jsp">
 	<jsp:param name="nav" value="deptuser_list" />
 </jsp:include>

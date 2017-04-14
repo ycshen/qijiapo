@@ -16,6 +16,8 @@ import javax.annotation.PostConstruct;
 @Component
 public class CRMApiUrl {
 
+
+
 	@Value("${qijiapoCrm}")
 	private String crm_url;
 	public static String crm;
@@ -145,6 +147,9 @@ public class CRMApiUrl {
 	@Value("${crm.getSelfCustomerCount}")
 	private String crm_getSelfCustomerCount_url;
 	public static String crm_getSelfCustomerCount;
+	@Value("${crm.getAllCustomer}")
+	private String crm_getAllCustomer_url;
+	public static String crm_getAllCustomer;
 
 	//contract
 	@Value("${crm.insertContract}")
@@ -212,6 +217,40 @@ public class CRMApiUrl {
 	private String crm_insertReturnMoneyDetail_url;
 	public static String crm_insertReturnMoneyDetail;
 
+	//WorkAttendancePlace
+	@Value("${crm.insertWorkAttendancePlace}")
+	private String crm_insertWorkAttendancePlace_url;
+	public static String crm_insertWorkAttendancePlace;
+	@Value("${crm.getWorkAttendancePlacePage}")
+	private String crm_getWorkAttendancePlacePage_url;
+	public static String crm_getWorkAttendancePlacePage;
+	@Value("${crm.getWorkAttendancePlaceById}")
+	private String crm_getWorkAttendancePlaceById_url;
+	public static String crm_getWorkAttendancePlaceById;
+	@Value("${crm.batchDeleteWorkAttendancePlace}")
+	private String crm_batchDeleteWorkAttendancePlace_url;
+	public static String crm_batchDeleteWorkAttendancePlace;
+	@Value("${crm.deleteWorkAttendancePlaceById}")
+	private String crm_deleteWorkAttendancePlaceById_url;
+	public static String crm_deleteWorkAttendancePlaceById;
+	@Value("${crm.enableOrDisableWorkAttendancePlaceById}")
+	private String crm_enableOrDisableWorkAttendancePlaceById_url;
+	public static String crm_enableOrDisableWorkAttendancePlaceById;
+	@Value("${crm.updateWorkAttendancePlace}")
+	private String crm_updateWorkAttendancePlace_url;
+	public static String crm_updateWorkAttendancePlace;
+
+	//WorkAttendance
+	@Value("${crm.insertWorkAttendance}")
+	private String crm_insertWorkAttendance_url;
+	public static String crm_insertWorkAttendance;
+	@Value("${crm.getWorkAttendancePage}")
+	private String crm_getWorkAttendancePage_url;
+	public static String crm_getWorkAttendancePage;
+	@Value("${crm.getWorkAttendanceById}")
+	private String crm_getWorkAttendanceById_url;
+	public static String crm_getWorkAttendanceById;
+
 	@PostConstruct
 	public void init() {
 		crm = this.crm_url;
@@ -258,6 +297,8 @@ public class CRMApiUrl {
 		crm_batchDeleteCustomer = this.crm_batchDeleteCustomer_url;
 		crm_deleteCustomerById = this.crm_deleteCustomerById_url;
 		crm_updateCustomer = this.crm_updateCustomer_url;
+		crm_getAllCustomer = this.crm_getAllCustomer_url;
+
 		//activity
 		crm_insertActivity = this.crm_insertActivity_url;
 		crm_getActivityPage = this.crm_getActivityPage_url;
@@ -293,6 +334,20 @@ public class CRMApiUrl {
 
 		//returnMoneyDetail
 		crm_insertReturnMoneyDetail = this.crm_insertReturnMoneyDetail_url;
+
+		//WorkAttendancePlaceById
+		crm_insertWorkAttendancePlace = this.crm_insertWorkAttendancePlace_url;
+		crm_getWorkAttendancePlacePage = this.crm_getWorkAttendancePlacePage_url;
+		crm_getWorkAttendancePlaceById = this.crm_getWorkAttendancePlaceById_url;
+		crm_batchDeleteWorkAttendancePlace = this.crm_batchDeleteWorkAttendancePlace_url;
+		crm_deleteWorkAttendancePlaceById = this.crm_deleteWorkAttendancePlaceById_url;
+		crm_enableOrDisableWorkAttendancePlaceById = this.crm_enableOrDisableWorkAttendancePlaceById_url;
+		crm_updateWorkAttendancePlace = this.crm_updateWorkAttendancePlace_url;
+
+		//WorkAttendance
+		crm_insertWorkAttendance = this.crm_insertWorkAttendance_url;
+		crm_getWorkAttendancePage = this.crm_getWorkAttendancePage_url;
+		crm_getWorkAttendanceById = this.crm_getWorkAttendanceById_url;
 	}
 	
 }

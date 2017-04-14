@@ -11,6 +11,7 @@ import com.qjp.service.ConfigService;
 import com.qjp.service.CustomerService;
 import com.qjp.service.DepartmentService;
 import com.qjp.service.UserService;
+import com.qjp.util.JsonUtils;
 import com.qjp.util.LogUtils;
 import com.qjp.util.UserUtils;
 import com.qjp.util.ValidateUtils;
@@ -112,7 +113,7 @@ public class UserController {
 		if(StringUtils.isNotBlank(id)){
 			user = userService.getUserById(id);
 			Long companyId = user.getCompanyId();
-			departmentList = departmentService.getListByCompanyId(companyId.toString());
+			departmentList = departmentService.getAllDepByCompanyId(companyId.toString());
 			editType = 2;//编辑
 		}
 		
@@ -127,18 +128,6 @@ public class UserController {
 	public ModelAndView addUser(String did, HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/user/user_edit");
-		/*DepartmentEntity department = null;
-		if(StringUtils.isNotBlank(did)){
-			department = departmentService.getDepartmentById(Integer.parseInt(did));
-			mav.addObject("department", department);
-			mav.addObject("editType", 1);
-		}else{
-			UserEntity loginUser = UserUtils.getLoginUser(request);
-			Long companyId = loginUser.getCompanyId();
-			List<DepartmentEntity> departmentList = departmentService.getAllDepByCompanyId(companyId.toString());
-			mav.addObject("departmentList", departmentList);
-			mav.addObject("editType", 2);
-		}*/
 		
 		UserEntity loginUser = UserUtils.getLoginUser(request);
 		Long companyId = loginUser.getCompanyId();
@@ -341,16 +330,16 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/selectAllUserActivity", method = RequestMethod.GET)
-	public ModelAndView selectAllUserActivity(String id, String name, HttpServletRequest request){
-		ModelAndView mav = new ModelAndView("/user/user_allcompany_activity_select");
-		UserEntity loginUser = UserUtils.getLoginUser(request);
-		List<UserEntity> userList = userService.getUserListByCompanyId(loginUser.getCompanyId().toString());
-		mav.addObject("userList", userList);
-		mav.addObject("id", id);
-		mav.addObject("name", name);
+    public ModelAndView selectAllUserActivity(String id, String name, HttpServletRequest request){
+        ModelAndView mav = new ModelAndView("/user/user_allcompany_activity_select");
+        UserEntity loginUser = UserUtils.getLoginUser(request);
+        List<UserEntity> userList = userService.getUserListByCompanyId(loginUser.getCompanyId().toString());
+        mav.addObject("userList", userList);
+        mav.addObject("id", id);
+        mav.addObject("name", name);
 
-		return mav;
-	}
+        return mav;
+    }
 
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public ModelAndView profile(HttpServletRequest request){
@@ -435,5 +424,27 @@ public class UserController {
 
 		return result;
 	}
+
+    @RequestMapping(value = "/getUserListByCompanyId",produces = "application/text; charset=utf-8")
+    @ResponseBody
+    public String getUserListByCompanyId(@ModelAttribute UserQuery userQuery, HttpServletRequest request){
+        UserEntity loginUser = UserUtils.getLoginUser(request);
+        userQuery.setCompanyId(loginUser.getCompanyId().toString());
+        userQuery = userService.getUserList(userQuery);
+        return JsonUtils.json2Str(userQuery);
+    }
+
+    /**
+     * 获取公司同事信息
+     * @param userQuery 查询条件
+     * @param request 请求作用域
+     * @return
+     */
+    @RequestMapping(value = "/listCompanyUser", method = RequestMethod.GET)
+    public ModelAndView listCompanyUser(@ModelAttribute UserQuery userQuery, HttpServletRequest request){
+        ModelAndView mav = new ModelAndView("/user/company_user_list");
+
+        return mav;
+    }
 }
 

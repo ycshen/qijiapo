@@ -94,7 +94,7 @@ public class LogUtils {
 	/**
 	 * 记录CRM联系人动态日志
 	 * @param logMsg 日志内容
-	 * @param attnId 竞争对手id
+	 * @param attnId 联系人id
 	 * @param user 登录人信息
 	 */
 	public static void logCRMAttn(String logMsg, String attnId, UserEntity user){
@@ -109,7 +109,7 @@ public class LogUtils {
 		log.setLogType(2);
 		log.setLogMsg(logMsg);
 		log.setCasecadeId(attnId);
-		log.setCasecadeIdDesc("CRM-竞争对手ID");
+		log.setCasecadeIdDesc("CRM-联系人ID");
 		log.setCreateUser(user.getUserName());
 		String logJson = new Gson().toJson(log);
 		MyBaseApiUtils.log(logJson);
@@ -195,7 +195,7 @@ public class LogUtils {
 		log.setLogType(2);
 		log.setLogMsg(s);
 		log.setCasecadeId(returnId);
-		log.setCasecadeIdDesc("CRM-产品ID");
+		log.setCasecadeIdDesc("CRM-合同ID");
 		log.setCreateUser(user.getUserName());
 		String logJson = new Gson().toJson(log);
 		MyBaseApiUtils.log(logJson);
@@ -214,10 +214,58 @@ public class LogUtils {
 		log.setLogType(2);
 		log.setLogMsg(msg);
 		log.setCasecadeId(id);
-		log.setCasecadeIdDesc("CRM-产品ID");
+		log.setCasecadeIdDesc("CRM-销售机会ID");
 		log.setCreateUser(user.getUserName());
 		String logJson = new Gson().toJson(log);
 		MyBaseApiUtils.log(logJson);
     }
+
+	/**
+	 * 考勤点日志
+	 * @param msg
+	 * @param id
+	 * @param user
+	 */
+    public static void logCRMWorkAttendancePlace(String msg, String id, UserEntity user) {
+		LogEntity log = new LogEntity();
+		log.setCompanyId(user.getCompanyId().toString());
+		Integer departmentId = user.getDepartmentId();
+		if(departmentId != null){
+			log.setDepartmentId(departmentId.toString());
+		}
+		log.setUserId(user.getId().toString());
+		log.setUserName(user.getUserName());
+		log.setLogType(2);
+		log.setLogMsg(msg);
+		log.setCasecadeId(id);
+		log.setCasecadeIdDesc("CRM-考勤点ID");
+		log.setCreateUser(user.getUserName());
+		String logJson = new Gson().toJson(log);
+		MyBaseApiUtils.log(logJson);
+    }
+
+	/**
+	 * 考勤记录
+	 * @param msg
+	 * @param id
+	 * @param user
+	 */
+	public static void logCRMWorkAttendance(String msg, String id, UserEntity user) {
+		LogEntity log = new LogEntity();
+		log.setCompanyId(user.getCompanyId().toString());
+		Integer departmentId = user.getDepartmentId();
+		if(departmentId != null){
+			log.setDepartmentId(departmentId.toString());
+		}
+		log.setUserId(user.getId().toString());
+		log.setUserName(user.getUserName());
+		log.setLogType(2);
+		log.setLogMsg(msg);
+		log.setCasecadeId(id);
+		log.setCasecadeIdDesc("CRM-考勤记录ID");
+		log.setCreateUser(user.getUserName());
+		String logJson = new Gson().toJson(log);
+		MyBaseApiUtils.log(logJson);
+	}
 }
 
