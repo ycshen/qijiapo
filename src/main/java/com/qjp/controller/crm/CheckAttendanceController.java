@@ -174,7 +174,7 @@ public class CheckAttendanceController {
         return mav;
     }
 
-    @RequestMapping(value = "/deleteById", method = RequestMethod.GET)
+    @RequestMapping(value = "/enableOrDisableById", method = RequestMethod.GET)
     @ResponseBody
     public Integer enableOrDisableById(String id, String name,HttpServletRequest request){
         Integer result = ResponseStatus.INIT;
