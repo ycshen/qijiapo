@@ -54,7 +54,7 @@ public class CheckAttendanceController {
      * @return
      */
     @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public ModelAndView checkingAttendance(String id){
+    public ModelAndView add(String id){
         ModelAndView mav = new ModelAndView("/admin/office/checkingattendance_rule_edit");
         if(StringUtils.isNotBlank(id)){
             //编辑，加载数据
