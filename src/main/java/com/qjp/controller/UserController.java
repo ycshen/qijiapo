@@ -127,7 +127,7 @@ public class UserController {
 	public ModelAndView addUser(String did, HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/user/user_edit");
-		DepartmentEntity department = null;
+		/*DepartmentEntity department = null;
 		if(StringUtils.isNotBlank(did)){
 			department = departmentService.getDepartmentById(Integer.parseInt(did));
 			mav.addObject("department", department);
@@ -138,9 +138,12 @@ public class UserController {
 			List<DepartmentEntity> departmentList = departmentService.getAllDepByCompanyId(companyId.toString());
 			mav.addObject("departmentList", departmentList);
 			mav.addObject("editType", 2);
-		}
+		}*/
 		
-		
+		UserEntity loginUser = UserUtils.getLoginUser(request);
+		Long companyId = loginUser.getCompanyId();
+		List<DepartmentEntity> departmentList = departmentService.getAllDepByCompanyId(companyId.toString());
+		mav.addObject("departmentList", departmentList);
 		
 		return mav;
 	}
@@ -183,7 +186,7 @@ public class UserController {
 	@ResponseBody
 	public Integer isExistTelphone(String departmentId, String telphone, String userId, HttpServletRequest request){
 		Integer result = Constant.EXIST;
-		if(StringUtils.isNotBlank(telphone) && StringUtils.isNotBlank(departmentId)){
+		if(StringUtils.isNotBlank(telphone)){
 			boolean isExist = userService.isExistTelphone(departmentId, telphone, userId);
 			result = isExist ? Constant.EXIST : Constant.NO_EXIST;
 		}

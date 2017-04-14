@@ -31,17 +31,16 @@ function selectPosition(){
 function editUser(){
 	var editType = $("#hidEditType").val();
 	var departmentName = "";
-	if( editType == 2){
-		var editDepartmentId = $("select[name='departmentId']").val();
-		if(isBlank(editDepartmentId)){
-			layer.alert("请选择部门");
-			return;
-		}else{
-			departmentName = $("select[name='departmentId']").find("option:selected").text();
-			$("#txtdepartmentName").val(departmentName);
-			$("#hidDepartmentId").val(editDepartmentId);
-		}
+	var editDepartmentId = $("select[name='departmentId']").val();
+	if(editDepartmentId == -1){
+		layer.alert("请选择部门");
+		return;
+	}else{
+		departmentName = $("select[name='departmentId']").find("option:selected").text();
+		$("#txtdepartmentName").val(departmentName);
+		$("#hidDepartmentId").val(editDepartmentId);
 	}
+	
 	
 	var departmentId = $("#hidDepartmentId").val();
 	var txtuserName = $("#txtUserName").val();
@@ -124,16 +123,14 @@ function editUser(){
 function editAgainUser(){
 	var editType = $("#hidEditType").val();
 	var departmentName = "";
-	if( editType == 2){
-		var editDepartmentId = $("select[name='departmentId']").val();
-		if(isBlank(editDepartmentId)){
-			layer.alert("请选择部门");
-			return;
-		}else{
-			departmentName = $("select[name='departmentId']").find("option:selected").text();
-			$("#txtdepartmentName").val(departmentName);
-			$("#hidDepartmentId").val(editDepartmentId);
-		}
+	var editDepartmentId = $("select[name='departmentId']").val();
+	if(editDepartmentId == -1){
+		layer.alert("请选择部门");
+		return;
+	}else{
+		departmentName = $("select[name='departmentId']").find("option:selected").text();
+		$("#txtdepartmentName").val(departmentName);
+		$("#hidDepartmentId").val(editDepartmentId);
 	}
 	
 	var departmentId = $("#hidDepartmentId").val();
