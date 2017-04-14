@@ -119,7 +119,7 @@
 			<div class="layui-form-item my-layui-form-item my-top">
 				<label class="layui-form-label">偏差范围（米）<span style="color:red">*</span></label>
 				<div class="layui-input-block">
-					<input type="text" name="facsimile" autocomplete="off"
+					<input type="text" name="errorRange" autocomplete="off"
 						   placeholder="300" class="layui-input" maxlength="10">
 				</div>
 			</div>

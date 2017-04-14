@@ -15,6 +15,6 @@ public interface WorkAttendancePlaceService {
     WorkAttendancePlaceEntity getWorkAttendancePlaceById(String id);
     void deleteWorkAttendancePlaceById(String id);
     void batchDeleteWorkAttendancePlace(List<String> ids);
-    void updateWorkAttendancePlace(WorkAttendancePlaceEntity workAttendancePlace);
+    String updateWorkAttendancePlace(WorkAttendancePlaceEntity workAttendancePlace);
     void enableOrDisableWorkAttendancePlaceById(String id);
 }

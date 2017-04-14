@@ -20,10 +20,8 @@ public class WorkAttendancePlaceEntity {
     private String placeName;
     private String address;
     private String workTime;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date onWorkTime;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date offWorkTime;
+    private String onWorkTime;
+    private String offWorkTime;
     private String departmentName;
     private String departmentId;
     private String errorRange;
@@ -40,6 +38,24 @@ public class WorkAttendancePlaceEntity {
 
     private Integer state;//状态（启用，1停用）
     private Integer isDelete;
+    private String latitude;
+    private String longitude;
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
 
     public Long getId() {
         return id;
@@ -89,19 +105,19 @@ public class WorkAttendancePlaceEntity {
         this.workTime = workTime;
     }
 
-    public Date getOnWorkTime() {
+    public String getOnWorkTime() {
         return onWorkTime;
     }
 
-    public void setOnWorkTime(Date onWorkTime) {
+    public void setOnWorkTime(String onWorkTime) {
         this.onWorkTime = onWorkTime;
     }
 
-    public Date getOffWorkTime() {
+    public String getOffWorkTime() {
         return offWorkTime;
     }
 
-    public void setOffWorkTime(Date offWorkTime) {
+    public void setOffWorkTime(String offWorkTime) {
         this.offWorkTime = offWorkTime;
     }
 

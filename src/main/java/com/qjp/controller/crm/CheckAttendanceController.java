@@ -158,7 +158,8 @@ public class CheckAttendanceController {
     }
 
     @RequestMapping(value = "/saveOrUpdate", method = RequestMethod.POST)
-    public ModelAndView saveOrUpdate(@ModelAttribute WorkAttendancePlaceEntity workAttendancePlace, HttpServletRequest request){
+    @ResponseBody
+    public int saveOrUpdate(@ModelAttribute WorkAttendancePlaceEntity workAttendancePlace, HttpServletRequest request){
         ModelAndView mav = new ModelAndView("/admin/office/checkingattendance_rule_edit");
         workAttendancePlace.init(request); //初始化公司、部门、用户信息
         Long id = workAttendancePlace.getId();
@@ -171,7 +172,7 @@ public class CheckAttendanceController {
             LogUtils.logCRMWorkAttendancePlace("修改了考勤点(" + workAttendancePlace.getPlaceName() + ")", id.toString(), user);
         }
 
-        return mav;
+        return 1;
     }
 
     @RequestMapping(value = "/enableOrDisableById", method = RequestMethod.GET)

@@ -113,9 +113,9 @@ public class WorkAttendancePlaceServiceImpl implements WorkAttendancePlaceServic
     }
 
     @Override
-    public void updateWorkAttendancePlace(WorkAttendancePlaceEntity workAttendancePlace) {
+    public String updateWorkAttendancePlace(WorkAttendancePlaceEntity workAttendancePlace) {
         String jsonStr = JsonUtils.json2Str(workAttendancePlace);
-        CRMApiUtils.updateWorkAttendancePlace(jsonStr);
+        return CRMApiUtils.updateWorkAttendancePlace(jsonStr);
     }
 
     @Override
