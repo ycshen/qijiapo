@@ -1,14 +1,13 @@
 package com.qjp.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
+import com.qjp.entity.UserEntity;
+import com.qjp.util.UserUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.qjp.entity.UserEntity;
-import com.qjp.util.UserUtils;
+import javax.servlet.http.HttpServletRequest;
 
 /** 
  * <p>Project: qijiapo</p> 
@@ -29,5 +28,13 @@ public class CommonController {
 		
 		return mav;
 	}
+
+	@RequestMapping(value = "/locate", method = RequestMethod.GET)
+	public ModelAndView locate(HttpServletRequest request){
+		ModelAndView mav = new ModelAndView("common/locateAttendance");
+
+		return mav;
+	}
+
 }
 

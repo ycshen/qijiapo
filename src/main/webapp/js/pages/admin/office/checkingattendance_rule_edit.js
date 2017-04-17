@@ -43,3 +43,20 @@ $(function(){
 	});
 
 })
+
+function locate(){
+	var url = ctx + "/inner/common/locate";
+	layer.open({
+		type: 2,
+		title: '考勤点地图定位',
+		shadeClose: false,
+		shade: 0.8,
+		area: ['80%', '100%'],
+		content: url
+	});
+}
+
+function getLocation(addr, latitude, longitude){
+	$("#spanAddr").html(addr);
+	$("#txtAddress").val(addr);
+}

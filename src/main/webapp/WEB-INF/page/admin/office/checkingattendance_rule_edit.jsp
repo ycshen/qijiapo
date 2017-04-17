@@ -63,9 +63,11 @@
 		</div>
 		<div class="layui-form-item my-layui-form-item my-top">
 			<label class="layui-form-label">考勤地址<span style="color:red">*</span></label>
-			<div class="layui-input-block">
-				<input type="text" value="${workAttendancePlace.address}"
-					   autocomplete="off" placeholder="请输入考勤地址" class="layui-input" name="address"  lay-verify="address">
+			<div class="layui-input-block" style="vertical-align: middle;padding-top: 10px;">
+				<img src="${ctx}/img/coordinate_ico.png"><a href="#" onclick="locate();" style="color:#23527c;">请定位考勤地址</a>
+				<span id="spanAddr" style=""></span>
+				<input type="hidden" value="${workAttendancePlace.address}" id="txtAddress"
+					   autocomplete="off" placeholder="请输入考勤地址" class="layui-input" name="address" lay-verify="address">
 			</div>
 		</div>
 		<div class="layui-form-item my-layui-form-item my-top">
@@ -154,7 +156,7 @@
 			},
 			address: function (value) {
 				if (value.length < 2) {
-					return '考勤点地址的长度不能小于2个字符';
+					return '请定位考勤点地址';
 				}
 
 				if (value.length > 100) {
