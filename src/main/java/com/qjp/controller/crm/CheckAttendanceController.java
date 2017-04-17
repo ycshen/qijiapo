@@ -128,7 +128,7 @@ public class CheckAttendanceController {
         if(StringUtils.isNotBlank(id)){
             workAttendancePlaceService.deleteWorkAttendancePlaceById(id);
             UserEntity user = UserUtils.getLoginUser(request);
-            //LogUtils.logCRMWorkAttendancePlace("删除了考勤点(" + name + ")", id, user);
+            //LogUtils.logAdmin("删除了考勤点(" + name + ")", id, user);
             LogUtils.logAdmin("删除了考勤点(" + name + ")",  user);
             result = ResponseStatus.UPDATE_SUCCESS;
         }
@@ -145,10 +145,10 @@ public class CheckAttendanceController {
         UserEntity user = UserUtils.getLoginUser(request);
         if(id == null){
             String returnId = workAttendancePlaceService.insertWorkAttendancePlace(workAttendancePlace);
-            LogUtils.logCRMWorkAttendancePlace("添加了考勤点(" + workAttendancePlace.getPlaceName() + ")", returnId, user);
+            LogUtils.logAdmin("添加了考勤点(" + workAttendancePlace.getPlaceName() + ")", user);
         }else{
             workAttendancePlaceService.updateWorkAttendancePlace(workAttendancePlace);
-            LogUtils.logCRMWorkAttendancePlace("修改了考勤点(" + workAttendancePlace.getPlaceName() + ")", id.toString(), user);
+            LogUtils.logAdmin("修改了考勤点(" + workAttendancePlace.getPlaceName() + ")",  user);
         }
 
         return 1;
@@ -161,7 +161,7 @@ public class CheckAttendanceController {
         if(StringUtils.isNotBlank(id)){
             workAttendancePlaceService.enableOrDisableWorkAttendancePlaceById(id);
             UserEntity user = UserUtils.getLoginUser(request);
-            LogUtils.logCRMWorkAttendancePlace("修改了考勤点(" + name + ")启用状态", id, user);
+            LogUtils.logAdmin("修改了考勤点(" + name + ")启用状态", user);
             result = ResponseStatus.UPDATE_SUCCESS;
         }
 

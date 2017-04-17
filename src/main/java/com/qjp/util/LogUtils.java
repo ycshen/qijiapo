@@ -140,6 +140,30 @@ public class LogUtils {
 	}
 
 	/**
+	 * 记录CRM产品动态日志
+	 * @param logMsg 日志内容
+	 * @param productId 产品id
+	 * @param user 登录人信息
+	 */
+	public static void logCRMReturnMoneyDetail(String logMsg, String productId, UserEntity user){
+		LogEntity log = new LogEntity();
+		log.setCompanyId(user.getCompanyId().toString());
+		Integer departmentId = user.getDepartmentId();
+		if(departmentId != null){
+			log.setDepartmentId(departmentId.toString());
+		}
+		log.setUserId(user.getId().toString());
+		log.setUserName(user.getUserName());
+		log.setLogType(RETURN_MONEY);
+		log.setLogMsg(logMsg);
+		log.setCasecadeId(productId);
+		log.setCasecadeIdDesc("CRM-回款ID");
+		log.setCreateUser(user.getUserName());
+		String logJson = new Gson().toJson(log);
+		MyBaseApiUtils.log(logJson);
+	}
+
+	/**
 	 * 活动日志
 	 * @param logMsg
 	 * @param activityId

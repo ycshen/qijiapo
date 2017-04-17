@@ -216,6 +216,18 @@ public class CRMApiUrl {
 	@Value("${crm.insertReturnMoneyDetail}")
 	private String crm_insertReturnMoneyDetail_url;
 	public static String crm_insertReturnMoneyDetail;
+	@Value("${crm.getReturnMoneyDetailPage}")
+	private String crm_getReturnMoneyDetailPage_url;
+	public static String crm_getReturnMoneyDetailPage;
+	@Value("${crm.getReturnMoneyDetailById}")
+	private String crm_getReturnMoneyDetailById_url;
+	public static String crm_getReturnMoneyDetailById;
+	@Value("${crm.deleteReturnMoneyDetailById}")
+	private String crm_deleteReturnMoneyDetailById_url;
+	public static String crm_deleteReturnMoneyDetailById;
+	@Value("${crm.updateReturnMoneyDetail}")
+	private String crm_updateReturnMoneyDetail_url;
+	public static String crm_updateReturnMoneyDetail;
 
 	//WorkAttendancePlace
 	@Value("${crm.insertWorkAttendancePlace}")
@@ -334,6 +346,7 @@ public class CRMApiUrl {
 
 		//returnMoneyDetail
 		crm_insertReturnMoneyDetail = this.crm_insertReturnMoneyDetail_url;
+		crm_getReturnMoneyDetailPage = this.crm_getReturnMoneyDetailPage_url;
 
 		//WorkAttendancePlaceById
 		crm_insertWorkAttendancePlace = this.crm_insertWorkAttendancePlace_url;

@@ -161,7 +161,7 @@ public class ReturnMoneyController {
         returnMoney.setUserId(user.getId().toString());
         returnMoney.setUserName(user.getUserName());
         returnMoneyService.insertReturnMoney(returnMoney);
-        /*String contractId = returnMoney.getContractId();
+        String contractId = returnMoney.getContractId();
         ContractEntity contractEntity = contractService.getContractById(contractId);
         LogUtils.log(LogUtils.RETURN_MONEY, "添加了合同的回款" + contractEntity.getContractName(), contractId, "合同ID", UserUtils.getLoginUser(request));
         //更新合同回款信息
@@ -178,7 +178,7 @@ public class ReturnMoneyController {
                 contractService.updateReturnMoneyById(contractId,oldRM.toString());
                 LogUtils.log(LogUtils.RETURN_MONEY,"添加回款后更新合同对应金额【添加前回款金额（元）" + rm + ",添加后回款金额（元）" + oldRM + "]",contractId,"回款ID",  UserUtils.getLoginUser(request));
             }
-        }*/
+        }
 
         return 1;
     }
