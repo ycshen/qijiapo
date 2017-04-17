@@ -69,10 +69,10 @@ public class ReturnMoneyController {
             returnMoneyQuery.setDepartmentId(idList);
         }
 
-        //eturnMoneyQuery = returnMoneyService.getReturnMoneyPage(returnMoneyQuery);
-        List<ReturnMoneyEntity> list = new LinkedList<ReturnMoneyEntity>();
+        //returnMoneyQuery = returnMoneyService.getReturnMoneyPage(returnMoneyQuery);
+        /*List<ReturnMoneyEntity> list = new LinkedList<ReturnMoneyEntity>();
         list.add(this.getTestEntity());
-        returnMoneyQuery.setItems(list);
+        returnMoneyQuery.setItems(list);*/
         String jsonStr = JsonUtils.json2Str(returnMoneyQuery);
 
         return jsonStr;
