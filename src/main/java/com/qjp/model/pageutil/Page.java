@@ -1,13 +1,12 @@
 package com.qjp.model.pageutil;
 
+import com.qjp.entity.UserEntity;
+import com.qjp.util.UserUtils;
+
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
-import com.qjp.entity.UserEntity;
-import com.qjp.util.UserUtils;
 
 public class Page<T> {
 	private Integer page = 1;// 页码，默认是第一页

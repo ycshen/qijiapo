@@ -31,7 +31,7 @@ public class TestController {
 
 	public static void main(String[] args) {
 		Integer pwd = 50000000;
-		for(int i=0; i< 100; i++){
+		for(int i=0; i< 1000 ;i++){
 			Thread t = new Thread(new Task() {
 				@Override
 				public void cancel() {

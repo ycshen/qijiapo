@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -82,12 +81,14 @@ public class CheckAttendanceController {
     public String listAjax(@ModelAttribute WorkAttendancePlaceQuery workAttendancePlaceQuery, HttpServletRequest request){
         workAttendancePlaceQuery.init(request);
         String roleType = workAttendancePlaceQuery.getRoleType();
-        if(RoleEnum.DEP.getRoleId().toString().equals(roleType)){
+       /* if(RoleEnum.DEP.getRoleId().toString().equals(roleType)){
             String idList = departmentService.getSubDepList(workAttendancePlaceQuery.getDepartmentId(), workAttendancePlaceQuery.getCompanyId());
             workAttendancePlaceQuery.setDepartmentId(idList);
+        }*/
+        if(RoleEnum.ADMIN.getRoleId().toString().equals(roleType)){
+            workAttendancePlaceQuery = workAttendancePlaceService.getWorkAttendancePlacePage(workAttendancePlaceQuery);
         }
 
-        workAttendancePlaceQuery = workAttendancePlaceService.getWorkAttendancePlacePage(workAttendancePlaceQuery);
         String jsonStr = JsonUtils.json2Str(workAttendancePlaceQuery);
 
         return jsonStr;
@@ -132,25 +133,8 @@ public class CheckAttendanceController {
         if(StringUtils.isNotBlank(id)){
             workAttendancePlaceService.deleteWorkAttendancePlaceById(id);
             UserEntity user = UserUtils.getLoginUser(request);
-            LogUtils.logCRMWorkAttendancePlace("删除了考勤点(" + name + ")", id, user);
-            result = ResponseStatus.UPDATE_SUCCESS;
-        }
-
-        return result;
-    }
-
-    @RequestMapping(value = "/batchDeleteById", method = RequestMethod.GET)
-    @ResponseBody
-    public Integer batchDeleteById(String ids, HttpServletRequest request){
-        Integer result = ResponseStatus.INIT;
-        if(StringUtils.isNotBlank(ids)){
-            String[] idArr = ids.split("\\,");
-            List<String> idList =  Arrays.asList(idArr);
-            workAttendancePlaceService.batchDeleteWorkAttendancePlace(idList);
-            UserEntity user = UserUtils.getLoginUser(request);
-            for (String id : idList) {
-                LogUtils.logCRMWorkAttendancePlace("删除了考勤点", id, user);
-            }
+            //LogUtils.logCRMWorkAttendancePlace("删除了考勤点(" + name + ")", id, user);
+            LogUtils.logAdmin("删除了考勤点(" + name + ")",  user);
             result = ResponseStatus.UPDATE_SUCCESS;
         }
 
