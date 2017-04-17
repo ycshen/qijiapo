@@ -6,7 +6,7 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}"></c:set>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>部门树</title>
+<title>定位地图</title>
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <%@include file="../share/common_css.jsp"%>
     <link rel="stylesheet" href="${ctx}/js/layui/css/layui.css">
@@ -59,6 +59,10 @@
             map.addOverlay(mk);
             map.panTo(r.point);
             var geoc = new BMap.Geocoder();
+            var lat = r.point.lat;
+            var lng = r.point.lng;
+            $("#longitude").val(lng);
+            $("#latitude").val(lat);
             geoc.getLocation(r.point, function(rs){
                 var addComp = rs.addressComponents;
                 var address = addComp.province + addComp.district + addComp.street + addComp.streetNumber;
@@ -107,13 +111,15 @@
         map.clearOverlays();    //清除地图上所有覆盖物
         function myFun(){
             var pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
-            alert(pp)
             map.centerAndZoom(pp, 18);
+            $("#longitude").val(pp.lng);
+            $("#latitude").val(pp.lat);
             map.addOverlay(new BMap.Marker(pp));    //添加标注
         }
         var local = new BMap.LocalSearch(map, { //智能搜索
             onSearchComplete: myFun
         });
+
         local.search(myValue);
     }
     function G(id) {
@@ -127,7 +133,10 @@
                 skin: 'layui-layer-molv'
             });
         }else{
-            parent.getLocation(addr, 0, 0);
+
+            var lng = $("#longitude").val();
+            var lat = $("#latitude").val();
+            parent.getLocation(addr, lat, lng);
             parent.layer.closeAll();
         }
     }

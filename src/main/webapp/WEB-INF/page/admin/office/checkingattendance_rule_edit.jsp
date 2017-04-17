@@ -132,6 +132,8 @@
 	<input type="hidden" value="${workAttendancePlace.id}" id="hidId" name="id"/>
 	<input type="hidden" value="${workAttendancePlace.departmentId}" id="hidDepartmentId" name="departmentId"/>
 	<input type="hidden" value="${workAttendancePlace.departmentName}" id="hidDepartmentName" name="departmentName"/>
+	<input type="hidden" value="${workAttendancePlace.latitude}" id="hidLat" name="latitude"/>
+	<input type="hidden" value="${workAttendancePlace.longitude}" id="hidLng" name="longitude"/>
 </form>
 
 <script>

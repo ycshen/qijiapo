@@ -59,4 +59,6 @@ function locate(){
 function getLocation(addr, latitude, longitude){
 	$("#spanAddr").html(addr);
 	$("#txtAddress").val(addr);
+	$("#hidLat").val(latitude);
+	$("#hidLng").val(longitude);
 }
