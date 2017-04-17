@@ -57,40 +57,42 @@
 		<div class="layui-form-item my-layui-form-item my-top">
 			<label class="layui-form-label">考勤点名称<span style="color:red">*</span></label>
 			<div class="layui-input-block">
-				<input type="text"  autocomplete="off"
+				<input type="text"  autocomplete="off" value="${workAttendancePlace.placeName}"
 					   placeholder="请输入考勤点名称" class="layui-input" name="placeName" lay-verify="placeName">
 			</div>
 		</div>
 		<div class="layui-form-item my-layui-form-item my-top">
 			<label class="layui-form-label">考勤地址<span style="color:red">*</span></label>
 			<div class="layui-input-block">
-				<input type="text"
+				<input type="text" value="${workAttendancePlace.address}"
 					   autocomplete="off" placeholder="请输入考勤地址" class="layui-input" name="address"  lay-verify="address">
 			</div>
 		</div>
 		<div class="layui-form-item my-layui-form-item my-top">
 			<label class="layui-form-label">上班时间<span style="color:red">*</span></label>
 			<div class="layui-input-block">
-				<input type="checkbox" id="chkWeek1" title="星期一" checked="checked">
-				<input type="checkbox" id="chkWeek2" title="星期二" checked="checked">
-				<input type="checkbox" id="chkWeek3" title="星期三" checked="checked">
-				<input type="checkbox" id="chkWeek4" title="星期四" checked="checked">
-				<input type="checkbox" id="chkWeek5" title="星期五" checked="checked">
-				<input type="checkbox" id="chkWeek6" title="星期六" >
-				<input type="checkbox"  id="chkWeek7"  title="星期天">
+				<input type="checkbox" id="chkWeek1" title="星期一" <c:if test="${workAttendancePlace.workTime.contains('星期一')}"> checked="checked"</c:if>>
+				<input type="checkbox" id="chkWeek2" title="星期二" <c:if test="${workAttendancePlace.workTime.contains('星期二')}"> checked="checked"</c:if>>
+				<input type="checkbox" id="chkWeek3" title="星期三" <c:if test="${workAttendancePlace.workTime.contains('星期三')}"> checked="checked"</c:if>>
+				<input type="checkbox" id="chkWeek4" title="星期四" <c:if test="${workAttendancePlace.workTime.contains('星期四')}"> checked="checked"</c:if>>
+				<input type="checkbox" id="chkWeek5" title="星期五" <c:if test="${workAttendancePlace.workTime.contains('星期五')}"> checked="checked"</c:if>>
+				<input type="checkbox" id="chkWeek6" title="星期六" <c:if test="${workAttendancePlace.workTime.contains('星期六')}"> checked="checked"</c:if>>
+				<input type="checkbox"  id="chkWeek7"  title="星期天" <c:if test="${workAttendancePlace.workTime.contains('星期天')}"> checked="checked"</c:if>>
 			</div>
 			<input type="hidden" id="hidWorkTime" value="" name="workTime">
 		</div>
 		<div class="layui-form-item my-layui-form-item my-top">
 			<label class="layui-form-label">上班<span style="color:red">*</span></label>
 			<div class="layui-input-block">
-				<input id="txtOnWorkTime" type="text" class="layui-input" name="onWorkTime" lay-verify="onWorkTime">
+				<input id="txtOnWorkTime"  value="${workAttendancePlace.onWorkTime}"
+					   type="text" class="layui-input" name="onWorkTime" lay-verify="onWorkTime">
 			</div>
 		</div>
 		<div class="layui-form-item my-layui-form-item my-top">
 			<label class="layui-form-label">下班<span style="color:red">*</span></label>
 			<div class="layui-input-block">
-				<input id="txtOffWorkTime" type="text" class="layui-input" name="offWorkTime" lay-verify="offWorkTime">
+				<input id="txtOffWorkTime"  value="${workAttendancePlace.offWorkTime}"
+					   type="text" class="layui-input" name="offWorkTime" lay-verify="offWorkTime">
 			</div>
 		</div>
 		<div class="layui-form-item my-layui-form-item">
@@ -119,8 +121,8 @@
 			<div class="layui-form-item my-layui-form-item my-top">
 				<label class="layui-form-label">偏差范围（米）<span style="color:red">*</span></label>
 				<div class="layui-input-block">
-					<input type="text" name="errorRange" autocomplete="off"
-						   placeholder="300" class="layui-input" maxlength="10">
+					<input type="text" name="errorRange" autocomplete="off" value="${workAttendancePlace.errorRange}"
+						   placeholder="300" class="layui-input" maxlength="5">
 				</div>
 			</div>
 

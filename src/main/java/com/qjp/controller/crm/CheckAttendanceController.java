@@ -61,12 +61,6 @@ public class CheckAttendanceController {
 
         return mav;
     }
-    @RequestMapping(value = "/addWorkAttendancePlace")
-    public ModelAndView addWorkAttendancePlace(String saleOppoId, HttpServletRequest request){
-        ModelAndView mav = new ModelAndView("/workAttendancePlace/add_workAttendancePlace");
-        mav.addObject("saleOppoId", saleOppoId);
-        return mav;
-    }
 
     @RequestMapping(value = "/selectWorkAttendancePlace", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     public ModelAndView selectWorkAttendancePlace(@ModelAttribute WorkAttendancePlaceQuery workAttendancePlaceQuery, HttpServletRequest request){
@@ -95,15 +89,16 @@ public class CheckAttendanceController {
     }
     @RequestMapping(value = "/forwardEdit", method = RequestMethod.GET)
     public ModelAndView forwardEdit(String id, HttpServletRequest request){
-        ModelAndView mav = new ModelAndView("/admin/office/workAttendancePlace_edit");
-        UserEntity user = UserUtils.getLoginUser(request);
+     /*   ModelAndView mav = new ModelAndView("/admin/office/workAttendancePlace_edit");*/
+        ModelAndView mav = new ModelAndView("/admin/office/checkingattendance_rule_edit");
+        //UserEntity user = UserUtils.getLoginUser(request);
         WorkAttendancePlaceEntity workAttendancePlace = null;
         if(StringUtils.isNotBlank(id)){
             workAttendancePlace = workAttendancePlaceService.getWorkAttendancePlaceById(id);
         }
 
         mav.addObject("workAttendancePlace", workAttendancePlace);
-        mav.addObject("user", user);
+       // mav.addObject("user", user);
         return mav;
     }
 

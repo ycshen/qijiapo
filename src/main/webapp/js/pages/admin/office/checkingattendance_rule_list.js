@@ -24,13 +24,13 @@ function isNotBlank(args){
 
 
 function editAttendance(id){
-	var url = ctx + "/inner/competitor/forwardEdit?id=" + id;
+	var url = ctx + "/admin/checkAttendance/forwardEdit?id=" + id;
 	layer.open({
 		type: 2,
-		title: '编辑竞争对手',
+		title: '编辑考勤点',
 		shadeClose: true,
 		shade: 0.8,
-		area: ['800px', '400px'],
+		area: ['60%', '100%'],
 		content: url
 	});
 }
