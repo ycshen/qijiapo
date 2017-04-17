@@ -99,9 +99,9 @@
 			<label class="layui-form-label">适合部门<span style="color:red">*</span></label>
 			<div class="layui-input-inline" style="margin-right: 0px;">
 				<c:choose>
-					<c:when test="${competitor != null && competitor.id != '' }">
+					<c:when test="${workAttendancePlace != null && workAttendancePlace.id != '' }">
 						<input type="text" id="txtBeyondDeptName" autocomplete="off" class="layui-input"
-							   value="${competitor.departmentName}" disabled="disabled">
+							   value="${workAttendancePlace.departmentName}" disabled="disabled">
 					</c:when>
 					<c:otherwise>
 						<input type="text" id="txtBeyondDeptName" autocomplete="off" class="layui-input"
@@ -127,7 +127,9 @@
 			</div>
 
 		</div>
-	<input type="hidden" value="" id="hidId"/>
+	<input type="hidden" value="${workAttendancePlace.id}" id="hidId" name="id"/>
+	<input type="hidden" value="${workAttendancePlace.departmentId}" id="hidDepartmentId" name="departmentId"/>
+	<input type="hidden" value="${workAttendancePlace.departmentName}" id="hidDepartmentName" name="departmentName"/>
 </form>
 
 <script>

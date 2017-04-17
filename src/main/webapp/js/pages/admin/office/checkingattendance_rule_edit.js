@@ -20,6 +20,10 @@ function isBlank(args){
 }
 
 function returnInfo(id, name){
+	$("#hidDepartmentIdd").val(id);
+	$("#hidDepartmentName").val(name);
+
+	$("#txtBeyondDeptName").val(name);
 	layer.closeAll();
 }
 $(function(){
