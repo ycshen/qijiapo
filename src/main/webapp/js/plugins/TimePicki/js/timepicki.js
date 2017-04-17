@@ -5,7 +5,7 @@
         };
         this.defaultTime = options.defaultTime;
         var settings = $.extend( {}, defaults, options );
-        return this.each( function(defaultTime) {
+        return this.each(function(index, obj) {
             var ele = $(this);
             var ele_hei = ele.outerHeight();
             var ele_lef = ele.position().left;
@@ -43,7 +43,14 @@
             });
             function set_date()
             {
-                var d = new Date(defaultTime);
+                var time = obj.value;
+                time = time.replace(/ /g,'')
+                if(time == "" || time == null || time == undefined){
+                    time = new Date();
+                }else{
+                    time = "1970-01-01 " + time;
+                }
+                var d = new Date(time);
                 var ti = d.getHours();
                 var mi = d.getMinutes();
                 if (24 < ti) {
