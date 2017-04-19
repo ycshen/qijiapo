@@ -40,9 +40,17 @@ public class ReturnMoneyDetailController {
     @Autowired
     private ContractService contractService;
 
-    @RequestMapping(value = "/addPlan", method = RequestMethod.GET)
-    public ModelAndView addPlan(String contractId, HttpServletRequest request){
-        ModelAndView mav = new ModelAndView("/returnMoney/returnMoney_plan_edit");
+    @RequestMapping(value = "/addDetail", method = RequestMethod.GET)
+    public ModelAndView addDetail(Integer type, String contractId, HttpServletRequest request){
+        ModelAndView mav = new ModelAndView();
+        if(type == 1){
+        	mav.setViewName("/returnMoney/returnMoney_plan_edit");
+        }else if(type == 2){
+        	mav.setViewName("/returnMoney/returnMoney_actual_edit");
+        }else{
+        	mav.setViewName("/returnMoney/returnMoney_tax_edit");
+        }
+        
         UserEntity user = UserUtils.getLoginUser(request);
         //接口1：获取该合同本次调用的回款期次
         //start
