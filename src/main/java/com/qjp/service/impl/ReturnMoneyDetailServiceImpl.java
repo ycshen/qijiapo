@@ -45,7 +45,7 @@ public class ReturnMoneyDetailServiceImpl implements ReturnMoneyDetailService {
     @Override
     public ReturnMoneyDetailQuery getReturnMoneyDetailPage(ReturnMoneyDetailQuery returnMoneyDetailQuery) {
         String json = JsonUtils.json2Str(returnMoneyDetailQuery);
-        String getResult = CRMApiUtils.getReturnMoneyDetailPage(json);
+        String getResult = CRMApiUtils.getReturnMoneyDetailPageByReturnMoneyId(json);
         if(StringUtils.isNotBlank(getResult)){
             JSONObject jsonObject = JSONObject.parseObject(getResult);
             if(jsonObject != null){

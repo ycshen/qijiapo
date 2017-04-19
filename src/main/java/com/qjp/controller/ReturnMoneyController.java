@@ -110,36 +110,6 @@ public class ReturnMoneyController {
         return mav;
     }
 
-    @RequestMapping(value = "/deleteById", method = RequestMethod.GET)
-    @ResponseBody
-    public Integer deleteById(String id, String name,HttpServletRequest request){
-        Integer result = ResponseStatus.INIT;
-        if(StringUtils.isNotBlank(id)){
-            //returnMoneyService.deleteReturnMoneyById(id);
-            UserEntity user = UserUtils.getLoginUser(request);
-            result = ResponseStatus.UPDATE_SUCCESS;
-        }
-
-        return result;
-    }
-
-    @RequestMapping(value = "/batchDeleteById", method = RequestMethod.GET)
-    @ResponseBody
-    public Integer batchDeleteById(String ids, HttpServletRequest request){
-        Integer result = ResponseStatus.INIT;
-        if(StringUtils.isNotBlank(ids)){
-            String[] idArr = ids.split("\\,");
-            List<String> idList =  Arrays.asList(idArr);
-            //returnMoneyService.batchDeleteReturnMoney(idList);
-            UserEntity user = UserUtils.getLoginUser(request);
-            for (String id : idList) {
-                LogUtils.logCRMProduct("删除了合同", id, user);
-            }
-            result = ResponseStatus.UPDATE_SUCCESS;
-        }
-
-        return result;
-    }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     @ResponseBody

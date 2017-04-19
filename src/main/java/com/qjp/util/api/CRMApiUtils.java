@@ -1437,7 +1437,7 @@ public class CRMApiUtils {
      * @param query
      * @return
      */
-    public static String getReturnMoneyDetailPage(String query) {
+    public static String getReturnMoneyDetailPageByReturnMoneyId(String query) {
         String result = StringUtils.EMPTY;
         try {
             String url = getCRMUrl() + CRMApiUrl.crm_getReturnMoneyDetailPage;
