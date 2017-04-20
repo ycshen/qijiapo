@@ -151,10 +151,10 @@ function getReturnMoneyNum(id,planMoney, actualMoney, taxMoney){
     numTitle += "计划(元）:<span style=\"color: green;\">" + planMoney + "</span>   <a href=\"#\" title=\"添加回款计划\" onclick=\"addPlan(" + id + ")\"><i class=\"layui-icon\">&#xe61f;</i></a>";
     numTitle += "</div>";
     numTitle += "<div class=\"col-sm-4 invoice-col\">";
-    numTitle += "实际(元）：<span style=\"color: green;\">" + actualMoney + "</span>  <a href=\"#\" title=\"添加回款记录\"><i class=\"layui-icon\">&#xe61f;</i></a>";
+    numTitle += "实际(元）：<span style=\"color: green;\">" + actualMoney + "</span>  <a href=\"#\" title=\"添加回款记录\" onclick=\"addActual(" + id + ")\"><i class=\"layui-icon\">&#xe61f;</i></a>";
     numTitle += "</div>";
     numTitle += "<div class=\"col-sm-4 invoice-col\">";
-    numTitle += "开票(元）：<span style=\"color: green;\">" + taxMoney + "</span>   <a href=\"#\" title=\"添加开票记录\"><i class=\"layui-icon\">&#xe61f;</i></a>";
+    numTitle += "开票(元）：<span style=\"color: green;\">" + taxMoney + "</span>   <a href=\"#\" title=\"添加开票记录\" onclick=\"addTax(" + id + ")\"><i class=\"layui-icon\">&#xe61f;</i></a>";
     numTitle += "</div>";
     numTitle += "</div>";
 
@@ -296,7 +296,7 @@ function addPlanSuccess(obj){
 
 
 function addPlan(id){
-    var url = ctx + "/inner/returnMoneyDetail/addPlan?id=" + id;
+    var url = ctx + "/inner/returnMoneyDetail/addDetail?type=1&id=" + id;
     layer.open({
         type: 2,
         title: "新建回款计划",
@@ -305,13 +305,29 @@ function addPlan(id){
         area: ['80%', '80%'],
         content: url
     });
-     /*var url = ctx + "/inner/returnMoneyDetail/forwardEdit?contractId=" + id;
-     layer.open({
-         type: 2,
-         title: "新建回款计划",
-         shadeClose: false,
-         shade: 0.8,
-         area: ['500px', '400px'],
-         content: url
-     });*/
+}
+
+
+function addActual(id){
+    var url = ctx + "/inner/returnMoneyDetail/addDetail?type=2&id=" + id;
+    layer.open({
+        type: 2,
+        title: "新建实际回款",
+        shadeClose: false,
+        shade: 0.8,
+        area: ['80%', '80%'],
+        content: url
+    });
+}
+
+function addTax(id){
+    var url = ctx + "/inner/returnMoneyDetail/addDetail?type=3&id=" + id;
+    layer.open({
+        type: 2,
+        title: "新建开票信息",
+        shadeClose: false,
+        shade: 0.8,
+        area: ['80%', '80%'],
+        content: url
+    });
 }
