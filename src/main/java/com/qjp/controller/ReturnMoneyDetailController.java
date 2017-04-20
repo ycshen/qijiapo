@@ -1,10 +1,8 @@
 package com.qjp.controller;
 
 import com.qjp.base.ResponseStatus;
-import com.qjp.entity.LogEntity;
+import com.qjp.entity.*;
 import com.qjp.entity.ReturnMoneyDetailEntity;
-import com.qjp.entity.ReturnMoneyDetailEntity;
-import com.qjp.entity.UserEntity;
 import com.qjp.service.*;
 import com.qjp.util.LogUtils;
 import com.qjp.util.StringUtils;
@@ -42,19 +40,23 @@ public class ReturnMoneyDetailController {
     @Autowired
     private ContractService contractService;
 
-    @RequestMapping(value = "/addPlan", method = RequestMethod.GET)
-    public ModelAndView addPlan(String contractId, HttpServletRequest request){
+    @RequestMapping(value = "/addDetail", method = RequestMethod.GET)
+    public ModelAndView addPlan(String contractId,String returnMoneyId ,HttpServletRequest request){
         ModelAndView mav = new ModelAndView("/returnMoney/returnMoney_plan_edit");
         UserEntity user = UserUtils.getLoginUser(request);
         //接口1：获取该合同本次调用的回款期次
         //start
         ReturnMoneyQuery query = new ReturnMoneyQuery();
         query.init(request);
-        List<ReturnMoneyEntity> returnMoneyEntityList = returnMoneyService.getReturnMoneyByContractId(query);
+        query = returnMoneyService.getReturnMoneyByContractId(query);
+        Integer returnMoneyNum = 0;
         if (!TextUtils.isEmpty(returnMoneyId)) {
             ReturnMoneyEntity returnMoneyEntity = returnMoneyService.getReturnMoneyById(returnMoneyId);
+            returnMoneyNum = returnMoneyEntity.getReturnMoneyNum();
+        }else {
+            returnMoneyNum = query.getItems().size() + 1;//新增则期次数据加一
         }
-        Integer returnMoneyNum = 1;
+
         //end
         UserEntity loginUser = UserUtils.getLoginUser(request);
         List<UserEntity> userList = userService.getUserListByCompanyId(loginUser.getCompanyId().toString());

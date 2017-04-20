@@ -1,5 +1,6 @@
 package com.qjp.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.qjp.base.ResponseStatus;
 import com.qjp.base.RoleEnum;
 import com.qjp.entity.*;
@@ -16,9 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * <p>Project: qijiapo</p>
@@ -150,4 +149,11 @@ public class ReturnMoneyController {
         return 1;
     }
 
+    public static void main(String[] args) {
+        ReturnMoneyEntity returnMoney = new ReturnMoneyEntity();
+        returnMoney.setActualReturnMoney("20");
+        ReturnMoneyDetailEntity detailOne = new ReturnMoneyDetailEntity();
+        returnMoney.setReturnMoneyDetail(detailOne);
+        String json = JSONObject.toJSONString(returnMoney);
+    }
 }
