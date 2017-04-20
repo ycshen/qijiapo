@@ -122,3 +122,5 @@ function getContractBusinessType(businessType){
 
     return businessTypeStr;
 }
+
+

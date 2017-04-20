@@ -414,29 +414,11 @@
         var $ = layui.jquery
             , element = layui.element(); //Tab的切换功能，切换事件监听等，需要依赖element模块
 
-        //触发事件
-        var active = {
-            tabAdd: function () {
-                //新增一个Tab项
-                element.tabAdd('demo', {
-                    title: '新选项' + (Math.random() * 1000 | 0) //用于演示
-                    , content: '内容' + (Math.random() * 1000 | 0)
-                })
-            }
-            , tabDelete: function () {
-                //删除指定Tab项
-                element.tabDelete('demo', 2); //删除第3项（注意序号是从0开始计算）
-            }
-            , tabChange: function () {
-                //切换到指定Tab项
-                element.tabChange('demo', 1); //切换到第2项（注意序号是从0开始计算）
-            }
-        };
-
-        $('.site-demo-active').on('click', function () {
-            var type = $(this).data('type');
-            active[type] ? active[type].call(this) : '';
-        });
+        element.on('tab(docDemoTabBrief)', function(data){
+			if(data.index == 1){
+				reloadReturnDetail(${contract.id});
+			}
+		});
     });
 </script>
 
