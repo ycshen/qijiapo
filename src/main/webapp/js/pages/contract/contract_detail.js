@@ -331,3 +331,13 @@ function addTax(id){
         content: url
     });
 }
+
+function reloadReturnDetail(contractId){
+	$.ajax({
+		url: ctx + "/inner/returnMoney/listAjax?contractId=" + contractId,
+		type: "get",
+		success: function(data){
+			alert(data)
+		}
+	});
+}
