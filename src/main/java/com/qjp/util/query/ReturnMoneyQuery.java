@@ -12,6 +12,14 @@ import com.qjp.model.pageutil.Page;
  * @author <a href="mailto:shenyuchuan@itiaoling.com">申鱼川</a>
  */
 public class ReturnMoneyQuery extends Page<ReturnMoneyEntity>{
+    private String contractId;
 
+    public String getContractId() {
+        return contractId;
+    }
+
+    public void setContractId(String contractId) {
+        this.contractId = contractId;
+    }
 }
 

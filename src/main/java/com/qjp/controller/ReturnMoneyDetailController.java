@@ -1,15 +1,15 @@
 package com.qjp.controller;
 
 import com.qjp.base.ResponseStatus;
-import com.qjp.entity.LogEntity;
+import com.qjp.entity.*;
 import com.qjp.entity.ReturnMoneyDetailEntity;
-import com.qjp.entity.ReturnMoneyDetailEntity;
-import com.qjp.entity.UserEntity;
 import com.qjp.service.*;
 import com.qjp.util.LogUtils;
 import com.qjp.util.StringUtils;
 import com.qjp.util.UserUtils;
 import com.qjp.util.query.LogQuery;
+import com.qjp.util.query.ReturnMoneyQuery;
+import org.apache.http.util.TextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -41,11 +41,17 @@ public class ReturnMoneyDetailController {
     private ContractService contractService;
 
     @RequestMapping(value = "/addPlan", method = RequestMethod.GET)
-    public ModelAndView addPlan(String contractId, HttpServletRequest request){
+    public ModelAndView addPlan(String contractId,String returnMoneyId, HttpServletRequest request){
         ModelAndView mav = new ModelAndView("/returnMoney/returnMoney_plan_edit");
         UserEntity user = UserUtils.getLoginUser(request);
         //接口1：获取该合同本次调用的回款期次
         //start
+        ReturnMoneyQuery query = new ReturnMoneyQuery();
+        query.init(request);
+        List<ReturnMoneyEntity> returnMoneyEntityList = returnMoneyService.getReturnMoneyByContractId(query);
+        if (!TextUtils.isEmpty(returnMoneyId)) {
+            ReturnMoneyEntity returnMoneyEntity = returnMoneyService.getReturnMoneyById(returnMoneyId);
+        }
         Integer returnMoneyNum = 1;
         //end
         UserEntity loginUser = UserUtils.getLoginUser(request);

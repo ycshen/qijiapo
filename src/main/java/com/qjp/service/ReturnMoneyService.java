@@ -1,6 +1,9 @@
 package com.qjp.service;
 
 import com.qjp.entity.ReturnMoneyEntity;
+import com.qjp.util.query.ReturnMoneyQuery;
+
+import java.util.List;
 
 /**
  * @Author yuchuanshen
@@ -11,4 +14,5 @@ public interface ReturnMoneyService {
     String insertReturnMoney(ReturnMoneyEntity returnMoneyEntity);
     ReturnMoneyEntity getReturnMoneyById(String id);
     void updateReturnMoney(ReturnMoneyEntity returnMoneyEntity);
+    ReturnMoneyQuery getReturnMoneyByContractId(ReturnMoneyQuery returnMoneyQuery);
 }

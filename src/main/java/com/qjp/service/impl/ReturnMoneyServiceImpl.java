@@ -2,12 +2,16 @@ package com.qjp.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.qjp.entity.ReturnMoneyEntity;
+import com.qjp.entity.ReturnMoneyEntity;
 import com.qjp.service.ReturnMoneyService;
 import com.qjp.util.JsonUtils;
 import com.qjp.util.api.CRMApiUtils;
 import com.qjp.util.api.model.ApiCode;
+import com.qjp.util.query.ReturnMoneyQuery;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created by fengyue on 2017/4/5.
@@ -67,5 +71,36 @@ public class ReturnMoneyServiceImpl implements ReturnMoneyService {
     @Override
     public void updateReturnMoney(ReturnMoneyEntity returnMoneyEntity) {
 
+    }
+
+    @Override
+    public ReturnMoneyQuery getReturnMoneyByContractId(ReturnMoneyQuery returnMoneyQuery) {
+        String json = JsonUtils.json2Str(returnMoneyQuery);
+        String loginResult = CRMApiUtils.getReturnMoneyPageByContractId(json);
+        if(StringUtils.isNotBlank(loginResult)){
+            JSONObject jsonObject = JSONObject.parseObject(loginResult);
+            if(jsonObject != null){
+                Object codeObj = jsonObject.get("code");
+                if(codeObj != null){
+                    String code = codeObj.toString();
+                    if (ApiCode.OK.toString().equals(code)) {
+                        Object dataObj = jsonObject.get("data");
+                        if(dataObj != null){
+                            String data = dataObj.toString();
+                            List<ReturnMoneyEntity> list = JSONObject.parseArray(data, ReturnMoneyEntity.class);
+                            returnMoneyQuery.setItems(list);
+                        }
+
+                        Object countObj = jsonObject.get("count");
+                        if(countObj != null){
+                            String count = countObj.toString();
+                            returnMoneyQuery.setCount(Integer.parseInt(count));
+                        }
+                    }
+                }
+            }
+        }
+
+        return returnMoneyQuery;
     }
 }
