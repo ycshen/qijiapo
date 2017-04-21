@@ -1,13 +1,18 @@
 package com.qjp.controller;
 
 import com.qjp.base.ResponseStatus;
-import com.qjp.entity.*;
+import com.qjp.base.RoleEnum;
+import com.qjp.entity.LogEntity;
 import com.qjp.entity.ReturnMoneyDetailEntity;
+import com.qjp.entity.ReturnMoneyEntity;
+import com.qjp.entity.UserEntity;
 import com.qjp.service.*;
+import com.qjp.util.JsonUtils;
 import com.qjp.util.LogUtils;
 import com.qjp.util.StringUtils;
 import com.qjp.util.UserUtils;
 import com.qjp.util.query.LogQuery;
+import com.qjp.util.query.ReturnMoneyDetailQuery;
 import com.qjp.util.query.ReturnMoneyQuery;
 import org.apache.http.util.TextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,6 +93,22 @@ public class ReturnMoneyDetailController {
 
         return result;
     }
+    @RequestMapping(value = "/listAjax", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String listAjax(@ModelAttribute ReturnMoneyDetailQuery returnMoneyDetailQuery, HttpServletRequest request){
+        returnMoneyDetailQuery.init(request);
+        String roleType = returnMoneyDetailQuery.getRoleType();
+        if(RoleEnum.DEP.getRoleId().toString().equals(roleType)){
+            String idList = departmentService.getSubDepList(returnMoneyDetailQuery.getDepartmentId(), returnMoneyDetailQuery.getCompanyId());
+            returnMoneyDetailQuery.setDepartmentId(idList);
+        }
+
+        returnMoneyDetailQuery = returnMoneyDetailService.getReturnMoneyDetailPage(returnMoneyDetailQuery);
+        String jsonStr = JsonUtils.json2Str(returnMoneyDetailQuery);
+
+        return jsonStr;
+    }
+
 
     @RequestMapping(value = "/forwardEdit", method = RequestMethod.GET)
     public ModelAndView forwardEdit(String id, HttpServletRequest request){
