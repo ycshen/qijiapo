@@ -1,7 +1,6 @@
 package com.qjp.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.qjp.base.ResponseStatus;
 import com.qjp.base.RoleEnum;
 import com.qjp.entity.*;
 import com.qjp.service.*;
@@ -17,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.*;
+import java.util.List;
 
 /**
  * <p>Project: qijiapo</p>
@@ -73,6 +72,8 @@ public class ReturnMoneyController {
 
         return jsonStr;
     }
+
+
     @RequestMapping(value = "/forwardEdit", method = RequestMethod.GET)
     public ModelAndView forwardEdit(String id, HttpServletRequest request){
         ModelAndView mav = new ModelAndView("/returnMoney/returnMoney_edit");
@@ -107,7 +108,7 @@ public class ReturnMoneyController {
     }
 
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @RequestMapping(value = "/saveOrUpdate", method = RequestMethod.POST)
     @ResponseBody
     public Integer saveOrUpdate(@RequestBody ReturnMoneyEntity returnMoney, HttpServletRequest request){
         Integer result = 0;
@@ -123,9 +124,8 @@ public class ReturnMoneyController {
 
             returnMoneyDetail.init(request);
         }
-        UserEntity user = UserUtils.getLoginUser(request);
-        returnMoney.setUserId(user.getId().toString());
-        returnMoney.setUserName(user.getUserName());
+
+        returnMoney.init(request);
         returnMoneyService.insertReturnMoney(returnMoney);
         String contractId = returnMoney.getContractId();
         ContractEntity contractEntity = contractService.getContractById(contractId);

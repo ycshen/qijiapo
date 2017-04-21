@@ -162,7 +162,7 @@
         form.on('submit(mySubmit)', function(data){
             var obj = new Object();
             obj.returnMoneyTime = $("input[name='returnMoneyTime']").val();
-            obj.returnMoneyType = 1;
+            obj.returnMoneyType = 3;
             obj.money = $("input[name='money']").val();
             parent.addPlanSuccess(obj);
             return false;

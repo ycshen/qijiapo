@@ -129,54 +129,77 @@ function viewCustomer(id, name){
 }
 var i=1;
 function addReturnMoney(id){
-	var numHtml = getReturnMoneyNum(id,0, 0, 0);
+	var numHtml = getReturnMoneyNum(id,0, 0, 0, 1,false);
 	$("#sectionDiv").html(numHtml);
 
 }
 
 
 
-function getReturnMoneyNum(id,planMoney, actualMoney, taxMoney){
+function getReturnMoneyNum(id,planMoney, actualMoney, taxMoney, returnMoneyNum, isInit){
 	var numTitle = "";
     numTitle += "<div class=\"row\">";
     numTitle += "<div class=\"col-xs-12\">";
     numTitle += "<h2 class=\"page-box\">";
-    numTitle += "第1期";
+    numTitle += "第" + returnMoneyNum + "期";
 
     numTitle += "</h2>";
     numTitle += "</div>";
     numTitle += "</div>";
-    numTitle += "<div class=\"row invoice-info\"  id=\"rowDiv\">";
+    numTitle += "<div class=\"row invoice-info\"  id=\"rowDiv" + id + "\">";
     numTitle += "<div class=\"col-sm-4 invoice-col\">";
-    numTitle += "计划(元）:<span style=\"color: green;\">" + planMoney + "</span>   <a href=\"#\" title=\"添加回款计划\" onclick=\"addPlan(" + id + ")\"><i class=\"layui-icon\">&#xe61f;</i></a>";
+    numTitle += "计划(元）:<span style=\"color: green;\">" + planMoney + "</span>   <a href=\"#\" title=\"添加回款计划\" onclick=\"addPlan('" + id + "')\"><i class=\"layui-icon\">&#xe61f;</i></a>";
     numTitle += "</div>";
     numTitle += "<div class=\"col-sm-4 invoice-col\">";
-    numTitle += "实际(元）：<span style=\"color: green;\">" + actualMoney + "</span>  <a href=\"#\" title=\"添加回款记录\" onclick=\"addActual(" + id + ")\"><i class=\"layui-icon\">&#xe61f;</i></a>";
+    numTitle += "实际(元）：<span style=\"color: green;\">" + actualMoney + "</span>  <a href=\"#\" title=\"添加回款记录\" onclick=\"addActual('" + id + "')\"><i class=\"layui-icon\">&#xe61f;</i></a>";
     numTitle += "</div>";
     numTitle += "<div class=\"col-sm-4 invoice-col\">";
-    numTitle += "开票(元）：<span style=\"color: green;\">" + taxMoney + "</span>   <a href=\"#\" title=\"添加开票记录\" onclick=\"addTax(" + id + ")\"><i class=\"layui-icon\">&#xe61f;</i></a>";
+    numTitle += "开票(元）：<span style=\"color: green;\">" + taxMoney + "</span>   <a href=\"#\" title=\"添加开票记录\" onclick=\"addTax('" + id + "')\"><i class=\"layui-icon\">&#xe61f;</i></a>";
     numTitle += "</div>";
     numTitle += "</div>";
 
+    if(isInit){
+        $.ajax({
+            type: "get",
+            url: ctx + "/inner/returnMoneyDetail/listAjax?returnMoneyId=" + id,
+            async: false,
+            success: function(data){
+                var list = data.items;
+                if(list != null){
+                    if(list.length > 0){
+                        var detail = "";
+                        $.each(list, function(index, obj){
+                            var returnMoneyType = obj.returnMoneyType;
+                            console.log(returnMoneyType)
+                            if(returnMoneyType == 1){
+                                //计划
+                                detail += getPlanTr();
+                            }else if(returnMoneyType == 2){
+                                //实际
+                                detail += getActualTr();
+                            }else{
+                                //开票
+                                detail += getTaxTr();
+                            }
+                        });
+
+                        numTitle += appendDetail(detail);
+                    }
+                }
+            }
+        });
+    }
+
     return numTitle;
 }
-/**
- *
- * @param type 1-计划 2-实际  3-开票
- * @param isNewNum  是否是新期次  0-不是  1-是
- * @returns {string}
- */
-function appendDetail(type, isNewNum){
+
+
+function appendDetail(detail){
 	var appendHtml = "";
     appendHtml += "<div class=\"row\">";
     appendHtml += "<div class=\"col-xs-12 table-responsive\">";
     appendHtml += " <table class=\"table\">";
-    var planTr = getPlanTr();
-    appendHtml += planTr;
-    var actualTr = getActualTr();
-    appendHtml += actualTr;
-    var taxTr = getTaxTr();
-    appendHtml += taxTr;
+    appendHtml += detail;
     appendHtml += " </table>";
     appendHtml += "   </div>";
     appendHtml += "  </div>";
@@ -263,11 +286,11 @@ function addPlanSuccess(obj){
 	var returnMoney = new Object();
 	returnMoney.returnMoneyDetail = obj;
     returnMoney.returnMoneyNum = 1;
-    returnMoney.contractId = 21;
+    returnMoney.contractId = $("#hidContractId").val();
 
 
 	//把obj封装回款其次
-    var url = ctx + "/inner/returnMoney/save"
+    var url = ctx + "/inner/returnMoney/saveOrUpdate"
 
     var jsonData = JSON.stringify(returnMoney);
     $.ajax({
@@ -296,7 +319,7 @@ function addPlanSuccess(obj){
 
 
 function addPlan(id){
-    var url = ctx + "/inner/returnMoneyDetail/addDetail?type=1&id=" + id;
+    var url = ctx + "/inner/returnMoneyDetail/addDetail?type=1&returnMoneyId=" + id;
     layer.open({
         type: 2,
         title: "新建回款计划",
@@ -309,7 +332,7 @@ function addPlan(id){
 
 
 function addActual(id){
-    var url = ctx + "/inner/returnMoneyDetail/addDetail?type=2&id=" + id;
+    var url = ctx + "/inner/returnMoneyDetail/addDetail?type=2&returnMoneyId=" + id;
     layer.open({
         type: 2,
         title: "新建实际回款",
@@ -321,7 +344,7 @@ function addActual(id){
 }
 
 function addTax(id){
-    var url = ctx + "/inner/returnMoneyDetail/addDetail?type=3&id=" + id;
+    var url = ctx + "/inner/returnMoneyDetail/addDetail?type=3&returnMoneyId=" + id;
     layer.open({
         type: 2,
         title: "新建开票信息",
@@ -337,7 +360,24 @@ function reloadReturnDetail(contractId){
 		url: ctx + "/inner/returnMoney/listAjax?contractId=" + contractId,
 		type: "get",
 		success: function(data){
-			alert(data)
+			var list = data.items;
+            if(list.length > 0){
+                var numHtml = "";
+                $.each(list, function(index, obj){
+                    var planReturnMoney = obj.planReturnMoney;
+                    if(isBlank(planReturnMoney)){
+                        planReturnMoney = 0;
+                    }
+                    var actualReturnMoney = obj.actualReturnMoney;
+                    if(isBlank(actualReturnMoney)){
+                        actualReturnMoney = 0;
+                    }
+                    numHtml += getReturnMoneyNum(obj.id,planReturnMoney, actualReturnMoney, 9, obj.returnMoneyNum,true);
+
+                });
+
+                $("#sectionDiv").html(numHtml);
+            }
 		}
 	});
 }

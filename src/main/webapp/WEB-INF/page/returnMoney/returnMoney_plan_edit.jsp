@@ -85,7 +85,7 @@
                     <option value="">搜索或者选择所有人</option>
                     <c:if test="${userList != null && userList.size() > 0}">
                         <c:forEach items="${userList}" var="userInfo">
-                            <option <c:if test="${userInfo.id == user.id}">selected</c:if> value="${userInfo.userName}">${userInfo.userName}(${userInfo.departmentName})</option>
+                            <option <c:if test="${userInfo.id == user.id}">selected</c:if> value="${userInfo.id}">${userInfo.userName}(${userInfo.departmentName})</option>
                         </c:forEach>
                     </c:if>
 

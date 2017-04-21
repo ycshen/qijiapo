@@ -46,19 +46,26 @@ public class ReturnMoneyDetailController {
     private ContractService contractService;
 
     @RequestMapping(value = "/addDetail", method = RequestMethod.GET)
-    public ModelAndView addPlan(String contractId,String returnMoneyId ,HttpServletRequest request){
-        ModelAndView mav = new ModelAndView("/returnMoney/returnMoney_plan_edit");
+    public ModelAndView addPlan(String contractId,String returnMoneyId , Integer type,HttpServletRequest request){
+        ModelAndView mav = new ModelAndView();
+        if(type == 1){
+            mav.setViewName("/returnMoney/returnMoney_plan_edit");
+        }else if(type == 2){
+            mav.setViewName("/returnMoney/returnMoney_actual_edit");
+        }else{
+            mav.setViewName("/returnMoney/returnMoney_tax_edit");
+        }
         UserEntity user = UserUtils.getLoginUser(request);
         //接口1：获取该合同本次调用的回款期次
         //start
-        ReturnMoneyQuery query = new ReturnMoneyQuery();
-        query.init(request);
-        query = returnMoneyService.getReturnMoneyByContractId(query);
         Integer returnMoneyNum = 0;
         if (!TextUtils.isEmpty(returnMoneyId)) {
             ReturnMoneyEntity returnMoneyEntity = returnMoneyService.getReturnMoneyById(returnMoneyId);
             returnMoneyNum = returnMoneyEntity.getReturnMoneyNum();
         }else {
+            ReturnMoneyQuery query = new ReturnMoneyQuery();
+            query.init(request);
+            query = returnMoneyService.getReturnMoneyByContractId(query);
             returnMoneyNum = query.getItems().size() + 1;//新增则期次数据加一
         }
 

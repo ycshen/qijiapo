@@ -135,16 +135,12 @@ function initDataTable() {
             }
         },
         "columns": [
-            { data: 'code',
-                render: function(data, type, returnMoney){
-                    return redenerCode('1', returnMoney.code);
-                }
-            },
             {data: 'code'},
-            {data: 'code'},
-            {data: 'code'},
-            {data: 'code'},
-            {data: 'code'},
+            {data: 'contractId'},
+            {data: 'customerId'},
+            {data: 'returnMoneyNum'},
+            {data: 'planReturnDate'},
+            {data: 'planReturnMoney'},
             {data: 'code'},
             {data: 'code'},
             {data: 'code'},
